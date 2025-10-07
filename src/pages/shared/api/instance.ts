@@ -57,7 +57,7 @@ apiWithToken.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // 추후 api 경로 변경 필요
+        // 추후 api 경로 변경 예정
         const res = await axios.post(`${BASE_URL}/login/re-issue`, {}, { withCredentials: true });
 
         const newAccessToken = res.data.accessToken;
