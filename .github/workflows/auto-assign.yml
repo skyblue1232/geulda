@@ -1,0 +1,20 @@
+name: Auto Assign Reviewer and Assignee
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign Reviewers and Assignees
+        uses: kentaro-m/auto-assign-action@v2.3.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          reviewers: |
+            skyblue1232
+            jjangminii
+            KongMezu
+          assignees: |
+            ${{ github.actor }}
