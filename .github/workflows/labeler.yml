@@ -1,4 +1,4 @@
-name: PR Labeler
+name: 🏷️ PR Labeler
 
 on:
   pull_request:
@@ -12,8 +12,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Apply labels automatically
+      - name: Apply PR labels
         uses: jimschubert/labeler-action@v1
         with:
-          configuration-path: .github/pr-labeler-config.yml
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
