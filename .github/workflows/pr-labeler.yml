@@ -8,11 +8,17 @@ jobs:
   labeler:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
 
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          working-directory: FE 
+
       - name: Apply PR labels
         uses: jimschubert/labeler-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: FE/.github/labeler.yml 
