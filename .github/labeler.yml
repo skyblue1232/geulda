@@ -1,69 +1,40 @@
+# 활성화 설정
+enable:
+  issues: false
+  prs: true
+
+# 레이블 적용 시 코멘트
+comments:
+  prs: |
+    Labeler has automatically applied labels based on your PR title or description.
+    Please check that they are appropriate.
+
+# 라벨 매칭 규칙
 labels:
-  - label: "feat"
-    head-branch:
-      - "^feat/"
-      - "^feature/"
-    paths:
-      - "src/pages/**"
-      - "src/auth/**"
-      - "src/stamp/**"
-      - "src/shared/components/**"
-      - "src/shared/styles/**"
+  'feature':
+    include:
+      - '\bfeat\b'
+      - '\bfeature\b'
 
-  - label: "setting"
-    head-branch:
-      - "^setting/"
-    paths:
-      - "config/**"
-      - ".env*"
-      - "package.json"
-      - "tailwind.config.js"
-      - "next.config.ts"
-      - "tsconfig.json"
-      - "postcss.config.mjs"
-      - "eslint.config.mjs"
+  'bug':
+    include:
+      - '\bfix\b'
+      - '\bbug\b'
 
-  - label: "api"
-    head-branch:
-      - "^api/"
-    paths:
-      - "src/shared/api/**"
-      - "src/shared/hooks/**"
-      - "src/shared/utils/**"
+  'refactor':
+    include:
+      - '\brefactor\b'
 
-  - label: "fix"
-    head-branch:
-      - "^fix/"
-    title:
-      - "\\[Fix\\]"
-    paths:
-      - "src/**"
+  'docs':
+    include:
+      - '\bdocs\b'
+      - '\breadme\b'
 
-  - label: "release"
-    head-branch:
-      - "^release/"
-    paths:
-      - "CHANGELOG.md"
+  'test':
+    include:
+      - '\btest\b'
 
-  - label: "hotfix"
-    head-branch:
-      - "^hotfix/"
-      - "^HOTFIX/"
-    title:
-      - "\\[Hotfix\\]"
-    paths:
-      - "src/**"
-
-  - label: "docs"
-    paths:
-      - "**/*.md"
-      - "README.md"
-
-  - label: "refactor"
-    head-branch:
-      - "^refactor/"
-    title:
-      - "\\[Refactor\\]"
-    paths:
-      - "src/**"
-
+  'chore':
+    include:
+      - '\bchore\b'
+      - '\bconfig\b'
