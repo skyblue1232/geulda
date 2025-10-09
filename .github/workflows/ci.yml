@@ -2,50 +2,40 @@ name: Next.js CI/CD with Vercel
 
 on:
   push:
-    branches: [develop] 
+    branches: [develop]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-22.04
-
     strategy:
       matrix:
         node-version: [20]
 
     steps:
-      # 코드 가져오기
       - uses: actions/checkout@v4
 
-      # pnpm 설치
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      # Node.js 설정 + pnpm 캐시
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-          cache-dependency-path: ./FE/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml 
 
-      # 의존성 설치
       - name: Install dependencies
-        working-directory: FE
         run: pnpm install
 
-      # Next.js 빌드
       - name: Build Next.js app
-        working-directory: FE
         run: pnpm build
 
-      # Vercel 자동 배포
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: FE
           prod: ${{ github.ref == 'refs/heads/main' }}
