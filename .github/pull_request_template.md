@@ -7,7 +7,7 @@
 - 
 
 ### 🔗 이슈
-close #
+- close #
 
 ### PR Point (To Reviewer)
 - ex) 로그인 입력 검증 로직 적절한지 확인 부탁드립니다.
