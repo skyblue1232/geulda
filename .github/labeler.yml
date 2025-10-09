@@ -1,0 +1,45 @@
+# ============================================
+# 🏷️ 자동 라벨링 규칙
+# ============================================
+
+feat:
+  - head-branch: ['^feat/', '^feature/']
+  - 'src/pages/**'
+  - 'src/auth/**'
+  - 'src/stamp/**'
+  - 'src/shared/components/**'
+  - 'src/shared/styles/**'
+
+setting:
+  - head-branch: ['^setting/']
+  - 'config/**'
+  - '.env*'
+  - 'package.json'
+  - 'tailwind.config.js'
+  - 'next.config.ts'
+  - 'tsconfig.json'
+  - 'postcss.config.mjs'
+  - 'eslint.config.mjs'
+
+api:
+  - head-branch: ['^api/']
+  - 'src/shared/api/**'
+  - 'src/shared/hooks/**'
+  - 'src/shared/utils/**'
+
+release:
+  - head-branch: ['^release/']
+  - 'CHANGELOG.md'
+
+hotfix:
+  - head-branch: ['^hotfix/', '^HOTFIX/']
+  - title: '\[Fix\]'
+  - 'src/**'
+
+docs:
+  - '**/*.md'
+  - 'README.md'
+
+refactor:
+  - title: '\[Refactor\]'
+  - 'src/**'
