@@ -1,0 +1,11 @@
+# Dependencies
+/node_modules
+/pnpm-lock.yaml
+
+# Next.js Build
+/.next
+/out
+
+# Directories
+/public
+/src/styles/globals.css
