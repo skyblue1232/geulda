@@ -1,20 +1,15 @@
-name: Auto Assign Reviewer and Assignee
+name: Auto Assign Reviewer & Assignee
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, ready_for_review]
 
 jobs:
-  auto-assign:
+  assign:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign Reviewers and Assignees
-        uses: kentaro-m/auto-assign-action@v2.3.0
+      - name: Assign reviewers and assignee
+        uses: hkusu/review-assign-action@v1
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          reviewers: |
-            skyblue1232
-            jjangminii
-            KongMezu
-          assignees: |
-            ${{ github.actor }}
+          assignees: ${{ github.actor }} # PR 작성자 자동 지정
+          reviewers: skyblue1232, jjangminii, KongMezu # GitHub username 기준
