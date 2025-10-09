@@ -2,14 +2,11 @@ name: Next.js CI/CD with Vercel
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [20]
 
     steps:
       - uses: actions/checkout@v4
@@ -19,12 +16,12 @@ jobs:
         with:
           version: 10
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
           cache: 'pnpm'
-          cache-dependency-path: pnpm-lock.yaml 
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install
@@ -38,4 +35,5 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          prod: ${{ github.ref == 'refs/heads/main' }}
+          working-directory: .
+          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
