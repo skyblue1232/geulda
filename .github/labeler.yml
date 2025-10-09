@@ -2,44 +2,70 @@
 # 🏷️ 자동 라벨링 규칙 (AF-FE Git Flow 반영)
 # ============================================
 
-# 기능 개발 (UI, 스타일 포함)
 feat:
-  - { head-branch: ['^feat/', '^feature/'] }
-  - { paths: ['src/pages/**', 'src/auth/**', 'src/stamp/**', 'src/shared/components/**', 'src/shared/styles/**'] }
+  - head-branch:
+      - '^feat/'
+      - '^feature/'
+  - paths:
+      - 'src/pages/**'
+      - 'src/auth/**'
+      - 'src/stamp/**'
+      - 'src/shared/components/**'
+      - 'src/shared/styles/**'
 
-# 초기 세팅 / 환경 설정
 setting:
-  - { head-branch: ['^setting/'] }
-  - { paths: ['config/**', '.env*', 'package.json', 'tailwind.config.js', 'next.config.ts', 'tsconfig.json', 'postcss.config.mjs', 'eslint.config.mjs'] }
+  - head-branch:
+      - '^setting/'
+  - paths:
+      - 'config/**'
+      - '.env*'
+      - 'package.json'
+      - 'tailwind.config.js'
+      - 'next.config.ts'
+      - 'tsconfig.json'
+      - 'postcss.config.mjs'
+      - 'eslint.config.mjs'
 
-# API 연결
 api:
-  - { head-branch: ['^api/'] }
-  - { paths: ['src/shared/api/**', 'src/shared/hooks/**', 'src/shared/utils/**'] }
+  - head-branch:
+      - '^api/'
+  - paths:
+      - 'src/shared/api/**'
+      - 'src/shared/hooks/**'
+      - 'src/shared/utils/**'
 
-# 버그 및 자잘한 오류 수정
 fix:
-  - { head-branch: ['^fix/'] }
-  - { title: '\[Fix\]' }
-  - { paths: ['src/**'] }
+  - head-branch:
+      - '^fix/'
+  - title:
+      - '\[Fix\]'
+  - paths:
+      - 'src/**'
 
-# 릴리즈 준비
 release:
-  - { head-branch: ['^release/'] }
-  - { paths: ['CHANGELOG.md'] }
+  - head-branch:
+      - '^release/'
+  - paths:
+      - 'CHANGELOG.md'
 
-# 긴급 버그 수정 (메인에서 분기)
 hotfix:
-  - { head-branch: ['^hotfix/', '^HOTFIX/'] }
-  - { title: '\[Hotfix\]' }
-  - { paths: ['src/**'] }
+  - head-branch:
+      - '^hotfix/'
+      - '^HOTFIX/'
+  - title:
+      - '\[Hotfix\]'
+  - paths:
+      - 'src/**'
 
-# 문서 / 가이드 / 노트
 docs:
-  - { paths: ['**/*.md', 'README.md'] }
+  - paths:
+      - '**/*.md'
+      - 'README.md'
 
-# 리팩토링
 refactor:
-  - { head-branch: ['^refactor/'] }
-  - { title: '\[Refactor\]' }
-  - { paths: ['src/**'] }
+  - head-branch:
+      - '^refactor/'
+  - title:
+      - '\[Refactor\]'
+  - paths:
+      - 'src/**'
