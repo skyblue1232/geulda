@@ -65,7 +65,7 @@ module.exports = {
         'layout-auto': 'auto',
       },
       maxWidth: {
-        mobile: '402px', // 모바일 최대 넓이
+        mobile: '430px', // 모바일 최대 넓이
       },
       minWidth: {
         100: '100px',
