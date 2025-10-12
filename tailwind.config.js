@@ -75,7 +75,7 @@ module.exports = {
       gap: {
         1: '0.25rem', // 4px
         2: '0.5rem', // 8px
-        3: '0.625`rem', // 10px
+        3: '0.625rem', // 10px
         3.5: '0.875rem', // 14px
         4: '1rem', // 16px
         4.5: '1.125rem', // 18px
