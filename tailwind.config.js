@@ -73,16 +73,18 @@ module.exports = {
       },
       /* padding, margin, gap 모두 사용 가능*/
       spacing: {
-        1: '0.25rem', // 4px
-        2: '0.5rem', // 8px
-        3: '0.625rem', // 10px
-        3.5: '0.875rem', // 14px
-        4: '1rem', // 16px
-        4.5: '1.125rem', // 18px
-        5: '1.25rem', // 20px
-        6: '1.5rem', // 24px
-        18: '4.5rem', // 72px
-        // 필요 시 LAYER GUID 기준 값 추가
+        0: '0rem',
+        1: '0.4rem',   // 4px
+        2: '0.8rem',   // 8px
+        3: '1rem',     // 10px
+        4: '1.6rem',   // 16px
+        5: '2rem',     // 20px
+        6: '2.4rem',   // 24px
+        7: '2.8rem',   // 28px
+        8: '3.2rem',   // 32px
+        9: '3.6rem',   // 36px
+        10: '4rem',    // 40px
+        18: '7.2rem',  // 72px
       },
       /* Radius(모서리)*/
       borderRadius: {
@@ -107,151 +109,151 @@ module.exports = {
         /* Pretendard */
         /* DISPLAY */
         '.text-display-lg': {
-          fontSize: '3.5625rem', //57px
+          fontSize: '5.7rem', //57px
           fontWeight: 300,
-          lineHeight: '4rem', //64px
-          letterSpacing: '-0.015625rem', //-0.25px',
+          lineHeight: '6.4rem', //64px
+          letterSpacing: '-0.025rem', //-0.25px',
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-display-md': {
-          fontSize: '3.25rem', //52px
+          fontSize: '5.2rem', //52px
           fontWeight: 300,
-          lineHeight: '2.8125rem', //45px
+          lineHeight: '4.5rem', //45px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-display-sm': {
-          fontSize: '2.25rem', //36px
+          fontSize: '3.6rem', //36px
           fontWeight: 300,
-          lineHeight: '2.75rem', //44px
+          lineHeight: '4.4rem', //44px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         /* HEADLINE */
         '.text-headline-lg': {
-          fontSize: '2rem', //32px
+          fontSize: '3.2rem', //32px
           fontWeight: 200,
-          lineHeight: '2.5rem', //40px
+          lineHeight: '4rem', //40px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-headline-md': {
-          fontSize: '1.75rem', //28px
+          fontSize: '2.8rem', //28px
           fontWeight: 200,
-          lineHeight: '2rem', //32px
+          lineHeight: '3.2rem', //32px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-headline-sm': {
-          fontSize: '1.5rem', //24px
+          fontSize: '2.4rem', //24px
           fontWeight: 200,
-          lineHeight: '2rem', //32px
+          lineHeight: '3.2rem', //32px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
 
         /* TITLE */
         '.text-title-lg': {
-          fontSize: '1.375rem', //22px
+          fontSize: '2.2rem', //22px
           fontWeight: 400,
           lineHeight: '1.75rem', //28px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-title-md': {
-          fontSize: '1rem', //16px
+          fontSize: '1.6rem', //16px
           fontWeight: 400,
-          lineHeight: '1.5rem', //24px
-          letterSpacing: '0.009375rem', //0.15px
+          lineHeight: '2.4rem', //24px
+          letterSpacing: '0.015rem', //0.15px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-title-sm': {
-          fontSize: '0.875rem', //14px
+          fontSize: '1.4rem', //14px
           fontWeight: 400,
-          lineHeight: '1.25rem', //20px
-          letterSpacing: '0.00625rem', //0.1px
+          lineHeight: '2rem', //20px
+          letterSpacing: '0.01rem', //0.1px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         /* LABEL */
         '.text-label-lg': {
-          fontSize: '0.875rem', //14px
+          fontSize: '1.4rem', //14px
           fontWeight: 300,
-          lineHeight: '1.25rem', //20px
-          letterSpacing: '0.00625rem', //0.1px
+          lineHeight: '2rem', //20px
+          letterSpacing: '0.01rem', //0.1px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-label-md': {
-          fontSize: '0.75rem', //12px
+          fontSize: '1.2em', //12px
           fontWeight: 300,
-          lineHeight: '1rem', //16px
-          letterSpacing: '0.03125rem', //0.5px
+          lineHeight: '1.6rem', //16px
+          letterSpacing: '0.05rem', //0.5px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-label-sm': {
-          fontSize: '0.6875rem', //11px
+          fontSize: '1.1rem', //11px
           fontWeight: 300,
-          lineHeight: '1rem', //16px
-          letterSpacing: '0.03125rem', //0.5px
+          lineHeight: '1.6rem', //16px
+          letterSpacing: '0.05rem', //0.5px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         /* BODY */
         '.text-body-lg': {
-          fontSize: '0.875rem', //14px,
+          fontSize: '1.4rem', //14px,
           fontWeight: 400,
-          lineHeight: '1.5rem', //24px
-          letterSpacing: '0.03125rem', //0.5px
+          lineHeight: '2.4rem', //24px
+          letterSpacing: '0.05rem', //0.5px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-body-md': {
-          fontSize: '0.75rem', //12px
+          fontSize: '1.2rem', //12px
           fontWeight: 300,
-          lineHeight: '1.25rem', //20px
-          letterSpacing: '0.015625rem', //0.25px
+          lineHeight: '2rem', //20px
+          letterSpacing: '0.025rem', //0.25px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
         '.text-body-sm': {
-          fontSize: '0.625rem', //10px
+          fontSize: '1rem', //10px
           fontWeight: 200,
-          lineHeight: '1rem', //16px
-          letterSpacing: '0.025rem', // 0.4px
+          lineHeight: '1.6rem', //16px
+          letterSpacing: '0.04rem', // 0.4px
           fontFamily: 'Pretendard, system-ui, sans-serif',
         },
 
         /* JEN Serif */
         /* DISPLAY */
         '.text-display-serif': {
-          fontSize: '2.25rem', //36px
+          fontSize: '3.6rem', //36px
           fontWeight: 200,
-          lineHeight: '2.875rem', //46px
-          letterSpacing: '0.375rem', //6px
+          lineHeight: '4.6rem', //46px
+          letterSpacing: '0.6rem', //6px
           fontFamily: 'JEN Serif, serif',
         },
         /* HEADLINE */
         '.text-headline-lg-serif': {
-          fontSize: '2rem', //32px
+          fontSize: '3.2rem', //32px
           fontWeight: 200,
-          lineHeight: '2.5rem', //40px
-          letterSpacing: '0.125rem', //2px
+          lineHeight: '4rem', //40px
+          letterSpacing: '0.2rem', //2px
           fontFamily: 'JEN Serif, serif',
         },
         '.text-headline-md-serif': {
-          fontSize: '1.5rem', //24px
+          fontSize: '2.4rem', //24px
           fontWeight: 200,
-          lineHeight: '2rem', //32px
-          letterSpacing: '0.125rem', //2px
+          lineHeight: '3.2rem', //32px
+          letterSpacing: '0.2rem', //2px
           fontFamily: 'JEN Serif, serif',
         },
         '.text-headline-sm-serif': {
-          fontSize: '1.25rem', //20px
+          fontSize: '2rem', //20px
           fontWeight: 200,
-          lineHeight: '1.5rem', //24px
-          letterSpacing: '0.75rem', //12px
+          lineHeight: '2.4rem', //24px
+          letterSpacing: '1.2rem', //12px
           fontFamily: 'JEN Serif, serif',
         },
         /* LABEL */
         '.text-label-serif': {
-          fontSize: '0.875rem', //14px
+          fontSize: '1.4rem', //14px
           fontWeight: 200,
-          lineHeight: '1.25rem', //20px
-          letterSpacing: '0.25rem', //4px
+          lineHeight: '2rem', //20px
+          letterSpacing: '0.4rem', //4px
           fontFamily: 'JEN Serif, serif',
         },
       };
-      addUtilities(newUtilities, { variants: ['responsive'] });
+      addUtilities(newUtilities);
     },
   ],
 };

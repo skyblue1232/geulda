@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 62.5%;
+}
+
 :root {
   /* 메인컬러(MAIN) */
   --color-main-1: #D9FAFB;
