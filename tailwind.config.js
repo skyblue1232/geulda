@@ -71,8 +71,8 @@ module.exports = {
         100: '100px',
         200: '200px',
       },
-      /* gap(패딩)*/
-      gap: {
+      /* padding, margin, gap 모두 사용 가능*/
+      spacing: {
         1: '0.25rem', // 4px
         2: '0.5rem', // 8px
         3: '0.625rem', // 10px
