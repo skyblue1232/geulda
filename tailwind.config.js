@@ -3,6 +3,7 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
+      /* colors */
       colors: {
         main: {
           1: 'var(--color-main-1)',
@@ -48,6 +49,52 @@ module.exports = {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
+      /* display */
+      display: {
+        'layout-flex': 'flex',
+        'layout-grid': 'grid',
+        'layout-block': 'block',
+        'layout-inline': 'inline-block',
+      },
+      /* grid & layout */
+      gridTemplateColumns: {
+        'layout-6': 'repeat(6, minmax(0, 1fr))', // 모바일 6컬럼 그리드
+        'layout-4': 'repeat(4, minmax(0, 1fr))', // 모바일 4컬럼 그리드
+      },
+      gridTemplateRows: {
+        'layout-auto': 'auto',
+      },
+      maxWidth: {
+        mobile: '402px', // 모바일 최대 넓이
+      },
+      minWidth: {
+        100: '100px',
+        200: '200px',
+      },
+      /* gap(패딩)*/
+      gap: {
+        1: '0.25rem', // 4px
+        2: '0.5rem', // 8px
+        3: '0.625`rem', // 10px
+        3.5: '0.875rem', // 14px
+        4: '1rem', // 16px
+        4.5: '1.125rem', // 18px
+        5: '1.25rem', // 20px
+        6: '1.5rem', // 24px
+        18: '4.5rem', // 72px
+        // 필요 시 LAYER GUID 기준 값 추가
+      },
+      /* Radius(모서리)*/
+      borderRadius: {
+        xs: '2px',
+        base: '5px',
+        sm: '4px',
+        md: '8px',
+        lg: '16px',
+        xl: '24px',
+        full: '9999px',
+      },
+      /* font*/
       fontFamily: {
         sans: ['Pretendard', 'system-ui', 'sans-serif'],
         serif: ['JEN Serif', 'serif'],
