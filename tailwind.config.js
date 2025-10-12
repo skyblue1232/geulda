@@ -42,7 +42,7 @@ module.exports = {
           900: 'var(--color-gray-10)',
         },
         blue: {
-         400: 'var(--color-blue)'
+        400: 'var(--color-blue)'
         },
         red: {
           300: 'var(--color-red-1)',
