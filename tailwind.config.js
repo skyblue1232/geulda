@@ -251,7 +251,7 @@ module.exports = {
           fontFamily: 'JEN Serif, serif',
         },
       };
-      addUtilities(newUtilities, { variants: ['responsive'] });
+      addUtilities(newUtilities);
     },
   ],
 };
