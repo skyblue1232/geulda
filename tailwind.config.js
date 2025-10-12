@@ -74,19 +74,19 @@ module.exports = {
       /* padding, margin, gap 모두 사용 가능*/
       spacing: {
         0: '0rem',
-        1: '0.4rem',   // 4px
-        2: '0.8rem',   // 8px
-        3: '1rem',     // 10px
-        4: '1.6rem',   // 16px
-        5: '2rem',     // 20px
-        6: '2.4rem',   // 24px
-        7: '2.8rem',   // 28px
-        8: '3.2rem',   // 32px
-        9: '3.6rem',   // 36px
-        10: '4rem',    // 40px
-        18: '7.2rem',  // 72px
+        1: '0.4rem',   
+        2: '0.8rem',  
+        3: '1rem',   
+        4: '1.6rem',  
+        5: '2rem',    
+        6: '2.4rem',   
+        7: '2.8rem', 
+        8: '3.2rem', 
+        9: '3.6rem',  
+        10: '4rem', 
+        18: '7.2rem',
       },
-      /* Radius(모서리)*/
+      /* Radius*/
       borderRadius: {
         xs: '2px',
         base: '5px',
