@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 import type { IconName } from '../iconNames';
 
 type IconRotate = 90 | 180 | 270;

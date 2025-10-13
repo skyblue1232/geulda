@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "icons:clean": "svgo -r -f src/shared/icons/source --config=./svgo.config.mjs --multipass",
+    "icons:gen": "pnpm dlx tsx src/shared/icons/scripts/generate-icon-list.ts && prettier --write src/shared/icons/iconNames.ts src/shared/icons/index.ts",
+    "icons": "pnpm icons:clean && pnpm icons:gen",
+    "icons:watch": "chokidar \"src/shared/icons/source/**/*.svg\" -c \"pnpm icons\""
   },
   "dependencies": {
     "axios": "^1.12.2",
@@ -14,7 +18,8 @@
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "^7.64.0"
+    "react-hook-form": "^7.64.0",
+    "svgo": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -24,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "svg-sprite-loader": "^6.0.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
