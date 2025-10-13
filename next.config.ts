@@ -1,6 +1,8 @@
 import path from 'path';
 import type { NextConfig } from 'next';
 
+const ICON_DIR = path.resolve(__dirname, 'src/shared/icons/source');
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
@@ -10,15 +12,12 @@ const nextConfig: NextConfig = {
     );
     if (svgRule) {
       // @ts-ignore
-      svgRule.exclude = [
-        ...(svgRule.exclude || []),
-        path.resolve(__dirname, 'src/icons/source'),
-      ];
+      svgRule.exclude = [...(svgRule.exclude || []), ICON_DIR];
     }
 
     config.module.rules.push({
       test: /\.svg$/,
-      include: [path.resolve(__dirname, 'src/icons/source')],
+      include: [ICON_DIR],
       use: [
         {
           loader: require.resolve('svg-sprite-loader'),

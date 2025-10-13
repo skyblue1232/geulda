@@ -3,43 +3,42 @@ import type { IconName } from '../iconNames';
 
 type IconRotate = 90 | 180 | 270;
 
-type IconColor = // main
-
-    | 'main-1'
-    | 'main-2'
-    | 'main-3'
-    | 'main-4'
-    | 'main-5'
-    | 'main-6'
-    | 'main-7'
-    | 'main-8'
-    | 'main-9'
-    | 'main-10'
-    | 'secondary-1'
-    | 'secondary-2'
-    | 'secondary-3'
-    | 'secondary-4'
-    | 'secondary-5'
-    | 'secondary-6'
-    | 'secondary-7'
-    | 'secondary-8'
-    | 'secondary-9'
-    | 'secondary-10'
-    | 'gray-1'
-    | 'gray-2'
-    | 'gray-3'
-    | 'gray-4'
-    | 'gray-5'
-    | 'gray-6'
-    | 'gray-7'
-    | 'gray-8'
-    | 'gray-9'
-    | 'gray-10'
-    | 'blue'
-    | 'red-1'
-    | 'red-2'
-    | 'background'
-    | 'foreground';
+type IconColor =
+  | 'mint-50'
+  | 'mint-100'
+  | 'mint-200'
+  | 'mint-300'
+  | 'mint-400'
+  | 'mint-500'
+  | 'mint-600'
+  | 'mint-700'
+  | 'mint-800'
+  | 'mint-900'
+  | 'pink-50'
+  | 'pink-100'
+  | 'pink-200'
+  | 'pink-300'
+  | 'pink-400'
+  | 'pink-500'
+  | 'pink-600'
+  | 'pink-700'
+  | 'pink-800'
+  | 'pink-900'
+  | 'gray-50'
+  | 'gray-100'
+  | 'gray-200'
+  | 'gray-300'
+  | 'gray-400'
+  | 'gray-500'
+  | 'gray-600'
+  | 'gray-700'
+  | 'gray-800'
+  | 'gray-900'
+  | 'blue-400'
+  | 'red-300'
+  | 'red-400'
+  | 'background'
+  | 'foreground';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
@@ -86,6 +85,7 @@ export const Icon = ({
 
   return (
     <svg
+      fill='currentColor'
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
       className={combined}
