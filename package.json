@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "icons:clean": "svgo -r -f src/shared/icons/source --config=./svgo.config.mjs --multipass",
-    "icons:gen": "pnpm dlx tsx src/shared/icons/scripts/generate-icon-list.ts && prettier --write src/shared/icons/iconNames.ts src/shared/icons/index.ts",
+    "icons:gen": "pnpm dlx tsx src/shared/icons/scripts/generate-icon-list.ts ",
     "icons": "pnpm icons:clean && pnpm icons:gen",
     "icons:watch": "chokidar \"src/shared/icons/source/**/*.svg\" -c \"pnpm icons\""
   },
@@ -29,8 +29,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
-    "tailwindcss": "4.1.14",
     "svg-sprite-loader": "^6.0.11",
+    "tailwindcss": "4.1.14",
     "typescript": "^5"
   }
 }
