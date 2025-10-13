@@ -1,10 +1,4 @@
-// AUTO-GENERATED (직접 수정 금지)
-// 브라우저에서만 스프라이트 런타임 로드(SSR 안전)
-if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  require('svg-sprite-loader/runtime/browser-sprite.build');
-}
-
+// 이 파일은 자동 생성 파일입니다. (직접 수정 금지)
 import './source/CalendarBlank.svg';
 import './source/Caret.svg';
 import './source/ChatCircle.svg';
