@@ -1,9 +1,12 @@
 export default {
   multipass: true,
   plugins: [
-    // 기본 최적화 + viewBox 유지
-    { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
-    // 루트 <svg>의 width/height 제거
+    { name: 'preset-default' },
     { name: 'removeDimensions' },
+    { name: 'removeAttrs', params: { attrs: ['fill', 'stroke'] } },
+    {
+      name: 'addAttributesToSVGElement',
+      params: { attributes: [{ fill: 'none' }, { stroke: 'currentColor' }] },
+    },
   ],
 };

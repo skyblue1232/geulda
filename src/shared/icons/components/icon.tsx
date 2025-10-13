@@ -86,6 +86,7 @@ export const Icon = ({
   return (
     <svg
       fill='currentColor'
+      stroke='currentColor'
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
       className={combined}
