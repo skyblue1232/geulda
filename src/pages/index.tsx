@@ -12,7 +12,7 @@ export default function Home() {
           <Icon name='CalendarBlank' size={200} color='gray-900' />
           <Icon name='User' size={200} color='blue-400' />
           <Icon name='User' size={200} color='red-300' />
-
+          <Icon name='User' size={200} color='red-300' />
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>

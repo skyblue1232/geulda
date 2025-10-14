@@ -78,8 +78,9 @@ export const Icon = ({
 
   const combined = clsx(
     'inline-block',
+    'transform',
     rotateClass,
-    hasRotateAnimation && 'transform transition-transform duration-200',
+    hasRotateAnimation && 'transition-transform duration-200',
     className,
   );
 
