@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import type { IconName } from '../iconNames';
 
 type IconRotate = 90 | 180 | 270;
-
 type IconColor =
   | 'mint-50'
   | 'mint-100'
@@ -62,6 +61,7 @@ export const Icon = ({
   rotate,
   hasRotateAnimation = false,
   ariaHidden = true,
+  style,
   ...rest
 }: IconProps) => {
   const w = width ?? size ?? 20;
@@ -90,7 +90,7 @@ export const Icon = ({
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
       className={combined}
-      style={color ? { color: `var(--color-${color})` } : undefined}
+      style={{ ...(color && { color: `var(--${color})` }), ...style }}
       aria-hidden={ariaHidden}
       {...rest}
     >
