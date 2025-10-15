@@ -29,6 +29,9 @@ importers:
       svgo:
         specifier: ^4.0.0
         version: 4.0.0
+      tailwind-merge:
+        specifier: ^3.3.1
+        version: 3.3.1
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -57,9 +60,6 @@ importers:
       svg-sprite-loader:
         specifier: ^6.0.11
         version: 6.0.11
-      tailwind-merge:
-        specifier: ^3.3.1
-        version: 3.3.1
       tailwindcss:
         specifier: 4.1.14
         version: 4.1.14
