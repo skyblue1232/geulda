@@ -1,10 +1,16 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@font-face {
+  font-family: 'JEN Serif';
+  src: url('/fonts/ZEN-SERIF-TTF-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  font-size: 62.5%;
-}
 
 :root {
     /* 메인컬러(MAIN) → mint */
@@ -57,11 +63,44 @@ html {
   --font-serif: 'JEN Serif', serif;
 }
 
+
+html,body {
+  font-size: 62.5%;
+  font-family: var(--font-sans);
+}
+
 /* 다크 모드 */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+/* 6. 커스텀 타이포그래피 @layer utilities */
+@layer utilities {
+  /* Pretendard */
+  .text-display-lg { font-size:5.7rem; font-weight:300; line-height:6.4rem; letter-spacing:-0.025rem; font-family: var(--font-sans); }
+  .text-display-md { font-size:5.2rem; font-weight:300; line-height:4.5rem; font-family: var(--font-sans); }
+  .text-display-sm { font-size:3.6rem; font-weight:300; line-height:4.4rem; font-family: var(--font-sans); }
+
+  .text-headline-lg { font-size:3.2rem; font-weight:200; line-height:4rem; font-family: var(--font-sans); }
+  .text-headline-md { font-size:2.8rem; font-weight:200; line-height:3.2rem; font-family: var(--font-sans); }
+  .text-headline-sm { font-size:2.4rem; font-weight:200; line-height:3.2rem; font-family: var(--font-sans); }
+
+  .text-title-lg { font-size:2.2rem; font-weight:400; line-height:1.75rem; font-family: var(--font-sans); }
+  .text-title-md { font-size:1.6rem; font-weight:400; line-height:2.4rem; letter-spacing:0.015rem; font-family: var(--font-sans); }
+  .text-title-sm { font-size:1.4rem; font-weight:400; line-height:2rem; letter-spacing:0.01rem; font-family: var(--font-sans); }
+
+  .text-label-lg { font-size:1.4rem; font-weight:300; line-height:2rem; font-family: var(--font-sans); }
+  .text-label-md { font-size:1.2rem; font-weight:300; line-height:1.6rem; font-family: var(--font-sans); }
+  .text-label-sm { font-size:1.1rem; font-weight:300; line-height:1.6rem; font-family: var(--font-sans); }
+
+  /* JEN Serif */
+  .text-display-serif { font-size:3.6rem; font-weight:200; line-height:4.6rem; letter-spacing:0.6rem; font-family: var(--font-serif); }
+  .text-headline-lg-serif { font-size:3.2rem; font-weight:200; line-height:4rem; letter-spacing:0.2rem; font-family: var(--font-serif); }
+  .text-headline-md-serif { font-size:2.4rem; font-weight:200; line-height:3.2rem; letter-spacing:0.2rem; font-family: var(--font-serif); }
+  .text-headline-sm-serif { font-size:2rem; font-weight:200; line-height:2.4rem; letter-spacing:1.2rem; font-family: var(--font-serif); }
+  .text-label-serif { font-size:1.4rem; font-weight:200; line-height:2rem; letter-spacing:0.4rem; font-family: var(--font-serif); }
 }
 
