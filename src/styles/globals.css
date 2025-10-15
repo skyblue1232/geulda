@@ -1,6 +1,6 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 @font-face {
-  font-family: 'JEN Serif';
+  font-family: 'ZEN Serif';
   src: url('/fonts/ZEN-SERIF-TTF-Regular.woff2') format('woff2');
   font-style: normal;
   font-display: swap;
@@ -58,7 +58,7 @@
 
   /* 폰트 */
   --font-sans: 'Pretendard', system-ui, sans-serif;
-  --font-serif: 'JEN Serif', serif;
+  --font-serif: 'ZEN Serif', serif;
 }
 
 

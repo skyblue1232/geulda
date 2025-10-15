@@ -101,7 +101,7 @@ module.exports = {
       /* font*/
       fontFamily: {
         sans: ['"Pretendard"', 'system-ui', 'sans-serif'],
-        serif: ['"JEN Serif"', 'serif'],
+        serif: ['"ZEN Serif"', 'serif'],
       },
     },
   },
