@@ -18,7 +18,8 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.64.0",
-    "svgo": "^4.0.0"
+    "svgo": "^4.0.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -31,8 +32,6 @@
     "svg-sprite-loader": "^6.0.11",
     "tailwindcss": "4.1.14",
     "typescript": "^5",
-    "tailwind-merge": "^3.3.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1"
+    "class-variance-authority": "^0.7.1"
   }
 }
