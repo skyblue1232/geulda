@@ -14,7 +14,7 @@ html, body {
 }
 
 :root {
-  /* 메인 컬러(MINT) */
+    /* 메인컬러(MAIN) → mint */
   --mint-50: #D9FAFB;
   --mint-100: #B2F4F6;
   --mint-200: #8CEFF2;
@@ -26,30 +26,34 @@ html, body {
   --mint-800: #107274;
   --mint-900: #0A5C5E;
 
-  /* 서브 컬러(PINK) */
+  /* 서브컬러(SECONDARY) → pink */
   --pink-50: #FEEFF3;
   --pink-100: #FFD0DC;
   --pink-200: #FAA2B8;
   --pink-300: #FF7B9C;
   --pink-400: #FF5B84;
   --pink-500: #EB436D;
+  --pink-600: #CD1845;
+  --pink-700: #920C2D;
+  --pink-800: #710520;
+  --pink-900: #470214;
 
-  /* 그레이 스케일 */
+  /* 그레이 스케일(GRAY) → gray */
   --gray-50: #FAFAFA;
   --gray-100: #F4F4F4;
   --gray-200: #E9E9E9;
   --gray-300: #D5D5D5;
   --gray-400: #BCBDBE;
   --gray-500: #A1A4AA;
+  --gray-600: #8B9099;
+  --gray-700: #484B51;
+  --gray-800: #2E3136;
+  --gray-900: #111215;
 
-  /* 포인트 컬러 */
+  /* 서브 포인트 컬러 */
   --blue-400: #2569FF;
   --red-300: #F06B6B;
   --red-400: #EB3939;
-
-  /* 배경/전경 */
-  --background: #ffffff;
-  --foreground: #111215;
 
   /* 폰트 */
   --font-sans: 'Pretendard', system-ui, sans-serif;
