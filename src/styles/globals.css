@@ -113,6 +113,8 @@ html, body {
 @utility text-mint-800 { color: var(--color-mint-800)!important; }
 @utility text-mint-900 { color: var(--color-mint-900)!important; }
 
+
+
 /* Pink */
 @utility bg-pink-50 { background-color: var(--color-pink-50)!important; }
 @utility bg-pink-100 { background-color: var(--color-pink-100)!important; }
