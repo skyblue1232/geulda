@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '@/styles/globals.css';
 import '@/shared/icons';
 import type { AppProps } from 'next/app';
 
