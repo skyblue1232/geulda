@@ -22,6 +22,6 @@
   "tailwindCSS.emmetCompletions": true,
   "editor.suggest.preview": true,
   "editor.colorDecorators": true,
-  "editor.defaultColorDecorators": true,
+  "editor.defaultColorDecorators": "auto",
   "tailwindCSS.colorDecorators": true
 }
