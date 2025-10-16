@@ -1,0 +1,23 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    // @utility 뒤에 오는 클래스 이름을 자동완성에 포함
+    ["@utility\\s+([a-zA-Z0-9-_]+)", "([a-zA-Z0-9-_]+)"]
+  ],
+  // Tailwind 자동완성 동장할 매핑
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "typescript": "typescript",
+    "typescriptreact": "html",
+    "javascriptreact": "html",
+    "css": "css",
+    "scss": "css"
+  },
+
+  // 문자열 안에서도 VSCode 자동완성 제안 표시
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  // 자동완성 추천 항목을 선택하기 전에 미리보기 표시
+  "tailwindCSS.emmetCompletions": true,
+  "editor.suggest.preview": true,
+}
