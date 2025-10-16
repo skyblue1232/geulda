@@ -55,9 +55,15 @@ html, body {
   --red-300: #F06B6B;
   --red-400: #EB3939;
 
+   /* 배경/전경 */
+  --background: #ffffff;
+  --foreground: #111215;
+
   /* 폰트 */
   --font-sans: 'Pretendard', system-ui, sans-serif;
   --font-serif: 'ZEN Serif', serif;
+
+
 
    /* Display */
   --display-flex: flex;
