@@ -16,9 +16,6 @@ export default function Home() {
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>
-          <p className='text-display-md'>
-            Next.js(Page Router) + TS + Tailwind + Axios
-          </p>
         </main>
       </div>
     </>
