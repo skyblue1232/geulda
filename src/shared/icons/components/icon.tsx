@@ -91,7 +91,7 @@ export const Icon = ({
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
       className={combined}
-      style={{ ...(color && { color: `var(--${color})` }), ...style }}
+      style={{ ...(color && { color: `var(--color-${color})` }), ...style }}
       aria-hidden={ariaHidden}
       {...rest}
     >

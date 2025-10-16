@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 @font-face {
@@ -13,47 +13,49 @@ html, body {
   font-family: var(--font-sans);
 }
 
-:root {
-    /* 메인컬러(MAIN) → mint */
-  --mint-50: #D9FAFB;
-  --mint-100: #B2F4F6;
-  --mint-200: #8CEFF2;
-  --mint-300: #65E9ED;
-  --mint-400: #22DFE5;
-  --mint-500: #0BCBD2;
-  --mint-600: #14A9AE;
-  --mint-700: #168A8E;
-  --mint-800: #107274;
-  --mint-900: #0A5C5E;
+
+@theme {
+     /* 메인컬러(MAIN) → mint */
+  --color-mint-50: #D9FAFB;
+  --color-mint-100: #B2F4F6;
+  --color-mint-200: #8CEFF2;
+  --color-mint-300: #65E9ED;
+  --color-mint-400: #22DFE5;
+  --color-mint-500: #0BCBD2;
+  --color-mint-600: #14A9AE;
+  --color-mint-700: #168A8E;
+  --color-mint-800: #107274;
+  --color-mint-900: #0A5C5E;
 
   /* 서브컬러(SECONDARY) → pink */
-  --pink-50: #FEEFF3;
-  --pink-100: #FFD0DC;
-  --pink-200: #FAA2B8;
-  --pink-300: #FF7B9C;
-  --pink-400: #FF5B84;
-  --pink-500: #EB436D;
-  --pink-600: #CD1845;
-  --pink-700: #920C2D;
-  --pink-800: #710520;
-  --pink-900: #470214;
+  --color-pink-50: #FEEFF3;
+  --color-pink-100: #FFD0DC;
+  --color-pink-200: #FAA2B8;
+  --color-pink-300: #FF7B9C;
+  --color-pink-400: #FF5B84;
+  --color-pink-500: #EB436D;
+  --color-pink-600: #CD1845;
+  --color-pink-700: #920C2D;
+  --color-pink-800: #710520;
+  --color-pink-900: #470214;
 
   /* 그레이 스케일(GRAY) → gray */
-  --gray-50: #FAFAFA;
-  --gray-100: #F4F4F4;
-  --gray-200: #E9E9E9;
-  --gray-300: #D5D5D5;
-  --gray-400: #BCBDBE;
-  --gray-500: #A1A4AA;
-  --gray-600: #8B9099;
-  --gray-700: #484B51;
-  --gray-800: #2E3136;
-  --gray-900: #111215;
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F4F4F4;
+  --color-gray-200: #E9E9E9;
+  --color-gray-300: #D5D5D5;
+  --color-gray-400: #BCBDBE;
+  --color-gray-500: #A1A4AA;
+  --color-gray-600: #8B9099;
+  --color-gray-700: #484B51;
+  --color-gray-800: #2E3136;
+  --color-gray-900: #111215;
 
   /* 서브 포인트 컬러 */
-  --blue-400: #2569FF;
-  --red-300: #F06B6B;
-  --red-400: #EB3939;
+  --color-blue-400: #2569FF;
+  --color-red-300: #F06B6B;
+  --color-red-400: #EB3939;
+
 
    /* 배경/전경 */
   --background: #ffffff;
@@ -87,125 +89,132 @@ html, body {
   }
 }
 /* 색상 */
-@layer utilities {
-  /* Mint */
-  .bg-mint-50 { background-color: var(--mint-50); }
-  .bg-mint-100 { background-color: var(--mint-100); }
-  .bg-mint-200 { background-color: var(--mint-200); }
-  .bg-mint-300 { background-color: var(--mint-300); }
-  .bg-mint-400 { background-color: var(--mint-400); }
-  .bg-mint-500 { background-color: var(--mint-500); }
-  .bg-mint-600 { background-color: var(--mint-600); }
-  .bg-mint-700 { background-color: var(--mint-700); }
-  .bg-mint-800 { background-color: var(--mint-800); }
-  .bg-mint-900 { background-color: var(--mint-900); }
-  .text-mint-50 { color: var(--mint-50); }
-  .text-mint-100 { color: var(--mint-100); }
-  .text-mint-200 { color: var(--mint-200); }
-  .text-mint-300 { color: var(--mint-300); }
-  .text-mint-400 { color: var(--mint-400); }
-  .text-mint-500 { color: var(--mint-500); }
-  .text-mint-600 { color: var(--mint-600); }
-  .text-mint-700 { color: var(--mint-700); }
-  .text-mint-800 { color: var(--mint-800); }
-  .text-mint-900 { color: var(--mint-900); }
+/* Mint */
+@utility bg-mint-50 { background-color: var(--color-mint-50)!important; }
+@utility bg-mint-100 { background-color: var(--color-mint-100)!important; }
+@utility bg-mint-200 { background-color: var(--color-mint-200)!important; }
+@utility bg-mint-300 { background-color: var(--color-mint-300)!important; }
+@utility bg-mint-400 { background-color: var(--color-mint-400)!important; }
+@utility bg-mint-500 { background-color: var(--color-mint-500)!important; }
+@utility bg-mint-600 { background-color: var(--color-mint-600)!important; }
+@utility bg-mint-700 { background-color: var(--color-mint-700)!important; }
+@utility bg-mint-800 { background-color: var(--color-mint-800)!important; }
+@utility bg-mint-900 { background-color: var(--color-mint-900)!important; }
 
-  /* Pink */
-  .bg-pink-50 { background-color: var(--pink-50); }
-  .bg-pink-100 { background-color: var(--pink-100); }
-  .bg-pink-200 { background-color: var(--pink-200); }
-  .bg-pink-300 { background-color: var(--pink-300); }
-  .bg-pink-400 { background-color: var(--pink-400); }
-  .bg-pink-500 { background-color: var(--pink-500); }
-  .bg-pink-600 { background-color: var(--pink-600); }
-  .bg-pink-700 { background-color: var(--pink-700); }
-  .bg-pink-800 { background-color: var(--pink-800); }
-  .bg-pink-900 { background-color: var(--pink-900); }
-  .text-pink-50 { color: var(--pink-50); }
-  .text-pink-100 { color: var(--pink-100); }
-  .text-pink-200 { color: var(--pink-200); }
-  .text-pink-300 { color: var(--pink-300); }
-  .text-pink-400 { color: var(--pink-400); }
-  .text-pink-500 { color: var(--pink-500); }
-  .text-pink-600 { color: var(--pink-600); }
-  .text-pink-700 { color: var(--pink-700); }
-  .text-pink-800 { color: var(--pink-800); }
-  .text-pink-900 { color: var(--pink-900); }
+@utility text-mint-50 { color: var(--color-mint-50)!important; }
+@utility text-mint-100 { color: var(--color-mint-100)!important; }
+@utility text-mint-200 { color: var(--color-mint-200)!important; }
+@utility text-mint-300 { color: var(--color-mint-300)!important; }
+@utility text-mint-400 { color: var(--color-mint-400)!important; }
+@utility text-mint-500 { color: var(--color-mint-500)!important; }
+@utility text-mint-600 { color: var(--color-mint-600)!important; }
+@utility text-mint-700 { color: var(--color-mint-700)!important; }
+@utility text-mint-800 { color: var(--color-mint-800)!important; }
+@utility text-mint-900 { color: var(--color-mint-900)!important; }
 
-  /* Gray */
-  .bg-gray-50 { background-color: var(--gray-50); }
-  .bg-gray-100 { background-color: var(--gray-100); }
-  .bg-gray-200 { background-color: var(--gray-200); }
-  .bg-gray-300 { background-color: var(--gray-300); }
-  .bg-gray-400 { background-color: var(--gray-400); }
-  .bg-gray-500 { background-color: var(--gray-500); }
-  .bg-gray-600 { background-color: var(--gray-600); }
-  .bg-gray-700 { background-color: var(--gray-700); }
-  .bg-gray-800 { background-color: var(--gray-800); }
-  .bg-gray-900 { background-color: var(--gray-900); }
-  .text-gray-50 { color: var(--gray-50); }
-  .text-gray-100 { color: var(--gray-100); }
-  .text-gray-200 { color: var(--gray-200); }
-  .text-gray-300 { color: var(--gray-300); }
-  .text-gray-400 { color: var(--gray-400); }
-  .text-gray-500 { color: var(--gray-500); }
-  .text-gray-600 { color: var(--gray-600); }
-  .text-gray-700 { color: var(--gray-700); }
-  .text-gray-800 { color: var(--gray-800); }
-  .text-gray-900 { color: var(--gray-900); }
 
-  /* Blue */
-  .bg-blue-400 { background-color: var(--blue-400); }
-  .text-blue-400 { color: var(--blue-400); }
+/* Pink */
+@utility bg-pink-50 { background-color: var(--color-pink-50)!important; }
+@utility bg-pink-100 { background-color: var(--color-pink-100)!important; }
+@utility bg-pink-200 { background-color: var(--color-pink-200)!important; }
+@utility bg-pink-300 { background-color: var(--color-pink-300)!important; }
+@utility bg-pink-400 { background-color: var(--color-pink-400)!important; }
+@utility bg-pink-500 { background-color: var(--color-pink-500)!important; }
+@utility bg-pink-600 { background-color: var(--color-pink-600)!important; }
+@utility bg-pink-700 { background-color: var(--color-pink-700)!important; }
+@utility bg-pink-800 { background-color: var(--color-pink-800)!important; }
+@utility bg-pink-900 { background-color: var(--color-pink-900)!important; }
 
-  /* Red */
-  .bg-red-300 { background-color: var(--red-300); }
-  .bg-red-400 { background-color: var(--red-400); }
-  .text-red-300 { color: var(--red-300); }
-  .text-red-400 { color: var(--red-400); }
+@utility text-pink-50 { color: var(--color-pink-50)!important; }
+@utility text-pink-100 { color: var(--color-pink-100)!important; }
+@utility text-pink-200 { color: var(--color-pink-200)!important; }
+@utility text-pink-300 { color: var(--color-pink-300)!important; }
+@utility text-pink-400 { color: var(--color-pink-400)!important; }
+@utility text-pink-500 { color: var(--color-pink-500)!important; }
+@utility text-pink-600 { color: var(--color-pink-600)!important; }
+@utility text-pink-700 { color: var(--color-pink-700)!important; }
+@utility text-pink-800 { color: var(--color-pink-800)!important; }
+@utility text-pink-900 { color: var(--color-pink-900)!important; }
 
-  /* Background / Foreground */
-  .bg-background { background-color: var(--background); }
-  .bg-foreground { background-color: var(--foreground); }
-  .text-background { color: var(--background); }
-  .text-foreground { color: var(--foreground); }
-}
-/* 폰트 */
-@layer utilities {
-  /* Pretendard */
-  .text-display-lg { font-size:5.7rem; font-weight:300; line-height:6.4rem; letter-spacing:-0.025rem; font-family: var(--font-sans); }
-  .text-display-md { font-size:5.2rem; font-weight:300; line-height:4.5rem; font-family: var(--font-sans); }
-  .text-display-sm { font-size:3.6rem; font-weight:300; line-height:4.4rem; font-family: var(--font-sans); }
 
-  .text-headline-lg { font-size:3.2rem; font-weight:200; line-height:4rem; font-family: var(--font-sans); }
-  .text-headline-md { font-size:2.8rem; font-weight:200; line-height:3.2rem; font-family: var(--font-sans); }
-  .text-headline-sm { font-size:2.4rem; font-weight:200; line-height:3.2rem; font-family: var(--font-sans); }
 
-  .text-title-lg { font-size:2.2rem; font-weight:400; line-height:1.75rem; font-family: var(--font-sans); }
-  .text-title-md { font-size:1.6rem; font-weight:400; line-height:2.4rem; letter-spacing:0.015rem; font-family: var(--font-sans); }
-  .text-title-sm { font-size:1.4rem; font-weight:400; line-height:2rem; letter-spacing:0.01rem; font-family: var(--font-sans); }
+/* Gray */
+@utility bg-gray-50 { background-color: var(--color-gray-50)!important; }
+@utility bg-gray-100 { background-color: var(--color-gray-100)!important; }
+@utility bg-gray-200 { background-color: var(--color-gray-200)!important; }
+@utility bg-gray-300 { background-color: var(--color-gray-300)!important; }
+@utility bg-gray-400 { background-color: var(--color-gray-400)!important; }
+@utility bg-gray-500 { background-color: var(--color-gray-500)!important; }
+@utility bg-gray-600 { background-color: var(--color-gray-600)!important; }
+@utility bg-gray-700 { background-color: var(--color-gray-700)!important; }
+@utility bg-gray-800 { background-color: var(--color-gray-800)!important; }
+@utility bg-gray-900 { background-color: var(--color-gray-900)!important; }
 
-  .text-label-lg { font-size:1.4rem; font-weight:300; line-height:2rem; font-family: var(--font-sans); }
-  .text-label-md { font-size:1.2rem; font-weight:300; line-height:1.6rem; font-family: var(--font-sans); }
-  .text-label-sm { font-size:1.1rem; font-weight:300; line-height:1.6rem; font-family: var(--font-sans); }
+@utility text-gray-50 { color: var(--color-gray-50)!important; }
+@utility text-gray-100 { color: var(--color-gray-100)!important; }
+@utility text-gray-200 { color: var(--color-gray-200)!important; }
+@utility text-gray-300 { color: var(--color-gray-300)!important; }
+@utility text-gray-400 { color: var(--color-gray-400)!important; }
+@utility text-gray-500 { color: var(--color-gray-500)!important; }
+@utility text-gray-600 { color: var(--color-gray-600)!important; }
+@utility text-gray-700 { color: var(--color-gray-700)!important; }
+@utility text-gray-800 { color: var(--color-gray-800)!important; }
+@utility text-gray-900 { color: var(--color-gray-900)!important; }
 
-  /* JEN Serif */
-  .text-display-serif { font-size:3.6rem; font-weight:200; line-height:4.6rem; letter-spacing:0.6rem; font-family: var(--font-serif); }
-  .text-headline-lg-serif { font-size:3.2rem; font-weight:200; line-height:4rem; letter-spacing:0.2rem; font-family: var(--font-serif); }
-  .text-headline-md-serif { font-size:2.4rem; font-weight:200; line-height:3.2rem; letter-spacing:0.2rem; font-family: var(--font-serif); }
-  .text-headline-sm-serif { font-size:2rem; font-weight:200; line-height:2.4rem; letter-spacing:1.2rem; font-family: var(--font-serif); }
-  .text-label-serif { font-size:1.4rem; font-weight:200; line-height:2rem; letter-spacing:0.4rem; font-family: var(--font-serif); }
-}
-  /*display, grid 참조 */
-@layer utilities {
+/* Blue */
+@utility bg-blue-400 { background-color: var(--color-blue-400)!important; }
+@utility text-blue-400 { color: var(--color-blue-400)!important; }
 
-  .layout-flex { display: var(--display-flex); }
-  .layout-grid { display: var(--display-grid); }
+/* Red */
+@utility bg-red-300 { background-color: var(--color-red-300)!important; }
+@utility bg-red-400 { background-color: var(--color-red-400)!important; }
+@utility text-red-300 { color: var(--color-red-300)!important; }
+@utility text-red-400 { color: var(--color-red-400)!important; }
 
-  .grid-cols-6 { grid-template-columns: var(--grid-cols-6); }
-  .grid-cols-4 { grid-template-columns: var(--grid-cols-4); }
 
-  .max-w-mobile { max-width: var(--max-w-mobile); }
-  .min-w-100 { min-width: var(--min-w-100); }
-}
+/* Background / Foreground */
+@utility bg-background { background-color: var(--background); }
+@utility bg-foreground { background-color: var(--foreground); }
+@utility text-background { color: var(--background); }
+@utility text-foreground { color: var(--foreground); }
 
+
+/* 폰트 *//* Pretendard */
+@utility text-display-lg { font-size:5.7rem; font-family: var(--font-sans); }
+@utility text-display-md { font-size:5.2rem; font-family: var(--font-sans); }
+@utility text-display-sm { font-size:3.6rem; font-family: var(--font-sans); }
+
+@utility text-headline-lg { font-size:3.2rem; font-family: var(--font-sans); }
+@utility text-headline-md { font-size:2.8rem; font-family: var(--font-sans); }
+@utility text-headline-sm { font-size:2.4rem; font-family: var(--font-sans); }
+
+@utility text-title-lg { font-size:2.2rem;  font-family: var(--font-sans); }
+@utility text-title-md { font-size:1.6rem;  font-family: var(--font-sans); }
+@utility text-title-sm { font-size:1.4rem; font-family: var(--font-sans); }
+
+@utility text-label-lg { font-size:1.4rem; font-family: var(--font-sans); }
+@utility text-label-md { font-size:1.2rem; font-family: var(--font-sans); }
+@utility text-label-sm { font-size:1.1rem; font-family: var(--font-sans); }
+
+@utility text-body-lg { font-size:1.4rem; font-family: var(--font-sans); }
+@utility text-body-md { font-size:1.2rem; font-family: var(--font-sans); }
+@utility text-body-sm { font-size:1rem; font-family: var(--font-sans); }
+
+/* JEN Serif */
+@utility text-display-serif { font-size:3.6rem; font-family: var(--font-serif); }
+@utility text-headline-lg-serif { font-size:3.2rem; font-family: var(--font-serif); }
+@utility text-headline-md-serif { font-size:2.4rem; font-family: var(--font-serif); }
+@utility text-headline-sm-serif { font-size:2rem; font-family: var(--font-serif); }
+@utility text-label-serif { font-size:1.4rem; font-family: var(--font-serif); }
+
+/* Layout */
+@utility layout-flex { display: var(--display-flex); }
+@utility layout-grid { display: var(--display-grid); }
+@utility layout-block { display: var(--display-block); }
+@utility layout-inline { display: var(--display-inline); }
+
+@utility grid-cols-6 { grid-template-columns: var(--grid-cols-6); }
+@utility grid-cols-4 { grid-template-columns: var(--grid-cols-4); }
+
+@utility max-w-mobile { max-width: var(--max-w-mobile); }
+@utility min-w-100 { min-width: var(--min-w-100); }
