@@ -9,11 +9,16 @@ import { Icon } from '@/shared/icons';
 
 export function DatePicker() {
   const [open, setOpen] = React.useState(false);
-  const [date] = React.useState<Date | undefined>(undefined);
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
+  const today = new Date();
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
 
   return (
     <div className='flex flex-col gap-3'>
-      <div className='px-1'>Date of birth</div>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -25,16 +30,19 @@ export function DatePicker() {
             <Icon name='CalendarBlank' />
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          className='w-auto overflow-hidden p-0 z-1000'
-          align='start'
-        >
+        <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
           <Calendar
             mode='single'
             selected={date}
             captionLayout='dropdown'
-            fromYear={2025}
-            toYear={2035}
+            fromYear={startOfToday.getFullYear()}
+            toYear={startOfToday.getFullYear() + 5}
+            disabled={{ before: startOfToday }}
+            onSelect={(d) => {
+              if (!d) return;
+              setDate(d);
+              setOpen(false);
+            }}
           />
         </PopoverContent>
       </Popover>
