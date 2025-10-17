@@ -1,0 +1,102 @@
+import { Icon } from '@/shared/icons';
+import { Card } from '@/shared/container/components/Card';
+import { cn } from '@/shared/lib';
+import Image from 'next/image';
+
+interface LocationCardProps {
+  name: string;
+  address: string;
+  description: string;
+  variant?: 'gray' | 'mint';
+  size?: 'medium' | 'large';
+  imageSrc?: string;
+}
+
+const LocationCard = ({
+  name,
+  address,
+  description,
+  variant = 'gray',
+  size = 'medium',
+  imageSrc = '',
+}: LocationCardProps) => {
+  return (
+    <Card variant={variant} size={size}>
+      {/* Medium 카드 */}
+      {size === 'medium' ? (
+        <div className='flex flex-col justify-between w-full'>
+          {/* 장소 사진 */}
+          <div className="w-full h-[9rem] rounded-[2rem] mb-[1rem] overflow-hidden">
+            <Image
+              src={imageSrc}
+              alt={name}
+              width={145} 
+              height={90}
+              className="object-cover w-full h-full"
+            />
+          </div>
+
+          {/* 장소 이름 */}
+          <div
+            className={cn(
+              'text-label-lg mb-[0.2rem]',
+              variant === 'mint' ? 'text-mint-800' : 'text-gray-900',
+            )}
+          >
+            {name}
+          </div>
+          {/* 장소 주소 */}
+          <div
+            className={cn(
+              'text-body-md',
+              variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
+            )}
+          >
+            {address}
+          </div>
+        </div>
+      ) : (
+        // Large 카드
+        <div className='flex flex-col justify-start w-full'>
+          <div className='flex items-center justify-between w-full'>
+            {/* 지도핀 + 장소 이름 + 하트 */}
+            <div className='flex items-center gap-[0.4rem]'>
+              <Icon
+                name='MapPin'
+                size={18}
+                color={variant === 'mint' ? 'mint-500' : 'gray-600'}
+              />
+              <span
+                className={cn(
+                  'text-label-lg',
+                  variant === 'mint' ? 'text-mint-800' : 'text-gray-900',
+                )}
+              >
+                {name}
+              </span>
+            </div>
+
+            <div className='flex-shrink-0 ml-auto'>
+              <Icon
+                name='HeartStraight'
+                size={20}
+                color={variant === 'mint' ? 'mint-400' : 'gray-300'}
+              />
+            </div>
+          </div>
+          {/* 장소 설명 */}
+          <p
+            className={cn(
+              'text-body-md mt-[0.5rem]',
+              variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
+            )}
+          >
+            {description}
+          </p>
+        </div>
+      )}
+    </Card>
+  );
+};
+
+export default LocationCard;
