@@ -9,7 +9,7 @@ interface ControlBarProps {
   className?: string;
 }
 
-const rightStyle = cva('flex items-center gap-[0.6rem] transition', {
+const rightStyle = cva('flex items-center gap-[0.6rem] transition w-[7.8rem]', {
   variants: {
     state: {
       loggedIn: 'text-mint-600',
@@ -42,12 +42,11 @@ const ControlBar = ({
         <h1 className='justify-self-center text-title-md font-[600] leading-[2.4rem] tracking-[0.015rem] text-gray-900'>
           글다
         </h1>
-
         {isLoggedIn ? (
           <div className={cn(rightStyle({ state: rightState }), 'min-w-0')}>
             <Icon name='User' size={24} color={iconColor} />
             <span
-              className='text-body-md max-w-[7.8rem] truncate'
+              className='text-body-md w-[7.8rem] truncate block'
               title={`${userName}님`}
               aria-label={`${userName}님`}
             >
