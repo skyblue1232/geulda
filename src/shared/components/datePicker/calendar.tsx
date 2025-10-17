@@ -22,7 +22,7 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn(
-        ' bg-gray-50 border rounded-[5px] border-pink-100 group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
+        ' bg-gray-50 border rounded-[5px] border-pink-100 group/calendar p-3 [--cell-size:--spacing(8)] ',
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
         String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className,
@@ -74,7 +74,7 @@ function Calendar({
           'select-none font-medium',
           captionLayout === 'label'
             ? 'text-title-md  text-pink-900'
-            : 'rounded-md text-pink-800 pl-2 pr-1 flex items-center gap-1 text-title-md h-8 [&>svg]:text-muted-foreground [&>svg]:size-3.5',
+            : 'rounded-md text-pink-800 pl-2 pr-1 flex items-center gap-1 text-title-md ',
           defaultClassNames.caption_label,
         ),
         table: 'w-full border-collapse',
@@ -93,7 +93,7 @@ function Calendar({
           defaultClassNames.week_number,
         ),
         day: cn(
-          'relative w-full h-full p-0 text-center [&:first-child[data-selected=true]_button]:rounded-l-md [&:last-child[data-selected=true]_button]:rounded-r-md group/day aspect-square select-none',
+          'relative w-full h-full p-0 text-center  group/day aspect-square select-none',
           defaultClassNames.day,
         ),
         range_start: cn(
@@ -130,11 +130,15 @@ function Calendar({
         },
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === 'left') {
-            return <Icon name={'Caret'} color='pink-800' />;
+            return <Icon name={'Caret'} color='pink-800' size={16} />;
           } else if (orientation === 'right') {
-            return <Icon name={'Caret'} rotate={180} color='pink-800' />;
+            return (
+              <Icon name={'Caret'} rotate={180} color='pink-800' size={16} />
+            );
           }
-          return <Icon name={'Caret'} rotate={270} color='pink-800' />;
+          return (
+            <Icon name={'Caret'} rotate={270} color='pink-800' size={12} />
+          );
         },
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...props }) => {
@@ -170,7 +174,6 @@ function CalendarDayButton({
     <Button
       ref={ref}
       variant='ghost'
-      size='icon'
       data-day={day.date.toLocaleDateString()}
       data-selected-single={
         modifiers.selected &&
@@ -182,7 +185,7 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        'data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground  dark:hover:text-accent-foreground flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none  [&>span]:opacity-70',
+        'flex  size-auto w-full min-w-(--cell-size) flex-col gap-1',
         defaultClassNames.day,
         className,
       )}

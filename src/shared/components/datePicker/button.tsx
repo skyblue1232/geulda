@@ -12,9 +12,6 @@ const buttonVariants = cva(
         default: 'px-[1.5rem] ',
         ghost: ' text-label-lg',
       },
-      size: {
-        icon: 'size-16',
-      },
       tone: {
         pink: 'text-pink-200 bg-pink-50 border border-pink-100',
       },
@@ -28,7 +25,6 @@ const buttonVariants = cva(
 function Button({
   className,
   variant,
-  size,
   tone,
   asChild = false,
   ...props
@@ -41,7 +37,7 @@ function Button({
   return (
     <Comp
       data-slot='button'
-      className={cn(buttonVariants({ variant, size, className, tone }))}
+      className={cn(buttonVariants({ variant, className, tone }))}
       {...props}
     />
   );
