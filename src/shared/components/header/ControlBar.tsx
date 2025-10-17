@@ -3,8 +3,8 @@ import { cn } from '@/shared/lib';
 import { cva } from 'class-variance-authority';
 
 interface ControlBarProps {
-  onLogin?: () => void;
   isLoggedIn: boolean;
+  onLogin?: () => void;
   userName?: string;
   className?: string;
 }
@@ -22,24 +22,21 @@ const rightStyle = cva('flex items-center gap-[0.6rem] transition w-[7.8rem]', {
 const ControlBar = ({
   onLogin,
   isLoggedIn = false,
-  userName = '홍길동',
+  userName = '글다',
   className,
 }: ControlBarProps) => {
   const rightState = isLoggedIn ? 'loggedIn' : ('guest' as const);
   const iconColor = isLoggedIn ? 'mint-600' : ('gray-400' as const);
 
   return (
-    <section
-      className={cn('bg-none w-full h-[5.4rem]', className)}
-      role='group'
-    >
+    <header className={cn('bg-none w-full h-[5.4rem]', className)} role='group'>
       <div className='h-full grid grid-cols-[auto_1fr_auto] items-center gap-[1.2rem]'>
         <div
           className='w-[7.8rem] h-[5.4rem] rounded-[0.6rem] bg-gray-200'
           aria-hidden
         />
 
-        <h1 className='justify-self-center text-title-md font-[600] leading-[2.4rem] tracking-[0.015rem] text-gray-900'>
+        <h1 className='justify-self-center text-headline-sm-serif font-[400] leading-[2.4rem] tracking-[0.015rem] text-gray-900'>
           글다
         </h1>
         {isLoggedIn ? (
@@ -67,7 +64,7 @@ const ControlBar = ({
           </button>
         )}
       </div>
-    </section>
+    </header>
   );
 };
 
