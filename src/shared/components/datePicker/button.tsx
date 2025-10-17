@@ -12,9 +12,6 @@ const buttonVariants = cva(
         default: 'px-[1.5rem] ',
         ghost: ' text-label-lg',
       },
-      tone: {
-        pink: 'text-pink-200 bg-pink-50 border border-pink-100',
-      },
     },
     defaultVariants: {
       variant: 'default',
@@ -25,7 +22,6 @@ const buttonVariants = cva(
 function Button({
   className,
   variant,
-  tone,
   asChild = false,
   ...props
 }: React.ComponentProps<'button'> &
@@ -37,7 +33,7 @@ function Button({
   return (
     <Comp
       data-slot='button'
-      className={cn(buttonVariants({ variant, className, tone }))}
+      className={cn(buttonVariants({ variant, className }))}
       {...props}
     />
   );
