@@ -3,9 +3,8 @@ import { cn } from '@/shared/lib';
 
 type HeaderProps = {
   title: string;
-  className?: string;
-
   onClick: () => void;
+  className?: string;
 };
 
 const Header = ({ title, onClick, className }: HeaderProps) => {
