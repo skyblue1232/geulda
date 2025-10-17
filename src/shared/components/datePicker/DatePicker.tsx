@@ -22,17 +22,21 @@ export function DatePicker() {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant='outline'
             id='date'
-            className='w-48 justify-between font-normal'
+            tone='pink'
+            className=' w-[16rem] h-[4rem] justify-between rounded-[500px] text-label-lg'
           >
             {date ? date.toLocaleDateString() : 'Select date'}
-            <Icon name='CalendarBlank' />
+            <Icon name='CalendarBlank' color='pink-400' size={14} />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
+        <PopoverContent
+          className='w-[24rem]  overflow-hidden p-0'
+          align='start'
+        >
           <Calendar
             mode='single'
+            className='w-[24rem] h-auto p-3 [--cell-size:2.8rem]'
             selected={date}
             captionLayout='dropdown'
             fromYear={startOfToday.getFullYear()}
