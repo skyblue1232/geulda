@@ -7,29 +7,23 @@ interface ControlBarProps {
   isLoggedIn: boolean;
   userName?: string;
   className?: string;
-  disabled?: boolean;
 }
 
-const rightStyle = cva('flex items-center gap-[0.6rem] transition w-[7.8rem]', {
+const rightStyle = cva('flex items-center gap-[0.6rem] transition', {
   variants: {
     state: {
       loggedIn: 'text-mint-600',
       guest: 'text-gray-400 hover:text-gray-600',
     },
-    disabled: {
-      true: 'opacity-60 pointer-events-none',
-      false: '',
-    },
   },
-  defaultVariants: { state: 'guest', disabled: false },
+  defaultVariants: { state: 'guest' },
 });
 
 const ControlBar = ({
   onLogin,
   isLoggedIn = false,
-  userName = '홍길동님',
+  userName = '홍길동',
   className,
-  disabled = false,
 }: ControlBarProps) => {
   const rightState = isLoggedIn ? 'loggedIn' : ('guest' as const);
   const iconColor = isLoggedIn ? 'mint-600' : ('gray-400' as const);
@@ -37,7 +31,6 @@ const ControlBar = ({
   return (
     <section
       className={cn('bg-none w-full h-[5.4rem]', className)}
-      aria-disabled={disabled}
       role='group'
     >
       <div className='h-full grid grid-cols-[auto_1fr_auto] items-center gap-[1.2rem]'>
@@ -51,12 +44,7 @@ const ControlBar = ({
         </h1>
 
         {isLoggedIn ? (
-          <div
-            className={cn(
-              rightStyle({ state: rightState, disabled }),
-              'min-w-0',
-            )}
-          >
+          <div className={cn(rightStyle({ state: rightState }), 'min-w-0')}>
             <Icon name='User' size={24} color={iconColor} />
             <span
               className='text-body-md max-w-[7.8rem] truncate'
@@ -71,12 +59,9 @@ const ControlBar = ({
             type='button'
             onClick={(e) => {
               e.stopPropagation();
-              {
-                /*TODO: 로그인 페이지 이동 연결*/
-              }
-              if (!disabled) onLogin?.();
+              onLogin?.();
             }}
-            className={rightStyle({ state: rightState, disabled })}
+            className={rightStyle({ state: rightState })}
             aria-label='Log In'
           >
             <Icon name='User' size={24} color={iconColor} />
