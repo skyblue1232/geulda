@@ -4,8 +4,8 @@ import { cva } from 'class-variance-authority';
 
 interface ControlBarProps {
   isLoggedIn: boolean;
-  onLogin?: () => void;
-  userName?: string;
+  onLogin: () => void;
+  userName: string;
   className?: string;
 }
 
