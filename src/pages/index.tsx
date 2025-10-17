@@ -1,3 +1,4 @@
+import { DatePicker } from '@/shared/components/datePicker/DatePicker';
 import { Icon } from '@/shared/icons';
 
 export default function Home() {
@@ -9,10 +10,8 @@ export default function Home() {
             초기 세팅 완료
             <Icon name='User' color='mint-600' />
           </h1>
-          <Icon name='CalendarBlank' size={200} color='gray-900' />
-          <Icon name='User' size={200} color='blue-400' />
-          <Icon name='User' size={200} color='red-300' />
-          <Icon name='User' size={200} color='red-300' />
+          <DatePicker />
+
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>
