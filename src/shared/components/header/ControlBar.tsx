@@ -21,7 +21,7 @@ const rightStyle = cva('flex items-center gap-[0.6rem] transition w-[7.8rem]', {
 
 const ControlBar = ({
   onLogin,
-  isLoggedIn = false,
+  isLoggedIn,
   userName = '글다',
   className,
 }: ControlBarProps) => {
