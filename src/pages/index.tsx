@@ -8,7 +8,7 @@ export default function Home() {
         <main className='flex flex-col items-center justify-center w-full flex-1 px-4 sm:px-20 text-center'>
           <Header onClick={() => {}} className='' title={'글다'} />
           <ControlBar isLoggedIn={false} />
-          <ControlBar isLoggedIn={true} userName='홍길ㅌㅌ동' />
+          <ControlBar isLoggedIn={true} userName='홍길동' />
           <h1 className='text-4xl sm:text-6xl font-extrabold text-gray-900 mb-4'>
             초기 세팅 완료
             <Icon name='User' color='mint-600' />

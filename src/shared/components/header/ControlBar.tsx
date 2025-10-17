@@ -46,8 +46,7 @@ const ControlBar = ({
           <div className={cn(rightStyle({ state: rightState }), 'min-w-0')}>
             <Icon name='User' size={24} color={iconColor} />
             <span
-              className='text-body-md w-[7.8rem] truncate block'
-              title={`${userName}님`}
+              className='text-body-md w-[5.3rem] truncate block'
               aria-label={`${userName}님`}
             >
               {userName}님
