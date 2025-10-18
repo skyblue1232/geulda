@@ -1,22 +1,40 @@
-import { Icon } from '@/shared/icons';
-import { cn } from '@/shared/lib';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/shared/lib';
+import { Icon } from '@/shared/icons';
+import type { IconName } from '@/shared/icons/iconNames';
 
-interface HeaderProps {}
+interface Props {
+  label: string;
+  icon?: IconName;
+  className?: string;
+  onClick?: () => void;
+  variant?: VariantProps<typeof tagStyle>['variant'];
+}
 
-const TagStyle = cva('px-[1.2rem] py-[0.5rem] ', {
+const tagStyle = cva('flex items-center rounded-[500px] text-gray-50 ', {
   variants: {
-    color: {
-      toggleTag: 'bg-pink-300 text-label-md',
-      hashTag: 'bg-mint-600 text-title-sm',
+    variant: {
+      hash: 'bg-mint-600 text-title-sm px-[1.2rem] py-[0.3rem]',
+      toggle:
+        'bg-pink-300 w-[10rem] text-label-md gap-2 justify-center py-[0.5rem]',
     },
   },
   defaultVariants: {
-    color: 'hashTag',
+    variant: 'hash',
   },
 });
-const Tag = ({}: HeaderProps) => {
-  return <></>;
+
+const Tag = ({ label, icon, variant, className, onClick }: Props) => {
+  return (
+    <button
+      type='button'
+      className={cn(tagStyle({ variant }), className)}
+      onClick={onClick}
+    >
+      {icon && <Icon name={icon} size={14} color='gray-50' />}
+      <span className='truncate'>{label}</span>
+    </button>
+  );
 };
 
 export default Tag;

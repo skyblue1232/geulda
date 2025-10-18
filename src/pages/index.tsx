@@ -1,3 +1,4 @@
+import Tag from '@/shared/components/tag/Tag';
 import { Icon } from '@/shared/icons';
 
 export default function Home() {
@@ -9,6 +10,9 @@ export default function Home() {
             초기 세팅 완료
             <Icon name='User' color='mint-600' />
           </h1>
+          <Tag label='리스트로 보기' icon='MapPin_' variant='toggle' />
+          <Tag label='지도로 보기' icon='FadersHorizontal' variant='toggle' />
+          <Tag label='#데이트' variant='hash' />
           <Icon name='CalendarBlank' size={200} color='gray-900' />
           <Icon name='User' size={200} color='blue-400' />
           <Icon name='User' size={200} color='red-300' />
