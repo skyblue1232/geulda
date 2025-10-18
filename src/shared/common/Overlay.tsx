@@ -10,7 +10,6 @@ const Overlay = ({ onClick, opacity = 40, className }: OverlayProps) => {
       onClick={onClick}
       className={`
         fixed inset-0 z-[40]
-        bg-black/40
         transition-opacity duration-300
         ${className ?? ''}
       `}
