@@ -1,6 +1,8 @@
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva, type VariantProps } from 'class-variance-authority';
+import type * as React from 'react';
+import { useState } from 'react';
 
 const addressCopyStyle = cva(
   'flex items-center justify-start flex-shrink-0 rounded-full transition-all duration-200',
@@ -21,16 +23,31 @@ interface AddressCopyProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof addressCopyStyle> {
   label?: string;
+  value?: string;
 }
 
 const AddressCopy = ({
   label = 'address copy',
+  value = label,
   variant = 'gray',
   className,
   ...props
 }: AddressCopyProps) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error('주소 복사 실패:', err);
+    }
+  };
+
   return (
     <div
+      onClick={handleCopy}
       className={cn(
         addressCopyStyle({ variant }),
         'w-[35.4rem] h-[4rem] px-[1.3rem] py-[1rem] gap-[0.4rem]',
