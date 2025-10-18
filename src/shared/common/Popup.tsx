@@ -18,7 +18,7 @@ export default function Popup({ text, onClose }: PopupProps) {
   return (
     <div
       className={cn(
-        'absolute px-[1.6rem] py-[1.5rem] w-[26.2rem] h-[12rem]',
+        'px-[1.6rem] py-[1.5rem] w-[26.2rem] h-[12rem]',
         'bg-white border border-gray-200 rounded-[0.8rem]',
         'flex flex-col items-center justify-center gap-[1.4rem]',
       )}
