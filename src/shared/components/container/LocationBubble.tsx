@@ -53,7 +53,7 @@ const LocationBubble = ({ name, imageSrc, className }: LocationBubbleProps) => {
             name='backto'
             size={24}
             color='gray-300'
-            className='rotate-180'
+            rotate={180}
           />
         </div>
       </div>
