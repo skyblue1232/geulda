@@ -26,16 +26,20 @@ const LocationCard = ({
       {size === 'medium' ? (
         <div className='flex flex-col justify-between w-full'>
           {/* 장소 사진 */}
-          <div className="w-full h-[9rem] rounded-[2rem] mb-[1rem] overflow-hidden">
-            <Image
-              src={imageSrc}
-              alt={name}
-              width={145} 
-              height={90}
-              className="object-cover w-full h-full"
-            />
+          <div className='relative w-full h-[9rem] rounded-[2rem] mb-[1rem] overflow-hidden'>
+            {imageSrc ? (
+              <Image
+                src={imageSrc}
+                alt={name}
+                fill
+                className='object-cover'
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 145px'
+                loading='lazy'
+              />
+            ) : (
+              <div className='absolute inset-0 bg-gray-200' />
+            )}
           </div>
-
           {/* 장소 이름 */}
           <div
             className={cn(
