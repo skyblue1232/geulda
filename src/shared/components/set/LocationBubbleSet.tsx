@@ -1,3 +1,4 @@
+'use client';
 import Overlay from '@/shared/common/Overlay';
 import LocationBubble from '@/shared/components/container/LocationBubble';
 import { cn } from '@/shared/lib';
