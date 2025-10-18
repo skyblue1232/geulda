@@ -24,7 +24,7 @@ const LocationBubble = ({ name, imageSrc, className }: LocationBubbleProps) => {
   };
 
   return (
-    <div className={cn(bubbleVariants(), className)}>
+    <div onClick={handleClick} className={cn(bubbleVariants(), className)}>
       {/* 장소 사진 */}
       <div className='relative h-[10.3rem] w-full rounded-[0.8rem] overflow-hidden'>
         {imageSrc ? (
