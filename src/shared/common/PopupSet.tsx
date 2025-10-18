@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { cn } from '@/shared/lib';
 import Popup from '@/shared/common/Popup';
