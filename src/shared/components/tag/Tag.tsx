@@ -16,7 +16,7 @@ const tagStyle = cva('flex items-center rounded-[500px] text-gray-50 ', {
     variant: {
       hash: 'bg-mint-600 text-title-sm px-[1.2rem] py-[0.3rem]',
       toggle:
-        'bg-pink-300 w-[10rem] text-label-md gap-2 justify-center py-[0.5rem]',
+        'bg-pink-300 w-[10rem] text-label-md gap-2 justify-center py-[0.5rem] font-medium',
     },
   },
   defaultVariants: {
@@ -32,7 +32,7 @@ const Tag = ({ label, icon, variant, className, onClick }: Props) => {
       onClick={onClick}
     >
       {icon && <Icon name={icon} size={14} color='gray-50' />}
-      <span className='truncate'>{label}</span>
+      <span>{label}</span>
     </button>
   );
 };
