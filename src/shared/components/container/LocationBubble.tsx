@@ -2,6 +2,7 @@ import { Icon } from '@/shared/icons';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface LocationBubbleProps {
   name: string;
@@ -14,6 +15,14 @@ const bubbleVariants = cva(
 );
 
 const LocationBubble = ({ name, imageSrc, className }: LocationBubbleProps) => {
+
+  const router = useRouter();
+  // 말풍선 클릭시 - 장소 세부 페이지로 이동
+  // 추후 페이지 작업시 맞는 경로 바꾸면 됩니다.
+  const handleClick = () => {
+    router.push('/location');
+  };
+
   return (
     <div className={cn(bubbleVariants(), className)}>
       {/* 장소 사진 */}
