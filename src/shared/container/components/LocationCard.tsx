@@ -43,7 +43,7 @@ const LocationCard = ({
           {/* 장소 이름 */}
           <div
             className={cn(
-              'text-label-lg mb-[0.2rem]',
+              'text-label-lg mb-[0.2rem] truncate', //1줄 초과
               variant === 'mint' ? 'text-mint-800' : 'text-gray-900',
             )}
           >
@@ -52,7 +52,7 @@ const LocationCard = ({
           {/* 장소 주소 */}
           <div
             className={cn(
-              'text-body-md',
+              'text-body-md truncate', //1줄 초과
               variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
             )}
           >
@@ -72,7 +72,7 @@ const LocationCard = ({
               />
               <span
                 className={cn(
-                  'text-label-lg',
+                  'text-label-lg truncate', //1줄 초과,
                   variant === 'mint' ? 'text-mint-800' : 'text-gray-900',
                 )}
               >
@@ -91,7 +91,7 @@ const LocationCard = ({
           {/* 장소 설명 */}
           <p
             className={cn(
-              'text-body-md mt-[0.5rem]',
+              'text-body-md mt-[0.5rem] line-clamp-4', //4줄 초과',
               variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
             )}
           >

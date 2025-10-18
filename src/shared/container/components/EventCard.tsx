@@ -50,7 +50,7 @@ const EventCard = ({
           <div className='flex items-center justify-between w-full mb-[0.2rem]'>
             <span
               className={cn(
-                'text-label-lg',
+                'text-label-lg truncate', //1줄 초과
                 variant === 'mint' ? 'text-mint-800' : 'text-gray-900',
               )}
             >
@@ -65,7 +65,7 @@ const EventCard = ({
           {/* 행사 주소 */}
           <div
             className={cn(
-              'text-body-md',
+              'text-body-md truncate', //1줄 초과
               variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
             )}
           >
@@ -96,7 +96,7 @@ const EventCard = ({
             <div className='flex items-start justify-between w-full'>
               <span
                 className={cn(
-                  'text-label-lg',
+                  'text-label-lg truncate', //1줄 초과
                   variant === 'mint' ? 'text-mint-800' : 'text-gray-900',
                 )}
               >
@@ -112,7 +112,7 @@ const EventCard = ({
             {/* 행사 설명 */}
             <p
               className={cn(
-                'text-body-md mt-[1rem]',
+                'text-body-md mt-[1rem] line-clamp-4', //4줄 초과
                 variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
               )}
             >

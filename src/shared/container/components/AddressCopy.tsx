@@ -1,7 +1,6 @@
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva, type VariantProps } from 'class-variance-authority';
-import type * as React from 'react';
 import { useState } from 'react';
 
 const addressCopyStyle = cva(
