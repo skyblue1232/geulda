@@ -1,5 +1,5 @@
 import { Icon } from '@/shared/icons';
-import { Card } from '@/shared/container/components/Card';
+import { Card } from '@/shared/icons/components/container/Card';
 import { cn } from '@/shared/lib';
 import Image from 'next/image';
 
