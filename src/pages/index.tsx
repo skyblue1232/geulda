@@ -1,5 +1,9 @@
 import { ControlBar, Header, Tag } from '@/shared/components';
 import { Icon } from '@/shared/icons';
+import LocationBubble from '@/shared/components/container/LocationBubble';
+import LocationCard from '@/shared/components/container/LocationCard';
+import EventCard from '@/shared/components/container/EventCard';
+import AddressCopy from '@/shared/components/button/AddressCopy';
 
 export default function Home() {
   return (
