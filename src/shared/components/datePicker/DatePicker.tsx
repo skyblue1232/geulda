@@ -8,7 +8,7 @@ import { cn } from '@/shared/lib';
 
 interface DatePickerProps {
   value?: Date;
-  onChange: (date: Date) => void;
+  onChange?: (date: Date) => void;
   defaultValue?: Date;
   className?: string;
 }
@@ -46,7 +46,7 @@ export function DatePicker({
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className='w-[24rem] overflow-hidden p-0' align='start'>
+        <PopoverContent className='w-[24rem] p-0' align='start'>
           <Calendar
             mode='single'
             className='w-[24rem] h-auto p-3 [--cell-size:2.8rem]'
