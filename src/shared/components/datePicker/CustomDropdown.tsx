@@ -103,8 +103,8 @@ export function CustomDropdown({
           tabIndex={-1}
           aria-label={ariaLabel}
           className={cn(
-            'absolute z-50 mt-2 w-[140px] max-h-[240px] overflow-auto',
-            'rounded-[12px] border border-gray-200 bg-white shadow-xl p-1',
+            'absolute z-50 mt-2 w-[14rem] max-h-[20rem] overflow-auto',
+            'rounded-[12px] border border-pink-200 bg-white p-1',
           )}
         >
           {options.map((opt, idx) => {
@@ -127,8 +127,8 @@ export function CustomDropdown({
                 className={cn(
                   'relative cursor-pointer select-none rounded-[8px] px-3 py-2 text-body-md',
                   opt.disabled && 'opacity-40 pointer-events-none',
-                  highlighted && 'bg-gray-100',
-                  selected && 'font-medium',
+                  highlighted && 'bg-pink-50',
+                  selected && 'text-pink-800 font-medium',
                 )}
               >
                 {opt.label}

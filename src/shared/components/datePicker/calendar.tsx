@@ -1,4 +1,3 @@
-// src/shared/components/datePicker/calendar.tsx
 import * as React from 'react';
 import { DayPicker, DayButton, getDefaultClassNames } from 'react-day-picker';
 import { cn } from '@/shared/lib';
@@ -25,7 +24,7 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       captionLayout={captionLayout}
       className={cn(
-        'bg-gray-50 border rounded-[5px] border-pink-100 group/calendar p-3 [--cell-size:--spacing(8)]',
+        'bg-white border rounded-[5px] border-pink-100 group/calendar p-3 [--cell-size:--spacing(8)]',
         className,
       )}
       formatters={{
@@ -122,7 +121,6 @@ function Calendar({
               value={value as number}
               options={opts}
               onChange={(next: number) => {
-                // DayPicker는 <select> change 이벤트를 기대하므로, synthetic event를 생성해 전달
                 const evt = {
                   target: { value: String(next) },
                 } as unknown as React.ChangeEvent<HTMLSelectElement>;
@@ -133,7 +131,6 @@ function Calendar({
             />
           );
         },
-        // 좌/우/상 아이콘
         Chevron: ({ orientation }) => {
           if (orientation === 'left') {
             return <Icon name='Caret' color='pink-800' size={16} />;
