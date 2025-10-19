@@ -5,7 +5,7 @@ import { cn } from '@/shared/lib';
 
 interface LocationBubbleSetProps {
   isVisible: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   name: string;
   imageSrc?: string;
   className?: string;

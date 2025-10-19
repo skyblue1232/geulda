@@ -3,7 +3,7 @@ import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+
 
 const addressCopyStyle = cva(
   'flex items-center justify-start flex-shrink-0 rounded-full transition-all duration-200',
