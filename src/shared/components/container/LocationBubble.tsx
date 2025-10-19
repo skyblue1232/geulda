@@ -15,7 +15,6 @@ const bubbleVariants = cva(
 );
 
 const LocationBubble = ({ name, imageSrc, className }: LocationBubbleProps) => {
-
   const router = useRouter();
   // 말풍선 클릭시 - 장소 세부 페이지로 이동
   // 추후 페이지 작업시 맞는 경로 바꾸면 됩니다.
@@ -49,12 +48,7 @@ const LocationBubble = ({ name, imageSrc, className }: LocationBubbleProps) => {
         </div>
 
         <div className='flex-shrink-0'>
-          <Icon
-            name='backto'
-            size={24}
-            color='gray-300'
-            rotate={180}
-          />
+          <Icon name='backto' size={24} color='gray-300' rotate={180} />
         </div>
       </div>
 

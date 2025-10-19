@@ -1,7 +1,9 @@
+'use client';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { useState } from 'react';
+
 
 const addressCopyStyle = cva(
   'flex items-center justify-start flex-shrink-0 rounded-full transition-all duration-200',
