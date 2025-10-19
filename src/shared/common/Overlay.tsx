@@ -4,7 +4,7 @@ interface OverlayProps {
   className?: string;
 }
 
-const Overlay = ({ onClick, opacity = 40, className }: OverlayProps) => {
+const Overlay = ({ onClick, opacity = 30, className }: OverlayProps) => {
   return (
     <div
       onClick={onClick}
