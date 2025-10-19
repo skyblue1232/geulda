@@ -1,5 +1,4 @@
-import { ControlBar, Header } from '@/shared/components';
-import Tag from '@/shared/components/tag/Tag';
+import { ControlBar, Header, Tag } from '@/shared/components';
 import { Icon } from '@/shared/icons';
 
 export default function Home() {
