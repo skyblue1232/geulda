@@ -12,7 +12,6 @@ interface DatePickerProps {
   defaultValue?: Date;
   className?: string;
 }
-
 export function DatePicker({
   value,
   onChange,
@@ -25,11 +24,16 @@ export function DatePicker({
     defaultValue,
   );
 
+  React.useEffect(() => {
+    if (value !== undefined) setInnerDate(value);
+  }, [value]);
+
   const selected = value ?? innerDate;
 
   const handleSelect = (d?: Date) => {
     if (!d) return;
-    onChange ? onChange(d) : setInnerDate(d);
+    if (onChange) onChange(d);
+    else setInnerDate(d);
     setOpen(false);
   };
 
@@ -37,10 +41,7 @@ export function DatePicker({
     <div className={cn('flex flex-col gap-3', className)}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button
-            id='date'
-            className='w-[16rem] h-[4rem] justify-between rounded-[500px] text-label-lg text-pink-300 bg-pink-50 border border-pink-100'
-          >
+          <Button className='w-[16rem] h-[4rem] justify-between rounded-[500px] text-label-lg text-pink-300 bg-pink-50 border border-pink-100'>
             {selected ? selected.toLocaleDateString() : 'Select date'}
             <Icon name='CalendarBlank' color='pink-400' size={14} />
           </Button>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/shared/lib';
-import { DropdownOption } from 'react-day-picker';
+import type { DropdownOption } from 'react-day-picker';
 
 export interface CustomDropdownProps {
   value?: number;
@@ -23,24 +23,68 @@ export function CustomDropdown({
     0,
     options.findIndex((o) => o.value === value),
   );
-  const [activeIndex, setActiveIndex] = React.useState(selectedIndex);
+  const [activeIndex, setActiveIndex] = React.useState(
+    selectedIndex === -1 ? 0 : selectedIndex,
+  );
 
-  const label = options.find((o) => o.value === value)?.label ?? '';
+  React.useEffect(() => {
+    if (selectedIndex >= 0) {
+      setActiveIndex(selectedIndex);
+    } else if (options.length > 0) {
+      setActiveIndex(0);
+    } else {
+      setActiveIndex(0);
+    }
+  }, [selectedIndex, options.length]);
 
-  // 바깥 클릭 닫기
+  const label =
+    options.find((o) => o.value === value)?.label ?? options[0]?.label ?? '';
+
   React.useEffect(() => {
     if (!open) return;
-    const onDocClick = (e: MouseEvent) => {
+
+    const handler = (e: Event) => {
       const t = e.target as Node;
       if (!buttonRef.current?.contains(t) && !listRef.current?.contains(t)) {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
+
+    const hasPointer =
+      typeof window !== 'undefined' && 'PointerEvent' in window;
+
+    if (hasPointer) {
+      document.addEventListener('pointerdown', handler as EventListener, {
+        capture: true,
+      });
+      return () =>
+        document.removeEventListener(
+          'pointerdown',
+          handler as EventListener,
+          { capture: true } as any,
+        );
+    } else {
+      document.addEventListener('mousedown', handler as EventListener, {
+        capture: true,
+      });
+      document.addEventListener('touchstart', handler as EventListener, {
+        capture: true,
+      });
+      return () => {
+        document.removeEventListener(
+          'mousedown',
+          handler as EventListener,
+          { capture: true } as any,
+        );
+        document.removeEventListener(
+          'touchstart',
+          handler as EventListener,
+          { capture: true } as any,
+        );
+      };
+    }
   }, [open]);
 
-  // 키보드 내비
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (
       !open &&
@@ -71,7 +115,7 @@ export function CustomDropdown({
       e.preventDefault();
       const opt = options[activeIndex];
       if (opt && !opt.disabled) {
-        onChange?.(opt.value);
+        onChange(opt.value);
         setOpen(false);
       }
     }
@@ -104,12 +148,13 @@ export function CustomDropdown({
           aria-label={ariaLabel}
           className={cn(
             'absolute z-50 mt-2 w-[14rem] max-h-[20rem] overflow-auto',
-            'rounded-[12px] border border-pink-200 bg-white p-1',
+            'rounded-[12px] border border-pink-200 bg-white p-1 shadow-xl',
           )}
         >
           {options.map((opt, idx) => {
             const selected = opt.value === value;
             const highlighted = idx === activeIndex;
+
             return (
               <li
                 key={opt.value}
@@ -117,10 +162,10 @@ export function CustomDropdown({
                 aria-selected={selected}
                 aria-disabled={opt.disabled || undefined}
                 onMouseEnter={() => setActiveIndex(idx)}
-                onMouseDown={(e) => e.preventDefault()}
+                onPointerDown={(e) => e.preventDefault()}
                 onClick={() => {
                   if (!opt.disabled) {
-                    onChange?.(opt.value);
+                    onChange(opt.value);
                     setOpen(false);
                   }
                 }}
@@ -132,9 +177,6 @@ export function CustomDropdown({
                 )}
               >
                 {opt.label}
-                {selected && (
-                  <span className='absolute left-2 top-1/2 -translate-y-1/2'></span>
-                )}
               </li>
             );
           })}
