@@ -46,7 +46,7 @@ export function createCalendarClassNames({
     table: 'w-full border-collapse',
     weekdays: cn('flex', d.weekdays),
     weekday: cn(
-      'rounded-md flex-1 text-pink-900 text-label-lg select-none',
+      'rounded-md flex-1 text-pink-700 text-title-sm select-none',
       d.weekday,
     ),
     week: cn('flex w-full mt-2', d.week),

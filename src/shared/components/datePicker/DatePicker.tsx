@@ -1,10 +1,10 @@
 'use client';
-import * as React from 'react';
 import { Calendar } from './calendar';
 import { Button } from './button';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
+import { useEffect, useState } from 'react';
 
 interface DatePickerProps {
   value?: Date;
@@ -12,6 +12,7 @@ interface DatePickerProps {
   defaultValue?: Date;
   className?: string;
 }
+const toFirstOfMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth(), 1);
 export function DatePicker({
   value,
   onChange,
@@ -19,23 +20,42 @@ export function DatePicker({
   className,
   ...calendarProps
 }: DatePickerProps) {
-  const [open, setOpen] = React.useState(false);
-  const [innerDate, setInnerDate] = React.useState<Date | undefined>(
-    defaultValue,
+  const [open, setOpen] = useState(false);
+  const [innerDate, setInnerDate] = useState<Date | undefined>(defaultValue);
+
+  const [displayMonth, setDisplayMonth] = useState<Date>(
+    toFirstOfMonth(value ?? innerDate ?? new Date()),
   );
 
-  React.useEffect(() => {
-    if (value !== undefined) setInnerDate(value);
+  useEffect(() => {
+    if (value !== undefined) {
+      setInnerDate(value);
+      setDisplayMonth(toFirstOfMonth(value));
+    }
   }, [value]);
+
+  useEffect(() => {
+    if (open) {
+      const base = value ?? innerDate ?? new Date();
+      setDisplayMonth(toFirstOfMonth(base));
+    }
+  }, [open, value, innerDate]);
 
   const selected = value ?? innerDate;
 
   const handleSelect = (d?: Date) => {
     if (!d) return;
-    if (onChange) onChange(d);
-    else setInnerDate(d);
+    onChange ? onChange(d) : setInnerDate(d);
+    setDisplayMonth(toFirstOfMonth(d));
     setOpen(false);
   };
+
+  const today = new Date();
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
 
   return (
     <div className={cn('flex flex-col gap-3', className)}>
@@ -53,8 +73,11 @@ export function DatePicker({
             className='w-[24rem] h-auto p-3 [--cell-size:2.8rem]'
             selected={selected}
             onSelect={handleSelect}
+            month={displayMonth}
+            onMonthChange={setDisplayMonth}
             captionLayout='dropdown'
-            fromYear={new Date().getFullYear()}
+            disabled={{ before: startOfToday }}
+            fromDate={startOfToday}
             toYear={new Date(new Date().getFullYear() + 5, 0, 1).getFullYear()}
             {...calendarProps}
           />
