@@ -1,9 +1,6 @@
 import { ControlBar, Header, Tag } from '@/shared/components';
 import { Icon } from '@/shared/icons';
-import LocationBubble from '@/shared/components/container/LocationBubble';
-import LocationCard from '@/shared/components/container/LocationCard';
-import EventCard from '@/shared/components/container/EventCard';
-import AddressCopy from '@/shared/components/button/AddressCopy';
+import Progress from './main/components/stamp/Progress';
 
 export default function Home() {
   return (
@@ -28,6 +25,7 @@ export default function Home() {
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>
+          <Progress value={45} className='w-64 mt-6' />
         </main>
       </div>
     </>
