@@ -1,0 +1,35 @@
+import { useState } from 'react';
+import { cn } from '@/shared/lib';
+import Popup from '@/shared/common/Popup';
+import Overlay from '@/shared/common/Overlay';
+
+interface PopupSetProps {
+  text: string;
+  onClose?: () => void;
+}
+
+export default function PopupSet({ text, onClose }: PopupSetProps) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    onClose?.();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <>
+      <Overlay />
+      {/* 중앙 고정 */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[50]',
+          'flex items-center justify-center',
+        )}
+      >
+        <Popup text={text} onClose={handleClose} />
+      </div>
+    </>
+  );
+}

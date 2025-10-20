@@ -1,4 +1,4 @@
-import { ControlBar, DatePicker, Header } from '@/shared/components';
+import { ControlBar, DatePicker, Header, Tag } from '@/shared/components';
 import { Icon } from '@/shared/icons';
 import { useState } from 'react';
 
@@ -19,6 +19,13 @@ export default function Home() {
             <Icon name='User' color='mint-600' />
           </h1>
 
+          <Tag label='리스트로 보기' icon='MapPin_' variant='toggle' />
+          <Tag label='지도로 보기' icon='FadersHorizontal' variant='toggle' />
+          <Tag label='#데이트' variant='hash' />
+          <Icon name='CalendarBlank' size={200} color='gray-900' />
+          <Icon name='User' size={200} color='blue-400' />
+          <Icon name='User' size={200} color='red-300' />
+          <Icon name='User' size={200} color='red-300' />
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>
