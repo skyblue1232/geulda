@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { DayPicker, DayButton } from 'react-day-picker';
 import { cn } from '@/shared/lib';
 import { Button } from './button';
 import { Icon } from '@/shared/icons';
 import { createCalendarClassNames } from './calendar.classes';
 import { CalendarDropdownAdapter } from './CalendarDropdownAdapter';
+import { useEffect, useRef } from 'react';
 
 function Calendar({
   className,
@@ -60,8 +60,8 @@ function CalendarDayButton({
   modifiers,
   ...props
 }: React.ComponentProps<typeof DayButton>) {
-  const ref = React.useRef<HTMLButtonElement>(null);
-  React.useEffect(() => {
+  const ref = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
     if (modifiers.focused) ref.current?.focus();
   }, [modifiers.focused]);
 

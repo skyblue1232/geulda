@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { cn } from '@/shared/lib';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { DropdownOption } from 'react-day-picker';
 
 export interface CustomDropdownProps {
@@ -7,6 +7,7 @@ export interface CustomDropdownProps {
   onChange: (next: number) => void;
   options: DropdownOption[];
   'aria-label'?: string;
+  className?: string;
 }
 
 export function CustomDropdown({
@@ -14,72 +15,61 @@ export function CustomDropdown({
   onChange,
   options,
   'aria-label': ariaLabel,
+  className,
 }: CustomDropdownProps) {
-  const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-  const listRef = React.useRef<HTMLUListElement>(null);
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
 
-  const selectedIndex = Math.max(
-    0,
-    options.findIndex((o) => o.value === value),
-  );
-  const [activeIndex, setActiveIndex] = React.useState(
-    selectedIndex === -1 ? 0 : selectedIndex,
-  );
+  const calcSelectedIndex = useCallback(() => {
+    const i = options.findIndex((o) => o.value === value);
+    return i >= 0 ? i : 0;
+  }, [options, value]);
 
-  React.useEffect(() => {
-    if (selectedIndex >= 0) {
-      setActiveIndex(selectedIndex);
-    } else if (options.length > 0) {
-      setActiveIndex(0);
-    } else {
-      setActiveIndex(0);
-    }
-  }, [selectedIndex, options.length]);
+  const [activeIndex, setActiveIndex] = useState<number>(calcSelectedIndex());
+
+  useEffect(() => {
+    setActiveIndex(calcSelectedIndex());
+  }, [calcSelectedIndex]);
 
   const label =
     options.find((o) => o.value === value)?.label ?? options[0]?.label ?? '';
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
 
     const handler = (e: Event) => {
-      const t = e.target as Node;
+      const t = (e as Event).target as Node | null;
+      if (!t) return;
       if (!buttonRef.current?.contains(t) && !listRef.current?.contains(t)) {
         setOpen(false);
       }
     };
 
-    const hasPointer =
+    const usePointer =
       typeof window !== 'undefined' && 'PointerEvent' in window;
 
-    if (hasPointer) {
-      document.addEventListener('pointerdown', handler as EventListener, {
-        capture: true,
-      });
+    if (usePointer) {
+      document.addEventListener('pointerdown', handler as EventListener, true);
       return () =>
         document.removeEventListener(
           'pointerdown',
           handler as EventListener,
-          { capture: true } as any,
+          true,
         );
     } else {
-      document.addEventListener('mousedown', handler as EventListener, {
-        capture: true,
-      });
-      document.addEventListener('touchstart', handler as EventListener, {
-        capture: true,
-      });
+      document.addEventListener('mousedown', handler as EventListener, true);
+      document.addEventListener('touchstart', handler as EventListener, true);
       return () => {
         document.removeEventListener(
           'mousedown',
           handler as EventListener,
-          { capture: true } as any,
+          true,
         );
         document.removeEventListener(
           'touchstart',
           handler as EventListener,
-          { capture: true } as any,
+          true,
         );
       };
     }
@@ -122,7 +112,7 @@ export function CustomDropdown({
   };
 
   return (
-    <div className='relative inline-block'>
+    <div className={cn('relative inline-block', className)}>
       <button
         ref={buttonRef}
         type='button'

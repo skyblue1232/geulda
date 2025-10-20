@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { CustomDropdown } from './CustomDropdown';
 import type { DropdownProps } from 'react-day-picker';
 
@@ -11,7 +10,7 @@ export function CalendarDropdownAdapter({
   return (
     <CustomDropdown
       value={value as number}
-      options={options as any}
+      options={options ?? []}
       aria-label={ariaLabel}
       onChange={(next) => {
         const evt = {

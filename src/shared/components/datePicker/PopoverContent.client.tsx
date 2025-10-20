@@ -1,10 +1,9 @@
 'use client';
-
-import * as React from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { cn } from '@/shared/lib';
+import { forwardRef } from 'react';
 
-export const PopoverContent = React.forwardRef<
+export const PopoverContent = forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
 >(function PopoverContent(
