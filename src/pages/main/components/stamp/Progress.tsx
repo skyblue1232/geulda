@@ -21,10 +21,8 @@ export default function Progress({
     <ProgressPrimitive.Root
       data-slot='progress'
       className={cn(
-        'relative w-full h-[10px] sm:h-[12px] rounded-full',
-        'bg-transparent overflow-visible',
-        "before:content-[''] before:absolute before:inset-0 before:rounded-full",
-        'before:border before:border-dotted before:border-pink-400/70',
+        'relative w-full h-[0.4rem] rounded-full',
+        'bg-transparent bg-pink-100 ',
         className,
       )}
       value={progressPercent}
@@ -35,9 +33,8 @@ export default function Progress({
         data-slot='progress-indicator'
         className={cn(
           'absolute left-0 top-1/2 -translate-y-1/2',
-          'h-[10px] sm:h-[12px] rounded-full',
-          'bg-gradient-to-r from-pink-500 to-fuchsia-500',
-          'shadow-[0_0_0_1px_rgba(255,255,255,0.6)]',
+          'h-[0.4rem]  rounded-full',
+          'bg-gradient-to-r from-pink-200 to-pink-400',
         )}
         style={{ width: `${progressPercent}%` }}
       />

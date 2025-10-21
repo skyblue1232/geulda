@@ -10,6 +10,10 @@ export default function Home() {
           <Header onClick={() => {}} className='' title={'글다'} />
           <ControlBar isLoggedIn={false} onLogin={() => {}} userName={''} />
           <ControlBar isLoggedIn={true} userName='홍길동' onLogin={() => {}} />
+          <Progress value={45} className='w-64 m-10' />
+          <Progress value={80} className='w-64 m-10' />
+          <Progress value={100} className='w-64 m-10' />
+
           <h1 className='text-4xl sm:text-6xl font-extrabold text-gray-900 mb-4'>
             초기 세팅 완료
             <Icon name='User' color='mint-600' />
@@ -25,7 +29,6 @@ export default function Home() {
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>
-          <Progress value={45} className='w-64 mt-6' />
         </main>
       </div>
     </>
