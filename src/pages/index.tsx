@@ -1,6 +1,7 @@
 import { ControlBar, Header, Tag } from '@/shared/components';
 import { Icon } from '@/shared/icons';
-import Progress from './main/components/stamp/Progress';
+import Progress from './main/components/stampBoard/Progress';
+import StampBoard from './main/components/stampBoard/stampBoard';
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
           <Header onClick={() => {}} className='' title={'글다'} />
           <ControlBar isLoggedIn={false} onLogin={() => {}} userName={''} />
           <ControlBar isLoggedIn={true} userName='홍길동' onLogin={() => {}} />
-          <Progress value={45} className='w-64 m-10' />
           <Progress value={80} className='w-64 m-10' />
           <Progress value={100} className='w-64 m-10' />
+          <StampBoard count={3} className='w-[35.4rem]' />
 
           <h1 className='text-4xl sm:text-6xl font-extrabold text-gray-900 mb-4'>
             초기 세팅 완료
