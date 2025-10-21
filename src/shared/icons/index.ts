@@ -11,6 +11,7 @@ import './source/HouseSimple.svg';
 import './source/MapPin.svg';
 import './source/MapPin_.svg';
 import './source/Save.svg';
+import './source/Stamp.svg';
 import './source/User.svg';
 import './source/backto.svg';
 import './source/x.svg';
