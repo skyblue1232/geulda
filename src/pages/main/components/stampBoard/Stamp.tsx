@@ -7,7 +7,7 @@ export interface StampProps {
   className?: string;
 }
 
-export function Stamp({ index, acquired, className }: StampProps) {
+export default function Stamp({ index, acquired, className }: StampProps) {
   if (acquired) {
     return (
       <div

@@ -1,6 +1,6 @@
 import { cn } from '@/shared/lib';
 import Progress from './Progress';
-import { Stamp } from './Stamp';
+import Stamp from './Stamp';
 
 export interface StampBoardProps {
   count: number;
