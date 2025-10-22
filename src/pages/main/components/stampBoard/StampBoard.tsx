@@ -39,11 +39,14 @@ export default function StampBoard({
         style={{ gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))` }}
         aria-label='스탬프 목록'
       >
-        {Array.from({ length: total }).map((_, i) => (
-          <li key={i} className='flex items-center justify-center'>
-            <Stamp index={i} acquired={i < clamped} />
-          </li>
-        ))}
+        {Array.from({ length: total }).map((_, i) => {
+          const key = `stamp-${i}`;
+          return (
+            <li key={key} className='flex items-center justify-center'>
+              <Stamp index={i} acquired={i < clamped} />
+            </li>
+          );
+        })}
       </ul>
 
       <Progress value={percent} className='my-[0.6rem]' />
