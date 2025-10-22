@@ -8,11 +8,7 @@ export interface StampBoardProps {
   className?: string;
 }
 
-export default function StampBoard({
-  count,
-  total = 8,
-  className,
-}: StampBoardProps) {
+const StampBoard = ({ count, total = 8, className }: StampBoardProps) => {
   const clamped = Math.max(0, Math.min(total, count));
   const percent = (clamped / total) * 100;
 
@@ -52,4 +48,6 @@ export default function StampBoard({
       <Progress value={percent} className='my-[0.6rem]' />
     </section>
   );
-}
+};
+
+export default StampBoard;
