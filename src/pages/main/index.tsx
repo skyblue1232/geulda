@@ -13,7 +13,7 @@ export default function MainPage() {
         className='fixed top-[0.6rem] left-0 right-0 z-50 px-[2rem]'
       />
 
-      <main className='w-full pt-[6.2rem] flex flex-col gap-4'>
+      <main className='w-full pt-[6.2rem] flex flex-col gap-4 overflow-auto'>
         <section>
           <Image
             src='/assets/bannerMain.svg'
