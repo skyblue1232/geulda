@@ -3,15 +3,9 @@ import StampBoard from './components/stampBoard/StampBoard';
 import { ControlBar } from '@/shared/components';
 import Image from 'next/image';
 
-export interface MainPageProps {
-  className?: string;
-}
-
-export default function MainPage({ className }: MainPageProps) {
+export default function MainPage() {
   return (
-    <div
-      className={cn('px-[2.4rem] bg-white flex flex-col gap-[1rem]', className)}
-    >
+    <div className={cn('px-[2.4rem] bg-white flex flex-col gap-[1rem]')}>
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
@@ -19,32 +13,32 @@ export default function MainPage({ className }: MainPageProps) {
         className='fixed top-[0.6rem] left-0 right-0 z-50 px-[2rem]'
       />
 
-      <main className=' w-full pt-[72px] '>
-        {/* 배너 */}
-        <section className='relative w-full h-auto aspect-[354/79.43] pb-[1rem]'>
+      <main className='w-full pt-[6.2rem] flex flex-col gap-4'>
+        <section>
           <Image
             src='/assets/bannerMain.svg'
-            alt='만화 속 부천 여행 배너 이미지'
-            fill
-            className='object-cover'
-            sizes='w-full'
-            priority
+            alt='...'
+            width={354}
+            height={79}
+            className='w-full h-auto object-cover block'
           />
         </section>
 
-        {/* 보드판 */}
-        <section className='relative w-full h-auto aspect-[354/426.36] pb-[1rem]'>
+        <section
+          onClick={() => {
+            /* TODO: 페이지 이동 */
+          }}
+        >
           <Image
             src='/assets/board.svg'
             alt='보드판'
-            fill
-            className='object-cover'
-            sizes='w-full'
+            width={354}
+            height={426.36}
+            className='w-full h-auto object-cover block'
           />
         </section>
 
-        {/* 스탬프 보드 */}
-        <StampBoard count={3} total={8} className='mt-2' />
+        <StampBoard count={3} total={8} />
       </main>
     </div>
   );
