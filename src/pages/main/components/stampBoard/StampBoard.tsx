@@ -8,11 +8,7 @@ export interface StampBoardProps {
   className?: string;
 }
 
-export default function StampBoard({
-  count,
-  total = 8,
-  className,
-}: StampBoardProps) {
+const StampBoard = ({ count, total = 8, className }: StampBoardProps) => {
   const clamped = Math.max(0, Math.min(total, count));
   const percent = (clamped / total) * 100;
 
@@ -33,15 +29,25 @@ export default function StampBoard({
         </span>
       </header>
 
-      <ul role='list' className='grid grid-cols-8' aria-label='스탬프 목록'>
-        {Array.from({ length: total }).map((_, i) => (
-          <li key={i} className='flex items-center justify-center'>
-            <Stamp index={i} acquired={i < clamped} />
-          </li>
-        ))}
+      <ul
+        role='list'
+        className='grid'
+        style={{ gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))` }}
+        aria-label='스탬프 목록'
+      >
+        {Array.from({ length: total }).map((_, i) => {
+          const key = `stamp-${i}`;
+          return (
+            <li key={key} className='flex items-center justify-center'>
+              <Stamp index={i} acquired={i < clamped} />
+            </li>
+          );
+        })}
       </ul>
 
       <Progress value={percent} className='my-[0.6rem]' />
     </section>
   );
-}
+};
+
+export default StampBoard;

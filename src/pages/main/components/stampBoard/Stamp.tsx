@@ -7,7 +7,7 @@ export interface StampProps {
   className?: string;
 }
 
-export default function Stamp({ index, acquired, className }: StampProps) {
+const Stamp = ({ index, acquired, className }: StampProps) => {
   if (acquired) {
     return (
       <div
@@ -28,4 +28,5 @@ export default function Stamp({ index, acquired, className }: StampProps) {
       aria-label={`${index + 1}번째 스탬프 미획득`}
     />
   );
-}
+};
+export default Stamp;
