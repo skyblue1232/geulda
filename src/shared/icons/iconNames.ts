@@ -14,6 +14,7 @@ export const iconNames = [
   "MapPin",
   "MapPin_",
   "Save",
+  "Stamp",
   "User",
   "backto",
   "x"
