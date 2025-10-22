@@ -10,9 +10,6 @@ export default function Home() {
             초기 세팅 완료
             <Icon name='User' color='mint-600' />
           </h1>
-          <StampBoard count={3} total={8} />
-          <StampBoard count={3} total={9} />
-          <StampBoard count={3} total={10} />
           <p className='mt-3 text-lg sm:text-2xl text-gray-600'>
             Next.js(Page Router) + TS + Tailwind + Axios
           </p>
