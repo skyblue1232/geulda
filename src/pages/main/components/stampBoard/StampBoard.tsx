@@ -33,7 +33,12 @@ export default function StampBoard({
         </span>
       </header>
 
-      <ul role='list' className='grid grid-cols-8' aria-label='스탬프 목록'>
+      <ul
+        role='list'
+        className='grid'
+        style={{ gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))` }}
+        aria-label='스탬프 목록'
+      >
         {Array.from({ length: total }).map((_, i) => (
           <li key={i} className='flex items-center justify-center'>
             <Stamp index={i} acquired={i < clamped} />
