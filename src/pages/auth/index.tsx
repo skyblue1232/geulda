@@ -8,7 +8,7 @@ export default function LoginPage() {
   const handleLoginClick = (platform: string) => alert(`${platform} 로그인`);
 
   return (
-    <main className='w-full flex flex-col items-center overflow-hidden bg-white'>
+    <main className='w-full flex flex-col items-center bg-white'>
       {/* 그라데이션 영역 */}
       <div className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'>
         <svg
