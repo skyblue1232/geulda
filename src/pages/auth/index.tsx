@@ -80,7 +80,7 @@ export default function LoginPage() {
             />
           </div>
 
-          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[2.5px]'>
+          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'>
             비회원 로그인
           </p>
         </div>
