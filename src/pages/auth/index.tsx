@@ -2,6 +2,7 @@
 import { Icon } from '@/shared/icons';
 import KakaoLoginButton from './components/KakaoLoginButton';
 import GoogleLoginButton from './components/GoogleLoginButton';
+import RecentLoginBubble from './components/RecentLoginBubble';
 
 export default function LoginPage() {
   const handleClick = () => alert('로그인 버튼 클릭');
@@ -9,11 +10,12 @@ export default function LoginPage() {
   return (
     <main className='w-full flex flex-col items-center overflow-hidden bg-white'>
       {/* 그라데이션 영역 */}
-      <div className='w-full'>
+      <div className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 402 194'
-          className='w-full h-auto'
+          className='absolute inset-0 w-full h-full'
+          preserveAspectRatio='none'
         >
           <path
             d='M402 180.922C257.925 56.9753 160.195 270.883 0 161.93V0H402V180.922Z'
@@ -53,17 +55,21 @@ export default function LoginPage() {
         </div>
 
         {/* 로그인 버튼 */}
-        <div className='flex flex-col items-center gap-[2.1rem]'>
-          <div className='flex flex-col items-center'>
-            <p className='text-label-lg text-gray-400'>start with</p>
+        <div className='flex flex-col items-center gap-[2.1rem] relative'>
+          <p className='text-label-lg text-gray-400'>start with</p>
+
+          {/* 최근 로그인 말풍선 */}
+          <div className='absolute -translate-x-1/2 z-50'>
+            <RecentLoginBubble />
           </div>
 
+          {/* 로그인 버튼 */}
           <div className='flex gap-[1.5rem]'>
             <KakaoLoginButton onClick={handleClick} />
             <GoogleLoginButton onClick={handleClick} />
           </div>
 
-          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[2.5px] '>
+          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[2.5px]'>
             비회원 로그인
           </p>
         </div>
