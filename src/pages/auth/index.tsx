@@ -2,7 +2,6 @@
 import { Icon } from '@/shared/icons';
 import KakaoLoginButton from './components/KakaoLoginButton';
 import GoogleLoginButton from './components/GoogleLoginButton';
-import RecentLoginBubble from './components/RecentLoginBubble';
 
 export default function LoginPage() {
   const handleClick = () => alert('로그인 버튼 클릭');
@@ -37,11 +36,11 @@ export default function LoginPage() {
       </div>
 
       {/* 콘텐츠  */}
-      <section className='w-full flex flex-col items-center text-center px-[2.4rem] pt-[3.2rem] pb-[6rem]'>
+      <section className='w-full flex flex-col items-center text-center px-[6.8rem] pt-[5.2rem]'>
         {/* 타이틀 */}
-        <div className='flex flex-col items-center gap-[1.2rem] mb-[4rem]'>
+        <div className='flex flex-col items-center gap-[3.3rem] mb-[3.2rem]'>
           <h1 className='text-headline-lg-serif text-mint-900'>글다</h1>
-          <p className='text-label-md text-mint-900 leading-[1.8rem]'>
+          <p className='text-label-md text-mint-900'>
             만화 속 부천 여행
             <br />
             8개 명소를 탐험하고 엽서를 모아보세요!
@@ -49,22 +48,22 @@ export default function LoginPage() {
         </div>
 
         {/* 로고 */}
-        <div className='mb-[6.8rem]'>
-          <Icon name='Stamp' size={196} color='mint-400' />
+        <div className='p-[3.2rem] mb-[3.2rem]'>
+          <Icon name='Stamp' size={132} color='mint-400' />
         </div>
 
         {/* 로그인 버튼 */}
-        <div className='flex flex-col items-center gap-[3.2rem]'>
-          <div className='flex flex-col items-center gap-[0.8rem]'>
+        <div className='flex flex-col items-center gap-[2.1rem]'>
+          <div className='flex flex-col items-center'>
             <p className='text-label-lg text-gray-400'>start with</p>
           </div>
 
-          <div className='flex gap-[2.4rem]'>
+          <div className='flex gap-[1.5rem]'>
             <KakaoLoginButton onClick={handleClick} />
             <GoogleLoginButton onClick={handleClick} />
           </div>
 
-          <p className='text-label-md text-gray-400 undezrline cursor-pointer'>
+          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[2.5px] '>
             비회원 로그인
           </p>
         </div>
