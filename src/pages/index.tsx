@@ -1,6 +1,4 @@
-import { ControlBar, Header, Tag } from '@/shared/components';
 import { Icon } from '@/shared/icons';
-import Progress from './main/components/stampBoard/Progress';
 import StampBoard from './main/components/stampBoard/StampBoard';
 
 export default function Home() {

@@ -29,7 +29,7 @@ const ControlBar = ({
   const iconColor = isLoggedIn ? 'mint-600' : ('gray-400' as const);
 
   return (
-    <header className={cn('bg-none w-full h-[5.4rem]', className)} role='group'>
+    <header className={cn(' w-full h-[5.4rem] bg-white', className)}>
       <div className='h-full grid grid-cols-[auto_1fr_auto] items-center gap-[1.2rem]'>
         <div
           className='w-[7.8rem] h-[5.4rem] rounded-[0.6rem] bg-gray-200'

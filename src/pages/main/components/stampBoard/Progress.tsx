@@ -1,3 +1,5 @@
+'use client';
+
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 import { cn } from '@/shared/lib';
 
@@ -9,11 +11,7 @@ export interface ProgressProps
   value: number;
 }
 
-export default function Progress({
-  className,
-  value,
-  ...props
-}: ProgressProps) {
+const Progress = ({ className, value, ...props }: ProgressProps) => {
   const progressPercent = Math.max(0, Math.min(100, value));
 
   return (
@@ -39,4 +37,6 @@ export default function Progress({
       />
     </ProgressPrimitive.Root>
   );
-}
+};
+
+export default Progress;
