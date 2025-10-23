@@ -1,11 +1,12 @@
 'use client';
 import { Icon } from '@/shared/icons';
+import { cn } from '@/shared/lib';
 import KakaoLoginButton from './components/KakaoLoginButton';
 import GoogleLoginButton from './components/GoogleLoginButton';
 import RecentLoginBubble from './components/RecentLoginBubble';
 
 export default function LoginPage() {
-  const handleClick = () => alert('로그인 버튼 클릭');
+  const handleLoginClick = () => alert('로그인 버튼 클릭');
 
   return (
     <main className='w-full flex flex-col items-center overflow-hidden bg-white'>
@@ -38,7 +39,12 @@ export default function LoginPage() {
       </div>
 
       {/* 콘텐츠  */}
-      <section className='w-full flex flex-col items-center text-center px-[6.8rem] pt-[5.2rem]'>
+      <section
+        className={cn(
+          'w-full flex flex-col items-center text-center',
+          'px-[6.8rem] pt-[5.2rem]',
+        )}
+      >
         {/* 타이틀 */}
         <div className='flex flex-col items-center gap-[3.3rem] mb-[3.2rem]'>
           <h1 className='text-headline-lg-serif text-mint-900'>글다</h1>
@@ -65,8 +71,8 @@ export default function LoginPage() {
 
           {/* 로그인 버튼 */}
           <div className='flex gap-[1.5rem]'>
-            <KakaoLoginButton onClick={handleClick} />
-            <GoogleLoginButton onClick={handleClick} />
+            <KakaoLoginButton onClick={handleLoginClick} />
+            <GoogleLoginButton onClick={handleLoginClick} />
           </div>
 
           <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[2.5px]'>
