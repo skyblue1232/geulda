@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { cn } from '@/shared/lib';
-import Popup from '@/shared/common/Popup';
-import Overlay from '@/shared/common/Overlay';
+import Popup from '@/shared/components/container/Popup';
+import Overlay from '@/shared/overlay/Overlay';
 
 interface PopupSetProps {
   text: string;
