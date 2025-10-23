@@ -1,8 +1,8 @@
 'use client';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
-import LoginButton from './components/LoginButton';
-import RecentLoginBubble from './components/RecentLoginBubble';
+import LoginButton from '@/pages/auth/components/LoginButton';
+import RecentLoginBubble from '@/pages/auth/components/RecentLoginBubble';
 
 export default function LoginPage() {
   const handleLoginClick = (platform: string) => alert(`${platform} 로그인`);
