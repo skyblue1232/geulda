@@ -1,12 +1,11 @@
 'use client';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
-import KakaoLoginButton from './components/KakaoLoginButton';
-import GoogleLoginButton from './components/GoogleLoginButton';
+import LoginButton from './components/LoginButton';
 import RecentLoginBubble from './components/RecentLoginBubble';
 
 export default function LoginPage() {
-  const handleLoginClick = () => alert('로그인 버튼 클릭');
+  const handleLoginClick = (platform: string) => alert(`${platform} 로그인`);
 
   return (
     <main className='w-full flex flex-col items-center overflow-hidden bg-white'>
@@ -71,8 +70,14 @@ export default function LoginPage() {
 
           {/* 로그인 버튼 */}
           <div className='flex gap-[1.5rem]'>
-            <KakaoLoginButton onClick={handleLoginClick} />
-            <GoogleLoginButton onClick={handleLoginClick} />
+            <LoginButton
+              platform='kakao'
+              onClick={() => handleLoginClick('카카오')}
+            />
+            <LoginButton
+              platform='google'
+              onClick={() => handleLoginClick('구글')}
+            />
           </div>
 
           <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[2.5px]'>
