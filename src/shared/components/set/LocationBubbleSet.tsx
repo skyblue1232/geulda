@@ -1,5 +1,5 @@
 'use client';
-import Overlay from '@/shared/common/Overlay';
+import Overlay from '@/shared/overlay/Overlay';
 import LocationBubble from '@/shared/components/container/LocationBubble';
 import { cn } from '@/shared/lib';
 
@@ -20,7 +20,7 @@ const LocationBubbleSet = ({
 }: LocationBubbleSetProps) => {
   if (!isVisible) return null;
 
-return (
+  return (
     <>
       <Overlay onClick={onClose} />
       <div
@@ -29,13 +29,12 @@ return (
           className,
         )}
       >
-        <div className="pointer-events-auto">
+        <div className='pointer-events-auto'>
           <LocationBubble name={name} imageSrc={imageSrc} />
         </div>
       </div>
     </>
   );
 };
-
 
 export default LocationBubbleSet;
