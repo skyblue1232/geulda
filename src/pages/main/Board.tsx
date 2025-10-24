@@ -29,11 +29,7 @@ const Board = () => {
             pointer-events-none
           '
         >
-          <BoardPathFromMatrix
-            boardData={boardData}
-            radius={28}
-            cellSize={90}
-          />
+          <BoardPathFromMatrix boardData={boardData} />
         </div>
       </main>
     </div>

@@ -67,7 +67,7 @@ function cornerStyle(
 
 export default function BoardPathFromMatrix({
   boardData,
-  radius = 28,
+  radius = 500,
   cellSize = 90,
   className,
 }: BoardPathProps) {
