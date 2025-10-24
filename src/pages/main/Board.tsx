@@ -1,22 +1,43 @@
+'use client';
+import Image from 'next/image';
+import { Header } from '@/shared/components';
 import BoardPathFromMatrix from './components/board/BoardPathFromMatrix';
 import { boardData } from './components/board/boardData';
 
-import Image from 'next/image';
-
-const Board: any = () => {
+const Board = () => {
   return (
-    <div>
-      <div className='absolute inset-0 p-3'>
+    <div className='relative w-full h-full bg-[#46d1cd] overflow-hidden'>
+      {/* Header */}
+      <Header title='지도' onClick={() => console.log('뒤로가기')} />
+
+      {/* Background image */}
+      <main className='relative pt-[14rem] '>
         <Image
           src='/assets/background.svg'
-          alt='...'
+          alt='board background'
           width={402}
           height={755}
-          className='w-full h-auto object-cover '
+          className='w-auto h-full object-cover bottom-0 left-0 '
+          priority
         />
-        <BoardPathFromMatrix boardData={boardData} radius={500} />
-      </div>
+
+        <div
+          className='
+            absolute
+            bottom-0 left-0  
+            z-10
+            pointer-events-none
+          '
+        >
+          <BoardPathFromMatrix
+            boardData={boardData}
+            radius={28}
+            cellSize={90}
+          />
+        </div>
+      </main>
     </div>
   );
 };
+
 export default Board;
