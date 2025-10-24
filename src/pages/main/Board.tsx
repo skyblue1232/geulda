@@ -1,21 +1,20 @@
 import BoardPathFromMatrix from './components/board/BoardPathFromMatrix';
+import { boardData } from './components/board/boardData';
 
-const MATRIX: (0 | 1)[][] = [
-  // 너가 준 배열 (행 7, 열 4)
-  [1, 1, 1, 1],
-  [0, 0, 0, 1],
-  [0, 1, 1, 1],
-  [0, 1, 0, 0],
-  [0, 1, 1, 1],
-  [0, 0, 0, 1],
-  [0, 0, 0, 1],
-];
+import Image from 'next/image';
 
 const Board: any = () => {
   return (
     <div>
       <div className='absolute inset-0 p-3'>
-        <BoardPathFromMatrix matrix={MATRIX} radius={500} cellSize={90} />
+        <Image
+          src='/assets/background.svg'
+          alt='...'
+          width={402}
+          height={755}
+          className='w-full h-auto object-cover '
+        />
+        <BoardPathFromMatrix boardData={boardData} radius={500} />
       </div>
     </div>
   );

@@ -3,37 +3,47 @@
 import React from 'react';
 import { cn } from '@/shared/lib';
 
-type Matrix = (0 | 1)[][];
+// ✅ 각 칸 정보 타입
+interface BoardCell {
+  active: boolean;
+  color?: string;
+  label?: string;
+}
+
+type BoardData = BoardCell[][];
 
 interface BoardPathProps {
-  matrix: Matrix;
-  gap?: number;
+  boardData: BoardData;
   radius?: number;
   cellSize?: number;
   className?: string;
 }
 
-const get = (m: Matrix, r: number, c: number) =>
-  r < 0 || c < 0 || r >= m.length || c >= m[0].length ? 0 : m[r][c];
+// 보드 경계 확인용 헬퍼
+const get = (m: BoardData, r: number, c: number): BoardCell | null =>
+  r < 0 || c < 0 || r >= m.length || c >= m[0].length ? null : m[r][c];
+
+// corner rounding 계산 함수
 function cornerStyle(
-  m: Matrix,
+  m: BoardData,
   r: number,
   c: number,
   radiusPx: number,
 ): React.CSSProperties {
-  if (get(m, r, c) !== 1) return {};
+  const cell = get(m, r, c);
+  if (!cell || !cell.active) return {};
 
   // 상하좌우
-  const up = get(m, r - 1, c) === 1;
-  const down = get(m, r + 1, c) === 1;
-  const left = get(m, r, c - 1) === 1;
-  const right = get(m, r, c + 1) === 1;
+  const up = get(m, r - 1, c)?.active;
+  const down = get(m, r + 1, c)?.active;
+  const left = get(m, r, c - 1)?.active;
+  const right = get(m, r, c + 1)?.active;
 
-  // 대각
-  const nw = get(m, r - 1, c - 1) === 1;
-  const ne = get(m, r - 1, c + 1) === 1;
-  const sw = get(m, r + 1, c - 1) === 1;
-  const se = get(m, r + 1, c + 1) === 1;
+  // 대각선
+  const nw = get(m, r - 1, c - 1)?.active;
+  const ne = get(m, r - 1, c + 1)?.active;
+  const sw = get(m, r + 1, c - 1)?.active;
+  const se = get(m, r + 1, c + 1)?.active;
 
   const style: React.CSSProperties = {};
   const deg = (up ? 1 : 0) + (right ? 1 : 0) + (down ? 1 : 0) + (left ? 1 : 0);
@@ -54,15 +64,15 @@ function cornerStyle(
 
   return style;
 }
+
 export default function BoardPathFromMatrix({
-  matrix,
-  gap = 8,
+  boardData,
   radius = 28,
   cellSize = 90,
   className,
 }: BoardPathProps) {
-  const rows = matrix.length;
-  const cols = matrix[0]?.length ?? 0;
+  const rows = boardData.length;
+  const cols = boardData[0]?.length ?? 0;
 
   return (
     <div
@@ -70,23 +80,27 @@ export default function BoardPathFromMatrix({
       style={{
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-        gap: `${gap}px`,
       }}
     >
-      {matrix.map((row, r) =>
+      {boardData.map((row, r) =>
         row.map((cell, c) => {
-          const isTile = cell === 1;
-          const style = isTile ? cornerStyle(matrix, r, c, radius) : undefined;
+          const style = cell.active ? cornerStyle(boardData, r, c, radius) : {};
           return (
             <div
               key={`cell-${r}-${c}`}
               className={cn(
-                isTile
-                  ? 'bg-[#F7E6C9]  outline-2 outline-[#EACFA3] shadow-[inset_0_0_0_6px_rgba(255,255,255,0.85)]'
-                  : 'bg-transparent',
+                'flex items-center justify-center text-sm font-medium border border-transparent text-center',
+                cell.active ? '' : 'bg-transparent',
               )}
-              style={style}
-            />
+              style={{
+                backgroundColor: cell.active
+                  ? cell.color ?? '#F7E6C9'
+                  : 'transparent',
+                ...style,
+              }}
+            >
+              {cell.active && cell.label}
+            </div>
           );
         }),
       )}
