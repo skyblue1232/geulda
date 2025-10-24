@@ -10,13 +10,11 @@ interface BoardPathProps {
   gap?: number;
   radius?: number;
   cellSize?: number;
-  debugGrid?: boolean;
   className?: string;
 }
 
 const get = (m: Matrix, r: number, c: number) =>
   r < 0 || c < 0 || r >= m.length || c >= m[0].length ? 0 : m[r][c];
-
 function cornerStyle(
   m: Matrix,
   r: number,
@@ -24,46 +22,43 @@ function cornerStyle(
   radiusPx: number,
 ): React.CSSProperties {
   if (get(m, r, c) !== 1) return {};
+
+  // 상하좌우
   const up = get(m, r - 1, c) === 1;
   const down = get(m, r + 1, c) === 1;
   const left = get(m, r, c - 1) === 1;
   const right = get(m, r, c + 1) === 1;
+
+  // 대각
   const nw = get(m, r - 1, c - 1) === 1;
   const ne = get(m, r - 1, c + 1) === 1;
   const sw = get(m, r + 1, c - 1) === 1;
   const se = get(m, r + 1, c + 1) === 1;
 
   const style: React.CSSProperties = {};
-  if (up && left && !nw) style.borderTopLeftRadius = radiusPx;
-  if (up && right && !ne) style.borderTopRightRadius = radiusPx;
-  if (down && right && !se) style.borderBottomRightRadius = radiusPx;
-  if (down && left && !sw) style.borderBottomLeftRadius = radiusPx;
+  const deg = (up ? 1 : 0) + (right ? 1 : 0) + (down ? 1 : 0) + (left ? 1 : 0);
 
-  const deg = [up, right, down, left].filter(Boolean).length;
-  if (deg === 1) {
-    if (up) {
-      style.borderBottomLeftRadius = radiusPx;
+  const isOrthogonalTwo = deg === 2 && !((up && down) || (left && right));
+
+  if (isOrthogonalTwo) {
+    if (up && left && !nw) {
       style.borderBottomRightRadius = radiusPx;
-    } else if (down) {
-      style.borderTopLeftRadius = radiusPx;
-      style.borderTopRightRadius = radiusPx;
-    } else if (left) {
-      style.borderTopRightRadius = radiusPx;
-      style.borderBottomRightRadius = radiusPx;
-    } else if (right) {
-      style.borderTopLeftRadius = radiusPx;
+    } else if (up && right && !ne) {
       style.borderBottomLeftRadius = radiusPx;
+    } else if (down && right && !se) {
+      style.borderTopLeftRadius = radiusPx;
+    } else if (down && left && !sw) {
+      style.borderTopRightRadius = radiusPx;
     }
   }
+
   return style;
 }
-
 export default function BoardPathFromMatrix({
   matrix,
   gap = 8,
   radius = 28,
-  cellSize = 90, // ★ 기본 90px
-  debugGrid = false,
+  cellSize = 90,
   className,
 }: BoardPathProps) {
   const rows = matrix.length;
@@ -86,9 +81,8 @@ export default function BoardPathFromMatrix({
             <div
               key={`cell-${r}-${c}`}
               className={cn(
-                debugGrid && 'outline outline-1 outline-red-400/40',
                 isTile
-                  ? 'bg-[#F7E6C9] outline outline-2 outline-[#EACFA3] shadow-[inset_0_0_0_6px_rgba(255,255,255,0.85)]'
+                  ? 'bg-[#F7E6C9]  outline-2 outline-[#EACFA3] shadow-[inset_0_0_0_6px_rgba(255,255,255,0.85)]'
                   : 'bg-transparent',
               )}
               style={style}
