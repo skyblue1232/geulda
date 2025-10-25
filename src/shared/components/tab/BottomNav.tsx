@@ -33,7 +33,8 @@ export const BottomNav = () => {
       "
     >
       {NAV_ITEMS.map((item) => {
-        const isActive = router.pathname === item.href;
+        const isActive =
+          router.pathname === item.href || router.pathname.startsWith(item.href + '/');
 
         return (
           <Link
