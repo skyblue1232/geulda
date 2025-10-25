@@ -3,18 +3,23 @@ import StampBoard from './components/stampBoard/StampBoard';
 import { ControlBar } from '@/shared/components';
 import Image from 'next/image';
 import router from 'next/router';
+import { BottomNav } from '@/shared/components/tab/BottomNav';
 
 export default function MainPage() {
   return (
-    <div className={cn('px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full')}>
+    <div
+      className={cn(
+        'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] pb-[12rem]',
+      )}
+    >
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
         userName='글다'
-        className='fixed top-[0.6rem] left-0 right-0 z-50 px-[2rem]'
+        className='fixed top-[1rem] left-0 right-0 z-50 px-[2rem]'
       />
 
-      <main className='w-full pt-[6.2rem] flex flex-col gap-4 overflow-auto'>
+      <main className='w-full pt-[6.3rem] flex flex-col gap-4 overflow-auto'>
         <section>
           <Image
             src='/assets/bannerMain.svg'
@@ -27,7 +32,6 @@ export default function MainPage() {
 
         <section
           onClick={() => {
-            // ✅ 클릭 시 페이지 이동
             router.push('/main/Board');
           }}
         >
@@ -42,6 +46,7 @@ export default function MainPage() {
 
         <StampBoard count={3} total={10} />
       </main>
+      <BottomNav />
     </div>
   );
 }

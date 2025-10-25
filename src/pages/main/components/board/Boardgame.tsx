@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { boardData } from '@/pages/main/components/board/boardData';
+import { boardData } from '@/shared/constants/main/boardData';
 
 const Boardgame = () => {
   return (

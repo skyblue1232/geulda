@@ -23,15 +23,15 @@ export const BottomNav = () => {
 
   return (
     <nav
-      className="
-        fixed bottom-[2rem] left-[2.4rem]
+      className='
+        fixed bottom-[5.3rem] left-[2.4rem]
         w-[calc(100%-4.8rem)]
         flex justify-between items-center
         py-[1rem]
         rounded-[37.07px]
         bg-mint-50 border border-mint-300
-      "
-      aria-label="Bottom navigation"
+      '
+      aria-label='Bottom navigation'
     >
       {NAV_ITEMS.map((item) => {
         const isActive =
@@ -42,8 +42,8 @@ export const BottomNav = () => {
           <Link
             key={item.id}
             href={item.href}
-            aria-current={isActive ? 'page' : undefined} 
-            className="flex-1 flex justify-center"
+            aria-current={isActive ? 'page' : undefined}
+            className='flex-1 flex justify-center'
           >
             <TabItem label={item.label} icon={item.icon} isActive={isActive} />
           </Link>
