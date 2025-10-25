@@ -31,15 +31,18 @@ export const BottomNav = () => {
         rounded-[37.07px]
         bg-mint-50 border border-mint-300
       "
+      aria-label="Bottom navigation"
     >
       {NAV_ITEMS.map((item) => {
         const isActive =
-          router.pathname === item.href || router.pathname.startsWith(item.href + '/');
+          router.pathname === item.href ||
+          router.pathname.startsWith(item.href + '/');
 
         return (
           <Link
             key={item.id}
             href={item.href}
+            aria-current={isActive ? 'page' : undefined} 
             className="flex-1 flex justify-center"
           >
             <TabItem label={item.label} icon={item.icon} isActive={isActive} />
