@@ -19,10 +19,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative min-h-screen pb-[10rem]">
-        <Component {...pageProps} />
-        <BottomNav />
-      </div>
+      <Component {...pageProps} />
+      <BottomNav />
     </QueryClientProvider>
   );
 }
