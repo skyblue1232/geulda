@@ -11,7 +11,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'main', label: 'main', icon: 'HouseSimple', href: '/' },
+  { id: 'main', label: 'main', icon: 'HouseSimple', href: '/main' },
   { id: 'route', label: 'Route', icon: 'MapPin_', href: '/route' },
   { id: 'events', label: 'Events', icon: 'CalendarBlank', href: '/events' },
   { id: 'chatbot', label: 'ChatBot', icon: 'ChatCircle', href: '/chatbot' },
@@ -24,10 +24,9 @@ export const BottomNav = () => {
   return (
     <nav
       className="
-        fixed bottom-[2rem] left-1/2 -translate-x-1/2
-        w-[calc(100%-48px)] max-w-[42.5rem]
+        fixed bottom-[2rem] left-[2.4rem]
+        w-[calc(100%-4.8rem)]
         flex justify-between items-center
-        px-[1.3rem]
         py-[1rem]
         rounded-[37.07px]
         bg-mint-50 border border-mint-300

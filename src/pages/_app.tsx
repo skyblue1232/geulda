@@ -20,9 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="relative min-h-screen pb-[10rem]">
-        {/* 페이지 내용 */}
         <Component {...pageProps} />
-        {/* 하단 네비 */}
         <BottomNav />
       </div>
     </QueryClientProvider>
