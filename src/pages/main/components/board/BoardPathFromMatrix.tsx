@@ -76,7 +76,7 @@ export default function BoardPathFromMatrix({
 
   return (
     <div
-      className={cn('grid', className)}
+      className={cn('grid ', className)}
       style={{
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Header } from '@/shared/components';
 import BoardPathFromMatrix from './components/board/BoardPathFromMatrix';
 import { boardData } from './components/board/boardData';
+import BoardPathBackground from './components/board/BoardPathBackground';
 
 const Board = () => {
   return (
@@ -11,7 +12,7 @@ const Board = () => {
       <Header title='지도' onClick={() => console.log('뒤로가기')} />
 
       {/* Background image */}
-      <main className='relative pt-[14rem] '>
+      <main className='relative pt-[11.8rem] '>
         <Image
           src='/assets/background.svg'
           alt='board background'
@@ -21,15 +22,23 @@ const Board = () => {
           priority
         />
 
+        {/* <div
+          className='
+            absolute
+            bottom-0 left-0  
+            z-30
+          '
+        >
+          <BoardPathFromMatrix boardData={boardData} />
+        </div> */}
         <div
           className='
             absolute
             bottom-0 left-0  
-            z-10
-            pointer-events-none
+            z-20
           '
         >
-          <BoardPathFromMatrix boardData={boardData} />
+          <BoardPathBackground boardData={boardData} />
         </div>
       </main>
     </div>
