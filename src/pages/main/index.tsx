@@ -2,10 +2,11 @@ import { cn } from '@/shared/lib';
 import StampBoard from './components/stampBoard/StampBoard';
 import { ControlBar } from '@/shared/components';
 import Image from 'next/image';
+import router from 'next/router';
 
 export default function MainPage() {
   return (
-    <div className={cn('px-[2.4rem] bg-white flex flex-col gap-[1rem]')}>
+    <div className={cn('px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full')}>
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
@@ -26,7 +27,8 @@ export default function MainPage() {
 
         <section
           onClick={() => {
-            /* TODO: 페이지 이동 */
+            // ✅ 클릭 시 페이지 이동
+            router.push('/main/Board');
           }}
         >
           <Image
@@ -38,7 +40,7 @@ export default function MainPage() {
           />
         </section>
 
-        <StampBoard count={3} total={8} />
+        <StampBoard count={3} total={10} />
       </main>
     </div>
   );
