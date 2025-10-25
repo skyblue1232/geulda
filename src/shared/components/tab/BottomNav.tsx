@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { TabItem } from './TabItem';
+import { TabItem } from '@/shared/components/tab/TabItem';
 import type { IconName } from '@/shared/icons/iconNames';
 
 interface NavItem {
