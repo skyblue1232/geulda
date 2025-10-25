@@ -1,5 +1,4 @@
 import { Icon } from '@/shared/icons';
-import StampBoard from './main/components/stampBoard/StampBoard';
 
 export default function Home() {
   return (
