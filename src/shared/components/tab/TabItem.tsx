@@ -47,7 +47,7 @@ export const TabItem = ({
       />
       <span
         className={cn(
-          'text-label-md font-medium',
+          'text-body-sm',
           isActive ? 'text-mint-700' : 'text-mint-500',
         )}
       >
