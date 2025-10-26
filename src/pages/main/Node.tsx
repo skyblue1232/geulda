@@ -5,11 +5,13 @@ import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import Image from 'next/image';
 
-import router from 'next/router';
+import { useRouter } from 'next/router';
 
 const Board = () => {
+  const router = useRouter();
   const { label } = router.query;
-  const isStamp = false;
+  const isStamp = true; // 스탬프 획득 여부 (임시)
+
   return (
     <div className='relative w-full h-[100vh] overflow-auto px-[2.4rem]'>
       <Header
@@ -19,17 +21,18 @@ const Board = () => {
 
       <main className='relative pt-[14.3rem] gap-[1.2rem] flex flex-col '>
         <section className='relative w-full'>
-          {/* ✅ 이미지 */}
           <Image
             src='/assets/board.svg'
             alt='보드판'
             width={354}
             height={436}
-            className='w-full h-auto object-cover block rounded-[1.6rem]'
+            className={cn(
+              'w-full h-auto object-cover block rounded-[1.6rem] transition-all duration-300',
+              !isStamp && 'blur-xs brightness-90',
+            )}
           />
 
-          {/* ✅ 스탬프 아이콘 (오른쪽 하단 고정) */}
-          <div
+          <button
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
           >
             <Icon
@@ -37,8 +40,9 @@ const Board = () => {
               color={isStamp ? 'pink-400' : 'gray-50'}
               size={isStamp ? 100 : 160}
             />
-          </div>
+          </button>
         </section>
+
         <LocationCard
           name={label ? String(label) : '노드'}
           address='주소'
