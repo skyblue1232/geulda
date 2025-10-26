@@ -5,11 +5,12 @@ interface CummonButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonStyle> {
   label: string;
+  group?: string;
 }
 
 const buttonStyle = cva(
   `
-  text-center rounded-[2rem] text-title-md tracking-[0.015em]
+  text-center rounded-[2rem] text-title-md
   py-[1rem] w-[11.3rem] border border-[1px]
   transition-colors duration-150 flex justify-center items-center
   select-none focus:outline-none focus:ring-0 active:outline-none
@@ -30,12 +31,14 @@ const buttonStyle = cva(
 const CummonButton = ({
   label,
   variant,
+  group,
   className,
   ...props
 }: CummonButtonProps) => {
   return (
     <button
       type="button"
+      data-group={group}
       className={cn(buttonStyle({ variant }), className)}
       {...props}
     >
