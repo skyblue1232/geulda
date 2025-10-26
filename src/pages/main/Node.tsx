@@ -3,14 +3,14 @@ import AddressCopy from '@/shared/components/button/AddressCopy';
 import LocationCard from '@/shared/components/container/LocationCard';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
+import { getLocation } from '@/shared/utils/handleGetLocation';
 import Image from 'next/image';
-
 import { useRouter } from 'next/router';
 
 const Board = () => {
   const router = useRouter();
   const { label } = router.query;
-  const isStamp = true; // 스탬프 획득 여부 (임시)
+  const isStamp = true;
 
   return (
     <div className='relative w-full h-[100vh] overflow-auto px-[2.4rem]'>
@@ -34,14 +34,13 @@ const Board = () => {
 
           <button
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
-            onClick={() => {
-              //TODO: 리워드 페이지로 이동
-              //   router.push({
-              //     pathname: '/main/riward',
-              //     query: { label },
-              //   });
-              console.log('리워드 페이지로 이동');
-            }}
+            onClick={() =>
+              getLocation(
+                (pos) => console.log('📍 현재 위치:', pos.coords),
+                (err) => console.error('⚠️ 위치 에러:', err.message),
+                //TODO : 리워드 페이지로 이동 , 위치 에러일경우 모달창
+              )
+            }
           >
             <Icon
               name={isStamp ? 'Stamp' : 'PressStamp'}
@@ -58,6 +57,7 @@ const Board = () => {
           variant='mint'
           size='large'
         />
+
         <AddressCopy
           variant='mint'
           value='인천광역시 계양구 오조산로 31길(복사되어야할 주소)'
