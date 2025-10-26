@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { boardData } from '@/shared/constants/main/boardData';
+import router from 'next/router';
 
 const Boardgame = () => {
   return (
@@ -31,7 +32,15 @@ const Boardgame = () => {
             }
 
             return (
-              <div key={key} onClick={() => console.log(cell.label)}></div>
+              <div
+                key={key}
+                onClick={() => {
+                  router.push({
+                    pathname: '/main/Node',
+                    query: { label: cell.label },
+                  });
+                }}
+              ></div>
             );
           }),
         )}
