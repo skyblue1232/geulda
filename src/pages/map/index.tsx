@@ -1,35 +1,91 @@
-import CommonButton from '@/shared/components/button/CommonButton';
-import { useState } from 'react';
+import Image from 'next/image';
+import { cn } from '@/shared/lib';
+import { ControlBar } from '@/shared/components';
+import { BottomNav } from '@/shared/components/tab/BottomNav';
+import { purposes, stays, moves } from '@/shared/constants/course/courseOptions';
+import { useCourseSelection } from '@/shared/hooks/useCourseSelection';
+import CourseSelectSection from '@/pages/map/components/CourseSelectSection';
+import { useRouter } from 'next/navigation';
+import CourseInputSection from '@/pages/map/components/CourseInputSection';
 
-export default function CourseSettingPreview() {
-  const [active, setActive] = useState<string | null>(null);
+export default function CourseSettingPage() {
+  const router = useRouter();
+  const { purpose, setPurpose, stay, setStay, move, setMove } =
+    useCourseSelection();
 
-  const buttons = [
-    { id: 'family', label: '가족여행' },
-    { id: 'friends', label: '우정여행' },
-    { id: 'date', label: '데이트' },
-    { id: 'solo', label: '당일치기' },
-    { id: 'oneNight', label: '1박2일' },
-    { id: 'twoNight', label: '2박3일' },
-    { id: 'walk', label: '도보' },
-    { id: 'transit', label: '대중교통' },
-    { id: 'car', label: '자가차' },
-  ];
+  const canProceed = purpose && stay && move;
+
+  const handleNext = () => {
+    if (!canProceed) return alert('모든 항목을 선택해주세요.');
+    router.push('/map/result');
+  };
 
   return (
-    // 스타일은 다 수정할 거에요 버튼만 봐주세요~  // CommonButton.tsx 저것만 확인해주세요
-    <div className="flex flex-col items-center gap-6 py-10">
-      <h1 className="text-title-lg text-gray-700 mb-4">코스 버튼 임시 화면</h1>
-      <div className="flex flex-wrap justify-center gap-4 max-w-[400px]">  
-        {buttons.map(({ id, label }) => (
-          <CommonButton
-            key={id}
-            label={label}
-            variant={active === id ? 'active' : 'default'}
-            onClick={() => setActive(active === id ? null : id)}
+    <div
+      className={cn(
+        'relative px-[2.4rem] bg-white flex flex-col h-full pt-[1.3rem] pb-[12rem]'
+      )}
+      role="form"
+      aria-labelledby="course-setting-title"
+      aria-describedby="course-setting-desc"
+    >
+      <ControlBar
+        isLoggedIn={false}
+        onLogin={() => {}}
+        userName="글다"
+        className="fixed top-[1rem] left-0 right-0 z-50 px-[2rem]"
+      />
+
+      <main
+        className="w-full pt-[3.4rem] flex flex-col overflow-auto"
+        aria-live="polite" 
+      >
+        <section className="mb-[3.6rem] text-center">
+          <h1
+            id="course-setting-title"
+            className="sr-only"
+          >
+            여행 코스 설정
+          </h1>
+          <Image
+            src="/assets/bannerMap.svg"
+            alt="여행 코스 추천 배너 이미지"
+            width={354}
+            height={79}
+            className="w-full h-auto object-cover block"
           />
-        ))}
-      </div>
+          <p
+            id="course-setting-desc"
+            className="sr-only"
+          >
+            여행 목적, 체류 시간, 이동 방식을 선택하고, 원하는 장소를 입력할 수 있습니다.
+          </p>
+        </section>
+
+        <div className="flex flex-col gap-[1.9rem] mb-[8rem]">
+          <CourseSelectSection
+            title="여행 목적을 선택해 주세요"
+            options={purposes}
+            selected={purpose}
+            onSelect={setPurpose}
+          />
+          <CourseSelectSection
+            title="체류 시간을 선택해 주세요"
+            options={stays}
+            selected={stay}
+            onSelect={setStay}
+          />
+          <CourseSelectSection
+            title="이동 방식을 선택해 주세요"
+            options={moves}
+            selected={move}
+            onSelect={setMove}
+          />
+          <CourseInputSection onNext={handleNext} />
+        </div>
+      </main>
+
+      <BottomNav />
     </div>
   );
 }
