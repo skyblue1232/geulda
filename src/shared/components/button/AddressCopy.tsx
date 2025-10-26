@@ -52,7 +52,7 @@ const AddressCopy = ({
       onClick={handleCopy}
       className={cn(
         addressCopyStyle({ variant }),
-        'w-[35.4rem] h-[4rem] px-[1.3rem] py-[1rem] gap-[0.4rem]',
+        'w-full h-[4rem] px-[1.3rem] py-[1rem] gap-[0.4rem]',
         'cursor-pointer select-none',
         className,
       )}
