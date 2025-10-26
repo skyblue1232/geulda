@@ -1,4 +1,3 @@
-// src/shared/utils/getLocation.ts
 export const getLocation = (
   onSuccess: (pos: GeolocationPosition) => void,
   onError?: (err: GeolocationPositionError) => void,
