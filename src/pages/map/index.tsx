@@ -13,11 +13,11 @@ export default function CourseSettingPage() {
   const { purpose, setPurpose, stay, setStay, move, setMove } =
     useCourseSelection();
 
-  const canProceed = purpose && stay && move;
+  const canProceed = Boolean(purpose && stay && move);
 
   const handleNext = () => {
     if (!canProceed) return alert('모든 항목을 선택해주세요.');
-    router.push('/result');
+    router.push('/map/result');
   };
 
   return (
