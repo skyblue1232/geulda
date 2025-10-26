@@ -46,7 +46,6 @@ export default function CourseSelectSection({
                 label={label}
                 aria-pressed={selected === id}
                 aria-label={`${label} 선택`}
-                role="button"
                 variant={selected === id ? 'active' : 'default'}
                 onClick={() => onSelect(selected === id ? null : id)}
               />

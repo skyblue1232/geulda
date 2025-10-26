@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { cn } from '@/shared/lib';
 import { ControlBar } from '@/shared/components';
@@ -5,8 +7,8 @@ import { BottomNav } from '@/shared/components/tab/BottomNav';
 import { purposes, stays, moves } from '@/shared/constants/course/courseOptions';
 import { useCourseSelection } from '@/shared/hooks/useCourseSelection';
 import CourseSelectSection from '@/pages/map/components/CourseSelectSection';
-import { useRouter } from 'next/router';
 import CourseInputSection from '@/pages/map/components/CourseInputSection';
+import { useRouter } from 'next/router';
 
 export default function CourseSettingPage() {
   const router = useRouter();
@@ -16,8 +18,7 @@ export default function CourseSettingPage() {
   const canProceed = Boolean(purpose && stay && move);
 
   const handleNext = () => {
-    if (!canProceed) return alert('모든 항목을 선택해주세요.');
-    router.push('/map/result');
+    if (canProceed) router.push('/map/result');
   };
 
   return (
@@ -38,13 +39,10 @@ export default function CourseSettingPage() {
 
       <main
         className="w-full pt-[3.4rem] flex flex-col overflow-auto"
-        aria-live="polite" 
+        aria-live="polite"
       >
         <section className="mb-[3.6rem] text-center">
-          <h1
-            id="course-setting-title"
-            className="sr-only"
-          >
+          <h1 id="course-setting-title" className="sr-only">
             여행 코스 설정
           </h1>
           <Image
@@ -54,10 +52,7 @@ export default function CourseSettingPage() {
             height={79}
             className="w-full h-auto object-cover block"
           />
-          <p
-            id="course-setting-desc"
-            className="sr-only"
-          >
+          <p id="course-setting-desc" className="sr-only">
             여행 목적, 체류 시간, 이동 방식을 선택하고, 원하는 장소를 입력할 수 있습니다.
           </p>
         </section>
