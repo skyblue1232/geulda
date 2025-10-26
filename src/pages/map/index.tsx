@@ -1,4 +1,4 @@
-import CummonButton from '@/shared/components/button/CommonButton';
+import CommonButton from '@/shared/components/button/CommonButton';
 import { useState } from 'react';
 
 export default function CourseSettingPreview() {
@@ -22,7 +22,7 @@ export default function CourseSettingPreview() {
       <h1 className="text-title-lg text-gray-700 mb-4">코스 버튼 임시 화면</h1>
       <div className="flex flex-wrap justify-center gap-4 max-w-[400px]">  
         {buttons.map(({ id, label }) => (
-          <CummonButton
+          <CommonButton
             key={id}
             label={label}
             variant={active === id ? 'active' : 'default'}
