@@ -8,7 +8,7 @@ import router from 'next/router';
 const Board = () => {
   const { label } = router.query;
   return (
-    <div className='relative w-full h-[100vh]overflow-auto px-[2.4rem]'>
+    <div className='relative w-full h-[100vh] overflow-auto px-[2.4rem]'>
       <Header
         title={label ? String(label) : '노드'}
         onClick={() => router.back()}
@@ -25,7 +25,7 @@ const Board = () => {
           />
         </section>
         <LocationCard
-          name='장소명'
+          name={label ? String(label) : '노드'}
           address='주소'
           description='장소에 대한 설명'
           variant='mint'
@@ -34,7 +34,7 @@ const Board = () => {
         <AddressCopy
           variant='mint'
           value='인천광역시 계양구 오조산로 31길(복사되어야할 주소)'
-          label={'인천광역시 계양구 오조산로 31길(복사되어야할 주소)'}
+          label={label ? String(label) : '노드'}
         />
       </main>
     </div>
