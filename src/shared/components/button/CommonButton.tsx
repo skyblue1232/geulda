@@ -1,11 +1,10 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 
-interface CummonButtonProps
+interface CommonButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonStyle> {
   label: string;
-  group?: string;
 }
 
 const buttonStyle = cva(
@@ -28,17 +27,15 @@ const buttonStyle = cva(
   }
 );
 
-const CummonButton = ({
+const CommonButton = ({
   label,
   variant,
-  group,
   className,
   ...props
-}: CummonButtonProps) => {
+}: CommonButtonProps) => {
   return (
     <button
       type="button"
-      data-group={group}
       className={cn(buttonStyle({ variant }), className)}
       {...props}
     >
@@ -47,4 +44,4 @@ const CummonButton = ({
   );
 };
 
-export default CummonButton;
+export default CommonButton;
