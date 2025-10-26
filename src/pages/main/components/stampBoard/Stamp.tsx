@@ -12,19 +12,22 @@ const Stamp = ({ index, acquired, className }: StampProps) => {
     return (
       <div
         className={cn(
-          'flex items-center justify-center w-[3rem] h-[3rem]',
+          'flex items-center justify-center w-[2.8rem] h-[2.8rem]',
           className,
         )}
         aria-label={`${index + 1}번째 스탬프 획득`}
       >
-        <Icon name='Stamp' size={30} color='pink-400' aria-hidden />
+        <Icon name='Stamp' size={28} color='pink-400' aria-hidden />
       </div>
     );
   }
 
   return (
     <div
-      className={cn('rounded-full bg-pink-100 w-[3rem] h-[3rem]', className)}
+      className={cn(
+        'rounded-full bg-pink-100 w-[2.8rem] h-[2.8rem]',
+        className,
+      )}
       aria-label={`${index + 1}번째 스탬프 미획득`}
     />
   );
