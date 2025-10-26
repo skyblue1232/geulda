@@ -1,3 +1,5 @@
+'use client';
+
 import CommonButton from '@/shared/components/button/CommonButton';
 
 interface CourseSelectSectionProps {
@@ -13,7 +15,7 @@ export default function CourseSelectSection({
   selected,
   onSelect,
 }: CourseSelectSectionProps) {
-  const sectionId = `${title.replace(/\s+/g, '-')}-group`;
+  const sectionId = `${(title ?? '').replace(/\s+/g, '-')}-group`;
 
   return (
     <section
@@ -37,16 +39,17 @@ export default function CourseSelectSection({
           style={{ WebkitOverflowScrolling: 'touch' }}
           role="list"
         >
-          {options.map(({ id, label }) => (
-            <CommonButton
-              key={id}
-              label={label}
-              aria-pressed={selected === id}   
-              aria-label={`${label} 선택`}    
-              role="listitem"
-              variant={selected === id ? 'active' : 'default'}
-              onClick={() => onSelect(selected === id ? null : id)}
-            />
+          {Array.isArray(options) &&
+            options.map(({ id, label }) => (
+              <CommonButton
+                key={id}
+                label={label}
+                aria-pressed={selected === id}
+                aria-label={`${label} 선택`}
+                role="button"
+                variant={selected === id ? 'active' : 'default'}
+                onClick={() => onSelect(selected === id ? null : id)}
+              />
           ))}
         </div>
 

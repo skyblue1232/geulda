@@ -5,7 +5,7 @@ import { BottomNav } from '@/shared/components/tab/BottomNav';
 import { purposes, stays, moves } from '@/shared/constants/course/courseOptions';
 import { useCourseSelection } from '@/shared/hooks/useCourseSelection';
 import CourseSelectSection from '@/pages/map/components/CourseSelectSection';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import CourseInputSection from '@/pages/map/components/CourseInputSection';
 
 export default function CourseSettingPage() {
@@ -17,7 +17,7 @@ export default function CourseSettingPage() {
 
   const handleNext = () => {
     if (!canProceed) return alert('모든 항목을 선택해주세요.');
-    router.push('/map/result');
+    router.push('/result');
   };
 
   return (
