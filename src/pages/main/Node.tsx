@@ -34,6 +34,14 @@ const Board = () => {
 
           <button
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
+            onClick={() => {
+              //TODO: 리워드 페이지로 이동
+              //   router.push({
+              //     pathname: '/main/riward',
+              //     query: { label },
+              //   });
+              console.log('리워드 페이지로 이동');
+            }}
           >
             <Icon
               name={isStamp ? 'Stamp' : 'PressStamp'}
