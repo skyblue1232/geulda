@@ -53,7 +53,7 @@ export default function MyPage() {
         <button
           type='button'
           onClick={handleLogout}
-          className='mt-[2.1em] text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'
+          className='mt-[2.1rem] text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'
         >
           로그아웃
         </button>
