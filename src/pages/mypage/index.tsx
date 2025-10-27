@@ -1,12 +1,14 @@
 'use client';
 
+import React, { useState } from 'react';
 import ProfilePhoto from '@/pages/mypage/components/ProfilePhoto';
 import PostcardContainer from '@/pages/mypage/components/PostcardContainer';
-import { EventCard, BottomNav } from '@/shared/components';
+import { EventCard, BottomNav, PopupSet } from '@/shared/components';
 
 export default function MyPage() {
+ const [showLogoutPopup, setShowLogoutPopup] = useState(false); 
   const handleLogout = () => {
-    alert('로그아웃');
+    setShowLogoutPopup(true);
   };
 
   return (
@@ -57,6 +59,15 @@ export default function MyPage() {
         </button>
       </div>
       <BottomNav />
+
+       {showLogoutPopup && (
+        <PopupSet
+          text="로그아웃 하시겠습니까?"
+          onClose={() => {
+            setShowLogoutPopup(false);
+          }}
+        />
+      )}
     </main>
   );
 }
