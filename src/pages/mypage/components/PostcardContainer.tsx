@@ -16,7 +16,7 @@ const postcardContainerStyle = cva(
   layout-grid w-full
   rounded-[20px] border bg-pink-50 border-pink-200
   p-[1.2rem] gap-[0.6rem]
-  grid grid-cols-[repeat(auto-fill,minmax(70px,1fr))]
+  overflow-y-hidden no-scrollbar
   transition-all
   `,
   {
@@ -30,6 +30,12 @@ const postcardContainerStyle = cva(
     },
   },
 );
+
+const postcardGridStyle = `
+ grid grid-rows-2 grid-flow-col
+auto-cols-[minmax(70px,70px)]
+gap-[0.6rem]
+ `;
 
 const postcardCardStyle = cva(
   `
@@ -56,14 +62,26 @@ export default function PostcardContainer({
   className,
   bordered,
 }: PostcardContainerProps) {
-  // 엽서 기본 8개 (null placeholder유지) + 그 외는 아래로 채움
+  // 엽서 기본 8개 (null placeholder유지) + 9개 부터는 가로 스크롤
   const totalSlots = Math.max(postcards.length, 8);
   const filledSlots = Array(totalSlots)
     .fill(null)
     .map((_, i) => postcards[i] ?? null);
 
   return (
-    <div className={cn(postcardContainerStyle({ bordered }), className)}>
+  <div
+    className={cn(
+      postcardContainerStyle({ bordered }),
+      className,
+      postcards.length > 8 && 'overflow-x-auto',
+    )}
+  >
+    <div
+      className={cn(
+        postcardGridStyle,
+        postcards.length <= 8 && 'justify-center',
+      )}
+    >
       {filledSlots.map((src, idx) => (
         <button
           key={idx}
@@ -81,11 +99,13 @@ export default function PostcardContainer({
               alt={`엽서 ${idx + 1}`}
               width={200}
               height={200}
-              className='w-full h-full object-cover'
+              className="w-full h-full object-cover"
             />
           )}
         </button>
       ))}
     </div>
-  );
+  </div>
+);
+
 }

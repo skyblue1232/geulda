@@ -5,15 +5,17 @@ import PostcardContainer from '@/pages/mypage/components/PostcardContainer';
 import { EventCard, BottomNav } from '@/shared/components';
 
 export default function MyPage() {
-  const mockName = '이름';
+  const mockName = '이수민';
   const mockImages = [
     '/1.jpg',
-    '/11.jpg',
+    '/2.jpg',
     '/3.jpg',
+    '/2.jpg',
+    '/1.jpg',
     '/11.jpg',
-    '/3.jpg',
+    '/2.jpg',
+    '/1.jpg',
     '/11.jpg',
-    '/3.jpg',
   ];
   const mockUser = {
     profileImageUrl: '/11.jpg',
@@ -25,30 +27,29 @@ export default function MyPage() {
 
   return (
     <main className='w-full min-h-screen bg-white flex flex-col items-center'>
-      <div className='w-full flex flex-col items-center px-[2.3rem] pb-[8.4rem]'>
-        {/* 프로필 사진 */}
-        <section className='w-full flex flex-col items-center mt-[2.8rem] gap-[1.3rem]'>
+      <div className='w-full flex flex-col items-center px-[2.3rem] pb-[2rem]'>
+        {/* 프로필 */}
+        <section className='w-full flex flex-col items-center mt-[2.4rem] gap-[1.0rem]'>
           <ProfilePhoto src={mockUser.profileImageUrl} />
           <p className='text-title-md'>{mockName}</p>
         </section>
 
-        {/* 이벤트 카드 */}
+        {/* 저장한 행사 */}
         <section className='w-full mt-[1.6rem]'>
-          <p className='text-label-lg mb-[1rem]'>저장한 행사</p>
-          <div className='max-h-[15rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
+          <p className='text-label-lg mb-[1rem] pl-[1rem]'>저장한 행사</p>
+          <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
             <EventCard
-              name='벚꽃 축제'
-              address='서울 여의도'
-              description='봄꽃 구경하며 엽서 이벤트 참여하기'
+              name='골반 통신 이상 감지'
+              address='우리집'
+              description='내 골반이 멈추지 않아서 일까?'
               variant='gray'
               size='large'
-              imageSrc='/event1.jpg'
+              imageSrc='/1.jpg'
             />
-
             <EventCard
-              name='여름 캠프'
+              name='이혼 숙려 캠프'
               address='강원도 양양'
-              description='여름 한정 스탬프 챌린지 참가!'
+              description='앙 이라는 감정'
               variant='gray'
               size='large'
               imageSrc=''
@@ -56,26 +57,25 @@ export default function MyPage() {
           </div>
         </section>
 
-        {/* 엽서 컨테이너 */}
+        {/* 저장한 엽서 */}
         <section className='w-full mt-[1.8rem]'>
-          <p className='text-label-lg mb-[0.9rem]'>저장한 엽서</p>
+          <p className='text-label-lg mb-[0.6rem] pl-[1rem]'>저장한 엽서</p>
           <PostcardContainer
             postcards={mockImages}
-            onClickCard={(i) => alert(`${i + 1}번째 엽서`)}
+            onClickCard={(i) => alert(`${i + 1} 엽서 장소 페이지 이동`)}
           />
         </section>
 
+        {/* 로그아웃 */}
         <button
           type='button'
           onClick={handleLogout}
-          className='
-            mt-[2.1rem] text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]
-          '
+          className='mt-[2.1em] text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'
         >
           로그아웃
         </button>
       </div>
-      <BottomNav />
+        <BottomNav />
     </main>
   );
 }
