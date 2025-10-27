@@ -15,7 +15,7 @@ const postcardContainerStyle = cva(
   `
   layout-grid w-full
   rounded-[20px] border bg-pink-50 border-pink-200
-  p-2.5 gap-2.5
+  p-[1.2rem] gap-[0.6rem]
   grid grid-cols-[repeat(auto-fill,minmax(70px,1fr))]
   transition-all
   `,
