@@ -48,7 +48,7 @@ export default function MyPage() {
             />
             <EventCard
               name='이혼 숙려 캠프'
-              address='강원도 양양'
+              address='우리집'
               description='앙 이라는 감정'
               variant='gray'
               size='large'
