@@ -98,6 +98,7 @@ export const Icon = ({
       stroke={color ? 'currentColor' : 'none'}
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
+      viewBox="0 0 24 24"
       className={combined}
       style={iconStyle}
       aria-hidden={ariaHidden}
