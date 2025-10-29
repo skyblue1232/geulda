@@ -25,12 +25,10 @@ interface AddressCopyProps
     VariantProps<typeof addressCopyStyle> {
   value: string;
   truncate?: boolean;
-  label?: string;
 }
 
 const AddressCopy = ({
   value,
-  label,
   variant = 'gray',
   truncate = true,
   className,
@@ -74,7 +72,7 @@ const AddressCopy = ({
           truncate &&
             'truncate whitespace-nowrap overflow-hidden text-ellipsis',
         )}
-        title={label ?? value}
+        title={value}
       >
         {value}
       </span>
