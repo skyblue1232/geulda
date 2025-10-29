@@ -74,7 +74,7 @@ const AddressCopy = ({
           truncate &&
             'truncate whitespace-nowrap overflow-hidden text-ellipsis',
         )}
-        title={value}
+        title={label ?? value}
       >
         {value}
       </span>
