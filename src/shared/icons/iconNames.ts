@@ -14,6 +14,7 @@ export const iconNames = [
   "MapPin",
   "MapPin_",
   "NextButton",
+  "PressStamp",
   "Save",
   "Stamp",
   "User",
