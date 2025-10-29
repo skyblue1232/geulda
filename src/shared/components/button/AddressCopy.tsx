@@ -30,6 +30,7 @@ interface AddressCopyProps
 
 const AddressCopy = ({
   value,
+  label,
   variant = 'gray',
   truncate = true,
   className,
