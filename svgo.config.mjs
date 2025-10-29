@@ -3,5 +3,10 @@ export default {
   plugins: [
     { name: 'preset-default' },
     { name: 'removeDimensions' },
+    { name: 'removeAttrs', params: { attrs: ['fill', 'stroke'] } },
+    {
+      name: 'addAttributesToSVGElement',
+      params: { attributes: [{ fill: 'none' }, { stroke: 'currentColor' }] },
+    },
   ],
 };

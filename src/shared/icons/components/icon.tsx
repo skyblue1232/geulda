@@ -45,7 +45,6 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   width?: number | string;
   height?: number | string;
   color?: IconColor;
-  fillColor?: IconColor;
   className?: string;
   rotate?: IconRotate;
   hasRotateAnimation?: boolean;
@@ -58,7 +57,6 @@ export const Icon = ({
   width,
   height,
   color,
-  fillColor,
   className,
   rotate,
   hasRotateAnimation = false,
@@ -86,21 +84,14 @@ export const Icon = ({
     className,
   );
 
-  const iconStyle = {
-    ...style,
-    ...(color && { color: `var(--color-${color})` }),
-    ...(fillColor &&
-      ({ '--fill-color': `var(--color-${fillColor})` } as React.CSSProperties)),
-  };
   return (
     <svg
-      fill={fillColor ? 'var(--fill-color)' : 'none'}
-      stroke={color ? 'currentColor' : 'none'}
+      fill='currentColor'
+      stroke='currentColor'
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
-      viewBox="0 0 24 24"
       className={combined}
-      style={iconStyle}
+      style={{ ...(color && { color: `var(--${color})` }), ...style }}
       aria-hidden={ariaHidden}
       {...rest}
     >
