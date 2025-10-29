@@ -2,10 +2,11 @@ import { cn } from '@/shared/lib';
 import StampBoard from './components/stampBoard/StampBoard';
 import { ControlBar } from '@/shared/components';
 import Image from 'next/image';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { BottomNav } from '@/shared/components/tab/BottomNav';
 
 export default function MainPage() {
+  const router = useRouter();
   return (
     <div
       className={cn(
