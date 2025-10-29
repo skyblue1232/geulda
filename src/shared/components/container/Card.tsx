@@ -11,7 +11,7 @@ const cardStyle = cva(
       },
       size: {
         medium:
-          'w-[17rem] h-[17rem] flex-col items-center justify-center p-[1.2rem]',
+          'w-full h-[17rem] flex-col items-center justify-center p-[1.2rem]',
         large:
           'w-full h-[12rem] flex-row items-start justify-start px-[1.3rem] pt-[1.1rem] pb-[3.3rem]',
       },
