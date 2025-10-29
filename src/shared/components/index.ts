@@ -2,7 +2,6 @@ export { default as Header } from './header/Header';
 export { default as ControlBar } from './header/ControlBar';
 export { default as Tag } from './tag/Tag';
 export { DatePicker } from './datePicker/DatePicker';
-export { default as CommonButton } from './button/CommonButton';
 export { default as LocationBubbleSet } from './set/LocationBubbleSet';
 export { default as PopupSet } from './set/PopupSet';
 export { default as LocationCard } from './container/LocationCard';
