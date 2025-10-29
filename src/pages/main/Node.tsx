@@ -60,7 +60,7 @@ const Board = () => {
 
         <AddressCopy
           variant='mint'
-          value='(복사되어야할 주소)'
+          value='주소'
         />
       </main>
     </div>
