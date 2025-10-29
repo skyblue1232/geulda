@@ -25,6 +25,7 @@ interface AddressCopyProps
     VariantProps<typeof addressCopyStyle> {
   value: string;
   truncate?: boolean;
+  label?: string;
 }
 
 const AddressCopy = ({
