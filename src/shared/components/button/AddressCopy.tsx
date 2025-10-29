@@ -23,12 +23,12 @@ const addressCopyStyle = cva(
 interface AddressCopyProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof addressCopyStyle> {
-  value: string;
+  label: string;
   truncate?: boolean;
 }
 
 const AddressCopy = ({
-  value,
+  label,
   variant = 'gray',
   truncate = true,
   className,
@@ -38,7 +38,7 @@ const AddressCopy = ({
 
   const handleCopy = () => {
     Copy(
-      value,
+      label,
       () => {
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
@@ -72,9 +72,9 @@ const AddressCopy = ({
           truncate &&
             'truncate whitespace-nowrap overflow-hidden text-ellipsis',
         )}
-        title={value}
+        title={label}
       >
-        {value}
+        {label}
       </span>
     </div>
   );
