@@ -60,7 +60,7 @@ const Board = () => {
 
         <AddressCopy
           variant='mint'
-          value='주소'
+          value='인천광역시 계양구 오조산로 31길(복사되어야할 주소)'
         />
       </main>
     </div>
