@@ -30,7 +30,7 @@ export default function EventPage() {
           <DatePicker value={date} onChange={setDate} />
         </div>
 
-        {/* 행사 날짜 없음 */}
+        {/* 행사 없음 */}
         <div className='flex flex-col items-center justify-center text-center mt-[15rem]'>
           <Icon name='Stamp' size={120} color='gray-200' />
           <h2 className='text-headline-lg-serif text-gray-700 mt-[5rem]'>
