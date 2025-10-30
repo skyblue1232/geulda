@@ -3,19 +3,34 @@
 import { useState } from 'react';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
-import { ControlBar, DatePicker } from '@/shared/components';
-import { BottomNav } from '@/shared/components/tab/BottomNav';
+import {
+  ControlBar,
+  DatePicker,
+  BottomNav,
+  EventCard,
+} from '@/shared/components';
+import { eventData } from '@/shared/constants/events/eventsData';
 
 export default function EventPage() {
   const [date, setDate] = useState<Date>();
 
+  const selectedDate = date
+    ? new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        .toISOString()
+        .split('T')[0]
+    : undefined;
+
+  const filteredEvents = eventData.filter(
+    (event) => event.date === selectedDate,
+  );
+
   return (
     <div
       className={cn(
-        'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] pb-[12rem]',
+        'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] overflow-hidden',
       )}
     >
-      {/* 상단 고정 헤더 */}
+      {/* 헤더 */}
       <ControlBar
         isLoggedIn={true}
         userName='홍길동'
@@ -30,18 +45,39 @@ export default function EventPage() {
           <DatePicker value={date} onChange={setDate} />
         </div>
 
-        {/* 행사 없음 */}
-        <div className='flex flex-col items-center justify-center text-center mt-[15rem]'>
-          <Icon name='Stamp' size={120} color='gray-200' />
-          <h2 className='text-headline-lg-serif text-gray-700 mt-[5rem]'>
-            Ooops!
-          </h2>
-          <p className='text-label-serif  text-gray-500 mt-[2.4rem]'>
-            선택하신 날은
-            <br />
-            행사가 없어요!
-          </p>
-        </div>
+        {/* 행사카드 & 빈화면 */}
+        {filteredEvents.length > 0 ? (
+          <section
+            className={cn(
+              'grid w-full mt-[1.4rem]',
+              'grid-cols-2 gap-x-[1.4rem] gap-y-[1.4rem]',
+            )}
+          >
+            {filteredEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                name={event.name}
+                address={event.address}
+                description={event.description}
+                variant='gray'
+                size='medium'
+                imageSrc={event.imageSrc ?? ''}
+              />
+            ))}
+          </section>
+        ) : (
+          <div className='flex flex-col items-center justify-center text-center mt-[15rem]'>
+            <Icon name='Stamp' size={120} color='gray-200' />
+            <h2 className='text-headline-lg-serif text-gray-700 mt-[5rem]'>
+              Ooops!
+            </h2>
+            <p className='text-label-serif text-gray-500 mt-[2.4rem]'>
+              선택하신 날은
+              <br />
+              행사가 없어요!
+            </p>
+          </div>
+        )}
       </main>
 
       <BottomNav />
