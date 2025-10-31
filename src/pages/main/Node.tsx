@@ -1,6 +1,4 @@
-import { Header } from '@/shared/components';
-import AddressCopy from '@/shared/components/button/AddressCopy';
-import LocationCard from '@/shared/components/container/LocationCard';
+import { AddressCopy, Header, LocationCard } from '@/shared/components';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
