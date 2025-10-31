@@ -19,8 +19,8 @@ const PostCard = () => {
       </h1>
 
       <FlipCard
-        frontSrc='/assets/Card.svg'
-        backSrc='/assets/CardBack.svg'
+        frontSrc='/assets/card.png'
+        backSrc='/assets/card2.png'
         width={354}
         height={220}
       />
