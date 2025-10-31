@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Icon } from '@/shared/icons';
 import { Card } from '@/shared/components/container/Card';
 import { cn } from '@/shared/lib';
@@ -20,6 +21,11 @@ const EventCard = ({
   size = 'medium',
   imageSrc = '',
 }: EventCardProps) => {
+  const [liked, setLiked] = useState(false);
+  
+    const handleLikeClick = () => {
+      setLiked((prev) => !prev);
+    };
   return (
     <Card
       variant={variant}
@@ -57,10 +63,19 @@ const EventCard = ({
               {name}
             </span>
             <Icon
-              name='HeartStraight'
-              size={20}
-              color={variant === 'mint' ? 'mint-400' : 'gray-300'}
-            />
+                name='HeartStraight'
+                size={20}
+                color={
+                  liked
+                    ? 'red-400'
+                    : variant === 'mint'
+                    ? 'mint-400'
+                    : 'gray-300'
+                }
+                fillColor={liked ? 'red-300' : undefined}
+                onClick={handleLikeClick}
+                className='cursor-pointer'
+              />
           </div>
           {/* 행사 주소 */}
           <div
@@ -105,7 +120,16 @@ const EventCard = ({
               <Icon
                 name='HeartStraight'
                 size={20}
-                color={variant === 'mint' ? 'mint-400' : 'gray-300'}
+                color={
+                  liked
+                    ? 'red-400'
+                    : variant === 'mint'
+                    ? 'mint-400'
+                    : 'gray-300'
+                }
+                fillColor={liked ? 'red-300' : undefined}
+                onClick={handleLikeClick}
+                className='cursor-pointer'
               />
             </div>
 
