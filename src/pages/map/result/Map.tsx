@@ -1,10 +1,12 @@
 import { Header } from '@/shared/components';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import FullMap from '@/pages/map/result/components/FullMap';
 
-const Map = () => {
+const MapPage = () => {
+  const router = useRouter();
+
   return (
-    <div className="w-full h-[100vh] bg-[#46d1cd] overflow-hidden">
+    <div className="w-full h-[100vh] bg-mint-300 overflow-hidden">
       <Header
         title="코스 추천"
         onClick={() => router.push('/map/result?from=map')}
@@ -14,4 +16,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default MapPage;

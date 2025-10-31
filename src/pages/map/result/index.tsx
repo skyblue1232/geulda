@@ -15,6 +15,8 @@ export default function CourseResultPage() {
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
   useEffect(() => {
+    if(typeof window === 'undefined') return;
+    
     const hasSeenPopup = localStorage.getItem('seenCoursePopup');
     if (!hasSeenPopup) {
       setShowPopup(true);
