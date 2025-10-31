@@ -1,12 +1,10 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { cn } from '@/shared/lib';
 import { ControlBar } from '@/shared/components';
 import { BottomNav } from '@/shared/components/tab/BottomNav';
-import Popup from '@/shared/components/container/Popup';
+import { PopupSet } from '@/shared/components';
 import TagGroup from '@/pages/map/result/components/TagGroup';
 import ResultList from '@/pages/map/result/components/ResultList';
 import ResultMap from '@/pages/map/result/components/ResultMap';
@@ -22,7 +20,9 @@ export default function CourseResultPage() {
       setShowPopup(true);
       localStorage.setItem('seenCoursePopup', 'true');
     }
+  }, []); 
 
+  useEffect(() => {
     if (router.query.from === 'map') {
       setViewMode('map');
     }
@@ -31,7 +31,7 @@ export default function CourseResultPage() {
   const handlePopupClose = () => setShowPopup(false);
 
   return (
-    <div className="relative bg-white flex flex-col h-screen overflow-hidden">
+    <div className="relative bg-white flex flex-col min-h-screen pb-[12rem] no-scrollbar">
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
@@ -53,13 +53,9 @@ export default function CourseResultPage() {
 
           <TagGroup
             viewMode={viewMode}
-            onToggleView={() => {
-              setViewMode((prev) => {
-                const nextMode = prev === 'list' ? 'map' : 'list';
-                console.log(`${prev} → ${nextMode}`);
-                return nextMode;
-              });
-            }}
+            onToggleView={() =>
+              setViewMode((prev) => (prev === 'list' ? 'map' : 'list'))
+            }
           />
 
           <section
@@ -78,12 +74,10 @@ export default function CourseResultPage() {
       <BottomNav />
 
       {showPopup && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-          <Popup
-            text="새로고침 시 결과가 초기화됩니다."
-            onClose={handlePopupClose}
-          />
-        </div>
+        <PopupSet
+          text="새로고침 시 결과가 초기화됩니다."
+          onClose={handlePopupClose}
+        />
       )}
     </div>
   );

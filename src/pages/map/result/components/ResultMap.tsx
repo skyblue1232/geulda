@@ -1,4 +1,3 @@
-'use client';
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useKakaoMap } from '@/shared/hooks/kakao/useKakaoMap';
@@ -16,10 +15,6 @@ export default function ResultMap() {
       role="region"
       aria-labelledby="map-title"
     >
-      <h2 id="map-title" className="sr-only">
-        코스 추천 미리보기 지도
-      </h2>
-
       <div
         ref={mapRef}
         role="application"
@@ -28,7 +23,7 @@ export default function ResultMap() {
 
       <button
         onClick={() => router.push('/map/result/Map?from=map')}
-        aria-labelledby="전체화면 지도로 보기"
+        aria-label="전체화면 지도로 보기"
         className="absolute right-[1.2rem] bottom-[1.4rem] bg-pink-200 border border-pink-300 text-white text-title-sm px-[2.2rem] py-[1.2rem] rounded-[2rem]"
       >
         전체화면 보기

@@ -10,9 +10,8 @@ export default function ResultList() {
       role="list"
       aria-label="검색 결과 리스트"
       className={cn(
-        'grid grid-cols-2 gap-[1.2rem] w-full',
-        'justify-items-center pb-[15rem]',
-        'overflow-y-scroll' 
+        'grid grid-cols-2 gap-[1.2rem] w-full justify-items-center pb-[15rem]',
+        'overflow-y-scroll no-scrollbar' 
       )}
     >
       {listData.map((place) => (
@@ -27,20 +26,6 @@ export default function ResultList() {
           />
         </div>
       ))}
-
-      <style jsx global>{`
-        /* Chrome, Safari, Opera */
-        ::-webkit-scrollbar {
-          width: 0 !important;
-          height: 0 !important;
-        }
-
-        /* Firefox */
-        * {
-          scrollbar-width: none !important;
-          -ms-overflow-style: none !important;
-        }
-      `}</style>
     </div>
   );
 }

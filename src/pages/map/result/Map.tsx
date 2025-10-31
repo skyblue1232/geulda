@@ -1,5 +1,3 @@
-'use client';
-
 import { Header } from '@/shared/components';
 import router from 'next/router';
 import FullMap from '@/pages/map/result/components/FullMap';

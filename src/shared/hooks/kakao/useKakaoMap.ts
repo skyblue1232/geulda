@@ -16,7 +16,10 @@ export function useKakaoMap(
     if (!mapRef.current) return;
 
     const initMap = () => {
-      if (!window.kakao) return;
+      if (!window.kakao || !window.kakao.maps) {
+        console.warn('Kakao Maps SDK not loaded yet');
+        return;
+      }
 
       window.kakao.maps.load(() => {
         const map = new window.kakao.maps.Map(mapRef.current!, {
