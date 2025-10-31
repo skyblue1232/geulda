@@ -8,7 +8,11 @@ const inputWrapperStyle = cva(
   'flex items-center justify-between w-full bg-gray-100 px-[0.6rem] py-[0.7rem] rounded-[2rem]',
 );
 
-export default function ChattingInput() {
+interface ChattingInputProps {
+  onSend?: (text: string) => void;
+}
+
+export default function ChattingInput({ onSend }: ChattingInputProps) {
   const [message, setMessage] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,6 +32,7 @@ export default function ChattingInput() {
 
   const handleSubmit = () => {
     if (!message.trim()) return;
+    onSend?.(message); 
     setMessage('');
   };
 
