@@ -25,7 +25,7 @@ const Board = () => {
             width={354}
             height={436}
             className={cn(
-              'w-full h-auto object-cover block rounded-[1.6rem] transition-all duration-300',
+              'w-full h-auto object-cover block rounded-[16px] transition-all duration-300',
               !isStamp && 'blur-xs brightness-90',
             )}
           />

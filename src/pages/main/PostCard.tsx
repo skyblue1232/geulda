@@ -14,7 +14,7 @@ const PostCard = () => {
         overflow-x-auto overflow-y-hidden mb-[7rem]
       '
     >
-      <h1 className='text-headline-md-serif text-b mt-[8rem] mb-[8rem] text-center'>
+      <h1 className='text-headline-md-serif mt-[8rem] mb-[8rem] text-center'>
         {label}의 엽서 획득!
       </h1>
 
