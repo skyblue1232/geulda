@@ -36,11 +36,15 @@ const Board = () => {
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
             onClick={
               !isStamp
-                ? () =>
+                ? () => {
                     getLocation(
                       (pos) => console.log('📍 현재 위치:', pos.coords),
                       (err) => console.error('⚠️ 위치 에러:', err.message),
-                    )
+                    );
+                    router.push({
+                      pathname: '/main/HiddenReward',
+                    });
+                  }
                 : undefined
             }
           >
