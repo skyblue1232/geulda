@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { cn } from '@/shared/lib';
 import { ControlBar } from '@/shared/components';
-import { BottomNav } from '@/shared/components/tab/BottomNav';
+import { BottomNav } from '@/shared/components';
 import { PopupSet } from '@/shared/components';
 import TagGroup from '@/pages/map/result/components/TagGroup';
 import ResultList from '@/pages/map/result/components/ResultList';

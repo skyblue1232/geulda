@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib';
-import LocationCard from '@/shared/components/container/LocationCard';
+import { LocationCard } from '@/shared/components';
 import { listData } from '@/shared/constants/map/result/listData';
 
 export default function ResultList() {

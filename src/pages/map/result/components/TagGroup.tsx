@@ -1,6 +1,6 @@
 'use client';
 
-import Tag from '@/shared/components/tag/Tag';
+import { Tag } from '@/shared/components';
 import { cn } from '@/shared/lib';
 
 interface TagGroupProps {
