@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 const Board = () => {
   const router = useRouter();
   const { label } = router.query;
-  const isStamp = true;
+  const isStamp = false;
 
   return (
     <div className='relative w-full h-[100vh] overflow-auto px-[2.4rem]'>
@@ -34,12 +34,14 @@ const Board = () => {
 
           <button
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
-            onClick={() =>
-              getLocation(
-                (pos) => console.log('📍 현재 위치:', pos.coords),
-                (err) => console.error('⚠️ 위치 에러:', err.message),
-                //TODO : 리워드 페이지로 이동 , 위치 에러일경우 모달창
-              )
+            onClick={
+              !isStamp
+                ? () =>
+                    getLocation(
+                      (pos) => console.log('📍 현재 위치:', pos.coords),
+                      (err) => console.error('⚠️ 위치 에러:', err.message),
+                    )
+                : undefined
             }
           >
             <Icon
