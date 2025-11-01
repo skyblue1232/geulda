@@ -9,7 +9,7 @@ import Chatting from '@/pages/chatbot/components/ChattingBubble';
 import ChattingInput from '@/pages/chatbot/components/ChattingInput';
 
 const chatPageStyle = cva(
-  'relative w-full h-[100vh] overflow-hidden bg-white flex flex-col',
+  'relative w-full h-dvh overflow-hidden bg-white flex flex-col',
 );
 
 const mainStyle = cva(
