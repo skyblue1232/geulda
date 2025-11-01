@@ -21,7 +21,7 @@ export default function VideoPlaceholder() {
     >
       <div className="w-full px-[2.4rem] mt-[4.5rem] h-full">
         <div
-          className="relative w-full h-full overflow-hidden rounded-[2rem]"
+          className="relative w-full h-full overflow-hidden"
           role="region"
           aria-label={location ? `${location.label} 영상 플레이어` : '비디오 대기 화면'}
         >
@@ -34,7 +34,7 @@ export default function VideoPlaceholder() {
               playsInline
               controls
               onEnded={handleVideoEnd}
-              className="w-full h-full object-cover rounded-[2rem]"
+              className="w-full h-full object-cover"
               aria-label={`${location.label} 영상`}
               aria-describedby="video-description"
             />
