@@ -116,22 +116,6 @@ const EventCard = ({
       ) : (
         // Large 카드
         <div className='flex items-start justify-between w-full gap-[1.2rem]'>
-          {/* 행사 이미지 */}
-          <div className='relative w-[14.2rem] h-[10rem] rounded-[2rem] flex-shrink-0 overflow-hidden'>
-            {imageSrc ? (
-              <Image
-                src={imageSrc}
-                alt={name}
-                fill
-                className='object-cover'
-                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 14.2rem'
-                loading='lazy'
-              />
-            ) : (
-              <div className='absolute inset-0 bg-gray-200' />
-            )}
-          </div>
-
           {/* 행사 제목 + 하트 */}
           <div className='flex flex-col justify-between flex-1'>
             <div className='flex items-start justify-between w-full'>
@@ -162,7 +146,7 @@ const EventCard = ({
             {/* 행사 설명 */}
             <p
               className={cn(
-                'text-body-md mt-[1rem] line-clamp-4', //4줄 초과
+                'text-body-md mt-[1rem] line-clamp-4 text-left', //4줄 초과
                 variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
               )}
             >
