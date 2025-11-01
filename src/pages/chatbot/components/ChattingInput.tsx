@@ -69,7 +69,6 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
       <button
         type='button'
         onClick={handleSubmit}
-        aria-label='메시지 전송'
         className={cn(
           'w-[4rem] h-[4rem] flex justify-center items-center rounded-[2rem] bg-mint-500 flex-shrink-0',
         )}
