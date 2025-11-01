@@ -1,13 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { cva } from 'class-variance-authority';
+import { cn } from '@/shared/lib';
 import { Header } from '@/shared/components';
 import Chatting from '@/pages/chatbot/components/ChattingBubble';
 import ChattingInput from '@/pages/chatbot/components/ChattingInput';
 
+const chatPageStyle = cva(
+  'relative w-full h-[100vh] overflow-hidden bg-white flex flex-col',
+);
+
+const mainStyle = cva(
+  'relative w-full flex-1 pt-[14.4rem] pb-[10rem] px-[2.4rem] overflow-auto flex flex-col gap-[0.6rem]',
+);
+
+const introStyle = cva('flex flex-col items-start gap-[1rem]');
+
 export default function ChatPage() {
   const router = useRouter();
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   type Message = {
     id: number;
@@ -15,48 +28,56 @@ export default function ChatPage() {
     variant: 'received' | 'sent';
   };
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      text: '안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요.',
-      variant: 'received',
-    },
-    { id: 2, text: '원하시는 정보를 물어봐주세요!', variant: 'received' },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
-  const handleSendMessage = (text: string) => {
+  // 새로운 채팅 자동 스크롤
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // 메세지 전송 핸들러
+  const handleSend = (text: string) => {
     if (!text.trim()) return;
     const newMsg = { id: Date.now(), text, variant: 'sent' as const };
     setMessages((prev) => [...prev, newMsg]);
   };
 
   return (
-    <div className='relative w-full h-[100vh] overflow-hidden bg-white'>
-      {/* 상단 헤더 */}
-      <Header title='ChatBot' onClick={() => router.back()} />
+    <div className={cn(chatPageStyle())}>
+      {/* 헤더 고정 */}
+      <div className='fixed top-0 left-0 w-full z-10'>
+        <Header title='ChatBot' onClick={() => router.back()} />
+      </div>
 
       {/* 메인 콘텐츠 */}
-      <main className='flex flex-col justify-between w-full h-full mt-[1.4rem]'>
-        {/* 메시지 목록 */}
-        <section className='flex-1 overflow-y-auto px-[2.4rem] pt-[1.6rem] pb-[8rem] flex flex-col gap-[1.2rem] bg-white'>
-          <div className='flex items-start gap-[1.4rem]'>
-            <div className='w-[4rem] h-[4rem] rounded-full bg-gray-200 flex-shrink-0' />
-            <div className='flex flex-col gap-[0.8rem]'>
-              <Chatting message='안녕하세요, 글다에요!\n부천시 여행에 대한 정보를 쉽게 알려드릴게요.' variant='received' />
-              <Chatting message='원하시는 정보를 물어봐주세요!' variant='received' />
-            </div>
-          </div>
+      <main className={cn(mainStyle())}>
+        {/* 로고 + 기본 멘트 */}
+        <div className={cn(introStyle())}>
+          {/* 로고 자리 (임시) */}
+          <div className='w-[6rem] h-[6rem] rounded-full bg-gray-200 flex-shrink-0' />
+          <Chatting
+            message='안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요.'
+            variant='received'
+          />
+          <Chatting
+            message='원하시는 정보를 물어봐주세요!'
+            variant='received'
+          />
+        </div>
 
-          {messages
-            .filter((msg) => msg.id > 2)
-            .map((msg) => (
-              <Chatting key={msg.id} message={msg.text} variant={msg.variant} />
-            ))}
-        </section>
+        {/* 사용자 메시지 */}
+        {messages
+          .filter((msg) => msg.id > 2)
+          .map((msg) => (
+            <Chatting key={msg.id} message={msg.text} variant={msg.variant} />
+          ))}
 
-        {/* 하단 입력창 */}
-        <ChattingInput onSend={handleSendMessage} />
+        {/* 스크롤 */}
+        <div ref={bottomRef} />
       </main>
+
+      {/* 입력창 */}
+      <ChattingInput onSend={handleSend} />
     </div>
   );
 }

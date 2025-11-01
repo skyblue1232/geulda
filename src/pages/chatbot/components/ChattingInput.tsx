@@ -32,7 +32,7 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
 
   const handleSubmit = () => {
     if (!message.trim()) return;
-    onSend?.(message); 
+    onSend?.(message);
     setMessage('');
   };
 
@@ -52,8 +52,14 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
           ref={inputRef}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
           type='text'
-          placeholder='무엇이든 물어보세요!!'
+          placeholder='무엇이든 물어보세요'
           className={cn(
             'w-full bg-transparent outline-none text-label-lg placeholder:text-gray-300 text-gray-900',
           )}
