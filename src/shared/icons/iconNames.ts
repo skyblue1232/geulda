@@ -13,6 +13,7 @@ export const iconNames = [
   "KakaoIcon",
   "MapPin",
   "MapPin_",
+  "NextButton",
   "PressStamp",
   "Save",
   "Stamp",
