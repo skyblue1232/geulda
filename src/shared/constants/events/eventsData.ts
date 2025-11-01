@@ -3,7 +3,8 @@ export interface EventData {
   name: string;
   address: string;
   description: string;
-  date: string;
+  startDate: string;
+  endDate: string;
   imageSrc?: string;
 }
 
@@ -13,7 +14,8 @@ export const eventData: EventData[] = [
     name: 'ICPC',
     address: '다솔관',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-11-01',
+    endDate: '2025-11-03',
     imageSrc: '',
   },
   {
@@ -21,7 +23,8 @@ export const eventData: EventData[] = [
     name: '아우름제',
     address: '울학교',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-11-01',
+    endDate: '2025-11-02',
     imageSrc: '',
   },
   {
@@ -29,7 +32,8 @@ export const eventData: EventData[] = [
     name: '졸업식',
     address: '가톨릭대학교',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-10-31',
+    endDate: '2025-10-31',
     imageSrc: '',
   },
   {
@@ -37,7 +41,8 @@ export const eventData: EventData[] = [
     name: '학술제',
     address: '가톨릭대학교',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-10-30',
+    endDate: '2025-10-31',
     imageSrc: '',
   },
   {
@@ -45,7 +50,8 @@ export const eventData: EventData[] = [
     name: '둡둗다다',
     address: '부천시청',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-10-30',
+    endDate: '2025-10-31',
     imageSrc: '',
   },
   {
@@ -53,7 +59,8 @@ export const eventData: EventData[] = [
     name: '배고파요',
     address: '부천역',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-10-31',
+    endDate: '2025-11-01',
     imageSrc: '',
   },
   {
@@ -61,7 +68,8 @@ export const eventData: EventData[] = [
     name: '마짐막 테스트',
     address: '가톨릭대학교',
     description: '야르',
-    date: '2025-10-31',
+    startDate: '2025-10-31',
+    endDate: '2025-11-01',
     imageSrc: '',
   },
 ];

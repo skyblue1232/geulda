@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import {
@@ -12,6 +13,7 @@ import {
 import { eventData } from '@/shared/constants/events/eventsData';
 
 export default function EventPage() {
+  const router = useRouter();
   const [date, setDate] = useState<Date>();
 
   const selectedDate = date
@@ -20,9 +22,17 @@ export default function EventPage() {
         .split('T')[0]
     : undefined;
 
-  const filteredEvents = eventData.filter(
-    (event) => event.date === selectedDate,
-  );
+  const filteredEvents = eventData.filter((event) => {
+    if (!selectedDate) return false;
+    const start = new Date(event.startDate);
+    const end = new Date(event.endDate);
+    const selected = new Date(selectedDate);
+    return selected >= start && selected <= end;
+  });
+
+  const handleCardClick = (id: number) => {
+    router.push(`/events/${id}`);
+  };
 
   return (
     <div
@@ -54,15 +64,20 @@ export default function EventPage() {
             )}
           >
             {filteredEvents.map((event) => (
-              <EventCard
+              <div
                 key={event.id}
-                name={event.name}
-                address={event.address}
-                description={event.description}
-                variant='gray'
-                size='medium'
-                imageSrc={event.imageSrc ?? ''}
-              />
+                onClick={() => handleCardClick(event.id)}
+                className='cursor-pointer'
+              >
+                <EventCard
+                  name={event.name}
+                  address={event.address}
+                  description={event.description}
+                  variant='gray'
+                  size='medium'
+                  imageSrc={event.imageSrc ?? ''}
+                />
+              </div>
             ))}
           </section>
         ) : (
