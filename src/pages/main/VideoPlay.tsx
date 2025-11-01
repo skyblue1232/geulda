@@ -48,7 +48,7 @@ export default function VideoPlaceholder() {
                 priority
               />
               <span
-                className="absolute inset-0 flex justify-center items-center text-gray-800 text-body-md font-medium"
+                className="absolute inset-0 flex justify-center items-center text-title-md"
                 role="status"
                 aria-live="polite"
               >
