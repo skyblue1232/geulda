@@ -8,6 +8,8 @@ interface EventCardProps {
   name: string;
   address: string;
   description: string;
+  startDate?: string;
+  endDate?: string;
   variant?: 'gray' | 'mint';
   size?: 'small' | 'medium' | 'large';
   imageSrc?: string;
