@@ -3,8 +3,13 @@ export interface EventData {
   name: string;
   address: string;
   description: string;
+<<<<<<< HEAD
   startDate: string; 
   endDate: string; 
+=======
+  startDate: string;
+  endDate: string;
+>>>>>>> 07c877a529dc709133ac9d9a4ac98babc6b9fb62
   imageSrc?: string;
 }
 
@@ -68,7 +73,11 @@ export const eventData: EventData[] = [
     name: '마짐막 테스트',
     address: '가톨릭대학교',
     description: '야르',
+<<<<<<< HEAD
    startDate: '2025-10-31',
+=======
+    startDate: '2025-10-31',
+>>>>>>> 07c877a529dc709133ac9d9a4ac98babc6b9fb62
     endDate: '2025-11-01',
     imageSrc: '',
   },
