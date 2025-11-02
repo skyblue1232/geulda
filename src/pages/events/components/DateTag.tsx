@@ -4,8 +4,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 
 interface DateTagProps extends VariantProps<typeof dateTagStyle> {
-  startDate: string;
-  endDate: string;
+  startDate?: string;
+  endDate?: string;
   className?: string;
 }
 
@@ -26,7 +26,13 @@ export default function DateTag({
   endDate,
   className,
 }: DateTagProps) {
-const formatDate = (date: string) => date.replace(/-/g, '.');
+  const formatDate = (date?: string) => {
+    if (!date) return '';
+    return date.replace(/-/g, '.');
+  };
+
+  if (!startDate && !endDate) return null;
+
   return (
     <div className={cn(dateTagStyle(), className)}>
        {formatDate(startDate)} ~ {formatDate(endDate)}
