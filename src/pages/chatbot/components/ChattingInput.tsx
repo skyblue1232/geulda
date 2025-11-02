@@ -1,8 +1,8 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva } from 'class-variance-authority';
+import { useChattingInput } from '@/shared/hooks/useChattingInput';
 
 const inputWrapperStyle = cva(
   'flex items-center justify-between w-full bg-gray-100 px-[0.6rem] py-[0.7rem] rounded-[2rem]',
@@ -12,29 +12,15 @@ interface ChattingInputProps {
   onSend?: (text: string) => void;
 }
 
+
 export default function ChattingInput({ onSend }: ChattingInputProps) {
-  const [message, setMessage] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const handleFocus = () => {
-      setTimeout(() => {
-        inputRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }, 200);
-    };
-    const el = inputRef.current;
-    el?.addEventListener('focus', handleFocus);
-    return () => el?.removeEventListener('focus', handleFocus);
-  }, []);
-
-  const handleSubmit = () => {
-    if (!message.trim()) return;
-    onSend?.(message);
-    setMessage('');
-  };
+  const {
+    message,
+    setMessage,
+    inputRef,
+    handleSubmit,
+    handleKeyDown,
+  } = useChattingInput({ onSend });
 
   return (
     <div
@@ -52,17 +38,10 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
           ref={inputRef}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit();
-            }
-          }}
+          onKeyDown={handleKeyDown}
           type='text'
           placeholder='무엇이든 물어보세요'
-          className={cn(
-            'w-full bg-transparent outline-none text-label-lg placeholder:text-gray-300 text-gray-900',
-          )}
+          className='w-full bg-transparent outline-none text-label-lg placeholder:text-gray-300 text-gray-900'
         />
       </div>
 
