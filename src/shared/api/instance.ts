@@ -88,7 +88,9 @@ apiWithToken.interceptors.response.use(
       } catch (err) {
         processQueue(err, null);
         clearTokens();
-        window.location.href = '/login';
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
         return Promise.reject(err);
       } finally {
         isRefreshing = false;
