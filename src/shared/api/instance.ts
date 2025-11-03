@@ -35,7 +35,7 @@ apiWithToken.interceptors.request.use(
 let isRefreshing = false;
 let failedQueue: {
   resolve: (token?: string) => void;
-  reject: (error: any) => void;
+  reject: (error: unknown) => void;
 }[] = [];
 
 const processQueue = (error: any, token: string | null = null) => {
@@ -80,7 +80,8 @@ apiWithToken.interceptors.response.use(
         const { accessToken, refreshToken: newRefresh } = data.data;
         setTokens(accessToken, newRefresh);
 
-        apiWithToken.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+        apiWithToken.defaults.headers.common.Authorization =
+          'Bearer ' + accessToken;
         processQueue(null, accessToken);
 
         return apiWithToken(originalRequest);
