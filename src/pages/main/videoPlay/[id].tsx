@@ -1,7 +1,7 @@
 import { cn } from '@/shared/lib';
 import { useRouter } from 'next/router';
 import { VIDEO_LOCATIONS } from '@/shared/constants/main/videoLocations';
-import VideoPlayer from '@/pages/main/components/video/videoPlayer';
+import VideoPlayer from '@/pages/main/components/video/VideoPlayer';
 
 export default function VideoPlayPage() {
   const router = useRouter();
