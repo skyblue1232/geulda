@@ -3,8 +3,8 @@ export interface EventData {
   name: string;
   address: string;
   description: string;
-  startDate: string;
-  endDate: string;
+  startDate: string; 
+  endDate: string; 
   imageSrc?: string;
 }
 

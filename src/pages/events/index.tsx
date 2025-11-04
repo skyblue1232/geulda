@@ -11,24 +11,17 @@ import {
   EventCard,
 } from '@/shared/components';
 import { eventData } from '@/shared/constants/events/eventsData';
+import { formatDateToISO, isDateWithinRange } from '@/shared/utils/date';
 
 export default function EventPage() {
   const router = useRouter();
   const [date, setDate] = useState<Date>();
 
-  const selectedDate = date
-    ? new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-        .toISOString()
-        .split('T')[0]
-    : undefined;
+  const selectedDate = formatDateToISO(date);
 
-  const filteredEvents = eventData.filter((event) => {
-    if (!selectedDate) return false;
-    const start = new Date(event.startDate);
-    const end = new Date(event.endDate);
-    const selected = new Date(selectedDate);
-    return selected >= start && selected <= end;
-  });
+  const filteredEvents = eventData.filter((event) =>
+    isDateWithinRange(selectedDate, event.startDate, event.endDate),
+  );
 
   const handleCardClick = (id: number) => {
     router.push(`/events/${id}`);
