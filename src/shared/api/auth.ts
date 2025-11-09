@@ -1,5 +1,5 @@
 import { apiAuth } from '@/shared/api/instance';
-import type { ApiResponse, TokenData } from '@/shared/api/types';
+import type { ApiResponse, TokenData } from '@/shared/types/authtypes';
 import { setTokens } from '@/shared/utils/token';
 
 export const exchangeTempToken = async (tempToken: string) => {

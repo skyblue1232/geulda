@@ -6,7 +6,7 @@ import {
   setTokens,
   clearTokens,
 } from '@/shared/utils/token';
-import type { ApiResponse, TokenData } from '@/shared/api/types';
+import type { ApiResponse, TokenData } from '@/shared/types/authtypes';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -50,7 +50,9 @@ const processQueue = (error: unknown, token: string | null = null) => {
 apiWithToken.interceptors.response.use(
   (response) => response,
   async (error: AxiosError<ApiResponse<unknown>>) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
