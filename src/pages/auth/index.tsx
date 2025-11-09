@@ -36,6 +36,8 @@ export default function LoginPage() {
       {/* 그라데이션 영역 */}
       <div className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'>
         <svg
+          aria-hidden="true" 
+          focusable="false" 
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 402 194'
           className='absolute inset-0 w-full h-full'
