@@ -51,12 +51,26 @@ export default function LoginButton({
     },
   };
 
-  const { src, alt, width, height, label } = iconData[platform ?? 'google'];
+  if (!platform || !(platform in iconData)) {
+    throw new Error(`Invalid platform: ${platform}`);
+  }
+  const { src, alt, width, height, label } = iconData[platform as keyof typeof iconData];
+
+   const handleClick = () => {
+    if (onClick) return onClick();
+    const base = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const url =
+      platform === 'kakao'
+        ? `${base}/oauth2/authorization/kakao`
+        : `${base}/oauth2/authorization/google`;
+
+    window.location.href = url;
+  };
 
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={handleClick}
       aria-label={label}
       className={cn(loginButtonVariants({ platform }), className)}
     >

@@ -1,17 +1,21 @@
 'use client';
-import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/shared/lib';
 import LoginButton from '@/pages/auth/components/LoginButton';
 import RecentLoginBubble from '@/pages/auth/components/RecentLoginBubble';
+import { useRecentLogin } from '@/pages/auth/hooks/useRecentLogin';
 
 export default function LoginPage() {
-  const [recentPlatform, setRecentPlatform] = useState<string | null>(null);
+  const { recentPlatform, saveRecentPlatform } = useRecentLogin();
 
   const handleLoginClick = (platform: string) => {
-    alert(`${platform} 로그인 준비중`);
-    console.log(`${platform} 로그인 버튼 클릭`);
-    setRecentPlatform(platform);
+    saveRecentPlatform(platform);
+    const base = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const url =
+      platform === '카카오'
+        ? `${base}/oauth2/authorization/kakao`
+        : `${base}/oauth2/authorization/google`;
+    window.location.href = url;
   };
 
   return (
