@@ -50,14 +50,23 @@ export default function ChatPage() {
       </div>
 
       {/* 메인 콘텐츠 */}
-      <main className={cn(mainStyle())}>
+      <main 
+        role="log"
+        aria-label="채팅 내용"
+        aria-live="polite"
+        className={cn(mainStyle())}
+      >
         {/* 로고 + 기본 멘트 */}
         <div className={cn(introStyle())}>
           {/* 로고 자리 (임시) */}
-          <div className='w-[6rem] h-[6rem] rounded-full bg-gray-200 flex-shrink-0' />
+          <div 
+            className='w-[6rem] h-[6rem] rounded-full bg-gray-200 flex-shrink-0'
+            aria-hidden="true"
+          />
           <Chatting
             message='안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요.'
             variant='received'
+            aria-label="글다의 메시지: 안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요."
           />
           <Chatting
             message='원하시는 정보를 물어봐주세요!'
@@ -73,7 +82,7 @@ export default function ChatPage() {
           ))}
 
         {/* 스크롤 */}
-        <div ref={bottomRef} />
+        <div ref={bottomRef} aria-hidden="true" />
       </main>
 
       {/* 입력창 */}

@@ -11,6 +11,7 @@ interface DatePickerProps {
   onChange?: (date: Date) => void;
   defaultValue?: Date;
   className?: string;
+  ariaLabel?: string; 
 }
 const toFirstOfMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth(), 1);
 export function DatePicker({
@@ -18,6 +19,7 @@ export function DatePicker({
   onChange,
   defaultValue,
   className,
+  ariaLabel,
   ...calendarProps
 }: DatePickerProps) {
   const [open, setOpen] = useState(false);
@@ -45,7 +47,11 @@ export function DatePicker({
 
   const handleSelect = (d?: Date) => {
     if (!d) return;
-    onChange ? onChange(d) : setInnerDate(d);
+    if (onChange) {
+      onChange(d);
+    } else {
+      setInnerDate(d);
+    }
     setDisplayMonth(toFirstOfMonth(d));
     setOpen(false);
   };
@@ -61,7 +67,9 @@ export function DatePicker({
     <div className={cn('flex flex-col gap-3', className)}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className='w-[16rem] h-[4rem] justify-between rounded-[500px] text-label-lg text-pink-300 bg-pink-50 border border-pink-100'>
+          <Button 
+            aria-label={ariaLabel}
+            className='w-[16rem] h-[4rem] justify-between rounded-[500px] text-label-lg text-pink-300 bg-pink-50 border border-pink-100'>
             {selected ? selected.toLocaleDateString() : 'Select date'}
             <Icon name='CalendarBlank' color='pink-400' size={14} />
           </Button>

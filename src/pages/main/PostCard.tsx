@@ -7,6 +7,8 @@ const PostCard = () => {
 
   return (
     <div
+      role="main"
+      aria-label="엽서 획득 페이지"
       className='
         relative w-full h-[100vh] px-[2.4rem]
         bg-gradient-to-b from-pink-100 to-white
@@ -30,14 +32,16 @@ const PostCard = () => {
         <button
           className='flex items-center justify-center w-[4.8rem] h-[4.8rem]'
           onClick={handleSave}
+          aria-label="엽서 이미지 저장"
         >
-          <Icon name='Save' color='gray-400' size={28} />
+          <Icon name='Save' color='gray-400' size={28} aria-hidden="true" />
         </button>
         <button
           className='flex items-center justify-center w-[4.8rem] h-[4.8rem]'
           onClick={handleShare}
+          aria-label="엽서 공유하기"
         >
-          <Icon name='Export' color='gray-400' size={28} />
+          <Icon name='Export' color='gray-400' size={28} aria-hidden="true" />
         </button>
       </div>
 

@@ -11,11 +11,12 @@ const Stamp = ({ index, acquired, className }: StampProps) => {
   if (acquired) {
     return (
       <div
+        role="img"
+        aria-label={`${index + 1}번째 스탬프 ${acquired ? '획득' : '미획득'}`}
         className={cn(
           'flex items-center justify-center w-[2.8rem] h-[2.8rem]',
           className,
         )}
-        aria-label={`${index + 1}번째 스탬프 획득`}
       >
         <Icon name='Stamp' size={28} color='pink-400' aria-hidden />
       </div>
@@ -28,7 +29,7 @@ const Stamp = ({ index, acquired, className }: StampProps) => {
         'rounded-full bg-pink-100 w-[2.8rem] h-[2.8rem]',
         className,
       )}
-      aria-label={`${index + 1}번째 스탬프 미획득`}
+      aria-label={`${index + 1}번째 스탬프 획득`}
     />
   );
 };

@@ -41,6 +41,7 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
           onKeyDown={handleKeyDown}
           type='text'
           placeholder='무엇이든 물어보세요'
+          aria-label="채팅 메시지 입력"
           className='w-full bg-transparent outline-none text-label-lg placeholder:text-gray-300 text-gray-900'
         />
       </div>
@@ -48,6 +49,7 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
       <button
         type='button'
         onClick={handleSubmit}
+        aria-label="메시지 전송"
         className={cn(
           'w-[4rem] h-[4rem] flex justify-center items-center rounded-[2rem] bg-mint-500 flex-shrink-0',
         )}

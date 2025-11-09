@@ -17,7 +17,11 @@ const Board = () => {
         onClick={() => router.back()}
       />
 
-      <main className='relative pt-[14.3rem] gap-[1.2rem] flex flex-col '>
+      <main 
+        className='relative pt-[14.3rem] gap-[1.2rem] flex flex-col '
+        role="main"
+        aria-label={`${label ? label : '노드'} 상세 페이지`}
+      >
         <section className='relative w-full'>
           <Image
             src='/assets/board.svg'
@@ -31,6 +35,7 @@ const Board = () => {
           />
 
           <button
+            aria-label={isStamp ? '스탬프 획득 완료' : '스탬프 찍기'}
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
             onClick={
               !isStamp
@@ -50,6 +55,7 @@ const Board = () => {
               name={isStamp ? 'Stamp' : 'PressStamp'}
               color={isStamp ? 'pink-400' : 'gray-50'}
               size={isStamp ? 100 : 160}
+              aria-hidden="true"
             />
           </button>
         </section>
