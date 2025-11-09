@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 const headerStyle = cva(
-  'w-full h-[11.8rem] px-[1.6rem] pb-[1.8rem] pt-[7.6rem] fixed top-0 left-0 right-0 z-[100]',
+  'w-full h-[10rem] px-[1.6rem] pb-[1.4rem] fixed top-0 left-0 right-0 z-[100]  flex items-end justify-between ',
   {
     variants: {
       color: {
@@ -27,26 +27,17 @@ const headerStyle = cva(
 const Header = ({ title, onClick, color, className }: HeaderProps) => {
   return (
     <header className={cn(headerStyle({ color }), className)}>
-      <div className='mx-auto h-[2.4rem] grid grid-cols-[auto_1fr_auto] items-center text-mint-900'>
+      <div className='relative w-full flex items-center justify-center text-mint-900'>
         <button
           type='button'
           aria-label='뒤로가기'
           onClick={onClick}
-          className='grid place-items-center w-[2.4rem] h-[2.4rem]'
+          className='absolute left-[0rem] flex items-center justify-center w-[2.4rem] h-[2.4rem]'
         >
           <Icon name='Caret' size={24} color='mint-900' />
         </button>
 
-        <h1
-          className={cn(
-            'justify-self-center',
-            'text-title-md font-[600] leading-[2.4rem] tracking-[0.015rem]',
-          )}
-        >
-          {title}
-        </h1>
-
-        <div aria-hidden className='w-[2.4rem] h-[2.4rem]' />
+        <h1 className='text-title-md '>{title}</h1>
       </div>
     </header>
   );
