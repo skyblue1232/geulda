@@ -1,4 +1,5 @@
 import Lottie from 'lottie-react';
+
 import loading_revised from '../../../public/lottie/loading_revised.json';
 
 export default function Loading() {
