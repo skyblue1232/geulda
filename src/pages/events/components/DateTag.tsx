@@ -36,8 +36,7 @@ export default function DateTag({
   return (
     <div 
       className={cn(dateTagStyle(), className)}
-      role="text"
-      aria-label={`${startDate}부터 ${endDate}까지`}
+      aria-label={`${formatDate(startDate)}부터 ${formatDate(endDate)}까지`}
     >
       {formatDate(startDate)} ~ {formatDate(endDate)}
     </div>

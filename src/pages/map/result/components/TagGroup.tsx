@@ -28,7 +28,7 @@ export default function TagGroup({ viewMode, onToggleView }: TagGroupProps) {
         icon={viewMode === 'list' ? 'MapPin_' : 'ListButton'}
         variant="toggle"
         onClick={onToggleView}
-        aria-pressed={viewMode === 'map'}
+        aria-pressed={viewMode === 'list'}
         aria-label={
           viewMode === 'list'
             ? '현재 리스트 보기입니다. 지도로 전환하려면 클릭하세요.'

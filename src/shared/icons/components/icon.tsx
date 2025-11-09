@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import type { IconName } from '../iconNames';
+import { on } from 'events';
 
 type IconRotate = 90 | 180 | 270;
 type IconColor =
@@ -68,10 +69,20 @@ export const Icon = ({
   hasRotateAnimation = false,
   ariaHidden = true,
   style,
+  onClick,
+  onKeyDown,
   ...rest
 }: IconProps) => {
   const w = width ?? size ?? 20;
   const h = height ?? size ?? 20;
+
+  const handleKeyDown = (e: React.KeyboardEvent<SVGSVGElement>) => {
+    if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick?.(e as any);
+    }
+    onKeyDown?.(e);
+  };
 
   const rotateClass =
     rotate === 90
@@ -109,6 +120,8 @@ export const Icon = ({
       tabIndex={isInteractive ? 0 : undefined}
       aria-pressed={isInteractive ? pressed : undefined}
       aria-hidden={ariaHidden}
+      onClick={isInteractive ? onClick : undefined}
+      onKeyDown={isInteractive ? handleKeyDown : undefined}
       {...rest}
     >
       <use href={`#icon-${name}`} />

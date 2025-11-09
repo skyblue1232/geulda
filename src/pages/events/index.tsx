@@ -49,7 +49,7 @@ export default function EventPage() {
           <label htmlFor="event-date" className="sr-only">
             행사 날짜 선택
           </label>
-          <DatePicker value={date} onChange={setDate} />
+          <DatePicker ariaLabel="행사 날짜 선택" value={date} onChange={setDate} />
         </div>
 
         {/* 행사카드 & 빈화면 */}

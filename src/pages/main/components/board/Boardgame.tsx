@@ -17,7 +17,7 @@ const Boardgame = () => {
   return (
     <div
       className="relative w-full h-full bg-[#46d1cd] overflow-hidden"
-      role="application" 
+      role="region" 
       aria-label="보드게임 화면"
     >
       <Image
@@ -37,8 +37,8 @@ const Boardgame = () => {
           grid grid-cols-4 grid-rows-8 gap-0
           px-[2rem] pb-[1.7rem]
         "
-        role="grid"
-        aria-label="탐험 가능한 명소 목록"
+        role="group"
+        aria-label="명소 탐험 보드"
       >
         {boardData.map((row, r) =>
           row.map((cell, c) => {

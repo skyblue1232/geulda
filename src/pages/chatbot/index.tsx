@@ -71,7 +71,6 @@ export default function ChatPage() {
           <Chatting
             message='원하시는 정보를 물어봐주세요!'
             variant='received'
-            aria-label="글다의 메시지: 원하시는 정보를 물어봐주세요!"
           />
         </div>
 
@@ -79,7 +78,7 @@ export default function ChatPage() {
         {messages
           .filter((msg) => msg.id > 2)
           .map((msg) => (
-            <Chatting key={msg.id} message={msg.text} variant={msg.variant} aria-label={msg.variant === 'sent' ? '내 메시지' : '글다의 메시지'}/>
+            <Chatting key={msg.id} message={msg.text} variant={msg.variant} />
           ))}
 
         {/* 스크롤 */}

@@ -45,7 +45,6 @@ export default function CourseSelectSection({
                 <CommonButton
                   label={label}
                   aria-pressed={selected === id}
-                  aria-label={`${label} 선택`}
                   variant={selected === id ? 'active' : 'default'}
                   onClick={() => onSelect(selected === id ? null : id)}
                 />

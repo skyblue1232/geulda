@@ -29,7 +29,7 @@ const Stamp = ({ index, acquired, className }: StampProps) => {
         'rounded-full bg-pink-100 w-[2.8rem] h-[2.8rem]',
         className,
       )}
-      aria-label={`${index + 1}번째 스탬프 미획득`}
+      aria-label={`${index + 1}번째 스탬프 획득`}
     />
   );
 };

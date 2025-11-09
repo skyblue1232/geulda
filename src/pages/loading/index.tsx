@@ -27,10 +27,7 @@ export default function Loading() {
         </svg>
       </div>
 
-      <div 
-        className='flex items-center justify-center'
-        aria-label="콘텐츠를 불러오는 중입니다"
-      >
+      <div className='flex items-center justify-center'>
         <Lottie
           animationData={loading_revised}
           loop
