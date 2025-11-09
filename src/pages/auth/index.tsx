@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { cn } from '@/shared/lib';
 import LoginButton from '@/pages/auth/components/LoginButton';
 import RecentLoginBubble from '@/pages/auth/components/RecentLoginBubble';
-import { useRecentLogin } from '@/pages/auth/hooks/useRecentLogin';
+import { useRecentLogin } from '@/shared/hooks/useRecentLogin';
 
 export default function LoginPage() {
   const { recentPlatform, saveRecentPlatform } = useRecentLogin();
