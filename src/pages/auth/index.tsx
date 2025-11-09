@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { Icon } from '@/shared/icons';
 import { useRouter } from 'next/router';
 import { cn } from '@/shared/lib';
 import LoginButton from '@/shared/components/auth/LoginButton';
@@ -69,14 +70,7 @@ export default function LoginPage() {
       >
         {/* 로고 영역 */}
         <div className='flex flex-col items-center'>
-          <Image
-            src='/assets/Logo.svg'
-            alt='글다 로고'
-            width={112}
-            height={140}
-            className='mb-[2.8rem]'
-            priority
-          />
+          <Icon name='Logo' size={164}/>
           <p className='text-label-serif text-mint-900 mt-[5rem] mb-[2.8rem]'>
             만화 속 부천 여행
             <br />
