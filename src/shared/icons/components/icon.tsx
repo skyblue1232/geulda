@@ -41,6 +41,8 @@ type IconColor =
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
+  isInteractive?: boolean;
+  pressed?: boolean;
   size?: number | string;
   width?: number | string;
   height?: number | string;
@@ -54,6 +56,8 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 
 export const Icon = ({
   name,
+  isInteractive = false,
+  pressed,
   size,
   width,
   height,
@@ -101,6 +105,9 @@ export const Icon = ({
       viewBox="0 0 24 24"
       className={combined}
       style={iconStyle}
+      role={isInteractive ? 'button' : undefined}
+      tabIndex={isInteractive ? 0 : undefined}
+      aria-pressed={isInteractive ? pressed : undefined}
       aria-hidden={ariaHidden}
       {...rest}
     >

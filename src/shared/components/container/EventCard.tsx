@@ -92,6 +92,7 @@ const EventCard = ({
             >
               {name}
             </span>
+
             <Icon
               name='HeartStraight'
               size={20}
@@ -137,8 +138,11 @@ const EventCard = ({
                     ? 'mint-400'
                     : 'gray-300'
                 }
-                fillColor={liked ? 'red-300' : undefined}
+                fillColor={liked ? 'red-300' : undefined}       
                 onClick={handleLikeClick}
+                isInteractive
+                pressed={liked}
+                aria-label={liked ? '좋아요 취소' : '좋아요'}
                 className='cursor-pointer'
               />
             </div>

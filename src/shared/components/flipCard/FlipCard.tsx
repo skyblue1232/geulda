@@ -19,9 +19,18 @@ const FlipCard = ({
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label={isFlipped ? '엽서 뒷면 보기' : '엽서 앞면 보기'}
+      aria-pressed={isFlipped}
       className='relative flex justify-center items-center cursor-pointer'
       style={{ width, height }}
       onClick={() => setIsFlipped((prev) => !prev)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          setIsFlipped((prev) => !prev);
+        }
+      }}
     >
       <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <div className='flip-card-inner'>

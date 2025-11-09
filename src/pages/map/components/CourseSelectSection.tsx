@@ -41,14 +41,15 @@ export default function CourseSelectSection({
         >
           {Array.isArray(options) &&
             options.map(({ id, label }) => (
-              <CommonButton
-                key={id}
-                label={label}
-                aria-pressed={selected === id}
-                aria-label={`${label} 선택`}
-                variant={selected === id ? 'active' : 'default'}
-                onClick={() => onSelect(selected === id ? null : id)}
-              />
+              <div role="listitem" key={id}>
+                <CommonButton
+                  label={label}
+                  aria-pressed={selected === id}
+                  aria-label={`${label} 선택`}
+                  variant={selected === id ? 'active' : 'default'}
+                  onClick={() => onSelect(selected === id ? null : id)}
+                />
+              </div>
           ))}
         </div>
 

@@ -15,6 +15,8 @@ const HiddenReward = () => {
         overflow-hidden
         cursor-pointer
       '
+      role="main"
+      aria-label="히든 리워드 획득 페이지"
       onClick={() =>
         router.push({
           pathname: '/main/PostCard',

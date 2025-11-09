@@ -23,6 +23,8 @@ const EventSavePage = () => {
       />
 
       <main
+        role="main"
+        aria-label="저장한 행사 상세 페이지"
         className={cn(
           'flex flex-col items-center justify-start',
           'px-[2.4rem] pt-[calc(10rem+1.4rem)]',

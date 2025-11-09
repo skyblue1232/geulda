@@ -24,6 +24,8 @@ const Progress = ({ className, value, ...props }: ProgressProps) => {
       )}
       value={progressPercent}
       max={100}
+      aria-label="진행률"
+      aria-valuetext={`${Math.round(progressPercent)}% 완료됨`}
       {...props}
     >
       <ProgressPrimitive.Indicator
