@@ -1,4 +1,3 @@
-// SVGO 해결후 Image → Icon으로 교체 예정
 'use client';
 import Image from 'next/image';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -37,14 +36,14 @@ export default function LoginButton({
 }: LoginButtonProps) {
   const iconData = {
     google: {
-      src: '/svgs/GoogleIcon.svg',
+      src: '/assets/GoogleIcon.svg',
       alt: 'Google Logo',
       width: 36,
       height: 36,
       label: '구글 로그인',
     },
     kakao: {
-      src: '/svgs/KakaoIcon.svg',
+      src: '/assets/KakaoIcon.svg',
       alt: 'Kakao Logo',
       width: 28,
       height: 28,
