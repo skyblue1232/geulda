@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import type { IconName } from '../iconNames';
-import { on } from 'events';
 
 type IconRotate = 90 | 180 | 270;
 type IconColor =
@@ -79,7 +78,7 @@ export const Icon = ({
   const handleKeyDown = (e: React.KeyboardEvent<SVGSVGElement>) => {
     if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
-      onClick?.(e as any);
+      onClick?.(e as unknown as React.MouseEvent<SVGSVGElement, MouseEvent>);
     }
     onKeyDown?.(e);
   };

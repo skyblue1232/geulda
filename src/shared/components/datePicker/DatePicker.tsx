@@ -47,7 +47,11 @@ export function DatePicker({
 
   const handleSelect = (d?: Date) => {
     if (!d) return;
-    onChange ? onChange(d) : setInnerDate(d);
+    if (onChange) {
+      onChange(d);
+    } else {
+      setInnerDate(d);
+    }
     setDisplayMonth(toFirstOfMonth(d));
     setOpen(false);
   };
