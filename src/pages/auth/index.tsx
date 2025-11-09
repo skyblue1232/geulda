@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { cn } from '@/shared/lib';
 import LoginButton from '@/pages/auth/components/LoginButton';
 import RecentLoginBubble from '@/pages/auth/components/RecentLoginBubble';
@@ -7,7 +8,9 @@ import { useRecentLogin } from '@/pages/auth/hooks/useRecentLogin';
 
 export default function LoginPage() {
   const { recentPlatform, saveRecentPlatform } = useRecentLogin();
+  const router = useRouter();
 
+  //로그인
   const handleLoginClick = (platform: string) => {
     saveRecentPlatform(platform);
     const base = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -16,6 +19,15 @@ export default function LoginPage() {
         ? `${base}/oauth2/authorization/kakao`
         : `${base}/oauth2/authorization/google`;
     window.location.href = url;
+  };
+
+  //비회원 로그인
+  const handleGuestClick = () => {
+    if (document.referrer && document.referrer !== window.location.href) {
+      router.back();
+    } else {
+      router.push('/main');
+    }
   };
 
   return (
@@ -109,7 +121,10 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'>
+          <p
+            className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'
+            onClick={handleGuestClick}
+          >
             비회원 로그인
           </p>
         </div>
