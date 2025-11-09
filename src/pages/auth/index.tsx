@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { cn } from '@/shared/lib';
-import LoginButton from '@/pages/auth/components/LoginButton';
-import RecentLoginBubble from '@/pages/auth/components/RecentLoginBubble';
+import LoginButton from '@/shared/components/auth/LoginButton';
+import RecentLoginBubble from '@/shared/components/auth/RecentLoginBubble';
 import { useRecentLogin } from '@/shared/hooks/useRecentLogin';
 
 export default function LoginPage() {
