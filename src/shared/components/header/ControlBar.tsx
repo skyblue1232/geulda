@@ -1,15 +1,18 @@
+import { useRouter } from 'next/router';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva } from 'class-variance-authority';
+import { useUserStatus } from '@/shared/hooks/header/useUserStatus';
 
 interface ControlBarProps {
-  isLoggedIn: boolean;
-  onLogin: () => void;
-  userName: string;
   className?: string;
 }
 
-const rightStyle = cva('flex items-center gap-[0.6rem] transition w-[7.8rem]', {
+const controlBarVariants = cva(
+  'flex justify-between items-center h-full px-[1.6rem]',
+);
+
+const rightStyle = cva('flex items-center gap-[0.6rem] transition', {
   variants: {
     state: {
       loggedIn: 'text-mint-600',
@@ -19,26 +22,21 @@ const rightStyle = cva('flex items-center gap-[0.6rem] transition w-[7.8rem]', {
   defaultVariants: { state: 'guest' },
 });
 
-const ControlBar = ({
-  onLogin,
-  isLoggedIn,
-  userName = '글다',
-  className,
-}: ControlBarProps) => {
+const ControlBar = ({ className }: ControlBarProps) => {
+  const router = useRouter();
+  const { isLoggedIn, userName } = useUserStatus();
+
   const rightState = isLoggedIn ? 'loggedIn' : ('guest' as const);
   const iconColor = isLoggedIn ? 'mint-600' : ('gray-400' as const);
+  const logoName = isLoggedIn ? 'LogoMint' : 'LogoPink';
+
+  const handleLoginRedirect = () => router.push('/auth');
 
   return (
     <header className={cn(' w-full h-[5.4rem] bg-white', className)}>
-      <div className='h-full grid grid-cols-[auto_1fr_auto] items-center gap-[1.2rem]'>
-        <div
-          className='w-[7.8rem] h-[5.4rem] rounded-[0.6rem] bg-gray-200'
-          aria-hidden
-        />
+      <div className={controlBarVariants()}>
+        <Icon name={logoName} size={54} />
 
-        <h1 className='justify-self-center text-headline-sm-serif font-[400] leading-[2.4rem] tracking-[0.015rem] text-gray-900'>
-          글다
-        </h1>
         {isLoggedIn ? (
           <div className={cn(rightStyle({ state: rightState }), 'min-w-0')}>
             <Icon name='User' size={24} color={iconColor} />
@@ -54,7 +52,7 @@ const ControlBar = ({
             type='button'
             onClick={(e) => {
               e.stopPropagation();
-              onLogin?.();
+              handleLoginRedirect();
             }}
             className={rightStyle({ state: rightState })}
             aria-label='Log In'
