@@ -24,7 +24,7 @@ export default function ProfilePhoto({
   return (
     <div className={cn(baseStyle, className)}>
       {src ? (
-        <img src={src} className='w-full h-full object-cover' />
+        <img src={src} alt="사용자 프로필 사진" className='w-full h-full object-cover' />
       ) : (
         <div className='p-[6.1rem] flex items-center justify-center'>
           <Icon name='User' size={24} color='gray-500' />

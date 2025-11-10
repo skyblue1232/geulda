@@ -10,7 +10,6 @@ export default function VideoPlayer({ src, label, onEnd }: VideoPlayerProps) {
   return (
     <div
       className="relative w-full h-full overflow-hidden"
-      role="region"
       aria-label={label ? `${label} 영상 플레이어` : '비디오 대기 화면'}
     >
       {src ? (
@@ -24,7 +23,6 @@ export default function VideoPlayer({ src, label, onEnd }: VideoPlayerProps) {
           onEnded={onEnd}
           className="w-full h-full rounded-[2rem] object-cover"
           aria-label={`${label} 영상`}
-          aria-describedby="video-description"
         />
       ) : (
         <>

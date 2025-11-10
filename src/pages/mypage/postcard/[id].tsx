@@ -22,6 +22,8 @@ const PostCardSavePage = () => {
       />
 
       <main
+        role="main"
+        aria-label="저장한 엽서 상세 페이지"
         className={cn(
           'flex flex-col items-center justify-start',
           'px-[2.4rem] pt-[25.8rem]',

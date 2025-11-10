@@ -33,12 +33,13 @@ const EventDetailPage = () => {
         )}
       >
         {/* 행사 기간 */}
-        <div className={cn('flex justify-center w-[18.4rem] mt-[1.3rem]')}>
+        <div aria-label="행사 기간" className={cn('flex justify-center w-[18.4rem] mt-[1.3rem]')}>
           <DateTag startDate={startDate} endDate={endDate} />
         </div>
 
         {/* 대표 이미지 */}
         <section
+          aria-label="행사 대표 이미지"
           className={cn(
             'relative w-full flex justify-center max-w-[35.4rem]',
             'mt-[1rem]'
@@ -55,12 +56,15 @@ const EventDetailPage = () => {
           ) : (
             <div
               className={cn('w-full h-[43.6rem] bg-gray-200 rounded-[2rem]')}
+              role="img"
+              aria-label={`${name} 이미지가 제공되지 않습니다.`}
             />
           )}
         </section>
 
         {/* 행사 카드 */}
         <div
+          aria-label="행사 정보"
           className={cn(
             'flex flex-col items-center w-full gap-[0.8rem]',
             'mt-[0.8rem]'
@@ -76,6 +80,7 @@ const EventDetailPage = () => {
 
           {/* 관련 행사 */}
           <div
+            aria-label="관련 행사 목록"
             className={cn(
               'grid grid-cols-2 gap-[1.2rem] justify-items-center w-full max-w-[35.4rem]'
             )}

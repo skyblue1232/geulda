@@ -13,7 +13,6 @@ export default function ResultMap() {
     <section
       className="relative w-full h-[43.6rem] rounded-[2rem] overflow-hidden bg-gray-200"
       role="region"
-      aria-labelledby="map-title"
     >
       <div
         ref={mapRef}

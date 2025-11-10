@@ -45,12 +45,17 @@ export default function EventPage() {
       <main className='w-full pt-[6.3rem] flex flex-col items-center'>
         {/* 날짜 선택 */}
         <div className='w-full mt-[3.7rem] flex justify-start'>
-          <DatePicker value={date} onChange={setDate} />
+          {/* 스크린리더가 “날짜 선택”으로 읽히도록 추가 */}
+          <label htmlFor="event-date" className="sr-only">
+            행사 날짜 선택
+          </label>
+          <DatePicker ariaLabel="행사 날짜 선택" value={date} onChange={setDate} />
         </div>
 
         {/* 행사카드 & 빈화면 */}
         {filteredEvents.length > 0 ? (
           <section
+            aria-label="이벤트 목록"
             className={cn(
               'grid w-full mt-[1.4rem]',
               'grid-cols-2 gap-x-[1.4rem] gap-y-[1.4rem]',
@@ -74,7 +79,11 @@ export default function EventPage() {
             ))}
           </section>
         ) : (
-          <div className='flex flex-col items-center justify-center text-center mt-[15rem]'>
+          <div 
+            className='flex flex-col items-center justify-center text-center mt-[15rem]'
+            role='status'
+            aria-live='polite'
+          >
             <Icon name='Stamp' size={120} color='gray-200' />
             <h2 className='text-headline-lg-serif text-gray-700 mt-[5rem]'>
               Ooops!
