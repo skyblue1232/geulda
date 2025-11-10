@@ -41,10 +41,13 @@ type IconColor =
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
+  isInteractive?: boolean;
+  pressed?: boolean;
   size?: number | string;
   width?: number | string;
   height?: number | string;
   color?: IconColor;
+  fillColor?: IconColor;
   className?: string;
   rotate?: IconRotate;
   hasRotateAnimation?: boolean;
@@ -53,19 +56,32 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 
 export const Icon = ({
   name,
+  isInteractive = false,
+  pressed,
   size,
   width,
   height,
   color,
+  fillColor,
   className,
   rotate,
   hasRotateAnimation = false,
   ariaHidden = true,
   style,
+  onClick,
+  onKeyDown,
   ...rest
 }: IconProps) => {
   const w = width ?? size ?? 20;
   const h = height ?? size ?? 20;
+
+  const handleKeyDown = (e: React.KeyboardEvent<SVGSVGElement>) => {
+    if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick?.(e as unknown as React.MouseEvent<SVGSVGElement, MouseEvent>);
+    }
+    onKeyDown?.(e);
+  };
 
   const rotateClass =
     rotate === 90
@@ -84,15 +100,27 @@ export const Icon = ({
     className,
   );
 
+  const iconStyle = {
+    ...style,
+    ...(color && { color: `var(--color-${color})` }),
+    ...(fillColor &&
+      ({ '--fill-color': `var(--color-${fillColor})` } as React.CSSProperties)),
+  };
   return (
     <svg
-      fill='currentColor'
-      stroke='currentColor'
+      fill={fillColor ? 'var(--fill-color)' : 'none'}
+      stroke={color ? 'currentColor' : 'none'}
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
+      viewBox="0 0 24 24"
       className={combined}
-      style={{ ...(color && { color: `var(--color-${color})` }), ...style }}
+      style={iconStyle}
+      role={isInteractive ? 'button' : undefined}
+      tabIndex={isInteractive ? 0 : undefined}
+      aria-pressed={isInteractive ? pressed : undefined}
       aria-hidden={ariaHidden}
+      onClick={isInteractive ? onClick : undefined}
+      onKeyDown={isInteractive ? handleKeyDown : undefined}
       {...rest}
     >
       <use href={`#icon-${name}`} />

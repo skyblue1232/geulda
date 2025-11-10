@@ -1,6 +1,4 @@
-import { Header } from '@/shared/components';
-import AddressCopy from '@/shared/components/button/AddressCopy';
-import LocationCard from '@/shared/components/container/LocationCard';
+import { AddressCopy, Header, LocationCard } from '@/shared/components';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
@@ -10,7 +8,7 @@ import { useRouter } from 'next/router';
 const Board = () => {
   const router = useRouter();
   const { label } = router.query;
-  const isStamp = true;
+  const isStamp = false;
 
   return (
     <div className='relative w-full h-[100vh] overflow-auto px-[2.4rem]'>
@@ -19,7 +17,11 @@ const Board = () => {
         onClick={() => router.back()}
       />
 
-      <main className='relative pt-[14.3rem] gap-[1.2rem] flex flex-col '>
+      <main 
+        className='relative pt-[14.3rem] gap-[1.2rem] flex flex-col '
+        role="main"
+        aria-label={`${label ? label : '노드'} 상세 페이지`}
+      >
         <section className='relative w-full'>
           <Image
             src='/assets/board.svg'
@@ -27,25 +29,33 @@ const Board = () => {
             width={354}
             height={436}
             className={cn(
-              'w-full h-auto object-cover block rounded-[1.6rem] transition-all duration-300',
+              'w-full h-auto object-cover block rounded-[16px] transition-all duration-300',
               !isStamp && 'blur-xs brightness-90',
             )}
           />
 
           <button
+            aria-label={isStamp ? '스탬프 획득 완료' : '스탬프 찍기'}
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
-            onClick={() =>
-              getLocation(
-                (pos) => console.log('📍 현재 위치:', pos.coords),
-                (err) => console.error('⚠️ 위치 에러:', err.message),
-                //TODO : 리워드 페이지로 이동 , 위치 에러일경우 모달창
-              )
+            onClick={
+              !isStamp
+                ? () => {
+                    getLocation(
+                      (pos) => console.log('📍 현재 위치:', pos.coords),
+                      (err) => console.error('⚠️ 위치 에러:', err.message),
+                    );
+                    router.push({
+                      pathname: '/main/HiddenReward',
+                    });
+                  }
+                : undefined
             }
           >
             <Icon
               name={isStamp ? 'Stamp' : 'PressStamp'}
               color={isStamp ? 'pink-400' : 'gray-50'}
               size={isStamp ? 100 : 160}
+              aria-hidden="true"
             />
           </button>
         </section>
@@ -61,7 +71,6 @@ const Board = () => {
         <AddressCopy
           variant='mint'
           value='인천광역시 계양구 오조산로 31길(복사되어야할 주소)'
-          label={label ? String(label) : '노드'}
         />
       </main>
     </div>

@@ -1,9 +1,8 @@
 import { cn } from '@/shared/lib';
-import StampBoard from './components/stampBoard/StampBoard';
-import { ControlBar } from '@/shared/components';
+import { BottomNav, ControlBar } from '@/shared/components';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { BottomNav } from '@/shared/components/tab/BottomNav';
+import StampBoard from '@/pages/main/components/stampBoard/StampBoard';
 
 export default function MainPage() {
   const router = useRouter();
@@ -12,7 +11,7 @@ export default function MainPage() {
       className={cn(
         'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] pb-[12rem]',
       )}
-    >
+    > 
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
@@ -24,7 +23,8 @@ export default function MainPage() {
         <section>
           <Image
             src='/assets/bannerMain.svg'
-            alt='...'
+            alt=""
+            aria-hidden="true"
             width={354}
             height={79}
             className='w-full h-auto object-cover block'
@@ -32,6 +32,9 @@ export default function MainPage() {
         </section>
 
         <section
+          role="button"
+          tabIndex={0}
+          aria-label="보드판으로 이동"
           onClick={() => {
             router.push('/main/Board');
           }}
