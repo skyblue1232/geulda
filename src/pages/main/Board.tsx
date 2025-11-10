@@ -1,5 +1,5 @@
 import { Header } from '@/shared/components';
-import Boardgame from '@/pages/main/components/board/Boardgame';
+import Boardgame from '@/shared/components/main/components/board/Boardgame';
 import { useRouter } from 'next/router';
 
 const Board = () => {
