@@ -1,4 +1,5 @@
 const boardData = [
+  //라벨-> id 로 변경 후 서버 데이터랑 매칭 필요
   [{ active: false }, { active: false }, { active: false }, { active: false }],
   [
     { active: true, label: '김수환관' },
