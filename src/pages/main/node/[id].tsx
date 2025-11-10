@@ -5,9 +5,10 @@ import { getLocation } from '@/shared/utils/handleGetLocation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const Board = () => {
+const Node = () => {
   const router = useRouter();
-  const { label } = router.query;
+  const { label, address, description } = router.query;
+
   const isStamp = false;
 
   return (
@@ -37,19 +38,13 @@ const Board = () => {
           <button
             aria-label={isStamp ? '스탬프 획득 완료' : '스탬프 찍기'}
             className={cn('absolute bottom-0 right-0', isStamp && 'p-[2.5rem]')}
-            onClick={
-              !isStamp
-                ? () => {
-                    getLocation(
-                      (pos) => console.log('📍 현재 위치:', pos.coords),
-                      (err) => console.error('⚠️ 위치 에러:', err.message),
-                    );
-                    router.push({
-                      pathname: '/main/HiddenReward',
-                    });
-                  }
-                : undefined
-            }
+            onClick={() => {
+              getLocation(
+                (pos) => console.log('📍 현재 위치:', pos.coords),
+                (err) => console.error('⚠️ 위치 에러:', err.message),
+              );
+              router.push('/main/HiddenReward');
+            }}
           >
             <Icon
               name={isStamp ? 'Stamp' : 'PressStamp'}
@@ -62,19 +57,21 @@ const Board = () => {
 
         <LocationCard
           name={label ? String(label) : '노드'}
-          address='주소'
-          description='장소에 대한 설명'
+          address={address ? String(address) : '주소 정보 없음'}
+          description={
+            description ? String(description) : '장소 설명이 없습니다.'
+          }
           variant='mint'
           size='large'
         />
 
         <AddressCopy
           variant='mint'
-          value='인천광역시 계양구 오조산로 31길(복사되어야할 주소)'
+          value={address ? String(address) : '인천광역시 계양구 오조산로 31길'}
         />
       </main>
     </div>
   );
 };
 
-export default Board;
+export default Node;

@@ -2,7 +2,7 @@ import { cn } from '@/shared/lib';
 import { BottomNav, ControlBar } from '@/shared/components';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import StampBoard from '@/pages/main/components/stampBoard/StampBoard';
+import StampBoard from '@/shared/components/main/components/stampBoard/StampBoard';
 
 export default function MainPage() {
   const router = useRouter();
