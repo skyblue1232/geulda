@@ -26,6 +26,17 @@ const ControlBar = ({ className }: ControlBarProps) => {
   const router = useRouter();
   const { isLoggedIn, userName } = useUserStatus();
 
+  if (isLoggedIn === null) {
+    return (
+      <header className={cn('w-full h-[5.4rem] bg-white', className)}>
+        <div className={controlBarVariants()}>
+          <Icon name="LogoPink" size={54} />
+        </div>
+      </header>
+    );
+  }
+
+
   const rightState = isLoggedIn ? 'loggedIn' : ('guest' as const);
   const iconColor = isLoggedIn ? 'mint-600' : ('gray-400' as const);
   const logoName = isLoggedIn ? 'LogoMint' : 'LogoPink';
