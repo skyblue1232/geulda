@@ -36,9 +36,9 @@ const Boardgame = () => {
               <div
                 key={key}
                 onClick={() => {
-                  // TODO : 로그인 여부 체크
+                  // TODO : 로그인 여부 체크 router.push(`/main/node/${cell.id}`);
                   router.push({
-                    pathname: '/main/Node',
+                    pathname: `/main/node/${cell.label}`,
                     query: { label: cell.label },
                   });
                 }}
