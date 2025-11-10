@@ -30,18 +30,18 @@ const ControlBar = ({ className }: ControlBarProps) => {
     return (
       <header className={cn('w-full h-[5.4rem] bg-white', className)}>
         <div className={controlBarVariants()}>
-          <Icon name="LogoPink" size={54} />
+          <Icon name='LogoPink' size={54} />
         </div>
       </header>
     );
   }
-
 
   const rightState = isLoggedIn ? 'loggedIn' : ('guest' as const);
   const iconColor = isLoggedIn ? 'mint-600' : ('gray-400' as const);
   const logoName = isLoggedIn ? 'LogoMint' : 'LogoPink';
 
   const handleLoginRedirect = () => router.push('/auth');
+  const handleProfileClick = () => router.push('/mypage');
 
   return (
     <header className={cn(' w-full h-[5.4rem] bg-white', className)}>
@@ -49,15 +49,17 @@ const ControlBar = ({ className }: ControlBarProps) => {
         <Icon name={logoName} size={54} />
 
         {isLoggedIn ? (
-          <div className={cn(rightStyle({ state: rightState }), 'min-w-0')}>
+          <button
+            type='button'
+            onClick={handleProfileClick}
+            className={cn(rightStyle({ state: rightState }), 'min-w-0')}
+            aria-label={`${userName}님의 마이페이지`}
+          >
             <Icon name='User' size={24} color={iconColor} />
-            <span
-              className='text-body-md w-[5.3rem] truncate block'
-              aria-label={`${userName}님`}
-            >
+            <span className='text-body-md w-[5.3rem] truncate block'>
               {userName}님
             </span>
-          </div>
+          </button>
         ) : (
           <button
             type='button'
