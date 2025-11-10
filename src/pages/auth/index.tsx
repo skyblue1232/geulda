@@ -10,15 +10,26 @@ import { useRecentLogin } from '@/shared/hooks/useRecentLogin';
 export default function LoginPage() {
   const { recentPlatform, saveRecentPlatform } = useRecentLogin();
   const router = useRouter();
+  const PLATFORM = {
+    KAKAO: 'kakao',
+    GOOGLE: 'google',
+  } as const;
+
+  const PLATFORM_DISPLAY = {
+    [PLATFORM.KAKAO]: '카카오',
+    [PLATFORM.GOOGLE]: '구글',
+  } as const;
 
   //로그인
-  const handleLoginClick = (platform: string) => {
+  const handleLoginClick = (platformDisplay: string) => {
+    const platform = Object.entries(PLATFORM_DISPLAY).find(
+      ([_, display]) => display === platformDisplay,
+    )?.[0];
+    if (!platform) return;
+
     saveRecentPlatform(platform);
     const base = process.env.NEXT_PUBLIC_BACKEND_URL;
-    const url =
-      platform === '카카오'
-        ? `${base}/oauth2/authorization/kakao`
-        : `${base}/oauth2/authorization/google`;
+    const url = `${base}/oauth2/authorization/${platform}`;
     window.location.href = url;
   };
 
@@ -36,8 +47,8 @@ export default function LoginPage() {
       {/* 그라데이션 영역 */}
       <div className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'>
         <svg
-          aria-hidden="true" 
-          focusable="false" 
+          aria-hidden='true'
+          focusable='false'
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 402 194'
           className='absolute inset-0 w-full h-full'
@@ -72,7 +83,7 @@ export default function LoginPage() {
       >
         {/* 로고 영역 */}
         <div className='flex flex-col items-center'>
-          <Icon name='Logo' size={164}/>
+          <Icon name='Logo' size={164} />
           <p className='text-label-serif text-mint-900 mt-[5rem] mb-[2.8rem]'>
             만화 속 부천 여행
             <br />

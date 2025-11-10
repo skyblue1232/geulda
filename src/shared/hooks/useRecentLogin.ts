@@ -7,6 +7,7 @@ export function useRecentLogin() {
   const [recentPlatform, setRecentPlatform] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const saved = localStorage.getItem(RECENT_LOGIN_KEY);
     if (saved) setRecentPlatform(saved);
   }, []);

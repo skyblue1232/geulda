@@ -5,7 +5,6 @@ import { useRecentLogin } from '@/shared/hooks/useRecentLogin';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 
-
 const loginButtonVariants = cva(
   `
     flex justify-center items-center flex-shrink-0
@@ -23,7 +22,7 @@ const loginButtonVariants = cva(
     defaultVariants: {
       platform: 'google',
     },
-  }
+  },
 );
 
 interface LoginButtonProps extends VariantProps<typeof loginButtonVariants> {
@@ -56,11 +55,16 @@ export default function LoginButton({
   if (!platform || !(platform in iconData)) {
     throw new Error(`Invalid platform: ${platform}`);
   }
-  const { src, alt, width, height, label } = iconData[platform as keyof typeof iconData];
+  const { src, alt, width, height, label } =
+    iconData[platform as keyof typeof iconData];
 
-   const handleClick = () => {
+  const handleClick = () => {
     if (onClick) return onClick();
     const base = process.env.NEXT_PUBLIC_BACKEND_URL;
+    if (!base) {
+      console.error('NEXT_PUBLIC_BACKEND_URL is not defined');
+      return;
+    }
     const url =
       platform === 'kakao'
         ? `${base}/oauth2/authorization/kakao`
@@ -71,7 +75,7 @@ export default function LoginButton({
 
   return (
     <button
-      type="button"
+      type='button'
       onClick={handleClick}
       aria-label={label}
       className={cn(loginButtonVariants({ platform }), className)}
