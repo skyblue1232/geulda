@@ -29,6 +29,10 @@ export default function LoginPage() {
 
     saveRecentPlatform(platform);
     const base = process.env.NEXT_PUBLIC_BACKEND_URL;
+    if (!base) {  
+   console.error('NEXT_PUBLIC_BACKEND_URL is not defined');      
+   return;  
+  } 
     const url = `${base}/oauth2/authorization/${platform}`;
     window.location.href = url;
   };

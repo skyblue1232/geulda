@@ -1,7 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { useEffect } from 'react';
-import { useRecentLogin } from '@/shared/hooks/useRecentLogin';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 
@@ -26,7 +24,7 @@ const loginButtonVariants = cva(
 );
 
 interface LoginButtonProps extends VariantProps<typeof loginButtonVariants> {
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
 }
 
@@ -52,9 +50,12 @@ export default function LoginButton({
     },
   };
 
-  if (!platform || !(platform in iconData)) {
-    throw new Error(`Invalid platform: ${platform}`);
-  }
+  if (!platform || !(platform in iconData)) {  
+   if (process.env.NODE_ENV === 'development') {  
+      console.error(`Invalid platform: ${platform}. Falling back to google.`);  
+    }  
+   platform = 'google';  
+  }  
   const { src, alt, width, height, label } =
     iconData[platform as keyof typeof iconData];
 
@@ -62,7 +63,11 @@ export default function LoginButton({
     if (onClick) return onClick();
     const base = process.env.NEXT_PUBLIC_BACKEND_URL;
     if (!base) {
-      console.error('NEXT_PUBLIC_BACKEND_URL is not defined');
+      const message = 'NEXT_PUBLIC_BACKEND_URL is not defined';  
+    if (process.env.NODE_ENV === 'development') {  
+      throw new Error(message);  
+      }  
+    console.error(message); 
       return;
     }
     const url =
