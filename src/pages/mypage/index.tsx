@@ -12,16 +12,20 @@ export default function MyPage() {
   };
 
   return (
-    <main className='w-full min-h-screen bg-white flex flex-col items-center'>
+    <main 
+      className='w-full min-h-screen bg-white flex flex-col items-center'
+      role="main"
+      aria-label="마이 페이지"
+    >
       <div className='w-full flex flex-col items-center px-[2.3rem] pb-[2rem]'>
         {/* 프로필 */}
-        <section className='w-full flex flex-col items-center mt-[2.4rem] gap-[1.0rem]'>
+        <section aria-label="프로필 영역" className='w-full flex flex-col items-center mt-[2.4rem] gap-[1.0rem]'>
           <ProfilePhoto/>
           <p className='text-title-md'>이름</p>
         </section>
 
         {/* 저장한 행사 */}
-        <section className='w-full mt-[1.6rem]'>
+        <section aria-label="저장한 행사" className='w-full mt-[1.6rem]'>
           <p className='text-label-lg mb-[1rem] pl-[1rem]'>저장한 행사</p>
           <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
             <EventCard
@@ -44,7 +48,7 @@ export default function MyPage() {
         </section>
 
         {/* 저장한 엽서 */}
-        <section className='w-full mt-[1.8rem]'>
+        <section aria-label="저장한 엽서" className='w-full mt-[1.8rem]'>
           <p className='text-label-lg mb-[0.6rem] pl-[1rem]'>저장한 엽서</p>
           <PostcardContainer postcards={[]} />
         </section>

@@ -4,8 +4,16 @@ import loading_revised from '../../../public/lottie/loading_revised.json';
 
 export default function Loading() {
   return (
-    <div className='flex flex-col items-center justify-between h-[100vh] bg-white'>
-      <div className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'>
+    <div 
+      className='flex flex-col items-center justify-between h-[100vh] bg-white'
+      role='status'
+      aria-live='polite'
+      aria-label='페이지 로딩 중입니다'  
+    >
+      <div 
+        className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'
+        aria-hidden="true"
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 402 194'
@@ -25,6 +33,7 @@ export default function Loading() {
           loop
           autoplay
           className='w-[18rem] h-[18rem]'
+          aria-hidden="true"
         />
       </div>
 
