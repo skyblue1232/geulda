@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { cva } from 'class-variance-authority';
-import { useUserStatus } from '@/shared/hooks/header/useUserStatus';
+import { useUserStatus } from '@/shared/hooks/useUserStatus';
 
 interface ControlBarProps {
   className?: string;
