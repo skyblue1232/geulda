@@ -11,20 +11,15 @@ export default function MainPage() {
       className={cn(
         'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] pb-[12rem]',
       )}
-    > 
-      <ControlBar
-        isLoggedIn={false}
-        onLogin={() => {}}
-        userName='글다'
-        className='fixed top-[1rem] left-0 right-0 z-50 px-[2rem]'
-      />
+    >
+      <ControlBar className='fixed top-[1rem] left-0 right-0 z-50 px-[2rem]' />
 
       <main className='w-full pt-[6.3rem] flex flex-col gap-4 overflow-auto'>
         <section>
           <Image
             src='/assets/bannerMain.svg'
-            alt=""
-            aria-hidden="true"
+            alt=''
+            aria-hidden='true'
             width={354}
             height={79}
             className='w-full h-auto object-cover block'
@@ -32,9 +27,9 @@ export default function MainPage() {
         </section>
 
         <section
-          role="button"
+          role='button'
           tabIndex={0}
-          aria-label="보드판으로 이동"
+          aria-label='보드판으로 이동'
           onClick={() => {
             router.push('/main/Board');
           }}
