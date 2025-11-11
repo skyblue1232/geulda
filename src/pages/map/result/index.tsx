@@ -2,35 +2,40 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { cn } from '@/shared/lib';
-import { ControlBar } from '@/shared/components';
-import { BottomNav } from '@/shared/components';
-import { PopupSet } from '@/shared/components';
-import TagGroup from '@/pages/map/result/components/TagGroup';
-import ResultList from '@/pages/map/result/components/ResultList';
-import ResultMap from '@/pages/map/result/components/ResultMap';
+import { ControlBar, BottomNav, PopupSet } from '@/shared/components';
+import TagGroup from '@/shared/components/map/result/components/TagGroup';
+import ResultList from '@/shared/components/map/result/components/ResultList';
+import ResultMap from '@/shared/components/map/result/components/ResultMap';
+import { useCourseSession } from '@/shared/hooks/course/useCourseSession';
 
 export default function CourseResultPage() {
   const router = useRouter();
   const [showPopup, setShowPopup] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
+  const sessionId = router.query.sessionId as string | undefined;
+  const { data } = useCourseSession(sessionId ?? ''); 
+
   useEffect(() => {
-    if(typeof window === 'undefined') return;
-    
+    if (typeof window === 'undefined') return;
     const hasSeenPopup = localStorage.getItem('seenCoursePopup');
     if (!hasSeenPopup) {
       setShowPopup(true);
       localStorage.setItem('seenCoursePopup', 'true');
     }
-  }, []); 
+  }, []);
 
   useEffect(() => {
-    if (router.query.from === 'map') {
-      setViewMode('map');
-    }
+    if (router.query.from === 'map') setViewMode('map');
   }, [router.query.from]);
 
   const handlePopupClose = () => setShowPopup(false);
+
+  const tags = [
+    data?.travelPurpose || null,
+    data?.stayDuration || null,
+    data?.transportation || null,
+  ].filter(Boolean) as string[];
 
   return (
     <div className="relative bg-white flex flex-col min-h-screen pb-[12rem] no-scrollbar">
@@ -55,6 +60,7 @@ export default function CourseResultPage() {
 
           <TagGroup
             viewMode={viewMode}
+            tags={tags}
             onToggleView={() =>
               setViewMode((prev) => (prev === 'list' ? 'map' : 'list'))
             }
@@ -68,7 +74,11 @@ export default function CourseResultPage() {
                 : 'h-[43.6rem] overflow-hidden'
             )}
           >
-            {viewMode === 'list' ? <ResultList /> : <ResultMap />}
+            {viewMode === 'list' ? (
+              <ResultList places={data?.places ?? []} />
+            ) : (
+              <ResultMap sessionId={sessionId ?? ''} places={data?.places ?? []} />
+            )}
           </section>
         </div>
       </main>
