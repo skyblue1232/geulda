@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/router';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
@@ -24,9 +26,9 @@ const rightStyle = cva('flex items-center gap-[0.6rem] transition', {
 
 const ControlBar = ({ className }: ControlBarProps) => {
   const router = useRouter();
-  const { isLoggedIn, userName } = useUserStatus();
+  const { isLoggedIn, userName, isLoading } = useUserStatus();
 
-  if (isLoggedIn === null) {
+  if (isLoading || isLoggedIn === null) {
     return (
       <header className={cn('w-full h-[5.4rem] bg-white', className)}>
         <div className={controlBarVariants()}>
