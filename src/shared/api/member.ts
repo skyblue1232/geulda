@@ -1,4 +1,4 @@
-import { apiWithToken } from './instance';
+import { apiWithToken } from '@/shared/api/instance';
 import type { ApiResponse } from '@/shared/types/authtypes';
 import type { MyPageResponse } from '@/shared/types/membertypes';
 import { useQuery } from '@tanstack/react-query';
