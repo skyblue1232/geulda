@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/shared/lib';
 import { LocationCard } from '@/shared/components';
-import type { CoursePlace } from '@/shared/api/course/types/courseSettion';
+import type { CoursePlace } from '@/shared/api/course/types/courseSession';
 
 interface ResultListProps {
   places: CoursePlace[];

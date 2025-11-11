@@ -6,9 +6,9 @@ interface Props {
   purpose: string | null;
   stay: string | null;
   move: string | null;
-  setPurpose: (value: string) => void;
-  setStay: (value: string) => void;
-  setMove: (value: string) => void;
+  setPurpose: (value: string | null) => void;
+  setStay: (value: string | null) => void;
+  setMove: (value: string | null) => void;
 }
 
 export default function CourseSelectGroup({
@@ -25,19 +25,19 @@ export default function CourseSelectGroup({
         title="여행 목적을 선택해 주세요"
         options={purposes}
         selected={purpose}
-        onSelect={(id) => setPurpose(id ?? '')}
+        onSelect={setPurpose}
       />
       <CourseSelectSection
         title="체류 시간을 선택해 주세요"
         options={stays}
         selected={stay}
-        onSelect={(id) => setStay(id ?? '')}
+        onSelect={setStay}
       />
       <CourseSelectSection
         title="이동 방식을 선택해 주세요"
         options={moves}
         selected={move}
-        onSelect={(id) => setMove(id ?? '')}
+        onSelect={setMove}
       />
     </div>
   );

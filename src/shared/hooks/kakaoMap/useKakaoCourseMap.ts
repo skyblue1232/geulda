@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { loadKakaoSdk } from '@/shared/utils/loadKakaoSdk';
-import type { CoursePlace } from '@/shared/api/course/types/courseSettion';
+import type { CoursePlace } from '@/shared/api/course/types/courseSession';
 
 interface UseKakaoCourseMapOptions {
   places: CoursePlace[];
@@ -15,6 +15,7 @@ export function useKakaoCourseMap(
   { places, onPinClick, enableClick = false }: UseKakaoCourseMapOptions,
 ) {
   const mapInstanceRef = useRef<kakao.maps.Map | null>(null);
+  const overlaysRef = useRef<kakao.maps.CustomOverlay[]>([]);
 
   useEffect(() => {
     if (!places?.length) return;
@@ -48,6 +49,7 @@ export function useKakaoCourseMap(
           });
 
           overlay.setMap(map);
+          overlaysRef.current.push(overlay);
 
           if (enableClick && onPinClick) {
             el.addEventListener('click', () => onPinClick(place));
@@ -56,6 +58,12 @@ export function useKakaoCourseMap(
       });
     });
 
+    // cleanup
+    return () => {
+      overlaysRef.current.forEach((overlay) => overlay.setMap(null));
+      overlaysRef.current = [];
+      mapInstanceRef.current = null;
+    };
   }, [places, enableClick, onPinClick, mapRef]);
 
   return mapInstanceRef.current;

@@ -5,7 +5,9 @@ import FullMap from '@/shared/components/map/result/components/FullMap';
 const MapPage = () => {
   const router = useRouter();
 
-  const sessionId = router.query.sessionId as string | undefined;
+  const sessionId = Array.isArray(router.query.sessionId)
+    ? router.query.sessionId[0]
+    : router.query.sessionId;
 
   return (
     <main

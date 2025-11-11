@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useKakaoCourseMap } from '@/shared/hooks/kakaoMap/useKakaoCourseMap';
-import type { CoursePlace } from '@/shared/api/course/types/courseSettion';
+import type { CoursePlace } from '@/shared/api/course/types/courseSession';
+import { cn } from '@/shared/lib';
 
 interface ResultMapProps {
-  sessionId: string;
+  sessionId?: string; // sessionId 없으면 버튼 비활성화 시키기 위해서
   places: CoursePlace[]; 
 }
 
@@ -27,12 +28,14 @@ export default function ResultMap({ sessionId, places }: ResultMapProps) {
 
       <button
         onClick={() =>
-          router.push(`/map/result/Map?sessionId=${sessionId ?? ''}`)
+          router.push(`/map/result/Map?sessionId=${sessionId}`)
         }
+        disabled={!sessionId}
         aria-label="전체화면 지도로 보기"
-        className="absolute right-[1.2rem] bottom-[1.4rem] z-[9999]
-                   bg-pink-200 border border-pink-300 text-white text-title-sm
-                   px-[2.2rem] py-[1.2rem] rounded-[2rem]"
+        className={cn(
+          "absolute right-[1.2rem] bottom-[1.4rem] z-[9999] bg-pink-200 border border-pink-300 text-white text-title-sm px-[2.2rem] py-[1.2rem] rounded-[2rem]",
+          !sessionId && "opacity-50 cursor-not-allowed"
+        )}
       >
         전체화면 보기
       </button>
