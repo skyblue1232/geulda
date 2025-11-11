@@ -35,7 +35,7 @@ export default function AuthCallbackPage() {
     };
 
     handleLogin();
-  }, [router.isReady, router.asPath]);
+  }, [router]);
 
   return <Loading />;
 }
