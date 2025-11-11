@@ -4,14 +4,22 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import StampBoard from '@/shared/components/main/components/stampBoard/StampBoard';
 
+// ✅ React Query 훅 import
+import { useGetStampStatus } from '@/shared/queries/main';
+
 export default function MainPage() {
   const router = useRouter();
+
+  // ✅ 스탬프 현황 데이터 가져오기
+  // const { data, isLoading, isError } = useGetStampStatus();
+
   return (
     <div
       className={cn(
         'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] pb-[12rem]',
       )}
-    > 
+    >
+      {/* 상단 컨트롤바 */}
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
@@ -20,21 +28,23 @@ export default function MainPage() {
       />
 
       <main className='w-full pt-[6.3rem] flex flex-col gap-4 overflow-auto'>
+        {/* 메인 배너 */}
         <section>
           <Image
             src='/assets/bannerMain.svg'
-            alt=""
-            aria-hidden="true"
+            alt=''
+            aria-hidden='true'
             width={354}
             height={79}
             className='w-full h-auto object-cover block'
           />
         </section>
 
+        {/* 보드판 이동 */}
         <section
-          role="button"
+          role='button'
           tabIndex={0}
-          aria-label="보드판으로 이동"
+          aria-label='보드판으로 이동'
           onClick={() => {
             router.push('/main/Board');
           }}
@@ -44,12 +54,26 @@ export default function MainPage() {
             alt='보드판'
             width={354}
             height={426.36}
-            className='w-full h-auto object-cover block'
+            className='w-full h-auto object-cover block cursor-pointer transition-transform hover:scale-[1.01]'
           />
         </section>
 
-        <StampBoard count={3} total={10} />
+        {/* ✅ 스탬프 현황 표시 (API 연동) */}
+        <StampBoard count={0} total={10} />
+        {/* {isLoading ? (
+          <p className='text-gray-400 text-center py-4'>불러오는 중...</p>
+        ) : isError ? (
+          <p className='text-red-400 text-center py-4'>
+            데이터를 불러오지 못했습니다 😢
+          </p>
+        ) : (
+          <StampBoard
+            count={data?.collectedStampCount ?? 0}
+            total={data?.totalStampCount ?? 10}
+          />
+        )} */}
       </main>
+
       <BottomNav />
     </div>
   );

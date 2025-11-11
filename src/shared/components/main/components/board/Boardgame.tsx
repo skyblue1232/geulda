@@ -54,7 +54,10 @@ const Boardgame = () => {
                   cell.label ? `${cell.label} 명소로 이동` : '명소로 이동'
                 }
                 onClick={() => {
-                  handleCellClick;
+                  router.push({
+                    pathname: `/main/node/${cell.label}`,
+                    query: { label: cell.label },
+                  });
                 }}
                 className='
                   aspect-square
