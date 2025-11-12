@@ -8,6 +8,7 @@ export const useUserStatus = () => {
   const [isClient, setIsClient] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
   const [userName, setUserName] = useState('Guest');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -15,21 +16,28 @@ export const useUserStatus = () => {
 
     if (token) {
       setIsLoggedIn(true);
+      setIsLoading(true);
 
       const cachedName = localStorage.getItem('userName');
       if (cachedName) setUserName(cachedName);
       apiWithToken
         .get('/api/members/me')
         .then((res) => {
-          const name = res.data?.data?.name;
-          if (name) {
-            setUserName(name);
-            localStorage.setItem('userName', name);
+          const { code, data } = res.data || {};
+          if ((code === 'SUCCESS_READ' || code === 'S001') && data?.name) {
+            setUserName(data.name);
+            localStorage.setItem('userName', data.name);
+          } else {
+            setIsLoggedIn(false);
+            setUserName('Guest');
           }
         })
         .catch(() => {
           setIsLoggedIn(false);
           setUserName('Guest');
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     } else {
       setIsLoggedIn(false);
@@ -54,5 +62,5 @@ export const useUserStatus = () => {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
-  return { isLoggedIn, userName, isClient };
+  return { isLoggedIn, userName, isClient, isLoading };
 };
