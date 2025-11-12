@@ -3,7 +3,7 @@ import { getHasBoardStamp } from '@/shared/main/api/getHasBoardStamp';
 
 export const useGetHasBoardStamp = () => {
   return useQuery({
-    queryKey: ['stampStatus'],
+    queryKey: ['boardStamp'],
     queryFn: getHasBoardStamp,
   });
 };
