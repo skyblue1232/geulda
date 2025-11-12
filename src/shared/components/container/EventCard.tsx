@@ -13,6 +13,8 @@ interface EventCardProps {
   variant?: 'gray' | 'mint';
   size?: 'small' | 'medium' | 'large';
   imageSrc?: string;
+  liked?: boolean;
+  onLikeClick?: (e: React.MouseEvent) => void;
 }
 
 const EventCard = ({
@@ -22,12 +24,9 @@ const EventCard = ({
   variant = 'gray',
   size = 'medium',
   imageSrc = '',
+  liked = false,
+  onLikeClick,
 }: EventCardProps) => {
-  const [liked, setLiked] = useState(false);
-
-  const handleLikeClick = () => {
-    setLiked((prev) => !prev);
-  };
   return (
     <Card
       variant={variant}
@@ -100,8 +99,9 @@ const EventCard = ({
                 liked ? 'red-400' : variant === 'mint' ? 'mint-400' : 'gray-300'
               }
               fillColor={liked ? 'red-300' : undefined}
-              onClick={handleLikeClick}
+              onClick={onLikeClick}
               className='cursor-pointer'
+              aria-label={liked ? '좋아요 취소' : '좋아요'}
             />
           </div>
           {/* 행사 주소 */}
@@ -138,8 +138,8 @@ const EventCard = ({
                     ? 'mint-400'
                     : 'gray-300'
                 }
-                fillColor={liked ? 'red-300' : undefined}       
-                onClick={handleLikeClick}
+                fillColor={liked ? 'red-300' : undefined}
+                onClick={onLikeClick}
                 isInteractive
                 pressed={liked}
                 aria-label={liked ? '좋아요 취소' : '좋아요'}

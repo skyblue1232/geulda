@@ -10,22 +10,25 @@ import {
   BottomNav,
   EventCard,
 } from '@/shared/components';
-import { eventData } from '@/shared/constants/events/eventsData';
 import { formatDateToISO, isDateWithinRange } from '@/shared/utils/date';
+import { useEvents } from '@/shared/hooks/events/useEvents';
+import { useBookmark } from '@/shared/hooks/events/useBookmark';
 
 export default function EventPage() {
   const router = useRouter();
   const [date, setDate] = useState<Date>();
+  const { events } = useEvents();
 
   const selectedDate = formatDateToISO(date);
-
-  const filteredEvents = eventData.filter((event) =>
+  const filteredEvents = events.filter((event) =>
     isDateWithinRange(selectedDate, event.startDate, event.endDate),
   );
 
   const handleCardClick = (id: number) => {
     router.push(`/events/${id}`);
   };
+
+
 
   return (
     <div
@@ -53,30 +56,40 @@ export default function EventPage() {
         </div>
 
         {/* 행사카드 & 빈화면 */}
-        {filteredEvents.length > 0 ? (
+         {filteredEvents.length > 0 ? (
           <section
-            aria-label="이벤트 목록"
+            aria-label='이벤트 목록'
             className={cn(
               'grid w-full mt-[1.4rem]',
               'grid-cols-2 gap-x-[1.4rem] gap-y-[1.4rem]',
             )}
           >
-            {filteredEvents.map((event) => (
-              <div
-                key={event.id}
-                onClick={() => handleCardClick(event.id)}
-                className='cursor-pointer'
-              >
-                <EventCard
-                  name={event.name}
-                  address={event.address}
-                  description={event.description}
-                  variant='gray'
-                  size='medium'
-                  imageSrc={event.imageSrc ?? ''}
-                />
-              </div>
-            ))}
+            {filteredEvents.map((event) => {
+
+              const { isBookmarked, toggleBookmark } = useBookmark(event.id);
+
+              return (
+                <div
+                  key={event.id}
+                  onClick={() => handleCardClick(event.id)}
+                  className='cursor-pointer'
+                >
+                  <EventCard
+                    name={event.name}
+                    address={event.address}
+                    description={event.description}
+                    variant='gray'
+                    size='medium'
+                    imageSrc={event.imageSrc ?? ''}
+                    liked={isBookmarked}
+                    onLikeClick={(e) => {
+                      e.stopPropagation();
+                      toggleBookmark();
+                    }}
+                  />
+                </div>
+              );
+            })}
           </section>
         ) : (
           <div 
