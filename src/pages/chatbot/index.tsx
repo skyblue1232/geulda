@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 import { Header } from '@/shared/components';
@@ -57,7 +58,6 @@ export default function ChatPage() {
     }
   };
 
-
   return (
     <div className={cn(chatPageStyle())}>
       {/* 헤더 고정 */}
@@ -75,9 +75,13 @@ export default function ChatPage() {
         {/* 로고 + 기본 멘트 */}
         <div className={cn(introStyle())}>
           {/* 로고 자리 (임시) */}
-          <div
-            className='w-[6rem] h-[6rem] rounded-full bg-gray-200 flex-shrink-0'
-            aria-hidden='true'
+          <Image
+            src='/assets/chatbot.svg'
+            alt='챗봇 프로필 아이콘'
+            width={60}
+            height={60}
+            className='rounded-full flex-shrink-0'
+            priority
           />
           <Chatting
             message='안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요.'

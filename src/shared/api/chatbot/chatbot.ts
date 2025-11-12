@@ -29,10 +29,14 @@ export const createChatSession = async (): Promise<string> => {
   const BASE = getBaseUrl();
   const url = `${BASE}/api/chatbot/sessions`;
 
-  const res = await axios.post<SessionSuccess>(url, {}, {
-    headers: { 'Content-Type': 'application/json' },
-    validateStatus: () => true,
-  });
+  const res = await axios.post<SessionSuccess>(
+    url,
+    {},
+    {
+      headers: { 'Content-Type': 'application/json' },
+      validateStatus: () => true,
+    },
+  );
 
   if (res.status >= 400) {
     console.error('session create failed:', res.status, res.data);
@@ -41,10 +45,7 @@ export const createChatSession = async (): Promise<string> => {
 
   const d = res.data;
   const sessionId =
-    d?.result?.sessionId ??
-    d?.data?.sessionId ??
-    d?.sessionId ??
-    null;
+    d?.result?.sessionId ?? d?.data?.sessionId ?? d?.sessionId ?? null;
 
   if (!sessionId) {
     console.error('Unexpected session response shape:', d);
@@ -80,11 +81,7 @@ export const fetchChatResponse = async (
   }
 
   const d = res.data;
-  const answer =
-    d?.result?.message ??
-    d?.data?.message ??
-    d?.answer ??
-    null;
+  const answer = d?.result?.message ?? d?.data?.message ?? d?.answer ?? null;
 
   if (!answer) {
     console.error('Unexpected chat response shape:', d);
