@@ -13,21 +13,25 @@ import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
 import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
 import { useUserStatus } from '@/shared/hooks/useUserStatus';
+import { getMemberIdFromToken } from '@/shared/utils/token';
 
 const Node = () => {
   const router = useRouter();
   const { placeId } = router.query;
-  const memberId = Number(localStorage.getItem('memberId'));
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
 
+  // ✅ JWT에서 memberId 추출
+  const memberId = getMemberIdFromToken();
+
+  // ✅ React Query — placeId와 memberId 모두 있을 때만 실행
   const { data, isLoading, isError } = useGetPlaceDetail(
     router.isReady ? Number(placeId) : undefined,
-    memberId,
+    memberId ?? undefined,
   );
 
   console.log('📍 장소 ID:', placeId);
-  console.log('📍 사용자 ID:', memberId);
+  console.log('👤 사용자 ID:', memberId);
   console.log('📍 장소 상세 데이터:', data);
 
   if (isLoading) return <p className='text-center mt-10'>로딩 중...</p>;
@@ -37,13 +41,11 @@ const Node = () => {
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
   const handleStampClick = () => {
-    // ✅ 로그인 안 된 경우
     if (!isLoggedIn) {
       setShowLoginPopup(true);
       return;
     }
 
-    // ✅ 로그인 된 경우 → 위치 확인 후 스탬프 페이지 이동
     getLocation(
       (pos) => console.log('📍 현재 위치:', pos.coords),
       (err) => console.error('⚠️ 위치 에러:', err.message),
@@ -100,7 +102,6 @@ const Node = () => {
         <AddressCopy variant='mint' value={address} />
       </main>
 
-      {/* ✅ 로그인 팝업 */}
       {showLoginPopup && (
         <PopupSet
           text='로그인이 필요한 서비스입니다.'
