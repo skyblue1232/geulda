@@ -21,7 +21,7 @@ export default function MyPage() {
     closeLogout,
   } = usePopup();
 
-  const { data, isError } = useMyPageQuery(!!isLoggedIn);
+  const { data, isError, refetch } = useMyPageQuery(!!isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn === false || isError) {
@@ -29,9 +29,22 @@ export default function MyPage() {
     }
   }, [isLoggedIn, isError, openLogin]);
 
-  const profile = data?.data.profile;
-  const bookmarkedEvents = data?.data.bookmarkedEvents || [];
-  const postcards = data?.data.postcards || [];
+  useEffect(() => {
+    if (isLoggedIn) {
+      refetch();
+    }
+  }, [isLoggedIn, refetch]);
+
+  const profile = {
+    name: data?.name,
+    profileImageUrl: data?.profileImageUrl,
+  };
+
+  const bookmarkedEvents = data?.bookmarkedEvents || [];
+  const postcards = data?.postcards || [];
+
+  const hasEvents = bookmarkedEvents.length > 0;
+  const hasPostcards = postcards.length > 0;
 
   return (
     <main
@@ -52,9 +65,32 @@ export default function MyPage() {
         {/* 저장한 행사 */}
         <section aria-label='저장한 행사' className='w-full mt-[1.6rem]'>
           <p className='text-label-lg mb-[1rem] pl-[1rem]'>저장한 행사</p>
-          <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
-            {bookmarkedEvents.length > 0 ? (
-              bookmarkedEvents.map((event) => (
+          {/* 비로그인 상태 */}
+          {isLoggedIn === false && (
+            <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
+              <EventCard
+                name='행사 이름'
+                address='우리집'
+                description='행사 설명'
+                variant='gray'
+                size='large'
+                imageSrc=''
+              />
+              <EventCard
+                name='행사 이름'
+                address='우리집'
+                description='행사 설명'
+                variant='gray'
+                size='large'
+                imageSrc=''
+              />
+            </div>
+          )}
+
+          {/* 로그인 + 저장한 행사 있음 */}
+          {isLoggedIn && hasEvents && (
+            <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
+              {bookmarkedEvents.map((event) => (
                 <EventCard
                   key={event.eventId}
                   name={event.eventName}
@@ -64,34 +100,26 @@ export default function MyPage() {
                   size='large'
                   imageSrc={event.eventImageUrl}
                 />
-              ))
-            ) : (
-              <>
-                <EventCard
-                  name='행사 이름'
-                  address='우리집'
-                  description='행사 설명'
-                  variant='gray'
-                  size='large'
-                  imageSrc=''
-                />
-                <EventCard
-                  name='행사 이름'
-                  address='우리집'
-                  description='행사 설명'
-                  variant='gray'
-                  size='large'
-                  imageSrc=''
-                />
-              </>
-            )}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {/* 로그인 + 저장한 행사 없음  */}
+          {isLoggedIn && !hasEvents && (
+            <div className='h-[17rem] flex items-center justify-center'>
+              <p className='text-gray-400 text-label-md'>
+                저장한 행사가 없습니다.
+              </p>
+            </div>
+          )}
         </section>
 
         {/* 저장한 엽서 */}
         <section aria-label='저장한 엽서' className='w-full mt-[1.8rem]'>
           <p className='text-label-lg mb-[0.6rem] pl-[1rem]'>저장한 엽서</p>
-          <PostcardContainer postcards={postcards} />
+          <PostcardContainer
+            postcards={!isLoggedIn ? [] : hasPostcards ? postcards : []}
+          />
         </section>
 
         {/* 로그아웃 */}

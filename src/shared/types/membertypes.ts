@@ -1,10 +1,7 @@
 export interface MyPageResponse {
-  profile: {
-    id: number;
-    email: string;
-    name: string;
-    profileImageUrl: string;
-  };
+  memberId: number;
+  name: string;
+  profileImageUrl: string;
   bookmarkedEvents: {
     eventId: number;
     eventName: string;

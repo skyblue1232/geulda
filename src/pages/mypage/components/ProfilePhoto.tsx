@@ -13,6 +13,7 @@ export default function ProfilePhoto({
   className,
 }: ProfilePhotoProps) {
   const baseStyle = `
+    relative
     flex items-center justify-center
     h-[14.6rem] w-[14.6rem]
     rounded-[20px]

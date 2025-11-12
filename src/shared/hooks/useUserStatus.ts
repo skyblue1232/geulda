@@ -1,34 +1,43 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useMyPageQuery } from '@/shared/api/member';
-import type { ApiResponse } from '@/shared/types/authtypes';
-
-interface MyPageData {
-  profile?: { name?: string };
-  name?: string;
-  memberName?: string;
-}
+import { getAccessToken } from '@/shared/utils/token';
 
 export const useUserStatus = () => {
   const [isClient, setIsClient] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [userName, setUserName] = useState('Guest');
 
   useEffect(() => {
     setIsClient(true);
-    setToken(localStorage.getItem('accessToken'));
+    const token = getAccessToken();
+
+    if (token) {
+      setIsLoggedIn(true);
+      const cachedName = localStorage.getItem('userName');
+      if (cachedName) setUserName(cachedName);
+    } else {
+      setIsLoggedIn(false);
+      setUserName('Guest');
+    }
   }, []);
 
-  const { data, isLoading, isError } = useMyPageQuery(isClient && !!token);
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const token = getAccessToken();
+      if (!token) {
+        setIsLoggedIn(false);
+        setUserName('Guest');
+      } else {
+        setIsLoggedIn(true);
+        const cachedName = localStorage.getItem('userName');
+        if (cachedName) setUserName(cachedName);
+      }
+    };
 
-  if (!isClient) return { isLoggedIn: null, userName: 'Guest', isLoading: true };
-  if (!token) return { isLoggedIn: false, userName: 'Guest', isLoading: false };
-  if (isLoading) return { isLoggedIn: null, userName: 'Guest', isLoading: true };
-  if (isError || !data) return { isLoggedIn: false, userName: 'Guest', isLoading: false };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
-  const res = data as ApiResponse<MyPageData>;
-  const name = res.data?.profile?.name || res.data?.name || res.data?.memberName;
-  const ok = (res.code === 'SUCCESS_READ' || res.code === 'S001') && !!name;
-
-  return { isLoggedIn: ok, userName: ok ? name! : 'Guest', isLoading: false };
+  return { isLoggedIn, userName, isClient };
 };
