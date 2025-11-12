@@ -1,7 +1,7 @@
 import { cn } from '@/shared/lib';
 import { useRouter } from 'next/router';
 import { VIDEO_LOCATIONS } from '@/shared/constants/main/videoLocations';
-import VideoPlayer from '@/pages/main/components/video/VideoPlayer';
+import VideoPlayer from '@/shared/components/main/components/video/VideoPlayer';
 
 export default function VideoPlayPage() {
   const router = useRouter();
@@ -18,12 +18,12 @@ export default function VideoPlayPage() {
     <div
       className={cn(
         'relative w-full h-[100vh] flex flex-col items-center pb-[9.5rem]',
-        'bg-mint-50'
+        'bg-mint-50',
       )}
-      role="main"
-      aria-label="명소 영상 재생 페이지"
+      role='main'
+      aria-label='명소 영상 재생 페이지'
     >
-      <div className="w-full px-[2.4rem] mt-[4.5rem] h-full">
+      <div className='w-full px-[2.4rem] mt-[4.5rem] h-full'>
         <VideoPlayer
           src={location?.videoSrc}
           label={location?.label}
@@ -32,10 +32,10 @@ export default function VideoPlayPage() {
       </div>
 
       <p
-        id="video-description"
-        className="mt-[1.4rem] text-mint-700 text-body-lg"
-        role="note"
-        aria-label="영상 시청 이후 자동 이동 안내"
+        id='video-description'
+        className='mt-[1.4rem] text-mint-700 text-body-lg'
+        role='note'
+        aria-label='영상 시청 이후 자동 이동 안내'
       >
         영상 시청 이후 자동으로 넘어갑니다.
       </p>
