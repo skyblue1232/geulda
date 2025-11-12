@@ -13,14 +13,12 @@ export default function ControlBarHeader ({ className }: ControlBarHeaderProps) 
   const { isLoggedIn, userName, isLoading } = useUserStatus();
 
   const handleLogoClick = () => {
-    setTimeout(() => router.push('/main'), 500);
+    router.push('/main');
   };
 
   const handleUserClick = () => {
-    setTimeout(() => {
       if (isLoggedIn) router.push('/mypage');
       else router.push('/auth');
-    }, 500);
   };
 
   return (
