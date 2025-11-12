@@ -37,12 +37,7 @@ export default function EventPage() {
       )}
     >
       {/* 헤더 */}
-      <ControlBar
-        isLoggedIn={true}
-        userName='홍길동'
-        onLogin={() => {}}
-        className='fixed top-[1rem] left-0 right-0 z-50 px-[2rem]'
-      />
+      <ControlBar className="fixed top-[1rem] left-0 right-0 z-50 px-[2rem]" />
 
       {/* 본문 콘텐츠 */}
       <main className='w-full pt-[6.3rem] flex flex-col items-center'>

@@ -36,6 +36,7 @@ type IconColor =
   | 'blue-400'
   | 'red-300'
   | 'red-400'
+  | 'white'
   | 'background'
   | 'foreground';
 
@@ -112,7 +113,7 @@ export const Icon = ({
       stroke={color ? 'currentColor' : 'none'}
       width={typeof w === 'number' ? `${w}px` : w}
       height={typeof h === 'number' ? `${h}px` : h}
-      viewBox="0 0 24 24"
+      viewBox='0 0 24 24'
       className={combined}
       style={iconStyle}
       role={isInteractive ? 'button' : undefined}
