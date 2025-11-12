@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getStampStatus } from '@/shared/main/getStampStatus';
+import { getStampStatus } from '@/shared/main/api/getStampStatus';
 
 /**
  * 스탬프 수집 현황 조회
