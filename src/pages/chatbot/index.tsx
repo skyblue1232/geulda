@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 import { Header } from '@/shared/components';
+import { useChatbot } from '@/shared/hooks/chatbot/useChatbot';
 import Chatting from '@/pages/chatbot/components/ChattingBubble';
 import ChattingInput from '@/pages/chatbot/components/ChattingInput';
 
@@ -18,29 +19,44 @@ const mainStyle = cva(
 
 const introStyle = cva('flex flex-col items-start gap-[1rem]');
 
+type Message = {
+  id: number;
+  text: string;
+  variant: 'received' | 'sent';
+};
+
 export default function ChatPage() {
   const router = useRouter();
   const bottomRef = useRef<HTMLDivElement>(null);
-
-  type Message = {
-    id: number;
-    text: string;
-    variant: 'received' | 'sent';
-  };
-
+  const { mutateAsync: sendChat, sessionId } = useChatbot();
   const [messages, setMessages] = useState<Message[]>([]);
 
-  // 새로운 채팅 자동 스크롤
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // 메세지 전송 핸들러
-  const handleSend = (text: string) => {
+  const handleSend = async (text: string) => {
     if (!text.trim()) return;
-    const newMsg = { id: Date.now(), text, variant: 'sent' as const };
-    setMessages((prev) => [...prev, newMsg]);
+    if (!sessionId) {
+      return;
+    }
+
+    const userMsg: Message = { id: Date.now(), text, variant: 'sent' };
+    setMessages((prev) => [...prev, userMsg]);
+
+    try {
+      const answer = await sendChat({ message: text });
+      const botMsg: Message = {
+        id: Date.now() + 1,
+        text: answer,
+        variant: 'received',
+      };
+      setMessages((prev) => [...prev, botMsg]);
+    } catch (err) {
+      console.error('챗봇 응답 실패:', err);
+    }
   };
+
 
   return (
     <div className={cn(chatPageStyle())}>
@@ -50,23 +66,23 @@ export default function ChatPage() {
       </div>
 
       {/* 메인 콘텐츠 */}
-      <main 
-        role="log"
-        aria-label="채팅 내용"
-        aria-live="polite"
+      <main
+        role='log'
+        aria-label='채팅 내용'
+        aria-live='polite'
         className={cn(mainStyle())}
       >
         {/* 로고 + 기본 멘트 */}
         <div className={cn(introStyle())}>
           {/* 로고 자리 (임시) */}
-          <div 
+          <div
             className='w-[6rem] h-[6rem] rounded-full bg-gray-200 flex-shrink-0'
-            aria-hidden="true"
+            aria-hidden='true'
           />
           <Chatting
             message='안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요.'
             variant='received'
-            aria-label="글다의 메시지: 안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요."
+            aria-label='글다의 메시지: 안녕하세요, 글다에요! 부천시 여행에 대한 정보를 쉽게 알려드릴게요.'
           />
           <Chatting
             message='원하시는 정보를 물어봐주세요!'
@@ -75,18 +91,16 @@ export default function ChatPage() {
         </div>
 
         {/* 사용자 메시지 */}
-        {messages
-          .filter((msg) => msg.id > 2)
-          .map((msg) => (
-            <Chatting key={msg.id} message={msg.text} variant={msg.variant} />
-          ))}
+        {messages.map((m) => (
+          <Chatting key={m.id} message={m.text} variant={m.variant} />
+        ))}
 
         {/* 스크롤 */}
-        <div ref={bottomRef} aria-hidden="true" />
+        <div ref={bottomRef} aria-hidden='true' />
       </main>
 
       {/* 입력창 */}
-      <ChattingInput onSend={handleSend} />
+      <ChattingInput onSend={handleSend} disabled={!sessionId} />
     </div>
   );
 }
