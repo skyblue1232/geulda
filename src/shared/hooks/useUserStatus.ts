@@ -21,32 +21,14 @@ export const useUserStatus = () => {
 
   const { data, isLoading, isError } = useMyPageQuery(isClient && !!token);
 
-  if (!isClient) {
-    return { isLoggedIn: null, userName: 'Guest', isLoading: true };
-  }
-
-  if (!token) {
-    return { isLoggedIn: false, userName: 'Guest', isLoading: false };
-  }
-
-  if (isLoading) {
-    return { isLoggedIn: null, userName: 'Guest', isLoading: true };
-  }
-
-  if (isError || !data) {
-    return { isLoggedIn: false, userName: 'Guest', isLoading: false };
-  }
+  if (!isClient) return { isLoggedIn: null, userName: 'Guest', isLoading: true };
+  if (!token) return { isLoggedIn: false, userName: 'Guest', isLoading: false };
+  if (isLoading) return { isLoggedIn: null, userName: 'Guest', isLoading: true };
+  if (isError || !data) return { isLoggedIn: false, userName: 'Guest', isLoading: false };
 
   const res = data as ApiResponse<MyPageData>;
-  const name =
-    res.data?.profile?.name || res.data?.name || res.data?.memberName;
+  const name = res.data?.profile?.name || res.data?.name || res.data?.memberName;
+  const ok = (res.code === 'SUCCESS_READ' || res.code === 'S001') && !!name;
 
-  const isSuccess =
-    (res.code === 'SUCCESS_READ' || res.code === 'S001') && !!name;
-
-  return {
-    isLoggedIn: isSuccess,
-    userName: isSuccess ? name! : 'Guest',
-    isLoading: false,
-  };
+  return { isLoggedIn: ok, userName: ok ? name! : 'Guest', isLoading: false };
 };
