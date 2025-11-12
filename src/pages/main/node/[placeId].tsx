@@ -1,17 +1,25 @@
 'use client';
-import { AddressCopy, Header, LocationCard } from '@/shared/components';
+import { useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import {
+  AddressCopy,
+  Header,
+  LocationCard,
+  PopupSet,
+} from '@/shared/components';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
+import { useUserStatus } from '@/shared/hooks/useUserStatus';
 
 const Node = () => {
   const router = useRouter();
   const { placeId } = router.query;
-
   const memberId = Number(localStorage.getItem('memberId'));
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const { isLoggedIn } = useUserStatus();
 
   const { data, isLoading, isError } = useGetPlaceDetail(
     router.isReady ? Number(placeId) : undefined,
@@ -27,6 +35,21 @@ const Node = () => {
     return <p className='text-center mt-10'>데이터를 불러오지 못했습니다 😢</p>;
 
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
+
+  const handleStampClick = () => {
+    // ✅ 로그인 안 된 경우
+    if (!isLoggedIn) {
+      setShowLoginPopup(true);
+      return;
+    }
+
+    // ✅ 로그인 된 경우 → 위치 확인 후 스탬프 페이지 이동
+    getLocation(
+      (pos) => console.log('📍 현재 위치:', pos.coords),
+      (err) => console.error('⚠️ 위치 에러:', err.message),
+    );
+    router.push('/main/HiddenReward');
+  };
 
   return (
     <div className='relative w-full h-[100vh] overflow-auto px-[2.4rem]'>
@@ -55,13 +78,7 @@ const Node = () => {
               'absolute bottom-0 right-0',
               isCompleted && 'p-[2.5rem]',
             )}
-            onClick={() => {
-              getLocation(
-                (pos) => console.log('📍 현재 위치:', pos.coords),
-                (err) => console.error('⚠️ 위치 에러:', err.message),
-              );
-              router.push('/main/HiddenReward');
-            }}
+            onClick={handleStampClick}
           >
             <Icon
               name={isCompleted ? 'Stamp' : 'PressStamp'}
@@ -82,6 +99,17 @@ const Node = () => {
 
         <AddressCopy variant='mint' value={address} />
       </main>
+
+      {/* ✅ 로그인 팝업 */}
+      {showLoginPopup && (
+        <PopupSet
+          text='로그인이 필요한 서비스입니다.'
+          onClose={() => {
+            setShowLoginPopup(false);
+            router.push('/auth');
+          }}
+        />
+      )}
     </div>
   );
 };
