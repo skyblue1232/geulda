@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getAccessToken } from '@/shared/utils/token';
+import { apiWithToken } from '@/shared/api/instance';
 
 export const useUserStatus = () => {
   const [isClient, setIsClient] = useState(false);
@@ -14,8 +15,22 @@ export const useUserStatus = () => {
 
     if (token) {
       setIsLoggedIn(true);
+
       const cachedName = localStorage.getItem('userName');
       if (cachedName) setUserName(cachedName);
+      apiWithToken
+        .get('/api/members/me')
+        .then((res) => {
+          const name = res.data?.data?.name;
+          if (name) {
+            setUserName(name);
+            localStorage.setItem('userName', name);
+          }
+        })
+        .catch(() => {
+          setIsLoggedIn(false);
+          setUserName('Guest');
+        });
     } else {
       setIsLoggedIn(false);
       setUserName('Guest');
