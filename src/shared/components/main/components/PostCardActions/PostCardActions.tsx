@@ -8,7 +8,7 @@ interface PostCardActionsProps {
 
 export const PostCardActions = ({ className }: PostCardActionsProps) => {
   return (
-    <div className={`w-full flex justify-end mb-[7rem] ${className ?? ''}`}>
+    <div className={`w-full  flex justify-center ${className ?? ''}`}>
       <button
         className='flex items-center justify-center w-[4.8rem] h-[4.8rem]'
         onClick={handleSave}

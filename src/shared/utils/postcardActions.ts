@@ -3,7 +3,7 @@ export const handleShare = () => {
   if (navigator.share) {
     navigator.share({
       title: '엽서 공유',
-      text: '가톨릭대 엽서 🎴',
+      text: '글다',
       url: window.location.href,
     });
   } else {
@@ -13,9 +13,9 @@ export const handleShare = () => {
 
 // 저장
 export const handleSave = () => {
-  const imageUrl = '/assets/Card.svg';
+  const imageUrl = '/assets/Card.png';
   const link = document.createElement('a');
   link.href = imageUrl;
-  link.download = 'Card.svg';
+  link.download = '글다.png';
   link.click();
 };
