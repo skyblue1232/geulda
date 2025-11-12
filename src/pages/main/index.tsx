@@ -3,15 +3,12 @@ import { BottomNav, ControlBar } from '@/shared/components';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import StampBoard from '@/shared/components/main/components/stampBoard/StampBoard';
-
-// ✅ React Query 훅 import
-import { useGetStampStatus } from '@/shared/queries/main';
+import { useGetStampStatus } from '@/shared/main/queries/useGetStampStatus';
 
 export default function MainPage() {
   const router = useRouter();
 
-  // ✅ 스탬프 현황 데이터 가져오기
-  // const { data, isLoading, isError } = useGetStampStatus();
+  const { data, isLoading, isError } = useGetStampStatus();
 
   return (
     <div
@@ -19,7 +16,6 @@ export default function MainPage() {
         'px-[2.4rem] bg-white flex flex-col gap-[1rem] h-full pt-[1.3rem] pb-[12rem]',
       )}
     >
-      {/* 상단 컨트롤바 */}
       <ControlBar
         isLoggedIn={false}
         onLogin={() => {}}
@@ -28,7 +24,6 @@ export default function MainPage() {
       />
 
       <main className='w-full pt-[6.3rem] flex flex-col gap-4 overflow-auto'>
-        {/* 메인 배너 */}
         <section>
           <Image
             src='/assets/bannerMain.svg'
@@ -40,7 +35,6 @@ export default function MainPage() {
           />
         </section>
 
-        {/* 보드판 이동 */}
         <section
           role='button'
           tabIndex={0}
@@ -58,9 +52,7 @@ export default function MainPage() {
           />
         </section>
 
-        {/* ✅ 스탬프 현황 표시 (API 연동) */}
-        <StampBoard count={0} total={10} />
-        {/* {isLoading ? (
+        {isLoading ? (
           <p className='text-gray-400 text-center py-4'>불러오는 중...</p>
         ) : isError ? (
           <p className='text-red-400 text-center py-4'>
@@ -71,7 +63,7 @@ export default function MainPage() {
             count={data?.collectedStampCount ?? 0}
             total={data?.totalStampCount ?? 10}
           />
-        )} */}
+        )}
       </main>
 
       <BottomNav />

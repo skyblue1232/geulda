@@ -7,13 +7,9 @@ export interface StampStatus {
   stampIds: number[];
 }
 
-/**
- * 스탬프 수집 현황 조회 API
- * 비로그인 사용자도 접근 가능
- */
 export const getStampStatus = async (): Promise<StampStatus> => {
   const { data } = await apiAuth.get<ApiResponse<StampStatus>>(
-    '/api/stamps/status',
+    '/api/stamps/collection',
   );
   return data.data;
 };
