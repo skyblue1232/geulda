@@ -1,45 +1,63 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfilePhoto from '@/pages/mypage/components/ProfilePhoto';
 import PostcardContainer from '@/pages/mypage/components/PostcardContainer';
+import LoginRequired from '@/pages/mypage/components/LoginRequired';
+import LogoutConfirm from '@/pages/mypage/components/LogoutConfirm';
 import { EventCard, BottomNav, PopupSet } from '@/shared/components';
+import { useUserStatus } from '@/shared/hooks/useUserStatus';
+import { usePopup } from '@/shared/hooks/mypage/usePopup';
 
 export default function MyPage() {
- const [showLogoutPopup, setShowLogoutPopup] = useState(false); 
-  const handleLogout = () => {
-    setShowLogoutPopup(true);
-  };
+  const { isLoggedIn } = useUserStatus();
+  const {
+    showLoginPopup,
+    showLogoutPopup,
+    openLogin,
+    openLogout,
+    closeLogin,
+    closeLogout,
+  } = usePopup();
+
+  useEffect(() => {
+    if (isLoggedIn === false) {
+      openLogin();
+    }
+  }, [isLoggedIn, openLogin]);
 
   return (
-    <main 
+    <main
       className='w-full min-h-screen bg-white flex flex-col items-center'
-      role="main"
-      aria-label="마이 페이지"
+      role='main'
+      aria-label='마이 페이지'
     >
       <div className='w-full flex flex-col items-center px-[2.3rem] pb-[2rem]'>
         {/* 프로필 */}
-        <section aria-label="프로필 영역" className='w-full flex flex-col items-center mt-[2.4rem] gap-[1.0rem]'>
-          <ProfilePhoto/>
+        <section
+          aria-label='프로필 영역'
+          className='w-full flex flex-col items-center mt-[2.4rem] gap-[1.0rem]'
+        >
+          <ProfilePhoto />
           <p className='text-title-md'>이름</p>
         </section>
 
         {/* 저장한 행사 */}
-        <section aria-label="저장한 행사" className='w-full mt-[1.6rem]'>
+        <section aria-label='저장한 행사' className='w-full mt-[1.6rem]'>
           <p className='text-label-lg mb-[1rem] pl-[1rem]'>저장한 행사</p>
           <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
             <EventCard
-              name='골반 통신 이상 감지'
+              name='행사 이름'
               address='우리집'
-              description='내 골반이 멈추지 않아서 일까?'
+              description='행사 설명'
               variant='gray'
               size='large'
               imageSrc=''
             />
             <EventCard
-              name='이혼 숙려 캠프'
+              name='행사 이름'
               address='우리집'
-              description='앙 이라는 감정'
+              description='행사 설명'
               variant='gray'
               size='large'
               imageSrc=''
@@ -48,7 +66,7 @@ export default function MyPage() {
         </section>
 
         {/* 저장한 엽서 */}
-        <section aria-label="저장한 엽서" className='w-full mt-[1.8rem]'>
+        <section aria-label='저장한 엽서' className='w-full mt-[1.8rem]'>
           <p className='text-label-lg mb-[0.6rem] pl-[1rem]'>저장한 엽서</p>
           <PostcardContainer postcards={[]} />
         </section>
@@ -56,7 +74,7 @@ export default function MyPage() {
         {/* 로그아웃 */}
         <button
           type='button'
-          onClick={handleLogout}
+          onClick={openLogout}
           className='mt-[2.1rem] text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'
         >
           로그아웃
@@ -64,14 +82,8 @@ export default function MyPage() {
       </div>
       <BottomNav />
 
-       {showLogoutPopup && (
-        <PopupSet
-          text="로그아웃 하시겠습니까?"
-          onClose={() => {
-            setShowLogoutPopup(false);
-          }}
-        />
-      )}
+      {showLogoutPopup && <LogoutConfirm onClose={closeLogout} />}
+      {showLoginPopup && <LoginRequired onClose={closeLogin} />}
     </main>
   );
 }
