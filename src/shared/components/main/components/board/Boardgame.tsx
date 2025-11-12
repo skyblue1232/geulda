@@ -10,7 +10,6 @@ const Boardgame = () => {
   const router = useRouter();
   const { data, isLoading, isError } = useGetHasBoardStamp();
 
-  // todo : 스탬프 여부 넘기기
   const places = data?.result?.places ?? [];
   console.log('보드게임 스탬프 현황:', places);
 
@@ -58,7 +57,6 @@ const Boardgame = () => {
                 }
                 className={cn(
                   'aspect-square cursor-pointer flex items-center justify-center transition-all duration-300',
-                  hasStamp ? 'bg-transparent' : 'bg-transparent',
                 )}
               >
                 {hasStamp && (
