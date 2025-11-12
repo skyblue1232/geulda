@@ -6,7 +6,7 @@ import { useCourseSelection } from '@/shared/hooks/useCourseSelection';
 import CourseSelectGroup from '@/shared/components/map/components/CourseSelectGroup';
 import CourseInputSection from '@/shared/components/map/components/CourseInputSection';
 import { useRouter } from 'next/router';
-import { useRecommendCourse } from '@/shared/hooks/course/useRecommendCourse';
+import { useRecommendCourse } from '@/shared/api/course/queries/useRecommendCourse';
 import { useState } from 'react';
 
 export default function CourseSettingPage() {
