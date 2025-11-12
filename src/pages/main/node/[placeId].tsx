@@ -6,16 +6,13 @@ import { getLocation } from '@/shared/utils/handleGetLocation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
-import { useEffect } from 'react';
 
 const Node = () => {
   const router = useRouter();
   const { placeId } = router.query;
 
-  // ✅ 로그인 시 저장해둔 memberId 불러오기
   const memberId = Number(localStorage.getItem('memberId'));
 
-  // ✅ router.isReady 체크로 안전하게 호출
   const { data, isLoading, isError } = useGetPlaceDetail(
     router.isReady ? Number(placeId) : undefined,
     memberId,
