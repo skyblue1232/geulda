@@ -17,13 +17,21 @@ export default function LogoutConfirm({ onClose }: LogoutConfirmProps) {
   const handleLogout = async () => {
     try {
       const refreshToken = getRefreshToken();
+
+      if (!refreshToken) {
+        console.warn('No refresh token found');
+        clearTokens();
+        queryClient.clear();
+        router.replace('/main'); 
+        return;
+      }
+
       await apiWithToken.post('/api/auth/logout', { refreshToken });
+
       clearTokens();
       queryClient.clear();
 
-      router.push('/main');
-
-      router.reload();
+      router.replace('/main');
     } catch (err) {
       console.error('Logout failed:', err);
     } finally {
