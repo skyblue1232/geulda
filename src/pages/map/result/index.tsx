@@ -6,7 +6,7 @@ import { ControlBar, BottomNav, PopupSet } from '@/shared/components';
 import TagGroup from '@/shared/components/map/result/components/TagGroup';
 import ResultList from '@/shared/components/map/result/components/ResultList';
 import ResultMap from '@/shared/components/map/result/components/ResultMap';
-import { useCourseSession } from '@/shared/hooks/course/useCourseSession';
+import { useCourseSession } from '@/shared/api/course/queries/useCourseSession';
 
 export default function CourseResultPage() {
   const router = useRouter();

@@ -1,6 +1,6 @@
 'use client';
 import { useRef, useState } from 'react';
-import { useCourseSession } from '@/shared/hooks/course/useCourseSession';
+import { useCourseSession } from '@/shared/api/course/queries/useCourseSession';
 import { useKakaoCourseMap } from '@/shared/hooks/kakaoMap/useKakaoCourseMap';
 import LocationBubble from '@/shared/components/container/LocationBubble';
 
