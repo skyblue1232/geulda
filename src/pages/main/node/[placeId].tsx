@@ -6,22 +6,28 @@ import { getLocation } from '@/shared/utils/handleGetLocation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
+import { useEffect } from 'react';
 
 const Node = () => {
   const router = useRouter();
   const { placeId } = router.query;
 
+  // ✅ 로그인 시 저장해둔 memberId 불러오기
+  const memberId = Number(localStorage.getItem('memberId'));
+
+  // ✅ router.isReady 체크로 안전하게 호출
   const { data, isLoading, isError } = useGetPlaceDetail(
-    placeId ? Number(placeId) : undefined,
+    router.isReady ? Number(placeId) : undefined,
+    memberId,
   );
 
+  console.log('📍 장소 ID:', placeId);
+  console.log('📍 사용자 ID:', memberId);
   console.log('📍 장소 상세 데이터:', data);
 
   if (isLoading) return <p className='text-center mt-10'>로딩 중...</p>;
-  if (isError || !data) {
-    console.log(isError);
+  if (isError || !data)
     return <p className='text-center mt-10'>데이터를 불러오지 못했습니다 😢</p>;
-  }
 
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
