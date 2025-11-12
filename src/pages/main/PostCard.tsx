@@ -1,19 +1,19 @@
-import { Icon } from '@/shared/icons';
+'use client';
 import { BottomNav, FlipCard, LocationCard } from '@/shared/components';
-import { handleSave, handleShare } from '@/shared/utils/postcardActions';
+import { PostCardActions } from '@/shared/components/main/components/PostCardActions/PostCardActions';
 
 const PostCard = () => {
   const label = '가톨릭대'; // 임시
 
   return (
     <div
-      role="main"
-      aria-label="엽서 획득 페이지"
+      role='main'
+      aria-label='엽서 획득 페이지'
       className='
         relative w-full h-[100vh] px-[2.4rem]
         bg-gradient-to-b from-pink-100 to-white
         flex flex-col justify-start items-center
-        overflow-x-auto overflow-y-hidden mb-[7rem]
+        overflow-x-auto overflow-y-hidden 
       '
     >
       <h1 className='text-headline-md-serif mt-[8rem] mb-[8rem] text-center'>
@@ -26,24 +26,9 @@ const PostCard = () => {
         width={354}
         height={220}
       />
+      <PostCardActions className='mt-[4rem]' />
 
-      {/* 아이콘 버튼 (저장 / 공유) */}
-      <div className='w-full flex justify-end mb-[7rem]'>
-        <button
-          className='flex items-center justify-center w-[4.8rem] h-[4.8rem]'
-          onClick={handleSave}
-          aria-label="엽서 이미지 저장"
-        >
-          <Icon name='Save' color='gray-400' size={28} aria-hidden="true" />
-        </button>
-        <button
-          className='flex items-center justify-center w-[4.8rem] h-[4.8rem]'
-          onClick={handleShare}
-          aria-label="엽서 공유하기"
-        >
-          <Icon name='Export' color='gray-400' size={28} aria-hidden="true" />
-        </button>
-      </div>
+      {/* ✅ 분리된 컴포넌트 */}
 
       <LocationCard
         name={label}
