@@ -13,32 +13,27 @@ interface PostcardData {
   address: string;
   hidden: boolean;
 }
-
 const PostCard = () => {
   const [postcard, setPostcard] = useState<PostcardData | null>(null);
 
-  // 로컬스토리지에서 데이터 불러오기
   useEffect(() => {
     const stored = getPostcard();
-    if (stored) {
-      setPostcard(stored);
-      console.log('📮 불러온 엽서 데이터:', stored);
-    } else {
-      console.warn('로컬스토리지에 엽서 데이터가 없습니다.');
-    }
+    if (stored) setPostcard(stored);
   }, []);
+
+  const { orientation } = useImageOrientation(
+    postcard?.imageUrl || '/assets/card_placeholder.png',
+  );
 
   if (!postcard) {
     return (
       <div className='flex items-center justify-center h-screen'>
-        <p className='text-gray-500 text-lg'>엽서 데이터를 불러오는 중...</p>
+        <p>엽서 데이터를 불러오는 중...</p>
       </div>
     );
   }
 
   const { imageUrl, placeName, description, address } = postcard;
-
-  const { orientation } = useImageOrientation(imageUrl);
 
   const imageProps =
     orientation === 'portrait'

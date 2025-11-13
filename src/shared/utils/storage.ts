@@ -1,13 +1,9 @@
-// src/shared/utils/storage.ts
-
-/**
- * ✅ 클라이언트(브라우저) 환경에서만 localStorage 접근하도록 안전하게 감싸는 유틸
- */
+import { PostcardData } from '../api/main/node/types/stampAcquireTypes';
 
 const isBrowser = typeof window !== 'undefined';
 
 /** 엽서(postcard) 데이터 저장 */
-export const savePostcard = (data: any) => {
+export const savePostcard = (data: PostcardData) => {
   if (!isBrowser) return;
   try {
     localStorage.setItem('postcard', JSON.stringify(data));
