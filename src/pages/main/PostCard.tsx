@@ -5,14 +5,8 @@ import { PostCardActions } from '@/shared/components/main/components/PostCardAct
 import { useImageOrientation } from '@/shared/hooks/useImageOrientation';
 import { cn } from '@/shared/lib';
 import { getPostcard } from '@/shared/utils/storage';
+import { PostcardData } from '@/shared/api/main/node/types/stampAcquireTypes';
 
-interface PostcardData {
-  imageUrl: string;
-  placeName: string;
-  description: string;
-  address: string;
-  hidden: boolean;
-}
 const PostCard = () => {
   const [postcard, setPostcard] = useState<PostcardData | null>(null);
 
