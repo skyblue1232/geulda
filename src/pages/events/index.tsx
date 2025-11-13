@@ -10,9 +10,7 @@ import {
   BottomNav,
   EventCard,
 } from '@/shared/components';
-import { formatDateToISO, isDateWithinRange } from '@/shared/utils/date';
 import { useEvents } from '@/shared/hooks/events/useEvents';
-import { useBookmark } from '@/shared/hooks/events/useBookmark';
 
 export default function EventPage() {
   const router = useRouter();
