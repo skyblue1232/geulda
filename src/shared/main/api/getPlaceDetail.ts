@@ -10,13 +10,9 @@ interface PlaceDetailResponse {
   address: string;
 }
 
-// ✅ memberId를 query 파라미터로 추가
-export const getPlaceDetail = async (placeId: number, memberId: number) => {
+export const getPlaceDetail = async (placeId: number) => {
   const { data } = await apiAuth.get<ApiResponse<PlaceDetailResponse>>(
     `/api/places/${placeId}`,
-    {
-      params: { memberId },
-    },
   );
   return data;
 };
