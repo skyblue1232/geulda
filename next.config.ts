@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    domains: ['maps.googleapis.com'],
+    domains: ['maps.googleapis.com', 'example.com'],
   },
 
   webpack: (config) => {
