@@ -20,7 +20,6 @@ const Node = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
 
-  // ✅ React Query: JWT 기반으로 요청
   const { data, isLoading, isError } = useGetPlaceDetail(
     router.isReady ? Number(placeId) : undefined,
   );
