@@ -18,6 +18,7 @@ export default function CourseResultPage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
     const hasSeenPopup = localStorage.getItem('seenCoursePopup');
     if (!hasSeenPopup) {
       setShowPopup(true);
@@ -38,23 +39,18 @@ export default function CourseResultPage() {
   ].filter(Boolean) as string[];
 
   return (
-    <div className="relative bg-white flex flex-col min-h-screen pb-[12rem] no-scrollbar">
-      <ControlBar
-        isLoggedIn={false}
-        onLogin={() => {}}
-        userName="글다"
-        className="fixed top-[1rem] left-0 right-0 z-50 px-[2rem]"
-      />
+    <div className='relative bg-white flex flex-col min-h-screen pb-[12rem] no-scrollbar'>
+      <ControlBar className='fixed top-[1rem] left-0 right-0 z-50 px-[2rem]' />
 
-      <main className="relative w-full h-full pt-[6.3rem] flex flex-col overflow-hidden">
-        <div className="px-[2.4rem]">
-          <section className="mb-[2rem] text-center">
+      <main className='relative w-full h-full pt-[6.3rem] flex flex-col overflow-hidden'>
+        <div className='px-[2.4rem]'>
+          <section className='mb-[2rem] text-center'>
             <Image
-              src="/assets/bannerMap.svg"
-              alt="여행 결과 배너 이미지"
+              src='/assets/bannerMap.svg'
+              alt='여행 결과 배너 이미지'
               width={354}
               height={79}
-              className="w-full h-auto object-cover block"
+              className='w-full h-auto object-cover block'
             />
           </section>
 
@@ -71,7 +67,7 @@ export default function CourseResultPage() {
               'mt-[1.4rem] w-full text-gray-600',
               viewMode === 'list'
                 ? 'h-[43.6rem] overflow-y-auto no-scrollbar'
-                : 'h-[43.6rem] overflow-hidden'
+                : 'h-[43.6rem] overflow-hidden',
             )}
           >
             {viewMode === 'list' ? (
@@ -87,7 +83,7 @@ export default function CourseResultPage() {
 
       {showPopup && (
         <PopupSet
-          text="새로고침 시 결과가 초기화됩니다."
+          text='새로고침 시 결과가 초기화됩니다.'
           onClose={handlePopupClose}
         />
       )}

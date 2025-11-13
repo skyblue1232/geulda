@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { Icon } from '@/shared/icons';
 import { useRouter } from 'next/router';
 import { cn } from '@/shared/lib';
@@ -29,10 +28,10 @@ export default function LoginPage() {
 
     saveRecentPlatform(platform);
     const base = process.env.NEXT_PUBLIC_BACKEND_URL;
-    if (!base) {  
-   console.error('NEXT_PUBLIC_BACKEND_URL is not defined');      
-   return;  
-  } 
+    if (!base) {
+      console.error('NEXT_PUBLIC_BACKEND_URL is not defined');
+      return;
+    }
     const url = `${base}/oauth2/authorization/${platform}`;
     window.location.href = url;
   };
@@ -105,7 +104,7 @@ export default function LoginPage() {
                 platform='kakao'
                 onClick={() => handleLoginClick('카카오')}
               />
-              {recentPlatform === '카카오' && (
+              {recentPlatform === 'kakao' && (
                 <div
                   className='absolute -top-[2.5rem] left-1/2 -translate-x-1/2 
           w-auto min-w-max h-auto flex-shrink-0 pointer-events-none'
@@ -121,7 +120,7 @@ export default function LoginPage() {
                 platform='google'
                 onClick={() => handleLoginClick('구글')}
               />
-              {recentPlatform === '구글' && (
+              {recentPlatform === 'google' && (
                 <div
                   className='absolute -top-[2.5rem] left-1/2 -translate-x-1/2 
           w-auto min-w-max h-auto flex-shrink-0 pointer-events-none'

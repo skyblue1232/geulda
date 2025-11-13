@@ -2,11 +2,17 @@
 
 import Image from 'next/image';
 import { cn } from '@/shared/lib';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
+
+interface PostcardItem {
+  postcardId: number;
+  imageUrl: string;
+  placeName: string;
+}
 
 interface PostcardContainerProps {
-  postcards: string[];
-  onClickCard?: (index: number) => void;
+  postcards: PostcardItem[];
+  onClickCard?: (id: number) => void;
   className?: string;
   bordered?: boolean;
 }
@@ -21,13 +27,9 @@ const postcardContainerStyle = cva(
   `,
   {
     variants: {
-      bordered: {
-        false: 'border-none',
-      },
+      bordered: { false: 'border-none' },
     },
-    defaultVariants: {
-      bordered: true,
-    },
+    defaultVariants: { bordered: true },
   },
 );
 
@@ -35,7 +37,7 @@ const postcardGridStyle = `
  grid grid-rows-2 grid-flow-col
 auto-cols-[minmax(70px,70px)]
 gap-[0.6rem]
- `;
+`;
 
 const postcardCardStyle = cva(
   `
@@ -50,9 +52,7 @@ const postcardCardStyle = cva(
         false: 'cursor-default',
       },
     },
-    defaultVariants: {
-      interactive: true,
-    },
+    defaultVariants: { interactive: true },
   },
 );
 
@@ -69,43 +69,42 @@ export default function PostcardContainer({
     .map((_, i) => postcards[i] ?? null);
 
   return (
-  <div
-    className={cn(
-      postcardContainerStyle({ bordered }),
-      className,
-      postcards.length > 8 && 'overflow-x-auto',
-    )}
-  >
     <div
       className={cn(
-        postcardGridStyle,
-        postcards.length <= 8 && 'justify-center',
+        postcardContainerStyle({ bordered }),
+        className,
+        postcards.length > 8 && 'overflow-x-auto',
       )}
     >
-      {filledSlots.map((src, idx) => (
-        <button
-          key={idx}
-          onClick={() => src && onClickCard?.(idx)}
-          disabled={!src}
-          aria-disabled={!src}
-          className={cn(
-            postcardCardStyle({ interactive: !!src }),
-            !src && 'items-center justify-center bg-gray-200',
-          )}
-        >
-          {src && (
-            <Image
-              src={src}
-              alt={`엽서 ${idx + 1}`}
-              width={200}
-              height={200}
-              className="w-full h-full object-cover"
-            />
-          )}
-        </button>
-      ))}
+      <div
+        className={cn(
+          postcardGridStyle,
+          postcards.length <= 8 && 'justify-center',
+        )}
+      >
+        {filledSlots.map((card, idx) => (
+          <button
+            key={card?.postcardId ?? idx}
+            onClick={() => card && onClickCard?.(card.postcardId)}
+            disabled={!card}
+            aria-disabled={!card}
+            className={cn(
+              postcardCardStyle({ interactive: !!card }),
+              !card && 'items-center justify-center bg-gray-200',
+            )}
+          >
+            {card && (
+              <Image
+                src={card.imageUrl}
+                alt={card.placeName || `엽서 ${idx + 1}`}
+                width={200}
+                height={200}
+                className="w-full h-full object-cover"
+              />
+            )}
+          </button>
+        ))}
+      </div>
     </div>
-  </div>
-);
-
+  );
 }
