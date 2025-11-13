@@ -9,7 +9,7 @@ const Overlay = ({ onClick, opacity = 30, className }: OverlayProps) => {
     <div
       onClick={onClick}
       className={`
-        fixed inset-0 z-[40]
+        fixed inset-0 z-[9999]
         transition-opacity duration-300
         ${className ?? ''}
       `}
