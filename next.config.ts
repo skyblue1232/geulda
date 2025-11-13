@@ -17,8 +17,14 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    domains: ['maps.googleapis.com'],
-  },
+  domains: ['maps.googleapis.com'],
+  remotePatterns: [
+    { protocol: 'https', hostname: 'mblogthumb-phinf.pstatic.net' },
+    { protocol: 'https', hostname: 'blogfiles.pstatic.net' },
+    { protocol: 'https', hostname: 'postfiles.pstatic.net' },
+  ],
+},
+
 
   webpack: (config) => {
     const svgRule = config.module.rules.find(

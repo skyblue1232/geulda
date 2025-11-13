@@ -18,3 +18,22 @@ export interface EventData {
   imageSrc: string;
   liked: boolean;
 }
+
+export interface RelatedEvent {
+  eventId: number;
+  title: string;
+  imageUrl: string;
+}
+
+export interface EventDetailResponse {
+  success: boolean;
+  code: string;
+  message: string;
+  data: EventDetail;
+  timestamp: string;
+}
+
+export interface EventDetail extends EventResponse {
+  externalUrl?: string;
+  nextEvents: RelatedEvent[];
+}
