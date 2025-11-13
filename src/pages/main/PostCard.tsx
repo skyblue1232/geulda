@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib';
 
 const PostCard = () => {
   const label = '가톨릭대';
-  const frontSrc = '/assets/card3.png';
+  const frontSrc = '/assets/card.png';
 
   const { orientation } = useImageOrientation(frontSrc);
 
@@ -20,18 +20,20 @@ const PostCard = () => {
     <div
       role='main'
       aria-label='엽서 획득 페이지'
-      className='
-        relative w-full h-[100vh] px-[2.4rem]
-        bg-gradient-to-b from-pink-100 to-white
-        flex flex-col items-center
-        overflow-x-hidden overflow-y-auto
-      '
+      className={cn(
+        'relative w-full h-[100vh] px-[2.4rem] bg-gradient-to-b from-pink-100 to-white flex flex-col items-center overflow-x-hidden overflow-y-auto',
+        orientation === 'portrait' ? 'mb-[5rem]   ' : 'mb-[0rem]  ',
+      )}
     >
-      <h1 className='text-headline-md-serif mt-[10rem] text-center'>
+      <h1
+        className={cn(
+          'text-headline-md-serif text-center',
+          orientation === 'portrait' ? 'mt-[6rem]   ' : 'mt-[10rem]  ',
+        )}
+      >
         {label}의 엽서 획득!
       </h1>
-
-      {/* ✅ orientation에 따라 margin 동적으로 조절 */}
+      {/*  orientation에 따라 margin 동적으로 조절 */}
       <div
         className={cn(
           'flex flex-col justify-center items-center relative',
@@ -46,7 +48,6 @@ const PostCard = () => {
           height={imageProps.height}
         />
 
-        {/* ✅ 세로일 때는 카드 높이만큼 여백 확보 */}
         <div
           className={cn(
             'w-full flex justify-end',
@@ -58,7 +59,6 @@ const PostCard = () => {
           <PostCardActions />
         </div>
       </div>
-
       <LocationCard
         name={label}
         address='경기도 부천시 가톨릭대길 43'
@@ -66,7 +66,6 @@ const PostCard = () => {
         variant='gray'
         size='large'
       />
-
       <BottomNav />
     </div>
   );
