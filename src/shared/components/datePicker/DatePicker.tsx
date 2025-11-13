@@ -85,8 +85,8 @@ export function DatePicker({
             month={displayMonth}
             onMonthChange={setDisplayMonth}
             captionLayout='dropdown'
-            disabled={{ before: startOfToday }}
-            fromDate={startOfToday}
+            // disabled={{ before: startOfToday }}
+            // fromDate={startOfToday}
             toYear={new Date(new Date().getFullYear() + 5, 0, 1).getFullYear()}
             {...calendarProps}
           />

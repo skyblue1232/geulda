@@ -1,38 +1,41 @@
 import { apiWithToken } from '@/shared/api/instance';
 import type { ApiResponse } from '@/shared/types/authtypes';
-
-export interface EventData {
-  id: number;
-  name: string;
-  address: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  imageSrc?: string;
-}
+import type { EventData, EventResponse } from '@/shared/types/eventtypes';
+import { mapEvent } from '@/shared/hooks/events/EventMapper';
 
 // 전체 행사 목록 조회
 export const fetchEvents = async (
   date: string,
-  memberId: number,
 ): Promise<ApiResponse<EventData[]>> => {
   const res = await apiWithToken.get('/api/events', {
-    params: { date, memberId },
+    params: { date },
   });
-  return res.data;
+
+  const mapped = res.data.data.map((item: EventResponse) => mapEvent(item));
+
+  return {
+    ...res.data,
+    data: mapped,
+  };
 };
 
-// 단일 행사 상세 조회
+// 행사 상세 조회
 export const fetchEventDetail = async (
   eventId: number,
 ): Promise<ApiResponse<EventData>> => {
   const res = await apiWithToken.get(`/api/events/${eventId}`);
-  return res.data;
+
+  const mapped = mapEvent(res.data.data);
+
+  return {
+    ...res.data,
+    data: mapped,
+  };
 };
 
 // 북마크 추가
 export const postBookmark = async (eventId: number): Promise<ApiResponse<null>> => {
-  const res = await apiWithToken.post(`/api/bookmarks/${eventId}`);
+  const res = await apiWithToken.post(`/api/events/${eventId}/bookmark`);
   return res.data;
 };
 
@@ -40,7 +43,7 @@ export const postBookmark = async (eventId: number): Promise<ApiResponse<null>> 
 export const deleteBookmark = async (
   eventId: number,
 ): Promise<ApiResponse<null>> => {
-  const res = await apiWithToken.delete(`/api/bookmarks/${eventId}`);
+  const res = await apiWithToken.delete(`/api/events/${eventId}/bookmark`);
   return res.data;
 };
 
@@ -48,6 +51,6 @@ export const deleteBookmark = async (
 export const fetchBookmarkStatus = async (
   eventId: number,
 ): Promise<ApiResponse<{ isBookmarked: boolean }>> => {
-  const res = await apiWithToken.get(`/api/bookmarks/${eventId}`);
+  const res = await apiWithToken.get(`/api/events/${eventId}/bookmark`);
   return res.data;
 };

@@ -17,18 +17,13 @@ import { useBookmark } from '@/shared/hooks/events/useBookmark';
 export default function EventPage() {
   const router = useRouter();
   const [date, setDate] = useState<Date>();
-  const { events } = useEvents();
+  const { events } = useEvents(date);
 
-  const selectedDate = formatDateToISO(date);
-  const filteredEvents = events.filter((event) =>
-    isDateWithinRange(selectedDate, event.startDate, event.endDate),
-  );
+  const filteredEvents = events;
 
   const handleCardClick = (id: number) => {
     router.push(`/events/${id}`);
   };
-
-
 
   return (
     <div
@@ -37,21 +32,25 @@ export default function EventPage() {
       )}
     >
       {/* 헤더 */}
-      <ControlBar className="fixed top-[1rem] left-0 right-0 z-50 px-[2rem]" />
+      <ControlBar className='fixed top-[1rem] left-0 right-0 z-50 px-[2rem]' />
 
       {/* 본문 콘텐츠 */}
       <main className='w-full pt-[6.3rem] flex flex-col items-center'>
         {/* 날짜 선택 */}
         <div className='w-full mt-[3.7rem] flex justify-start'>
           {/* 스크린리더가 “날짜 선택”으로 읽히도록 추가 */}
-          <label htmlFor="event-date" className="sr-only">
+          <label htmlFor='event-date' className='sr-only'>
             행사 날짜 선택
           </label>
-          <DatePicker ariaLabel="행사 날짜 선택" value={date} onChange={setDate} />
+          <DatePicker
+            ariaLabel='행사 날짜 선택'
+            value={date}
+            onChange={setDate}
+          />
         </div>
 
         {/* 행사카드 & 빈화면 */}
-         {filteredEvents.length > 0 ? (
+        {filteredEvents.length > 0 ? (
           <section
             aria-label='이벤트 목록'
             className={cn(
@@ -60,9 +59,6 @@ export default function EventPage() {
             )}
           >
             {filteredEvents.map((event) => {
-
-              const { isBookmarked, toggleBookmark } = useBookmark(event.id);
-
               return (
                 <div
                   key={event.id}
@@ -70,24 +66,21 @@ export default function EventPage() {
                   className='cursor-pointer'
                 >
                   <EventCard
+                    eventId={event.id}
                     name={event.name}
                     address={event.address}
                     description={event.description}
                     variant='gray'
                     size='medium'
                     imageSrc={event.imageSrc ?? ''}
-                    liked={isBookmarked}
-                    onLikeClick={(e) => {
-                      e.stopPropagation();
-                      toggleBookmark();
-                    }}
+                    liked={event.liked}
                   />
                 </div>
               );
             })}
           </section>
         ) : (
-          <div 
+          <div
             className='flex flex-col items-center justify-center text-center mt-[15rem]'
             role='status'
             aria-live='polite'

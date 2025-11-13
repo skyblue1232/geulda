@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon } from '@/shared/icons';
 import { Card } from '@/shared/components/container/Card';
 import { cn } from '@/shared/lib';
 import Image from 'next/image';
+import { useBookmark } from '@/shared/hooks/events/useBookmark';
 
 interface EventCardProps {
+  eventId: number;
   name: string;
   address: string;
   description: string;
@@ -18,6 +20,7 @@ interface EventCardProps {
 }
 
 const EventCard = ({
+  eventId,
   name,
   address,
   description,
@@ -27,6 +30,13 @@ const EventCard = ({
   liked = false,
   onLikeClick,
 }: EventCardProps) => {
+  const { isBookmarked, setIsBookmarked, toggleBookmark } = useBookmark(eventId);
+
+useEffect(() => {
+  setIsBookmarked(liked);
+}, [liked]);
+
+
   return (
     <Card
       variant={variant}
@@ -98,12 +108,16 @@ const EventCard = ({
               color={
                 liked ? 'red-400' : variant === 'mint' ? 'mint-400' : 'gray-300'
               }
-              fillColor={liked ? 'red-300' : undefined}
-              onClick={onLikeClick}
-              className='cursor-pointer'
               aria-label={liked ? '좋아요 취소' : '좋아요'}
+              fillColor={isBookmarked ? 'red-300' : undefined}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleBookmark();
+              }}
+              className='cursor-pointer'
             />
           </div>
+
           {/* 행사 주소 */}
           <div
             className={cn(
@@ -138,11 +152,12 @@ const EventCard = ({
                     ? 'mint-400'
                     : 'gray-300'
                 }
-                fillColor={liked ? 'red-300' : undefined}
-                onClick={onLikeClick}
-                isInteractive
-                pressed={liked}
                 aria-label={liked ? '좋아요 취소' : '좋아요'}
+                fillColor={isBookmarked ? 'red-300' : undefined}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleBookmark();
+                }}
                 className='cursor-pointer'
               />
             </div>
