@@ -23,9 +23,9 @@ const LocationCard = ({
 }: LocationCardProps) => {
   const [liked, setLiked] = useState(false);
 
-  const handleLikeClick = () => {
-    setLiked((prev) => !prev);
-  };
+  // const handleLikeClick = () => {
+  //   setLiked((prev) => !prev);
+  // };
   return (
     <Card variant={variant} size={size}>
       {/* Medium 카드 */}
