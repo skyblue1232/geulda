@@ -16,8 +16,8 @@ const PostCard = () => {
   // ✅ 비율에 따라 이미지 크기 설정
   const imageProps =
     orientation === 'portrait'
-      ? { width: 220, height: 354, backSrc: '/assets/card4.png' }
-      : { width: 354, height: 220, backSrc: '/assets/card2.png' };
+      ? { width: 220, height: 354, backSrc: '/assets/letter_card_backv.png' }
+      : { width: 354, height: 220, backSrc: '/assets/letter_card_backh.png' };
 
   return (
     <div
