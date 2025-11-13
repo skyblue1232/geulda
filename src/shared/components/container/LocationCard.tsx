@@ -85,23 +85,6 @@ const LocationCard = ({
                 {name}
               </span>
             </div>
-
-            <div className='flex-shrink-0 ml-auto'>
-              <Icon
-                name='HeartStraight'
-                size={20}
-                color={
-                  liked
-                    ? 'red-400'
-                    : variant === 'mint'
-                    ? 'mint-400'
-                    : 'gray-300'
-                }
-                fillColor={liked ? 'red-300' : undefined}
-                onClick={handleLikeClick}
-                className='cursor-pointer'
-              />
-            </div>
           </div>
           {/* 장소 설명 */}
           <p
