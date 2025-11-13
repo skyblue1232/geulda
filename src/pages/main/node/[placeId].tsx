@@ -13,13 +13,19 @@ import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
 import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
 import { useUserStatus } from '@/shared/hooks/useUserStatus';
+import { useStampAcquire } from '@/shared/api/main/node/queries/useStampAcquire'; 
 
 const Node = () => {
   const router = useRouter();
   const { placeId } = router.query;
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false); 
   const { isLoggedIn } = useUserStatus();
 
+  // 스탬프 획득 훅
+  const { mutate: acquireStamp } = useStampAcquire();
+
+  // 장소 상세 조회 
   const { data, isLoading, isError } = useGetPlaceDetail(
     router.isReady ? Number(placeId) : undefined,
   );
@@ -30,17 +36,55 @@ const Node = () => {
 
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
+  // 스탬프 찍기 버튼 클릭 핸들러
   const handleStampClick = () => {
     if (!isLoggedIn) {
       setShowLoginPopup(true);
       return;
     }
 
+    if (isCompleted) return;
+
+    // 위치 가져와서 API 호출
     getLocation(
-      (pos) => console.log('📍 현재 위치:', pos.coords),
-      (err) => console.error('⚠️ 위치 에러:', err.message),
+      (pos) => {
+        const body = {
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        };
+        const placeIdNum = Number(placeId);
+
+        console.log('📍 현재 위치:', body);
+
+        acquireStamp(
+          { placeId: placeIdNum, body },
+          {
+            onSuccess: (res) => {
+              console.log('스탬프 획득 성공:', res.data);
+
+              const { postcard } = res.data;
+              const { hidden } = postcard;
+
+              // 항상 videoPlay로 이동하되, hidden이 true면 쿼리로 전달
+              router.push({
+                pathname: `/main/videoPlay`,
+                query: {
+                  placeName: postcard.placeName,
+                  ...(hidden ? { hidden: 'true' } : {}),
+                },
+              });
+            },
+            onError: (err) => {
+              console.error('스탬프 획득 실패:', err);
+              setShowErrorPopup(true); 
+            },
+          },
+        );
+      },
+      (err) => {
+        console.error('위치 정보를 가져올 수 없습니다:', err.message);
+      },
     );
-    router.push('/main/HiddenReward');
   };
 
   return (
@@ -92,6 +136,7 @@ const Node = () => {
         <AddressCopy variant='mint' value={address} />
       </main>
 
+      {/* 로그인 필요 팝업 */}
       {showLoginPopup && (
         <PopupSet
           text='로그인이 필요한 서비스입니다.'
@@ -99,6 +144,14 @@ const Node = () => {
             setShowLoginPopup(false);
             router.push('/auth');
           }}
+        />
+      )}
+
+      {/* 위치 에러 팝업 */}
+      {showErrorPopup && (
+        <PopupSet
+          text='해당 위치를 다시 확인해 주세요.'
+          onClose={() => setShowErrorPopup(false)}
         />
       )}
     </div>
