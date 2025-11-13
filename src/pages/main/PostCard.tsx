@@ -1,11 +1,10 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { BottomNav, FlipCard, LocationCard } from '@/shared/components';
 import { PostCardActions } from '@/shared/components/main/components/PostCardActions/PostCardActions';
 import { useImageOrientation } from '@/shared/hooks/useImageOrientation';
 import { cn } from '@/shared/lib';
-import { getPostcard } from '@/shared/utils/storage'; // 👈 로컬스토리지 유틸 import
+import { getPostcard } from '@/shared/utils/storage';
 
 interface PostcardData {
   imageUrl: string;
@@ -18,7 +17,7 @@ interface PostcardData {
 const PostCard = () => {
   const [postcard, setPostcard] = useState<PostcardData | null>(null);
 
-  // ✅ 로컬스토리지에서 데이터 불러오기
+  // 로컬스토리지에서 데이터 불러오기
   useEffect(() => {
     const stored = getPostcard();
     if (stored) {
@@ -29,7 +28,6 @@ const PostCard = () => {
     }
   }, []);
 
-  // 데이터가 아직 없으면 로딩 표시
   if (!postcard) {
     return (
       <div className='flex items-center justify-center h-screen'>
@@ -42,7 +40,6 @@ const PostCard = () => {
 
   const { orientation } = useImageOrientation(imageUrl);
 
-  // orientation에 따라 카드 크기와 뒷면 이미지 설정
   const imageProps =
     orientation === 'portrait'
       ? { width: 220, height: 354, backSrc: '/assets/letter_card_backv.png' }
