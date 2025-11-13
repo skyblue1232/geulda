@@ -13,7 +13,7 @@ export const savePostcard = (data: PostcardData) => {
 };
 
 /** 엽서(postcard) 데이터 불러오기 */
-export const getPostcard = () => {
+export const getPostcard = (): PostcardData | null => {
   if (!isBrowser) return null;
   try {
     const stored = localStorage.getItem('postcard');
