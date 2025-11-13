@@ -11,9 +11,8 @@ import {
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
-// import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
+import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
 import { useUserStatus } from '@/shared/hooks/useUserStatus';
-import { getMemberIdFromToken } from '@/shared/utils/token';
 
 const Node = () => {
   const router = useRouter();
@@ -21,33 +20,15 @@ const Node = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
 
-  // 임시 데이터
-  const placeName = '장소 이름';
-  const imageUrl = '';
-  const isCompleted = false;
-  const description = '장소 설명이 여기에 표시됩니다.';
-  const address = '서울특별시 강남구 테헤란로 123';
+  const { data, isLoading, isError } = useGetPlaceDetail(
+    router.isReady ? Number(placeId) : undefined,
+  );
 
-  // ✅ JWT에서 memberId 추출
-  const memberId = getMemberIdFromToken();
+  if (isLoading) return <p className='text-center mt-10'>로딩 중...</p>;
+  if (isError || !data)
+    return <p className='text-center mt-10'>데이터를 불러오지 못했습니다 😢</p>;
 
-  // ✅ React Query — placeId와 memberId 모두 있을 때만 실행
-  // const { data, isLoading, isError } = useGetPlaceDetail(
-  //   router.isReady ? Number(placeId) : undefined,
-  //   memberId ?? undefined,
-  // );
-
-  console.log('📍 장소 ID:', placeId);
-  console.log('👤 사용자 ID:', memberId);
-
-  //주석 처리된 부분 복원 예정
-  // console.log('📍 장소 상세 데이터:', data);
-
-  // if (isLoading) return <p className='text-center mt-10'>로딩 중...</p>;
-  // if (isError || !data)
-  //   return <p className='text-center mt-10'>데이터를 불러오지 못했습니다 😢</p>;
-
-  // const { isCompleted, imageUrl, placeName, description, address } = data.data;
+  const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
   const handleStampClick = () => {
     if (!isLoggedIn) {
