@@ -96,6 +96,7 @@ const EventDetailPage = () => {
             variant='gray'
             size='large'
             imageSrc={imageUrl ?? ''}
+            liked={eventDetail.isBookmarked}
           />
           {/* 관련 행사 */}
           <div

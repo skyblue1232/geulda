@@ -11,7 +11,14 @@ export const fetchEvents = async (
     params: { date },
   });
 
-  const mapped = res.data.data.map((item: EventResponse) => mapEvent(item));
+  const mapped = await Promise.all(
+  res.data.data.map(async (item: EventResponse) => {
+    const detail = await apiWithToken.get(`/api/events/${item.eventId}`);
+    const fullItem = { ...item, imageUrl: detail.data.data.imageUrl };
+
+    return mapEvent(fullItem);
+  })
+);
 
   return {
     ...res.data,
@@ -34,7 +41,9 @@ export const fetchEventDetail = async (
 };
 
 // 북마크 추가
-export const postBookmark = async (eventId: number): Promise<ApiResponse<null>> => {
+export const postBookmark = async (
+  eventId: number,
+): Promise<ApiResponse<null>> => {
   const res = await apiWithToken.post(`/api/events/${eventId}/bookmark`);
   return res.data;
 };

@@ -6,6 +6,7 @@ export interface EventResponse {
   startDate?: string;
   endDate?: string;
   imageUrl?: string;
+  thumbnailUrl?: string;
   isBookmarked?: boolean;
 }
 export interface EventData {
