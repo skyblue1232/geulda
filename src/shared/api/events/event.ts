@@ -12,13 +12,17 @@ export const fetchEvents = async (
   });
 
   const mapped = await Promise.all(
-  res.data.data.map(async (item: EventResponse) => {
-    const detail = await apiWithToken.get(`/api/events/${item.eventId}`);
-    const fullItem = { ...item, imageUrl: detail.data.data.imageUrl };
+    res.data.data.map(async (item: EventResponse) => {
+      const detail = await apiWithToken.get(`/api/events/${item.eventId}`);
+      const fullItem = {
+        ...item,
+        imageUrl: detail.data.data.imageUrl,
+        isBookmarked: detail.data.data.isBookmarked,
+      };
 
-    return mapEvent(fullItem);
-  })
-);
+      return mapEvent(fullItem);
+    }),
+  );
 
   return {
     ...res.data,
@@ -32,11 +36,9 @@ export const fetchEventDetail = async (
 ): Promise<ApiResponse<EventData>> => {
   const res = await apiWithToken.get(`/api/events/${eventId}`);
 
-  const mapped = mapEvent(res.data.data);
-
   return {
     ...res.data,
-    data: mapped,
+    data: res.data.data,
   };
 };
 

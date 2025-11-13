@@ -16,12 +16,6 @@ const EventDetailPage = () => {
   const { data: eventDetail, isLoading, isError } = useEventDetail(eventId);
 
   useEffect(() => {
-    if (isLoading) {
-      router.push('/loading');
-    }
-  }, [isLoading, router]);
-
-  useEffect(() => {
     if (!isLoading && (isError || !eventDetail)) {
       router.replace('/events');
     }
