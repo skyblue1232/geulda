@@ -1,14 +1,20 @@
-export const handleShare = (title: string, imageUrl: string, url?: string) => {
-  if (navigator.share) {
-    navigator
-      .share({
-        title: `${title} 엽서 공유`,
-        text: '내가 획득한 엽서를 확인해보세요!',
-        url: url ?? window.location.href,
-      })
-      .catch((err) => console.error('공유 실패:', err));
+export const handleShare = async (imageUrl: string, title: string) => {
+  if (navigator.canShare && navigator.canShare({ files: [] })) {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    const file = new File([blob], `${title}.png`, { type: blob.type });
+
+    try {
+      await navigator.share({
+        title: `${title} 엽서`,
+        text: '내가 획득한 엽서를 공유합니다!',
+        files: [file],
+      });
+    } catch (err) {
+      console.error('공유 실패:', err);
+    }
   } else {
-    alert('이 브라우저에서는 공유 기능을 지원하지 않습니다.');
+    alert('이 브라우저에서는 이미지 공유를 지원하지 않습니다.');
   }
 };
 
