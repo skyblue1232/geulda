@@ -10,7 +10,7 @@ const PostCard = () => {
 
   const { orientation } = useImageOrientation(frontSrc);
 
-  // ✅ 비율에 따라 이미지 크기 설정
+  // 비율에 따라 이미지 크기 설정
   const imageProps =
     orientation === 'portrait'
       ? { width: 220, height: 354, backSrc: '/assets/letter_card_backv.png' }

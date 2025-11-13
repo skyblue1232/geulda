@@ -12,7 +12,7 @@ export const PostCardActions = ({
   placeName,
 }: PostCardActionsProps) => {
   return (
-    <div className='w-full flex justify-end gap-[1.6rem] mb-[7rem]'>
+    <div className='w-full flex justify-end gap-[1.2rem]'>
       <button
         className='flex items-center justify-center w-[4.8rem] h-[4.8rem]'
         onClick={() => handleSave(imageUrl, placeName)}
