@@ -6,14 +6,18 @@ const ICON_DIR = path.resolve(__dirname, 'src/shared/icons/source');
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-   async redirects() {
+  async redirects() {
     return [
       {
-        source: '/',          
-        destination: '/main', 
-        permanent: false, 
+        source: '/',
+        destination: '/main',
+        permanent: false,
       },
     ];
+  },
+
+  images: {
+    domains: ['maps.googleapis.com'],
   },
 
   webpack: (config) => {
