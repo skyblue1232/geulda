@@ -22,22 +22,20 @@ export default function LogoutConfirm({ onClose }: LogoutConfirmProps) {
         console.warn('No refresh token found');
         clearTokens();
         queryClient.clear();
-        router.replace('/main'); 
+        router.replace('/main');
         return;
       }
 
       await apiWithToken.post('/api/auth/logout', { refreshToken });
-
-      clearTokens();
-      queryClient.clear();
-
-      router.replace('/main');
     } catch (err) {
       console.error('Logout failed:', err);
     } finally {
+      clearTokens();
+      queryClient.clear();
+      router.replace('/main');
       onClose();
     }
   };
 
-  return <PopupSet text="로그아웃 하시겠습니까?" onClose={handleLogout} />;
+  return <PopupSet text='로그아웃 하시겠습니까?' onClose={handleLogout} />;
 }

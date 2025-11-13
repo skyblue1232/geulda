@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import type { AxiosError } from 'axios';
 import ProfilePhoto from '@/pages/mypage/components/ProfilePhoto';
 import PostcardContainer from '@/pages/mypage/components/PostcardContainer';
 import LoginRequired from '@/pages/mypage/components/LoginRequired';
@@ -21,13 +22,16 @@ export default function MyPage() {
     closeLogout,
   } = usePopup();
 
-  const { data, isError, refetch } = useMyPageQuery(!!isLoggedIn);
+  const { data, isError, error, refetch } = useMyPageQuery(!!isLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn === false || isError) {
+    const isUnauthorized =
+      isError && (error as AxiosError)?.response?.status === 401;
+
+    if (isLoggedIn === false || isUnauthorized) {
       openLogin();
     }
-  }, [isLoggedIn, isError, openLogin]);
+  }, [isLoggedIn, isError, error, openLogin]);
 
   useEffect(() => {
     if (isLoggedIn) {
