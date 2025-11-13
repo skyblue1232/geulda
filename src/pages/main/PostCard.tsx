@@ -56,7 +56,7 @@ const PostCard = () => {
               : 'mt-[1rem] mb-[6rem]',
           )}
         >
-          <PostCardActions />
+          <PostCardActions imageUrl={frontSrc} placeName={label} />
         </div>
       </div>
       <LocationCard
