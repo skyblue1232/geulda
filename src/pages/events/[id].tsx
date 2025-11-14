@@ -7,6 +7,7 @@ import { cn } from '@/shared/lib';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEventDetail } from '@/shared/hooks/events/useEventDetail';
+import { useBookmark } from '@/shared/hooks/events/useBookmark';
 
 const EventDetailPage = () => {
   const router = useRouter();
@@ -14,6 +15,8 @@ const EventDetailPage = () => {
 
   const eventId = Number(id);
   const { data: eventDetail, isLoading, isError } = useEventDetail(eventId);
+
+  const { isBookmarked, toggleBookmark } = useBookmark(eventId);
 
   useEffect(() => {
     if (!isLoading && (isError || !eventDetail)) {
@@ -90,7 +93,6 @@ const EventDetailPage = () => {
             variant='gray'
             size='large'
             imageSrc={imageUrl ?? ''}
-            liked={eventDetail.isBookmarked}
           />
           {/* 관련 행사 */}
           <div
@@ -109,7 +111,6 @@ const EventDetailPage = () => {
                   imageSrc={item.imageUrl}
                   variant='gray'
                   size='small'
-                  liked={false}
                 />
               </div>
             ))}

@@ -16,7 +16,6 @@ interface EventCardProps {
   variant?: 'gray' | 'mint';
   size?: 'small' | 'medium' | 'large';
   imageSrc?: string;
-  liked?: boolean;
 }
 
 const EventCard = ({
@@ -27,19 +26,14 @@ const EventCard = ({
   variant = 'gray',
   size = 'medium',
   imageSrc = '',
-  liked = false,
 }: EventCardProps) => {
   const {
     isBookmarked,
-    setIsBookmarked,
     toggleBookmark,
     requireLogin,
     setRequireLogin,
   } = useBookmark(eventId);
 
-  useEffect(() => {
-    setIsBookmarked(liked);
-  }, [liked, setIsBookmarked]);
 
   return (
     <>
