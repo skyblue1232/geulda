@@ -38,11 +38,7 @@ export default function LoginPage() {
 
   //비회원 로그인
   const handleGuestClick = () => {
-    if (document.referrer && document.referrer !== window.location.href) {
-      router.back();
-    } else {
-      router.push('/main');
-    }
+    router.replace('/main');
   };
 
   return (
