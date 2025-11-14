@@ -17,7 +17,13 @@ const MapPage = () => {
     >
       <Header
         title="코스 추천"
-        onClick={() => router.back()} 
+        onClick={() => {
+          if (window.history.length > 1) {
+            router.back();
+          } else {
+            router.push('/map');
+          }
+        }}
       />
 
       {sessionId ? (
