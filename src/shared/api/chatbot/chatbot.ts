@@ -39,8 +39,8 @@ export const createChatSession = async (): Promise<string> => {
   );
 
   if (res.status >= 400) {
-    console.error('session create failed:', res.status, res.data);
-    throw new Error(`Session create failed: ${res.status}`);
+    console.error('세션 생성 실패:', res.status, res.data);
+    throw new Error(`세션 생성 실패: ${res.status}`);
   }
 
   const d = res.data;
@@ -48,8 +48,8 @@ export const createChatSession = async (): Promise<string> => {
     d?.result?.sessionId ?? d?.data?.sessionId ?? d?.sessionId ?? null;
 
   if (!sessionId) {
-    console.error('Unexpected session response shape:', d);
-    throw new Error('Invalid session response: sessionId missing');
+    console.error('예상치 못한 세션 생성 응답 형식:', d);
+    throw new Error('유효하지 않은 세션 응답: sessionId가 없습니다.');
   }
 
   return sessionId;
@@ -76,16 +76,16 @@ export const fetchChatResponse = async (
   );
 
   if (res.status >= 400) {
-    console.error('chat failed:', res.status, res.data);
-    throw new Error(`Chat failed: ${res.status}`);
+    console.error('챗봇 응답 실패:', res.status, res.data);
+    throw new Error(`챗봇 응답 실패: ${res.status}`);
   }
 
   const d = res.data;
   const answer = d?.result?.message ?? d?.data?.message ?? d?.answer ?? null;
 
   if (!answer) {
-    console.error('Unexpected chat response shape:', d);
-    throw new Error('Invalid chat response: message missing');
+    console.error('예상치 못한 챗봇 응답 형식:', d);
+    throw new Error('유효하지 않은 챗봇 응답: message가 없습니다.');
   }
 
   return answer;
