@@ -31,7 +31,7 @@ export const BottomNav = () => {
         rounded-[37.07px]
         bg-mint-50 border border-mint-300
       '
-      aria-label='Bottom navigation'
+      aria-label='하단 내비게이션'
     >
       {NAV_ITEMS.map((item) => {
         const isActive =

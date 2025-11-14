@@ -1,17 +1,48 @@
 'use client';
-import { useState } from 'react';
 import { Icon } from '@/shared/icons';
+import { useRouter } from 'next/router';
 import { cn } from '@/shared/lib';
-import LoginButton from '@/pages/auth/components/LoginButton';
-import RecentLoginBubble from '@/pages/auth/components/RecentLoginBubble';
+import LoginButton from '@/shared/components/auth/LoginButton';
+import RecentLoginBubble from '@/shared/components/auth/RecentLoginBubble';
+import { useRecentLogin } from '@/shared/hooks/useRecentLogin';
 
 export default function LoginPage() {
-  const [recentPlatform, setRecentPlatform] = useState<string | null>(null);
+  const { recentPlatform, saveRecentPlatform } = useRecentLogin();
+  const router = useRouter();
+  const PLATFORM = {
+    KAKAO: 'kakao',
+    GOOGLE: 'google',
+  } as const;
 
-  const handleLoginClick = (platform: string) => {
-    alert(`${platform} 로그인 준비중`);
-    console.log(`${platform} 로그인 버튼 클릭`);
-    setRecentPlatform(platform);
+  const PLATFORM_DISPLAY = {
+    [PLATFORM.KAKAO]: '카카오',
+    [PLATFORM.GOOGLE]: '구글',
+  } as const;
+
+  //로그인
+  const handleLoginClick = (platformDisplay: string) => {
+    const platform = Object.entries(PLATFORM_DISPLAY).find(
+      ([_, display]) => display === platformDisplay,
+    )?.[0];
+    if (!platform) return;
+
+    saveRecentPlatform(platform);
+    const base = process.env.NEXT_PUBLIC_BACKEND_URL;
+    if (!base) {
+      console.error('NEXT_PUBLIC_BACKEND_URL is not defined');
+      return;
+    }
+    const url = `${base}/oauth2/authorization/${platform}`;
+    window.location.href = url;
+  };
+
+  //비회원 로그인
+  const handleGuestClick = () => {
+    if (document.referrer && document.referrer !== window.location.href) {
+      router.back();
+    } else {
+      router.push('/main');
+    }
   };
 
   return (
@@ -19,6 +50,8 @@ export default function LoginPage() {
       {/* 그라데이션 영역 */}
       <div className='relative w-full h-[22vw] min-h-[14rem] max-h-[28rem]'>
         <svg
+          aria-hidden='true'
+          focusable='false'
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 402 194'
           className='absolute inset-0 w-full h-full'
@@ -48,25 +81,20 @@ export default function LoginPage() {
       <section
         className={cn(
           'w-full flex flex-col items-center text-center',
-          'px-[6.8rem] pt-[5.2rem]',
+          'px-[6.8rem] pt-[6rem]',
         )}
       >
-        {/* 타이틀 */}
-        <div className='flex flex-col items-center gap-[3.3rem] mb-[3.2rem]'>
-          <h1 className='text-headline-lg-serif text-mint-900'>글다</h1>
-          <p className='text-label-md text-mint-900'>
+        {/* 로고 영역 */}
+        <div className='flex flex-col items-center'>
+          <Icon name='Logo' size={164} />
+          <p className='text-label-serif text-mint-900 mt-[5rem] mb-[2.8rem]'>
             만화 속 부천 여행
             <br />
             10개 명소를 탐험하고 엽서를 모아보세요!
           </p>
         </div>
 
-        {/* 로고 */}
-        <div className='p-[3.2rem] mb-[3.2rem]'>
-          <Icon name='Stamp' size={132} color='mint-400' />
-        </div>
-
-        <div className='flex flex-col items-center gap-[2.1rem]'>
+        <div className='flex flex-col items-center mt-[5rem] gap-[2.1rem]'>
           <p className='text-label-lg text-gray-400'>start with</p>
 
           <div className='flex gap-[1.5rem] relative'>
@@ -76,9 +104,9 @@ export default function LoginPage() {
                 platform='kakao'
                 onClick={() => handleLoginClick('카카오')}
               />
-              {recentPlatform === '카카오' && (
+              {recentPlatform === 'kakao' && (
                 <div
-                  className='absolute -top-[3.8rem] left-1/2 -translate-x-1/2 
+                  className='absolute -top-[2.5rem] left-1/2 -translate-x-1/2 
           w-auto min-w-max h-auto flex-shrink-0 pointer-events-none'
                 >
                   <RecentLoginBubble />
@@ -92,9 +120,9 @@ export default function LoginPage() {
                 platform='google'
                 onClick={() => handleLoginClick('구글')}
               />
-              {recentPlatform === '구글' && (
+              {recentPlatform === 'google' && (
                 <div
-                  className='absolute -top-[3.8rem] left-1/2 -translate-x-1/2 
+                  className='absolute -top-[2.5rem] left-1/2 -translate-x-1/2 
           w-auto min-w-max h-auto flex-shrink-0 pointer-events-none'
                 >
                   <RecentLoginBubble />
@@ -103,14 +131,18 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <p className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'>
+          <p
+            className='text-label-md text-gray-400 cursor-pointer underline underline-offset-[0.25rem]'
+            onClick={handleGuestClick}
+          >
             비회원 로그인
           </p>
         </div>
+
         {/* 안내문 */}
-        <p className='mt-[5rem] text-label-sm text-gray-400'>
-          비회원은 스탬프 저장과 공유 기능을 사용할 수 없습니다.
-        </p>
+        <div className='mt-[5rem] text-label-md text-gray-400 whitespace-nowrap text-ellipsis overflow-hidden text-center'>
+          <p>비회원은 스탬프 저장과 공유 기능을 사용할 수 없습니다.</p>
+        </div>
       </section>
     </main>
   );

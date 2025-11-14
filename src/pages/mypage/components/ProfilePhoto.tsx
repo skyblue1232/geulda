@@ -13,6 +13,7 @@ export default function ProfilePhoto({
   className,
 }: ProfilePhotoProps) {
   const baseStyle = `
+    relative
     flex items-center justify-center
     h-[14.6rem] w-[14.6rem]
     rounded-[20px]
@@ -24,7 +25,7 @@ export default function ProfilePhoto({
   return (
     <div className={cn(baseStyle, className)}>
       {src ? (
-        <img src={src} className='w-full h-full object-cover' />
+        <img src={src} alt="사용자 프로필 사진" className='w-full h-full object-cover' />
       ) : (
         <div className='p-[6.1rem] flex items-center justify-center'>
           <Icon name='User' size={24} color='gray-500' />

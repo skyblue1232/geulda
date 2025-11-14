@@ -5,6 +5,21 @@ const ICON_DIR = path.resolve(__dirname, 'src/shared/icons/source');
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/main',
+        permanent: false,
+      },
+    ];
+  },
+
+  images: {
+    domains: ['maps.googleapis.com'],
+  },
+
   webpack: (config) => {
     const svgRule = config.module.rules.find(
       // @ts-ignore
