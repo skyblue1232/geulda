@@ -31,6 +31,18 @@ export default function ChatPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const { mutateAsync: sendChat, sessionId } = useChatbot();
   const [messages, setMessages] = useState<Message[]>([]);
+  const formatAnswer = (text: string) => {
+  return text
+    .replace(/·\s*/g, '\n• ')
+    .replace(/•\s*/g, '\n• ')
+    .replace(/([.?!])\s*/g, '$1\n')
+    .replace(
+      /(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?)[\n]?/gu,
+      '$1 ' 
+    )
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+};
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -46,13 +58,17 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, userMsg]);
 
     try {
-      const answer = await sendChat({ message: text });
-      const botMsg: Message = {
-        id: Date.now() + 1,
-        text: answer,
-        variant: 'received',
-      };
-      setMessages((prev) => [...prev, botMsg]);
+      let answer = await sendChat({ message: text });
+const formatted = formatAnswer(answer);
+
+const botMsg: Message = {
+  id: Date.now() + 1,
+  text: formatted,
+  variant: 'received',
+};
+
+setMessages(prev => [...prev, botMsg]);
+
     } catch (err) {
       console.error('챗봇 응답 실패:', err);
     }
