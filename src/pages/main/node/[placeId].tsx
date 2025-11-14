@@ -49,8 +49,12 @@ const Node = () => {
     getLocation(
       (pos) => {
         const body = {
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
+          // 하드 코딩
+          latitude: 37.48585193654532,
+          longitude: 126.80355242431538,
+          // 실제
+          // latitude: pos.coords.latitude,
+          // longitude: pos.coords.longitude,
         };
         const placeIdNum = Number(placeId);
 
