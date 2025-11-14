@@ -32,8 +32,9 @@ interface ChattingProps extends VariantProps<typeof chatBubbleStyle> {
 export default function Chatting({ message, variant }: ChattingProps) {
   return (
     <div className='w-full flex flex-col'>
-      <div 
+      <div
         className={cn(chatBubbleStyle({ variant }))}
+        style={{ whiteSpace: 'pre-line' }}
         aria-label={variant === 'sent' ? '내 메시지' : '상대방 메시지'}
       >
         {message}

@@ -10,17 +10,15 @@ const inputWrapperStyle = cva(
 
 interface ChattingInputProps {
   onSend?: (text: string) => void;
+  disabled?: boolean;
 }
 
-
-export default function ChattingInput({ onSend }: ChattingInputProps) {
-  const {
-    message,
-    setMessage,
-    inputRef,
-    handleSubmit,
-    handleKeyDown,
-  } = useChattingInput({ onSend });
+export default function ChattingInput({
+  onSend,
+  disabled,
+}: ChattingInputProps) {
+  const { message, setMessage, inputRef, handleSubmit, handleKeyDown } =
+    useChattingInput({ onSend });
 
   return (
     <div
@@ -38,18 +36,19 @@ export default function ChattingInput({ onSend }: ChattingInputProps) {
           ref={inputRef}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onKeyDown={disabled ? undefined : handleKeyDown}
           type='text'
           placeholder='무엇이든 물어보세요'
-          aria-label="채팅 메시지 입력"
+          aria-label='채팅 메시지 입력'
           className='w-full bg-transparent outline-none text-label-lg placeholder:text-gray-300 text-gray-900'
         />
       </div>
 
       <button
         type='button'
-        onClick={handleSubmit}
-        aria-label="메시지 전송"
+        onClick={disabled ? undefined : handleSubmit}
+        aria-label='메시지 전송'
+        disabled={disabled}
         className={cn(
           'w-[4rem] h-[4rem] flex justify-center items-center rounded-[2rem] bg-mint-500 flex-shrink-0',
         )}
