@@ -54,6 +54,16 @@ apiWithToken.interceptors.response.use(
       _retry?: boolean;
     };
 
+    // 북마크 
+    const url = originalRequest?.url ?? '';
+    const isBookmarkAPI =
+      url.includes('/api/events/') && url.includes('/bookmark');
+
+    if (isBookmarkAPI) {
+      return Promise.reject(error);
+    }
+    
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
