@@ -11,7 +11,8 @@ declare global {
       class Map {
         constructor(container: HTMLElement, options?: object);
         setCenter(latlng: LatLng): void;
-        setLevel(level: number): void;
+        setLevel(level: number, options?: { animate?: boolean }): void;
+        getLevel(): number;
         getProjection(): Projection;
         panTo(latlng: LatLng): void;
       }
@@ -28,7 +29,12 @@ declare global {
 
       interface Projection {
         pointFromCoords(latlng: LatLng): Point;
+
         coordsFromPoint(point: Point): LatLng;
+
+        containerPointFromCoords(latlng: LatLng): Point;
+
+        coordsFromContainerPoint(point: Point): LatLng;
       }
 
       class CustomOverlay {
@@ -41,21 +47,24 @@ declare global {
       }
 
       namespace event {
-        
+
+        type EventTarget = Map | CustomOverlay | HTMLElement | null;
+        type EventHandler = (...args: unknown[]) => void;
+
         function addListener(
-          target: any,
+          target: EventTarget,
           type: string,
-          handler: (...args: any[]) => void
+          handler: EventHandler
         ): void;
 
         function removeListener(
-          target: any,
+          target: EventTarget,
           type: string,
-          handler: (...args: any[]) => void
+          handler: EventHandler
         ): void;
 
         function removeListener(
-          target: any,
+          target: EventTarget,
           type: string
         ): void;
       }

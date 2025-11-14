@@ -4,34 +4,51 @@ import { useKakaoCourseMap } from '@/shared/hooks/kakaoMap/useKakaoCourseMap';
 import LocationBubble from '@/shared/components/container/LocationBubble';
 import type { CoursePlace } from '@/shared/api/course/types/courseSession';
 
-interface FullMapProps {
-  sessionId: string;
-}
-
-export default function FullMap({ sessionId }: FullMapProps) {
+export default function FullMap({ sessionId }: { sessionId: string }) {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const { data } = useCourseSession(sessionId);
+
   const [selectedPlace, setSelectedPlace] = useState<CoursePlace | null>(null);
+  const [bubblePos, setBubblePos] =
+    useState<{ x: number; y: number } | null>(null);
 
   useKakaoCourseMap(mapRef, {
     places: data?.places || [],
     enableClick: true,
+
     onPinClick: (place) => {
       setSelectedPlace(place);
+
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const offsetY = 20; 
+
+      setBubblePos({
+        x: centerX,
+        y: centerY - offsetY,
+      });
     },
   });
 
   return (
     <div className="relative w-full h-full">
-      <div ref={mapRef} className="absolute inset-0 w-full h-full bg-gray-200" />
+      <div
+        ref={mapRef}
+        className="absolute inset-0 w-full h-full bg-gray-200"
+      />
 
-      {selectedPlace && (
+      {selectedPlace && bubblePos && (
         <div
-          className="absolute inset-0 z-[2000] flex items-center justify-center bg-black/30"
+          className="absolute inset-0 z-[2000] bg-black/20"
           onClick={() => setSelectedPlace(null)}
         >
           <div
             className="absolute"
+            style={{
+              top: bubblePos.y,
+              left: bubblePos.x,
+              transform: "translate(-50%, -100%)",
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             <LocationBubble place={selectedPlace} />

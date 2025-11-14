@@ -6,17 +6,19 @@ import type { CoursePlace } from '@/shared/api/course/types/courseSession';
 
 interface UseKakaoCourseMapOptions {
   places: CoursePlace[];
-  onPinClick?: (place: CoursePlace) => void;
   enableClick?: boolean;
+  onPinClick?: (
+    place: CoursePlace,
+    point: { x: number; y: number }
+  ) => void;
 }
 
 export function useKakaoCourseMap(
   mapRef: React.RefObject<HTMLDivElement | null>,
-  { places, onPinClick, enableClick = false }: UseKakaoCourseMapOptions
+  { places, enableClick = false, onPinClick }: UseKakaoCourseMapOptions
 ) {
   const mapInstanceRef = useRef<kakao.maps.Map | null>(null);
-  const overlaysRef = useRef<kakao.maps.CustomOverlay[]>([]);
-  const isAnimatingRef = useRef(false); 
+  const markerOverlaysRef = useRef<kakao.maps.CustomOverlay[]>([]);
 
   useEffect(() => {
     if (!places?.length) return;
@@ -27,8 +29,16 @@ export function useKakaoCourseMap(
       window.kakao.maps.load(() => {
         const { maps } = window.kakao;
 
-        const center = new maps.LatLng(places[0].latitude, places[0].longitude);
-        const map = new maps.Map(mapRef.current!, { center, level: 5 });
+        const center = new maps.LatLng(
+          places[0].latitude,
+          places[0].longitude
+        );
+
+        const map = new maps.Map(mapRef.current!, {
+          center,
+          level: 5,
+        });
+
         mapInstanceRef.current = map;
 
         places.forEach((place) => {
@@ -47,63 +57,43 @@ export function useKakaoCourseMap(
           });
 
           overlay.setMap(map);
-          overlaysRef.current.push(overlay);
+          markerOverlaysRef.current.push(overlay);
 
           if (!enableClick) return;
 
           el.addEventListener('click', () => {
-            if (!onPinClick) return;
+            if (!mapRef.current) return;
 
-            const pinLatLng = new maps.LatLng(place.latitude, place.longitude);
+            const pos = new maps.LatLng(place.latitude, place.longitude);
+            const proj = map.getProjection();
 
-            const kakaoMap = map as unknown as {
-              getLevel: () => number;
-              setLevel: (level: number, opts?: { animate: boolean }) => void;
-            };
+            const offsetY = 40;
+            const p = proj.pointFromCoords(pos);
+            const newPoint = new maps.Point(p.x, p.y - offsetY);
+            const newCenter = proj.coordsFromPoint(newPoint);
 
-            const targetLevel = 6;
-            const currentLevel = kakaoMap.getLevel();
+            map.panTo(newCenter);
 
-            const handleAfterZoom = () => {
-              maps.event.removeListener(map, 'idle', handleAfterZoom);
+            const mapRect = mapRef.current.getBoundingClientRect();
+            const localPoint = proj.containerPointFromCoords(pos);
 
-              panToOffset(map, pinLatLng);
+            const pageX = mapRect.left + localPoint.x;
+            const pageY = mapRect.top + localPoint.y;
 
-              const handleAfterPan = () => {
-                maps.event.removeListener(map, 'idle', handleAfterPan);
-                onPinClick(place);  
-              };
-
-              maps.event.addListener(map, 'idle', handleAfterPan);
-            };
-
-            if (currentLevel > targetLevel) {
-              maps.event.addListener(map, 'idle', handleAfterZoom);
-              kakaoMap.setLevel(targetLevel, { animate: true });
-            } else {
-              handleAfterZoom();
-            }
+            onPinClick?.(place, {
+              x: pageX,
+              y: pageY,
+            });
           });
-
         });
       });
     });
 
     return () => {
-      overlaysRef.current.forEach((o) => o.setMap(null));
-      overlaysRef.current = [];
-      mapInstanceRef.current = null;
+      markerOverlaysRef.current.forEach((o) => o.setMap(null));
+      markerOverlaysRef.current = [];
     };
   }, [places, enableClick, mapRef]);
 
   return mapInstanceRef.current;
-}
-
-function panToOffset(map: any, latLng: any) {
-  const projection = map.getProjection();
-  const point = projection.pointFromCoords(latLng);
-  const offsetY = 130;
-  const newPoint = new kakao.maps.Point(point.x, point.y - offsetY);
-  const newCenter = projection.coordsFromPoint(newPoint);
-  map.panTo(newCenter);
 }
