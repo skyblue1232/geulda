@@ -12,14 +12,12 @@ export default function FullMap({ sessionId }: FullMapProps) {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const { data } = useCourseSession(sessionId);
   const [selectedPlace, setSelectedPlace] = useState<CoursePlace | null>(null);
-  const [selectedLoc, setSelectedLoc] = useState<{ lat: number; lng: number } | null>(null);
 
   useKakaoCourseMap(mapRef, {
     places: data?.places || [],
     enableClick: true,
     onPinClick: (place) => {
       setSelectedPlace(place);
-      setSelectedLoc({ lat: place.latitude, lng: place.longitude });
     },
   });
 
@@ -27,21 +25,16 @@ export default function FullMap({ sessionId }: FullMapProps) {
     <div className="relative w-full h-full">
       <div ref={mapRef} className="absolute inset-0 w-full h-full bg-gray-200" />
 
-      {selectedPlace && selectedLoc && (
+      {selectedPlace && (
         <div
           className="absolute inset-0 z-[2000] flex items-center justify-center bg-black/30"
           onClick={() => setSelectedPlace(null)}
         >
           <div
             className="absolute"
-            style={{ transform: 'translateY(-60px)' }} 
-            onClick={(e) => e.stopPropagation()}   
+            onClick={(e) => e.stopPropagation()}
           >
-            <LocationBubble
-              name={selectedPlace.name}
-              imageSrc={selectedPlace.placeImg}
-              placeId={selectedPlace.placeId}  // 🔥 placeId 전달
-            />
+            <LocationBubble place={selectedPlace} />
           </div>
         </div>
       )}

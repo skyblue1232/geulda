@@ -1,8 +1,8 @@
-import { apiWithToken } from "@/shared/api/instance";
+import { apiAuth } from "@/shared/api/instance";
 import type { CourseSessionResponse } from "@/shared/api/course/types/courseSession";
 
 export const getCourseSession = async (sessionId: string) => {
-  const { data } = await apiWithToken.get<CourseSessionResponse>(
+  const { data } = await apiAuth.get<CourseSessionResponse>(
     `/api/courses/session/${sessionId}`,
   );
 

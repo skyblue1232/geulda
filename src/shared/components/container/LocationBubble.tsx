@@ -3,11 +3,10 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import type { CoursePlace } from '@/shared/api/course/types/courseSession';
 
 interface LocationBubbleProps {
-  name: string;
-  imageSrc?: string;
-  placeId: number; 
+  place: CoursePlace;   // 🔥 place 통째로 받기
   className?: string;
 }
 
@@ -15,22 +14,29 @@ const bubbleVariants = cva(
   'relative flex flex-col w-[20.4rem] h-[15.5rem] px-[1.1rem] pt-[1.35rem] bg-white rounded-[2rem] shadow-[0_0.7rem_0.7rem_0_rgba(0,0,0,0.25)]',
 );
 
-const LocationBubble = ({ name, imageSrc, placeId, className }: LocationBubbleProps) => {
+const LocationBubble = ({ place, className }: LocationBubbleProps) => {
   const router = useRouter();
 
-  // 장소 말풍선 클릭 -> 상세 페이지 이동 (/map/location/[placeId])
   const handleClick = () => {
-    router.push(`/map/location/${placeId}`);
+    router.push({
+      pathname: `/map/location/${place.placeId}`,
+      query: {
+        name: place.name,
+        imageSrc: place.placeImg,
+        address: place.address,
+        description: place.description,
+      },
+    });
   };
 
   return (
     <div onClick={handleClick} className={cn(bubbleVariants(), className)}>
-      {/* 장소 사진 */}
+      {/* 사진 */}
       <div className="relative h-[10.3rem] w-full rounded-[0.8rem] overflow-hidden">
-        {imageSrc ? (
+        {place.placeImg ? (
           <Image
-            src={imageSrc}
-            alt={name}
+            src={place.placeImg}
+            alt={place.name}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 204px"
@@ -41,11 +47,11 @@ const LocationBubble = ({ name, imageSrc, placeId, className }: LocationBubblePr
         )}
       </div>
 
-      {/* 지도핀 + 장소 이름 + 아이콘 */}
+      {/* 이름 */}
       <div className="flex items-center justify-between w-full mt-[0.6rem]">
         <div className="flex items-center gap-[0.6rem] min-w-0">
           <Icon name="MapPin" size={24} color="gray-300" />
-          <span className="text-label-lg truncate">{name}</span>
+          <span className="text-label-lg truncate">{place.name}</span>
         </div>
 
         <div className="flex-shrink-0">
@@ -53,7 +59,7 @@ const LocationBubble = ({ name, imageSrc, placeId, className }: LocationBubblePr
         </div>
       </div>
 
-      {/* 말풍선 꼬리 */}
+      {/* 꼬리 */}
       <div
         className="
           absolute left-1/2 -bottom-[1.8rem] -translate-x-1/2

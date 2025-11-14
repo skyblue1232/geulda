@@ -17,7 +17,7 @@ const MapPage = () => {
     >
       <Header
         title="코스 추천"
-        onClick={() => router.push('/map/result?from=map')}
+        onClick={() => router.back()} 
       />
 
       {sessionId ? (

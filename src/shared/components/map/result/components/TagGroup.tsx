@@ -15,7 +15,7 @@ export default function TagGroup({ viewMode, tags, onToggleView }: TagGroupProps
         'flex items-center justify-between w-full gap-[0.4rem] flex-wrap'
       )}
     >
-      <div className="flex gap-[1.4rem] flex-wrap">
+      <div className="flex gap-[0.4rem] flex-wrap">
         {tags.length > 0 ? (
           tags.map((tag) => <Tag key={tag} label={tag} variant="hash" />)
         ) : (

@@ -2,12 +2,27 @@
 import { cn } from '@/shared/lib';
 import { LocationCard } from '@/shared/components';
 import type { CoursePlace } from '@/shared/api/course/types/courseSession';
+import { useRouter } from 'next/router';
 
 interface ResultListProps {
   places: CoursePlace[];
 }
 
 export default function ResultList({ places }: ResultListProps) {
+  const router = useRouter();
+
+  const handleClick = (place: CoursePlace) => {
+    router.push({
+      pathname: `/map/location/${place.placeId}`,
+      query: {
+        name: place.name,
+        address: place.address,
+        description: place.description,
+        imageSrc: place.placeImg,
+      },
+    });
+  };
+
   return (
     <div
       role="list"
@@ -19,14 +34,19 @@ export default function ResultList({ places }: ResultListProps) {
     >
       {places.length > 0 ? (
         places.map((place) => (
-          <div role="listitem" key={place.placeId ?? place.name} className="w-full">
+          <div
+            key={place.placeId}
+            role="listitem"
+            className="w-full cursor-pointer"
+            onClick={() => handleClick(place)}
+          >
             <LocationCard
               name={place.name}
               address={place.address}
               description={place.description}
+              imageSrc={place.placeImg}
               variant="gray"
               size="medium"
-              imageSrc={place.placeImg}
             />
           </div>
         ))
