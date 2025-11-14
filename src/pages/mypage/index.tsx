@@ -73,6 +73,7 @@ export default function MyPage() {
           {isLoggedIn === false && (
             <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
               <EventCard
+                eventId={99}
                 name='행사 이름'
                 address='우리집'
                 description='행사 설명'
@@ -81,6 +82,7 @@ export default function MyPage() {
                 imageSrc=''
               />
               <EventCard
+                eventId={98}
                 name='행사 이름'
                 address='우리집'
                 description='행사 설명'
@@ -97,12 +99,14 @@ export default function MyPage() {
               {bookmarkedEvents.map((event) => (
                 <EventCard
                   key={event.eventId}
+                  eventId={event.eventId}
                   name={event.eventName}
                   address=''
                   description=''
                   variant='gray'
                   size='large'
                   imageSrc={event.eventImageUrl}
+                  liked={true}
                 />
               ))}
             </div>
