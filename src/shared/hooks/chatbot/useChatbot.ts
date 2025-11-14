@@ -43,7 +43,7 @@ export const useChatbot = () => {
         return await fetchChatResponse(body.message, sessionId);
       } catch (err: any) {
         if (err.message === 'SESSION_EXPIRED') {
-          console.warn('세션 만료됨 → 새 세션 생성 후 재시도');
+          console.warn('새 세션 생성 후 재시도');
 
           // 새 세션 만들기
           const newId = await createChatSession();
