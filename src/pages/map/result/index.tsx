@@ -10,11 +10,16 @@ import { useCourseSession } from '@/shared/api/course/queries/useCourseSession';
 
 export default function CourseResultPage() {
   const router = useRouter();
+
   const [showPopup, setShowPopup] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
-  const sessionId = router.query.sessionId as string | undefined;
-  const { data } = useCourseSession(sessionId ?? ''); 
+  const isReady = router.isReady;
+  const sessionId = isReady
+    ? (router.query.sessionId as string)
+    : undefined;
+
+  const { data, isLoading, isError } = useCourseSession(sessionId);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -54,28 +59,38 @@ export default function CourseResultPage() {
             />
           </section>
 
-          <TagGroup
-            viewMode={viewMode}
-            tags={tags}
-            onToggleView={() =>
-              setViewMode((prev) => (prev === 'list' ? 'map' : 'list'))
-            }
-          />
+          {!isReady || isLoading ? (
+            <p className='text-center text-gray-400 mt-[4rem]'>결과를 불러오는 중입니다...</p>
+          ) : isError ? (
+            <p className='text-center text-red-500 mt-[4rem]'>
+              데이터를 불러오지 못했습니다. 다시 시도해주세요.
+            </p>
+          ) : (
+            <>
+              <TagGroup
+                viewMode={viewMode}
+                tags={tags}
+                onToggleView={() =>
+                  setViewMode((prev) => (prev === 'list' ? 'map' : 'list'))
+                }
+              />
 
-          <section
-            className={cn(
-              'mt-[1.4rem] w-full text-gray-600',
-              viewMode === 'list'
-                ? 'h-[43.6rem] overflow-y-auto no-scrollbar'
-                : 'h-[43.6rem] overflow-hidden',
-            )}
-          >
-            {viewMode === 'list' ? (
-              <ResultList places={data?.places ?? []} />
-            ) : (
-              <ResultMap sessionId={sessionId ?? ''} places={data?.places ?? []} />
-            )}
-          </section>
+              <section
+                className={cn(
+                  'mt-[1.4rem] w-full text-gray-600',
+                  viewMode === 'list'
+                    ? 'h-[43.6rem] overflow-y-auto no-scrollbar'
+                    : 'h-[43.6rem] overflow-hidden',
+                )}
+              >
+                {viewMode === 'list' ? (
+                  <ResultList places={data?.places ?? []} />
+                ) : (
+                  <ResultMap sessionId={sessionId!} places={data?.places ?? []} />
+                )}
+              </section>
+            </>
+          )}
         </div>
       </main>
 

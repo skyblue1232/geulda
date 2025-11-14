@@ -1,7 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import {
-  postRecommendCourse,
-} from '@/shared/api/course/api/postRecommendCourse';
+import { postRecommendCourse } from '@/shared/api/course/api/postRecommendCourse';
 import type {
   RecommendCourseRequest,
   RecommendCourseResponse,

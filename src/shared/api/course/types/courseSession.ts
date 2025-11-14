@@ -9,16 +9,17 @@ export interface CoursePlace {
 }
 
 export interface CourseSessionResponse {
+  success: boolean;      
   code: string;
   message: string;
-  isSuccess: boolean;
-  result: {
+  data: {          
     memberId: number;
+    places: CoursePlace[];
     createdAt: string;
     travelPurpose: string;
     stayDuration: string;
     transportation: string;
-    mustVisitPlace?: string; 
-    places: CoursePlace[];
+    mustVisitPlace?: string;
   };
+  timestamp: string;
 }

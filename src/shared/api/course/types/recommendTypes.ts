@@ -18,13 +18,14 @@ export interface CoursePlace {
 }
 
 export interface RecommendCourseResponse {
+  success: boolean;  
   code: string;
   message: string;
-  isSuccess: boolean;
-  result: {
+  data: {
     sessionId: string;
     places: CoursePlace[];
     routeSummary: string;
     totalDistance: number;
   };
+  timestamp: string; 
 }

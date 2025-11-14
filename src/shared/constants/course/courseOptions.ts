@@ -13,5 +13,5 @@ export const stays = [
 export const moves = [
   { id: '도보', label: '도보' },
   { id: '대중교통', label: '대중교통' },
-  { id: '자가차', label: '자가차' },
+  { id: '자차', label: '자차' },
 ];

@@ -7,7 +7,8 @@ import type {
 export const postRecommendCourse = async (body: RecommendCourseRequest) => {
   const { data } = await apiWithToken.post<RecommendCourseResponse>(
     '/api/courses/recommend',
-    body,
+    body
   );
-  return data;
+
+  return data; 
 };
