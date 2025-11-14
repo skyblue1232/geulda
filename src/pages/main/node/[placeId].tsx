@@ -13,19 +13,20 @@ import { cn } from '@/shared/lib';
 import { getLocation } from '@/shared/utils/handleGetLocation';
 import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
 import { useUserStatus } from '@/shared/hooks/useUserStatus';
-import { useStampAcquire } from '@/shared/api/main/node/queries/useStampAcquire'; 
+import { useStampAcquire } from '@/shared/api/main/node/queries/useStampAcquire';
+import { savePostcard } from '@/shared/utils/storage';
 
 const Node = () => {
   const router = useRouter();
   const { placeId } = router.query;
   const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const [showErrorPopup, setShowErrorPopup] = useState(false); 
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
 
   // 스탬프 획득 훅
   const { mutate: acquireStamp } = useStampAcquire();
 
-  // 장소 상세 조회 
+  // 장소 상세 조회
   const { data, isLoading, isError } = useGetPlaceDetail(
     router.isReady ? Number(placeId) : undefined,
   );
@@ -64,23 +65,17 @@ const Node = () => {
           { placeId: placeIdNum, body },
           {
             onSuccess: (res) => {
-              console.log('스탬프 획득 성공:', res.data);
-
               const { postcard } = res.data;
-              const { hidden } = postcard;
+              savePostcard(postcard);
 
-              // 항상 videoPlay로 이동하되, hidden이 true면 쿼리로 전달
               router.push({
-                pathname: `/main/videoPlay`,
-                query: {
-                  placeName: postcard.placeName,
-                  ...(hidden ? { hidden: 'true' } : {}),
-                },
+                pathname: '/main/videoPlay',
+                query: { placeName: postcard.placeName },
               });
             },
             onError: (err) => {
               console.error('스탬프 획득 실패:', err);
-              setShowErrorPopup(true); 
+              setShowErrorPopup(true);
             },
           },
         );

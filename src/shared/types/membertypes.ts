@@ -24,3 +24,10 @@ export interface MemberMeResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface PostCardDetailResponse {
+  postcardId: number;
+  imageUrl: string;
+  placeName: string;
+  placeDescription: string;
+}
