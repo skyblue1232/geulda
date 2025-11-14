@@ -74,7 +74,7 @@ export default function ChatPage() {
       >
         {/* 로고 + 기본 멘트 */}
         <div className={cn(introStyle())}>
-          {/* 로고 자리 (임시) */}
+          {/* 로고 자리*/}
           <Image
             src='/assets/chatbot.svg'
             alt='챗봇 프로필 아이콘'
