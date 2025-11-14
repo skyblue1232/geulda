@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEventDetail } from '@/shared/hooks/events/useEventDetail';
 import { useBookmark } from '@/shared/hooks/events/useBookmark';
+import { buildNextEventList } from '@/shared/utils/buildNextEventList';
 
 const EventDetailPage = () => {
   const router = useRouter();
@@ -24,13 +25,14 @@ const EventDetailPage = () => {
     }
   }, [isLoading, isError, eventDetail, router]);
 
-
   if (!eventId) return null;
   if (isError || !eventDetail) return null;
 
   const { title, body, address, startDate, endDate, imageUrl, nextEvents } =
     eventDetail;
-  
+
+  const nextList = buildNextEventList(nextEvents);
+
   return (
     <div className={cn('relative w-full min-h-[100vh] overflow-auto')}>
       <Header
@@ -66,11 +68,11 @@ const EventDetailPage = () => {
               src={imageUrl}
               alt={`${title} 이미지`}
               fill
-             className={cn('object-cover rounded-[2rem]')}
+              className={cn('object-cover rounded-[2rem]')}
             />
           ) : (
             <div
-               className={cn('w-full h-full bg-gray-200 rounded-[2rem]')}
+              className={cn('w-full h-full bg-gray-200 rounded-[2rem]')}
               role='img'
               aria-label={`${name} 이미지가 제공되지 않습니다.`}
             />
@@ -101,17 +103,21 @@ const EventDetailPage = () => {
               'grid grid-cols-2 gap-[1.2rem] justify-items-center w-full max-w-[35.4rem]',
             )}
           >
-            {nextEvents.map((item) => (
-              <div key={item.eventId} className={cn('w-[17rem]')}>
-                <EventCard
-                  eventId={item.eventId}
-                  name={item.title}
-                  address=''
-                  description=''
-                  imageSrc={item.imageUrl}
-                  variant='gray'
-                  size='small'
-                />
+            {nextList.map((item, idx) => (
+              <div key={idx} className={cn('w-[17rem]')}>
+                {item.isEmpty ? (
+                  <div className='w-[17rem] h-[8rem] bg-gray-200 rounded-[1rem]' />
+                ) : (
+                  <EventCard
+                    eventId={item.eventId}
+                    name={item.title}
+                    address=''
+                    description=''
+                    imageSrc={item.imageUrl}
+                    variant='gray'
+                    size='small'
+                  />
+                )}
               </div>
             ))}
           </div>
