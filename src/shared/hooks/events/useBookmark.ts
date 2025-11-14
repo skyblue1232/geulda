@@ -1,48 +1,36 @@
 'use client';
 
-import { useState, useEffect  } from 'react';
-import { postBookmark, deleteBookmark, fetchBookmarkStatus  } from '@/shared/api/events/event';
+import { useState } from 'react';
+import { postBookmark, deleteBookmark } from '@/shared/api/events/event';
 import { getAccessToken } from '@/shared/utils/token';
+import { useQueryClient } from '@tanstack/react-query';
 
-export const useBookmark = (eventId: number) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+export const useBookmark = (eventId: number, initialState: boolean) => {
+  const [isBookmarked, setIsBookmarked] = useState(initialState);
   const [requireLogin, setRequireLogin] = useState(false);
+    const queryClient = useQueryClient();
 
-   useEffect(() => {
-    const loadStatus = async () => {
-      const token = getAccessToken();
-      if (!token) return;
-
-      try {
-        const res = await fetchBookmarkStatus(eventId);
-        setIsBookmarked(res.data.isBookmarked);
-      } catch (err) {
-        console.error('북마크 상태 조회 실패:', err);
-      }
-    };
-
-    if (eventId) loadStatus();
-  }, [eventId]);
-
-  const toggleBookmark = async () => {
+ const toggleBookmark = async () => {
     const token = getAccessToken();
-
     if (!token) {
       setRequireLogin(true);
       return;
     }
 
-    try {
+     try {
       if (isBookmarked) {
         await deleteBookmark(eventId);
       } else {
         await postBookmark(eventId);
       }
-      setIsBookmarked((prev) => !prev);
+      setIsBookmarked(prev => !prev);
+
+        queryClient.invalidateQueries({ queryKey: ['events'] });
+      queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
     } catch (err) {
       console.error('북마크 토글 실패:', err);
     }
   };
 
-  return { isBookmarked, setIsBookmarked, toggleBookmark, requireLogin, setRequireLogin };
+  return { isBookmarked, toggleBookmark, requireLogin, setRequireLogin };
 };
