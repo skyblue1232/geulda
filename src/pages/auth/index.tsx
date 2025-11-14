@@ -88,7 +88,7 @@ export default function LoginPage() {
         <div className='flex flex-col items-center'>
           <Icon name='Logo' size={164} />
           <p className='text-label-serif text-mint-900 mt-[5rem] mb-[2.8rem]'>
-            만화 속 부천 여행
+            만화 같은 부천 여행
             <br />
             10개 명소를 탐험하고 엽서를 모아보세요!
           </p>
