@@ -13,7 +13,7 @@ interface ControlBarProps {
   onClickUser: () => void;
 }
 
-const controlBarVariants = cva('flex justify-between items-center h-full px-[1.6rem]');
+const controlBarVariants = cva('flex justify-between items-center h-full');
 const rightStyle = cva('flex items-center gap-[0.6rem] transition', {
   variants: {
     state: {
