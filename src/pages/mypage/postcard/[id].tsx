@@ -1,1 +1,5 @@
-/*정민님거 받아올 예정*/
+'use client';
+
+export default function PostcardPage() {
+  return <div>정민이거 받아오기</div>;
+}
