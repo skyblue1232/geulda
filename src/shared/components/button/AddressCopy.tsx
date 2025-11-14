@@ -62,13 +62,13 @@ const AddressCopy = ({
         <Icon
           name={copied ? 'Check' : 'CopySimple'}
           size={18}
-          color={variant === 'mint' ? 'mint-400' : 'gray-400'}
+          color={variant === 'mint' ? 'mint-600' : 'gray-400'}
         />
       </div>
       <span
         className={cn(
           'text-label-lg flex-1 min-w-0',
-          variant === 'mint' ? 'text-mint-400' : 'text-gray-400',
+          variant === 'mint' ? 'text-mint-600' : 'text-gray-400',
           truncate &&
             'truncate whitespace-nowrap overflow-hidden text-ellipsis',
         )}

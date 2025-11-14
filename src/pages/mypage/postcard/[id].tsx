@@ -1,72 +1,84 @@
-import { Header, EventCard } from '@/shared/components';
+'use client';
+import { Header, FlipCard, LocationCard } from '@/shared/components';
+import { useImageOrientation } from '@/shared/hooks/useImageOrientation';
 import { cn } from '@/shared/lib';
-import { eventData } from '@/shared/constants/events/eventsData';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-
-const PostCardSavePage = () => {
+import { useGetPostCardDetail } from '@/shared/api/member';
+const PostCard = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const event = eventData.find((e) => e.id === Number(id));
-  if (!event) return null;
+  const postcardId = Number(id);
+  const { data, isLoading, isError } = useGetPostCardDetail(postcardId);
 
-  const { name, address, description, imageSrc } = event;
+  const imageUrl = data?.data?.imageUrl ?? '/assets/letter_card_backh.png';
+  const { orientation } = useImageOrientation(imageUrl);
+
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center h-screen text-gray-500'>
+        엽서 정보를 불러오는 중입니다...
+      </div>
+    );
+
+  if (isError || !data)
+    return (
+      <div className='flex items-center justify-center h-screen text-red-500'>
+        데이터를 불러오지 못했습니다 😢
+      </div>
+    );
+
+  const { placeName, placeDescription } = data.data;
+
+  const imageProps =
+    orientation === 'portrait'
+      ? { width: 220, height: 354, backSrc: '/assets/letter_card_backv.png' }
+      : { width: 354, height: 220, backSrc: '/assets/letter_card_backh.png' };
 
   return (
-    <div className={cn('relative w-full min-h-[100vh] overflow-auto')}>
+    <div
+      role='main'
+      aria-label='엽서 상세 페이지'
+      className={cn(
+        'relative w-full h-[100vh] px-[2.4rem] bg-gray-50 mt-[10rem] flex flex-col items-center overflow-x-hidden overflow-y-auto',
+        orientation === 'portrait' ? 'mb-[5rem]' : 'mb-[0rem]',
+      )}
+    >
       <Header
         title='저장한 엽서'
         onClick={() => router.back()}
         className={cn('fixed top-0 left-0 right-0 z-50')}
       />
 
-      <main
-        role="main"
-        aria-label="저장한 엽서 상세 페이지"
+      {/* 카드 섹션 */}
+      <div
         className={cn(
-          'flex flex-col items-center justify-start',
-          'px-[2.4rem] pt-[25.8rem]',
+          'flex flex-col justify-center items-center relative',
+          orientation === 'portrait' ? 'mt-[0rem]' : 'mt-[20rem]',
         )}
       >
-        {/* 카드 플립 자리 */}
-        <section
-          className={cn(
-            'relative w-full flex justify-center max-w-[35.4rem]',
-            'overflow-hidden rounded-[2rem]',
-          )}
-        >
-          {imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt={`${name} 이미지`}
-              width={354}
-              height={220}
-              className='object-cover w-full h-auto rounded-[2rem]'
-            />
-          ) : (
-            <div className='w-full h-[22rem] bg-gray-200 rounded-[2rem]' />
-          )}
-        </section>
+        <FlipCard
+          frontSrc={imageUrl}
+          backSrc={imageProps.backSrc}
+          width={imageProps.width}
+          height={imageProps.height}
+        />
+      </div>
 
-        {/* 행사 카드 */}
-        <div
-          className={cn(
-            'flex flex-col items-center w-full gap-[0.8rem]',
-            'mt-[8.7rem]',
-          )}
-        >
-          <EventCard
-            name={name}
-            address={address}
-            description={description}
-            variant='gray'
-            size='large'
-          />
-        </div>
-      </main>
+      {/* 장소 카드 */}
+      <div
+        className={cn('fixed bottom-[12rem] left-0 right-0 z-50 px-[2.4rem]')}
+      >
+        <LocationCard
+          name={placeName}
+          address='주소 정보 없음'
+          description={placeDescription}
+          variant='gray'
+          size='large'
+        />
+      </div>
     </div>
   );
 };
 
-export default PostCardSavePage;
+export default PostCard;

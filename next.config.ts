@@ -17,9 +17,13 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    domains: ['maps.googleapis.com'],
+    domains: [
+      'maps.googleapis.com',
+      'geulda-ai-video-bucket.s3.ap-southeast-2.amazonaws.com',
+      'example.com'
+    ],
   },
-
+  
   webpack: (config) => {
     const svgRule = config.module.rules.find(
       // @ts-ignore
