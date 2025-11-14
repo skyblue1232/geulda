@@ -75,6 +75,13 @@ export const fetchChatResponse = async (
     },
   );
 
+   if (res.status === 404 && res.data?.code === 'E602') {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('chatbot:sessionId');
+    }
+    throw new Error('SESSION_EXPIRED');
+  }
+
   if (res.status >= 400) {
     console.error('챗봇 응답 실패:', res.status, res.data);
     throw new Error(`챗봇 응답 실패: ${res.status}`);

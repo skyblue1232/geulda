@@ -33,10 +33,30 @@ export const useChatbot = () => {
     bootstrap();
   }, []);
 
+   /** 메시지 전송 */
   const mutation = useMutation({
     mutationFn: async (body: { message: string }) => {
       if (!sessionId) throw new Error('세션이 아직 준비되지 않았습니다.');
-      return await fetchChatResponse(body.message, sessionId);
+
+      try {
+        // 기존 세션으로 보내기
+        return await fetchChatResponse(body.message, sessionId);
+      } catch (err: any) {
+        // 🔥 세션 만료 처리
+        if (err.message === 'SESSION_EXPIRED') {
+          console.warn('세션 만료됨 → 새 세션 생성 후 재시도');
+
+          // 1) 새 세션 만들기
+          const newId = await createChatSession();
+          setSessionId(newId);
+          localStorage.setItem(SESSION_KEY, newId);
+
+          // 2) 새 세션으로 다시 요청
+          return await fetchChatResponse(body.message, newId);
+        }
+
+        throw err;
+      }
     },
   });
 
