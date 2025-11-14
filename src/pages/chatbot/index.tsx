@@ -29,8 +29,7 @@ type Message = {
 export default function ChatPage() {
   const router = useRouter();
   const bottomRef = useRef<HTMLDivElement>(null);
-  const { mutateAsync: sendChat, sessionId } = useChatbot();
-  const [messages, setMessages] = useState<Message[]>([]);
+  const { messages, addMessage, mutateAsync: sendChat, sessionId } = useChatbot();
   const formatAnswer = (text: string) => {
   return text
     .replace(/·\s*/g, '\n• ')
@@ -49,25 +48,23 @@ export default function ChatPage() {
   }, [messages]);
 
   const handleSend = async (text: string) => {
-    if (!text.trim()) return;
-    if (!sessionId) {
-      return;
-    }
+    if (!text.trim() || !sessionId) return;
 
-    const userMsg: Message = { id: Date.now(), text, variant: 'sent' };
-    setMessages((prev) => [...prev, userMsg]);
+    addMessage({
+      role: 'user',
+      message: text,
+      timestamp: Date.now(),
+    });
 
     try {
-      let answer = await sendChat({ message: text });
-const formatted = formatAnswer(answer);
+      const answer = await sendChat({ message: text });
+      const formatted = formatAnswer(answer);
 
-const botMsg: Message = {
-  id: Date.now() + 1,
-  text: formatted,
-  variant: 'received',
-};
-
-setMessages(prev => [...prev, botMsg]);
+      addMessage({
+        role: 'assistant',
+        message: formatted,
+        timestamp: Date.now(),
+      });
 
     } catch (err) {
       console.error('챗봇 응답 실패:', err);
@@ -111,8 +108,12 @@ setMessages(prev => [...prev, botMsg]);
         </div>
 
         {/* 사용자 메시지 */}
-        {messages.map((m) => (
-          <Chatting key={m.id} message={m.text} variant={m.variant} />
+        {messages.map((m, i) => (
+          <Chatting
+            key={i}
+            message={m.message}
+            variant={m.role === 'user' ? 'sent' : 'received'}
+          />
         ))}
 
         {/* 스크롤 */}
