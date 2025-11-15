@@ -1,16 +1,25 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useCourseSession } from '@/shared/api/course/queries/useCourseSession';
 import { useKakaoCourseMap } from '@/shared/hooks/kakaoMap/useKakaoCourseMap';
 import LocationBubble from '@/shared/components/container/LocationBubble';
 import type { CoursePlace } from '@/shared/api/course/types/courseSession';
 
-export default function FullMap({ sessionId }: { sessionId: string }) {
-  const mapRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useCourseSession(sessionId);
+interface FullMapProps {
+  sessionId: string;
+  onError?: () => void; 
+}
 
+export default function FullMap({ sessionId, onError }: FullMapProps) {
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const { data, isError } = useCourseSession(sessionId);
   const [selectedPlace, setSelectedPlace] = useState<CoursePlace | null>(null);
-  const [bubblePos, setBubblePos] =
-    useState<{ x: number; y: number } | null>(null);
+  const [bubblePos, setBubblePos] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    if (isError) {
+      onError?.(); 
+    }
+  }, [isError, onError]);
 
   useKakaoCourseMap(mapRef, {
     places: data?.places || [],
@@ -21,7 +30,7 @@ export default function FullMap({ sessionId }: { sessionId: string }) {
 
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      const offsetY = 20; 
+      const offsetY = 20;
 
       setBubblePos({
         x: centerX,
@@ -47,7 +56,7 @@ export default function FullMap({ sessionId }: { sessionId: string }) {
             style={{
               top: bubblePos.y,
               left: bubblePos.x,
-              transform: "translate(-50%, -100%)",
+              transform: 'translate(-50%, -100%)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
