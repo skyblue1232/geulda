@@ -250,5 +250,35 @@ html, body {
 
 .flip-card-back {
   transform: rotateY(180deg);
-
 }
+
+@keyframes dotJump1 {
+  0%   { transform: translateY(0); opacity: 0.5; }
+  50%  { transform: translateY(-0.35rem); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.5; }
+}
+
+@keyframes dotJump2 {
+  0%   { transform: translateY(0); opacity: 0.5; }
+  50%  { transform: translateY(-0.35rem); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.5; }
+}
+
+@keyframes dotJump3 {
+  0%   { transform: translateY(0); opacity: 0.5; }
+  50%  { transform: translateY(-0.35rem); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.5; }
+}
+
+.animate-dot1 {
+  animation: dotJump1 0.7s infinite ease-in-out;
+}
+.animate-dot2 {
+  animation: dotJump2 0.7s infinite ease-in-out;
+  animation-delay: 0.15s;
+}
+.animate-dot3 {
+  animation: dotJump3 0.7s infinite ease-in-out;
+  animation-delay: 0.3s;
+}
+
