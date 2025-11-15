@@ -1,4 +1,4 @@
-import { apiAuth } from '@/shared/api/instance';
+import { apiWithToken } from '@/shared/api/instance';
 import type { ApiResponse } from '@/shared/types/authtypes';
 
 export interface StampStatus {
@@ -8,7 +8,7 @@ export interface StampStatus {
 }
 
 export const getStampStatus = async (): Promise<StampStatus> => {
-  const { data } = await apiAuth.get<ApiResponse<StampStatus>>(
+  const { data } = await apiWithToken.get<ApiResponse<StampStatus>>(
     '/api/stamps/collection',
   );
   return data.data;
