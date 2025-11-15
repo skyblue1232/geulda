@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
@@ -11,18 +11,22 @@ import {
   EventCard,
 } from '@/shared/components';
 import { useEvents } from '@/shared/hooks/events/useEvents';
-import type {EventData} from '@/shared/types/eventtypes';
+import type { EventData } from '@/shared/types/eventtypes';
 
 export default function EventPage() {
   const router = useRouter();
-  const [date, setDate] = useState<Date>();
+  const { date: dateQuery } = router.query;
+  const [date, setDate] = useState<Date | undefined>(undefined);
   const { events } = useEvents(date);
 
   const filteredEvents = events;
+  useEffect(() => {
+    if (router.isReady && dateQuery) {
+      setDate(new Date(String(dateQuery)));
+    }
+  }, [router.isReady, dateQuery]);
 
-  const handleCardClick = (id: number) => {
-    router.push(`/events/${id}`);
-  };
+  const selectedDateString = date ? date.toISOString().split('T')[0] : '';
 
   return (
     <div
@@ -57,19 +61,21 @@ export default function EventPage() {
               'grid-cols-2 gap-x-[1.4rem] gap-y-[1.4rem]',
             )}
           >
-             {filteredEvents.map((event: EventData) => (
+            {filteredEvents.map((event: EventData) => (
               <div
                 key={event.id}
-                onClick={() => handleCardClick(event.id)}
-                className="cursor-pointer"
+                onClick={() =>
+                  router.push(`/events/${event.id}?date=${selectedDateString}`)
+                }
+                className='cursor-pointer'
               >
                 <EventCard
                   eventId={event.id}
                   name={event.name}
                   address={event.address}
                   description={event.description}
-                  variant="gray"
-                  size="medium"
+                  variant='gray'
+                  size='medium'
                   imageSrc={event.imageSrc}
                   liked={event.liked}
                 />
