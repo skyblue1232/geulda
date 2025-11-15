@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import type { AxiosError } from 'axios';
 import ProfilePhoto from '@/pages/mypage/components/ProfilePhoto';
 import PostcardContainer from '@/pages/mypage/components/PostcardContainer';
-import LoginRequired from '@/pages/mypage/components/LoginRequired';
-import LogoutConfirm from '@/pages/mypage/components/LogoutConfirm';
+import LoginRequired from '@/shared/components/mypage/LoginRequired';
+import LogoutConfirm from '@/shared/components/mypage/LogoutConfirm';
 import { EventCard, BottomNav } from '@/shared/components';
 import { useUserStatus } from '@/shared/hooks/useUserStatus';
 import { usePopup } from '@/shared/hooks/mypage/usePopup';
@@ -13,6 +14,7 @@ import { useMyPageQuery } from '@/shared/api/member';
 
 export default function MyPage() {
   const { isLoggedIn } = useUserStatus();
+  const router = useRouter(); 
   const {
     showLoginPopup,
     showLogoutPopup,
@@ -73,6 +75,7 @@ export default function MyPage() {
           {isLoggedIn === false && (
             <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
               <EventCard
+                eventId={99}
                 name='행사 이름'
                 address='우리집'
                 description='행사 설명'
@@ -81,6 +84,7 @@ export default function MyPage() {
                 imageSrc=''
               />
               <EventCard
+                eventId={98}
                 name='행사 이름'
                 address='우리집'
                 description='행사 설명'
@@ -97,12 +101,15 @@ export default function MyPage() {
               {bookmarkedEvents.map((event) => (
                 <EventCard
                   key={event.eventId}
-                  name={event.eventName}
-                  address=''
-                  description=''
+                  eventId={event.eventId}
+                  name={event.title ?? event.eventName ?? ''}
+                  address={event.address ?? ''}
+                  description={event.body ?? ''}
                   variant='gray'
                   size='large'
-                  imageSrc={event.eventImageUrl}
+                  imageSrc={event.imageUrl}
+                  liked={true}
+                  onClick={() => router.push(`/mypage/events/${event.eventId}`)}
                 />
               ))}
             </div>

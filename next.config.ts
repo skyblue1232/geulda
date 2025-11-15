@@ -19,16 +19,18 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       'geulda-ai-video-bucket.s3.ap-southeast-2.amazonaws.com',
-      'example.com'
+      'example.com',
+      'www.bucheon.go.kr',
+      'www.bcf.or.kr',
     ],
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'places.googleapis.com',
-      },
+      { protocol: 'https', hostname: 'mblogthumb-phinf.pstatic.net' },
+      { protocol: 'https', hostname: 'blogfiles.pstatic.net' },
+      { protocol: 'https', hostname: 'postfiles.pstatic.net' },
+      { protocol: 'https', hostname: 'places.googleapis.com' },
     ],
   },
-  
+
   webpack: (config) => {
     const svgRule = config.module.rules.find(
       // @ts-ignore
