@@ -14,7 +14,7 @@ import { useMyPageQuery } from '@/shared/api/member';
 
 export default function MyPage() {
   const { isLoggedIn } = useUserStatus();
-  const router = useRouter(); 
+  const router = useRouter();
   const {
     showLoginPopup,
     showLogoutPopup,
@@ -126,10 +126,14 @@ export default function MyPage() {
         </section>
 
         {/* 저장한 엽서 */}
-        <section aria-label='저장한 엽서' className='w-full mt-[1.8rem]'>
+        <section
+          aria-label='저장한 엽서'
+          className='w-full mt-[1.8rem] relative z-[100]'
+        >
           <p className='text-label-lg mb-[0.6rem] pl-[1rem]'>저장한 엽서</p>
           <PostcardContainer
             postcards={!isLoggedIn ? [] : hasPostcards ? postcards : []}
+            onClickCard={(id) => router.push(`/mypage/postcard/${id}`)}
           />
         </section>
 
