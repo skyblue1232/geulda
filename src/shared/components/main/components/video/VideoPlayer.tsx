@@ -15,11 +15,12 @@ export default function VideoPlayer({ src, label, onEnd }: VideoPlayerProps) {
       {src ? (
         <video
           key={src}
-          src={src}
-          autoPlay
-          muted
-          playsInline
-          controls
+          src={src.trim()}
+          preload="auto"         // 초기 버퍼링 줄임
+          autoPlay               // 페이지 진입 즉시 재생
+          muted                  // iOS 자동재생 조건
+          playsInline            // 모바일 강제 전체화면 방지
+          controls={false}  
           onEnded={onEnd}
           className="w-full h-full rounded-[2rem] object-cover"
           aria-label={`${label} 영상`}
