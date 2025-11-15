@@ -4,6 +4,7 @@ import { useImageOrientation } from '@/shared/hooks/useImageOrientation';
 import { cn } from '@/shared/lib';
 import { useRouter } from 'next/router';
 import { useGetPostCardDetail } from '@/shared/api/member';
+
 const PostCard = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -11,7 +12,7 @@ const PostCard = () => {
   const postcardId = Number(id);
   const { data, isLoading, isError } = useGetPostCardDetail(postcardId);
 
-  const imageUrl = data?.data?.imageUrl ?? '/assets/letter_card_backh.png';
+  const imageUrl = data?.data?.imageUrl ?? '/assets/letter_card_backv.png';
   const { orientation } = useImageOrientation(imageUrl);
 
   if (isLoading)
@@ -58,7 +59,7 @@ const PostCard = () => {
         )}
       >
         <FlipCard
-          frontSrc={imageUrl}
+          frontSrc={imageUrl.trim()}
           backSrc={imageProps.backSrc}
           width={imageProps.width}
           height={imageProps.height}

@@ -36,7 +36,6 @@ type IconColor =
   | 'blue-400'
   | 'red-300'
   | 'red-400'
-  | 'white'
   | 'background'
   | 'foreground';
 

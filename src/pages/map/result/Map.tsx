@@ -1,6 +1,7 @@
 import { Header } from '@/shared/components';
 import { useRouter } from 'next/router';
 import FullMap from '@/shared/components/map/result/components/FullMap';
+import { useEffect } from 'react';
 
 const MapPage = () => {
   const router = useRouter();
@@ -8,6 +9,12 @@ const MapPage = () => {
   const sessionId = Array.isArray(router.query.sessionId)
     ? router.query.sessionId[0]
     : router.query.sessionId;
+
+  useEffect(() => {
+    if (router.isReady && !sessionId) {
+      router.push('/auth');
+    }
+  }, [router, sessionId]);
 
   return (
     <main
@@ -27,7 +34,10 @@ const MapPage = () => {
       />
 
       {sessionId ? (
-        <FullMap sessionId={sessionId} />
+        <FullMap
+          sessionId={sessionId}
+          onError={() => router.push('/auth')} 
+        />
       ) : (
         <div className="flex h-full items-center justify-center text-gray-600 text-title-sm bg-gray-200">
           코스 정보가 없습니다
