@@ -120,7 +120,7 @@ const Node = () => {
         role='main'
         aria-label={`${placeName} 상세 페이지`}
       >
-        <section className='relative w-full h-[256px]'>
+        <section className='relative w-full h-[43rem]'>
           <div className='relative w-full h-full rounded-[16px] overflow-hidden'>
             {!imageLoaded && (
               <Skeleton className='absolute inset-0 w-full h-full rounded-[16px] animate-pulse bg-gradient-to-br from-gray-200 to-gray-100' />
@@ -130,8 +130,6 @@ const Node = () => {
               src={imageUrl || '/assets/board.svg'}
               alt={placeName}
               fill
-              sizes='(max-width: 768px) 100vw, 354px'
-              priority={false}
               onLoadingComplete={() => setImageLoaded(true)}
               className={cn(
                 'object-cover rounded-[16px] transition-opacity duration-500',
