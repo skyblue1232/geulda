@@ -23,9 +23,9 @@ const LocationCard = ({
 }: LocationCardProps) => {
   const [liked, setLiked] = useState(false);
 
-  const handleLikeClick = () => {
-    setLiked((prev) => !prev);
-  };
+  // const handleLikeClick = () => {
+  //   setLiked((prev) => !prev);
+  // };
   return (
     <Card variant={variant} size={size}>
       {/* Medium 카드 */}
@@ -59,7 +59,7 @@ const LocationCard = ({
           <div
             className={cn(
               'text-body-md truncate', //1줄 초과
-              variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
+              variant === 'mint' ? 'text-mint-600' : 'text-gray-500',
             )}
           >
             {address}
@@ -74,7 +74,7 @@ const LocationCard = ({
               <Icon
                 name='MapPin'
                 size={18}
-                color={variant === 'mint' ? 'mint-500' : 'gray-600'}
+                color={variant === 'mint' ? 'mint-600' : 'gray-600'}
               />
               <span
                 className={cn(
@@ -107,7 +107,7 @@ const LocationCard = ({
           <p
             className={cn(
               'text-body-md mt-[0.5rem] line-clamp-4', //4줄 초과',
-              variant === 'mint' ? 'text-mint-500' : 'text-gray-500',
+              variant === 'mint' ? 'text-mint-600' : 'text-gray-500',
             )}
           >
             {description}

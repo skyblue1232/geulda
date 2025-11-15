@@ -79,7 +79,7 @@ export default function PostcardContainer({
       <div
         className={cn(
           postcardGridStyle,
-          postcards.length <= 8 && 'justify-center',
+          postcards.length <= 8 && 'justify-center gap-[1.2rem] ',
         )}
       >
         {filledSlots.map((card, idx) => (
@@ -90,7 +90,7 @@ export default function PostcardContainer({
             aria-disabled={!card}
             className={cn(
               postcardCardStyle({ interactive: !!card }),
-              !card && 'items-center justify-center bg-gray-200',
+              !card && 'items-center justify-center bg-pink-100',
             )}
           >
             {card && (
@@ -99,7 +99,7 @@ export default function PostcardContainer({
                 alt={card.placeName || `엽서 ${idx + 1}`}
                 width={200}
                 height={200}
-                className="w-full h-full object-cover"
+                className='w-full h-full object-cover'
               />
             )}
           </button>

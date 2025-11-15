@@ -1,21 +1,30 @@
-// 공유
-export const handleShare = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: '엽서 공유',
-      text: '가톨릭대 엽서 🎴',
-      url: window.location.href,
-    });
+export const handleShare = async (imageUrl: string, title: string) => {
+  if (navigator.canShare && navigator.canShare({ files: [] })) {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    const file = new File([blob], `${title}.png`, { type: blob.type });
+
+    try {
+      await navigator.share({
+        title: `${title} 엽서`,
+        text: '내가 획득한 엽서를 공유합니다!',
+        files: [file],
+      });
+    } catch (err) {
+      console.error('공유 실패:', err);
+    }
   } else {
-    alert('이 브라우저에서는 공유 기능을 지원하지 않습니다.');
+    alert('이 브라우저에서는 이미지 공유를 지원하지 않습니다.');
   }
 };
 
-// 저장
-export const handleSave = () => {
-  const imageUrl = '/assets/Card.svg';
-  const link = document.createElement('a');
-  link.href = imageUrl;
-  link.download = 'Card.svg';
-  link.click();
+export const handleSave = (imageUrl: string, placeName: string) => {
+  try {
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = `${placeName}.png`;
+    link.click();
+  } catch (err) {
+    console.error('이미지 저장 실패:', err);
+  }
 };
