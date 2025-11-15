@@ -11,6 +11,7 @@ import {
   EventCard,
 } from '@/shared/components';
 import { useEvents } from '@/shared/hooks/events/useEvents';
+import type {EventData} from '@/shared/types/eventtypes';
 
 export default function EventPage() {
   const router = useRouter();
@@ -56,26 +57,24 @@ export default function EventPage() {
               'grid-cols-2 gap-x-[1.4rem] gap-y-[1.4rem]',
             )}
           >
-            {filteredEvents.map((event) => {
-              return (
-                <div
-                  key={event.id}
-                  onClick={() => handleCardClick(event.id)}
-                  className='cursor-pointer'
-                >
-                  <EventCard
-                    eventId={event.id}
-                    name={event.name}
-                    address={event.address}
-                    description={event.description}
-                    variant='gray'
-                    size='medium'
-                    imageSrc={event.imageSrc ?? ''}
-                    liked={event.liked}
-                  />
-                </div>
-              );
-            })}
+             {filteredEvents.map((event: EventData) => (
+              <div
+                key={event.id}
+                onClick={() => handleCardClick(event.id)}
+                className="cursor-pointer"
+              >
+                <EventCard
+                  eventId={event.id}
+                  name={event.name}
+                  address={event.address}
+                  description={event.description}
+                  variant="gray"
+                  size="medium"
+                  imageSrc={event.imageSrc}
+                  liked={event.liked}
+                />
+              </div>
+            ))}
           </section>
         ) : (
           <div

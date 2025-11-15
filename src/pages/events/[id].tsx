@@ -8,6 +8,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEventDetail } from '@/shared/hooks/events/useEventDetail';
 import { buildNextEventList } from '@/shared/utils/buildNextEventList';
+import type { RelatedEventOrEmpty } from '@/shared/types/eventtypes';
+
+const isEmptyItem = (
+  item: RelatedEventOrEmpty
+): item is { isEmpty: true } => 'isEmpty' in item;
 
 const EventDetailPage = () => {
   const router = useRouter();
@@ -33,7 +38,7 @@ const EventDetailPage = () => {
   return (
     <div className={cn('relative w-full min-h-[100vh] overflow-auto')}>
       <Header
-        title='행사명'
+        title="행사명"
         onClick={() => router.back()}
         className={cn('fixed top-0 left-0 right-0 z-50')}
       />
@@ -46,7 +51,7 @@ const EventDetailPage = () => {
       >
         {/* 행사 기간 */}
         <div
-          aria-label='행사 기간'
+          aria-label="행사 기간"
           className={cn('flex justify-center w-[18.4rem] mt-[1.3rem]')}
         >
           <DateTag startDate={startDate!} endDate={endDate!} />
@@ -54,7 +59,7 @@ const EventDetailPage = () => {
 
         {/* 대표 이미지 */}
         <section
-          aria-label='행사 대표 이미지'
+          aria-label="행사 대표 이미지"
           className={cn(
             'relative w-full flex justify-center max-w-[35.4rem]  h-[43rem]',
             'mt-[1rem]',
@@ -70,15 +75,15 @@ const EventDetailPage = () => {
           ) : (
             <div
               className={cn('w-full h-full bg-gray-200 rounded-[2rem]')}
-              role='img'
-              aria-label={`${name} 이미지가 제공되지 않습니다.`}
+              role="img"
+              aria-label={`${title} 이미지가 제공되지 않습니다.`}
             />
           )}
         </section>
 
         {/* 행사 카드 */}
         <div
-          aria-label='행사 정보'
+          aria-label="행사 정보"
           className={cn(
             'flex flex-col items-center w-full gap-[0.8rem]',
             'mt-[0.8rem]',
@@ -89,31 +94,32 @@ const EventDetailPage = () => {
             name={title}
             address={address ?? ''}
             description={body ?? ''}
-            variant='gray'
-            size='large'
+            variant="gray"
+            size="large"
             imageSrc={imageUrl ?? ''}
             liked={eventDetail.isBookmarked ?? false}
           />
+
           {/* 관련 행사 */}
           <div
-            aria-label='관련 행사 목록'
+            aria-label="관련 행사 목록"
             className={cn(
               'grid grid-cols-2 gap-[1.2rem] justify-items-center w-full max-w-[35.4rem]',
             )}
           >
-            {nextList.map((item, idx) => (
+            {nextList.map((item: RelatedEventOrEmpty, idx) => (
               <div key={idx} className={cn('w-[17rem]')}>
-                {item.isEmpty ? (
-                  <div className='w-[17rem] h-[8rem] bg-gray-200 rounded-[1rem]' />
+                {isEmptyItem(item) ? (
+                  <div className="w-[17rem] h-[8rem] bg-gray-200 rounded-[1rem]" />
                 ) : (
                   <EventCard
                     eventId={item.eventId}
                     name={item.title}
-                    address=''
-                    description=''
+                    address=""
+                    description=""
                     imageSrc={item.imageUrl}
-                    variant='gray'
-                    size='small'
+                    variant="gray"
+                    size="small"
                     liked={false}
                   />
                 )}

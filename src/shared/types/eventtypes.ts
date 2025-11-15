@@ -38,3 +38,5 @@ export interface EventDetail extends EventResponse {
   externalUrl?: string;
   nextEvents: RelatedEvent[];
 }
+
+export type RelatedEventOrEmpty = RelatedEvent | { isEmpty: true };

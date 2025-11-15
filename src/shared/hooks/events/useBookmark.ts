@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { postBookmark, deleteBookmark } from '@/shared/api/events/event';
 import { getAccessToken } from '@/shared/utils/token';
 import { useQueryClient } from '@tanstack/react-query';
@@ -8,24 +8,29 @@ import { useQueryClient } from '@tanstack/react-query';
 export const useBookmark = (eventId: number, initialState: boolean) => {
   const [isBookmarked, setIsBookmarked] = useState(initialState);
   const [requireLogin, setRequireLogin] = useState(false);
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
- const toggleBookmark = async () => {
+  useEffect(() => {
+    setIsBookmarked(initialState);
+  }, [initialState]);
+
+  const toggleBookmark = async () => {
     const token = getAccessToken();
     if (!token) {
       setRequireLogin(true);
       return;
     }
 
-     try {
+    try {
       if (isBookmarked) {
         await deleteBookmark(eventId);
       } else {
         await postBookmark(eventId);
       }
-      setIsBookmarked(prev => !prev);
 
-        queryClient.invalidateQueries({ queryKey: ['events'] });
+      setIsBookmarked((prev) => !prev);
+
+      queryClient.invalidateQueries({ queryKey: ['events'] });
       queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
     } catch (err) {
       console.error('북마크 토글 실패:', err);

@@ -13,14 +13,19 @@ export const fetchEvents = async (
 
   const mapped = await Promise.all(
     res.data.data.map(async (item: EventResponse) => {
-      const detail = await apiWithToken.get(`/api/events/${item.eventId}`);
-      const fullItem = {
-        ...item,
-        imageUrl: detail.data.data.imageUrl,
-        isBookmarked: detail.data.data.isBookmarked,
-      };
+    const detail = await apiWithToken.get(`/api/events/${item.eventId}`);
+      const detailData = detail.data.data;
 
-      return mapEvent(fullItem);
+      return {
+        id: item.eventId,
+        name: item.title,
+        description: item.body,
+        address: item.address ?? '',
+        startDate: item.startDate ?? '',
+        endDate: item.endDate ?? '',
+        imageSrc: detailData.imageUrl ?? '', 
+        liked: item.isBookmarked ?? false, 
+      } satisfies EventData;
     }),
   );
 
@@ -29,6 +34,8 @@ export const fetchEvents = async (
     data: mapped,
   };
 };
+
+
 
 // 행사 상세 조회
 export const fetchEventDetail = async (

@@ -7,6 +7,6 @@ export const mapEvent = (item: EventResponse): EventData => ({
   address: item.address ?? '',
   startDate: item.startDate ?? '',
   endDate: item.endDate ?? '',
-  imageSrc: item.imageUrl ?? '',
+  imageSrc: item.thumbnailUrl ?? item.imageUrl ?? '',
   liked: item.isBookmarked ?? false,
 });
