@@ -24,7 +24,7 @@ export default function PopupSet({ text, onClose }: PopupSetProps) {
       {/* 중앙 고정 */}
       <div
         className={cn(
-          'fixed inset-0 z-[50]',
+          'fixed inset-0 z-[100]',
           'flex items-center justify-center',
         )}
       >

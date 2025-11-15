@@ -1,18 +1,28 @@
+import { useEffect } from 'react';
 import { Header, EventCard, AddressCopy } from '@/shared/components';
 import DateTag from '@/pages/events/components/DateTag';
 import { cn } from '@/shared/lib';
-import { eventData } from '@/shared/constants/events/eventsData';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEventDetail } from '@/shared/hooks/events/useEventDetail';
 
 const EventSavePage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const event = eventData.find((e) => e.id === Number(id));
-  if (!event) return null;
+  const eventId = Number(id);
+  const { data: eventDetail, isLoading, isError } = useEventDetail(eventId);
 
-  const { name, address, description, startDate, endDate, imageSrc } = event;
+  useEffect(() => {
+    if (!isLoading && (!isLoading|| !eventDetail)) {
+      router.replace('/mypage');
+    }
+  }, [isLoading, isError, eventDetail, router]);
+
+  if (!eventId) return null;
+  if (isError || !eventDetail) return null;
+
+  const { title, body, address, startDate, endDate, imageUrl } = eventDetail;
 
   return (
     <div className={cn('relative w-full min-h-[100vh] overflow-auto')}>
@@ -23,8 +33,8 @@ const EventSavePage = () => {
       />
 
       <main
-        role="main"
-        aria-label="저장한 행사 상세 페이지"
+        role='main'
+        aria-label='저장한 행사 상세 페이지'
         className={cn(
           'flex flex-col items-center justify-start',
           'px-[2.4rem] pt-[calc(10rem+1.4rem)]',
@@ -38,21 +48,23 @@ const EventSavePage = () => {
         {/* 대표 이미지 */}
         <section
           className={cn(
-            'relative w-full flex justify-center max-w-[35.4rem]',
+            'relative w-full flex justify-center max-w-[35.4rem] h-[43rem]',
             'mt-[1rem]',
           )}
         >
-          {imageSrc ? (
+          {imageUrl ? (
             <Image
-              src={imageSrc}
-              alt={`${name} 이미지`}
-              width={354}
-              height={430}
-              className={cn('w-full h-auto object-cover rounded-[2rem]')}
+              src={imageUrl}
+              alt={`${title} 이미지`}
+              fill
+              sizes="(max-width: 35.4rem) 100vw, 35.4rem"  
+              className='object-cover rounded-[2rem]'
             />
           ) : (
             <div
-              className={cn('w-full h-[43.6rem] bg-gray-200 rounded-[2rem]')}
+              className='w-full h-full bg-gray-200 rounded-[2rem]'
+              role='img'
+              aria-label={`${title} 이미지가 제공되지 않습니다.`}
             />
           )}
         </section>
@@ -65,15 +77,17 @@ const EventSavePage = () => {
           )}
         >
           <EventCard
-            name={name}
-            address={address}
-            description={description}
+            eventId={eventId}
+            name={title}
+            address={address ?? ''}
+            description={body ?? ''}
             variant='gray'
             size='large'
+            imageSrc={imageUrl ?? ''}
+            liked={eventDetail.isBookmarked ?? true}
           />
-
           {/* 주소복사 */}
-          <AddressCopy variant='gray' value={address} />
+          <AddressCopy variant='gray' value={address ?? ''} />
         </div>
       </main>
     </div>

@@ -2,10 +2,14 @@ export interface MyPageResponse {
   memberId: number;
   name: string;
   profileImageUrl: string;
-  bookmarkedEvents: {
+   bookmarkedEvents: {
     eventId: number;
-    eventName: string;
-    eventImageUrl: string;
+    title?: string;
+    body?: string;
+    address?: string;
+    imageUrl?: string;
+    eventName?: string;
+    eventImageUrl?: string;
   }[];
   postcards: {
     postcardId: number;

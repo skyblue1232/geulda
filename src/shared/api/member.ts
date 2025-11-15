@@ -26,7 +26,6 @@ export const useMyPageQuery = (enabled: boolean) =>
     queryKey: ['myPage'],
     queryFn: fetchMyPage,
     enabled,
-    staleTime: 1000 * 60 * 5,
   });
 
 export const useMyInfoQuery = (enabled: boolean) =>
@@ -34,7 +33,6 @@ export const useMyInfoQuery = (enabled: boolean) =>
     queryKey: ['myInfo'],
     queryFn: fetchMyInfo,
     enabled,
-    staleTime: 1000 * 60 * 5,
   });
 
 export const getPostCardDetail = async (postcardId: number) => {
