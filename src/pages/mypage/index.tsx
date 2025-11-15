@@ -100,6 +100,7 @@ export default function MyPage() {
             <div className='max-h-[18rem] overflow-y-auto no-scrollbar space-y-[1rem]'>
               {bookmarkedEvents.map((event) => (
                 <EventCard
+                  key={event.eventId}
                   eventId={event.eventId}
                   name={event.title ?? event.eventName ?? ''}
                   address={event.address ?? ''}
