@@ -1,4 +1,4 @@
-import { apiAuth } from '@/shared/api/instance';
+import { apiWithToken } from '@/shared/api/instance';
 import type { ApiResponse } from '@/shared/types/authtypes';
 
 interface PlaceDetailResponse {
@@ -11,7 +11,7 @@ interface PlaceDetailResponse {
 }
 
 export const getPlaceDetail = async (placeId: number) => {
-  const { data } = await apiAuth.get<ApiResponse<PlaceDetailResponse>>(
+  const { data } = await apiWithToken.get<ApiResponse<PlaceDetailResponse>>(
     `/api/places/${placeId}`,
   );
   return data;
