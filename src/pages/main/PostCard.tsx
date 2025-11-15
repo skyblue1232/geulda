@@ -68,7 +68,7 @@ const PostCard = () => {
           height={imageProps.height}
         />
 
-        {/* 공유 / 저장 버튼 */}
+        {/* 저장 버튼 */}
         <div
           className={cn(
             'w-full flex justify-end',
