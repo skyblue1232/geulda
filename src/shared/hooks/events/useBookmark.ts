@@ -32,10 +32,16 @@ export const useBookmark = (eventId: number, initialState: boolean) => {
 
       queryClient.invalidateQueries({ queryKey: ['events'] });
       queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
+      queryClient.invalidateQueries({ queryKey: ['myPage'] });
+      await queryClient.refetchQueries({ queryKey: ['myPage'] });
     } catch (err) {
       console.error('북마크 토글 실패:', err);
     }
   };
 
-  return { isBookmarked, toggleBookmark, requireLogin, setRequireLogin };
+  return {  isBookmarked,
+    setIsBookmarked,
+    toggleBookmark,
+    requireLogin,
+    setRequireLogin,};
 };
