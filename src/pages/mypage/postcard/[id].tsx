@@ -4,7 +4,7 @@ import { useImageOrientation } from '@/shared/hooks/useImageOrientation';
 import { cn } from '@/shared/lib';
 import { useRouter } from 'next/router';
 import { useGetPostCardDetail } from '@/shared/api/member';
-import { PostCardActions } from '@/shared/components/main/components/PostCardActions/PostCardActions';
+
 const PostCard = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -65,7 +65,6 @@ const PostCard = () => {
           height={imageProps.height}
         />
       </div>
-      <PostCardActions imageUrl={imageUrl} placeName={placeName} />
 
       {/* 장소 카드 */}
       <div

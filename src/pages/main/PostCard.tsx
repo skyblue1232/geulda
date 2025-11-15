@@ -15,9 +15,13 @@ const PostCard = () => {
     if (stored) setPostcard(stored);
   }, []);
 
-  const { orientation } = useImageOrientation(
-    postcard?.imageUrl || '/assets/letter_card_backv.png',
-  );
+  // 🔥 postcard가 null이어도 안전하게 처리
+  const cleanedImageUrl = (
+    postcard?.imageUrl || '/assets/letter_card_backv.png'
+  ).trim();
+
+  // 🔥 훅은 조건문 밖에서 항상 호출!
+  const { orientation } = useImageOrientation(cleanedImageUrl);
 
   if (!postcard) {
     return (
@@ -27,7 +31,7 @@ const PostCard = () => {
     );
   }
 
-  const { imageUrl, placeName, description, address } = postcard;
+  const { placeName, description, address } = postcard;
 
   const imageProps =
     orientation === 'portrait'
@@ -60,15 +64,13 @@ const PostCard = () => {
           orientation === 'portrait' ? 'mt-[0rem]' : 'mt-[6rem]',
         )}
       >
-        {/* 카드 */}
         <FlipCard
-          frontSrc={imageUrl}
+          frontSrc={cleanedImageUrl}
           backSrc={imageProps.backSrc}
           width={imageProps.width}
           height={imageProps.height}
         />
 
-        {/* 저장 버튼 */}
         <div
           className={cn(
             'w-full flex justify-end',
@@ -77,11 +79,10 @@ const PostCard = () => {
               : 'mt-[1rem] mb-[6rem]',
           )}
         >
-          <PostCardActions imageUrl={imageUrl} placeName={placeName} />
+          <PostCardActions imageUrl={cleanedImageUrl} placeName={placeName} />
         </div>
       </div>
 
-      {/* 장소 카드 */}
       <LocationCard
         name={placeName}
         address={address}
