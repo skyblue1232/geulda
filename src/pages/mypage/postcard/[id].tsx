@@ -11,7 +11,7 @@ const PostCard = () => {
   const postcardId = Number(id);
   const { data, isLoading, isError } = useGetPostCardDetail(postcardId);
 
-  const imageUrl = data?.data?.imageUrl ?? '/assets/letter_card_backh.png';
+  const imageUrl = data?.data?.imageUrl ?? '/assets/letter_card_backv.png';
   const { orientation } = useImageOrientation(imageUrl);
 
   if (isLoading)

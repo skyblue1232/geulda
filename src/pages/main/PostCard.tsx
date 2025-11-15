@@ -16,7 +16,7 @@ const PostCard = () => {
   }, []);
 
   const { orientation } = useImageOrientation(
-    postcard?.imageUrl || '/assets/card_placeholder.png',
+    postcard?.imageUrl || '/assets/letter_card_backv.png',
   );
 
   if (!postcard) {
