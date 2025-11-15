@@ -20,12 +20,7 @@ export default function PopupSet({ text, onClose }: PopupSetProps) {
 
   return (
     <>
-      <Overlay
-        onClick={(e) => {
-          e.stopPropagation();
-          handleClose();
-        }}
-      />
+      <Overlay onClick={handleClose} />
       {/* 중앙 고정 */}
       <div
         className={cn(
