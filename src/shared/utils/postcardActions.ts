@@ -28,3 +28,25 @@ export const handleSave = (imageUrl: string, placeName: string) => {
     console.error('이미지 저장 실패:', err);
   }
 };
+
+export async function downloadFromServer(url: string, fileName: string) {
+  try {
+    const resp = await fetch(`/api/file?url=${encodeURIComponent(url)}`);
+    const json = await resp.json();
+
+    const blob = new Blob([Uint8Array.from(json.arrayBuffer)], {
+      type: json.type,
+    });
+
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = fileName;
+    a.click();
+
+    URL.revokeObjectURL(blobUrl);
+  } catch (err) {
+    console.error('다운로드 실패:', err);
+  }
+}
