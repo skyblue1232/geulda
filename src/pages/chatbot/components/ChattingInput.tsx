@@ -50,7 +50,7 @@ export default function ChattingInput({
         aria-label='메시지 전송'
         disabled={disabled}
         className={cn(
-          'w-[4rem] h-[4rem] flex justify-center items-center rounded-[2rem] bg-mint-500 flex-shrink-0',
+          'w-[4rem] h-[4rem] flex justify-center items-center rounded-[2rem] bg-pink-200 flex-shrink-0',
         )}
       >
         <Icon name='backto' size={20} color='gray-50' rotate={90} />

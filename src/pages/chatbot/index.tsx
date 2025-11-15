@@ -9,6 +9,7 @@ import { Header } from '@/shared/components';
 import { useChatbot } from '@/shared/hooks/chatbot/useChatbot';
 import Chatting from '@/pages/chatbot/components/ChattingBubble';
 import ChattingInput from '@/pages/chatbot/components/ChattingInput';
+import ChattingLoading from '@/pages/chatbot/components/ChattingLoading'
 
 const chatPageStyle = cva(
   'relative w-full h-dvh overflow-hidden bg-white flex flex-col',
@@ -28,6 +29,7 @@ type Message = {
 
 export default function ChatPage() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { messages, addMessage, mutateAsync: sendChat, sessionId } = useChatbot();
   const formatAnswer = (text: string) => {
@@ -56,9 +58,13 @@ export default function ChatPage() {
       timestamp: Date.now(),
     });
 
+    setIsLoading(true);
+
     try {
       const answer = await sendChat({ message: text });
       const formatted = formatAnswer(answer);
+
+      setIsLoading(false); 
 
       addMessage({
         role: 'assistant',
@@ -115,6 +121,12 @@ export default function ChatPage() {
             variant={m.role === 'user' ? 'sent' : 'received'}
           />
         ))}
+
+        {isLoading && (
+  <div className="flex items-start">
+     <ChattingLoading />
+  </div>
+)}
 
         {/* 스크롤 */}
         <div ref={bottomRef} aria-hidden='true' />

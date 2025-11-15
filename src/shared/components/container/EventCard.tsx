@@ -18,6 +18,7 @@ interface EventCardProps {
   imageSrc?: string;
   liked?: boolean;
   onClick?: () => void;
+  hideLike?: boolean;
 }
 
 const EventCard = ({
@@ -30,6 +31,7 @@ const EventCard = ({
   imageSrc = '',
   liked = false,
   onClick,
+  hideLike = false,
 }: EventCardProps) => {
   const { isBookmarked, toggleBookmark, requireLogin, setRequireLogin } =
     useBookmark(eventId, liked);
@@ -47,7 +49,7 @@ const EventCard = ({
         onClick={onClick}
       >
         {size === 'small' ? (
-          <div className='flex w-[17rem] h-[8rem] p-[0.9rem_1rem] justify-center items-center flex-shrink-0 gap-[2rem]'>
+          <div className='flex w-full h-[8rem] p-[0.9rem_1rem] justify-start items-center flex-shrink-0 gap-[2rem]'>
             {/* 행사 사진 */}
             <div className='relative w-[7rem] h-full rounded-[0.8rem] flex-shrink-0 overflow-hidden'>
               {imageSrc ? (
@@ -102,26 +104,28 @@ const EventCard = ({
                 {name}
               </span>
 
-              <button
-                className='cursor-pointer p-1'
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleBookmark();
-                }}
-              >
-                <Icon
-                  name='HeartStraight'
-                  size={20}
-                  color={
-                    isBookmarked
-                      ? 'red-400'
-                      : variant === 'mint'
-                      ? 'mint-400'
-                      : 'gray-300'
-                  }
-                  fillColor={isBookmarked ? 'red-300' : undefined}
-                />
-              </button>
+              {!hideLike && (
+                <button
+                  className='cursor-pointer p-1'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleBookmark();
+                  }}
+                >
+                  <Icon
+                    name='HeartStraight'
+                    size={20}
+                    color={
+                      isBookmarked
+                        ? 'red-400'
+                        : variant === 'mint'
+                        ? 'mint-400'
+                        : 'gray-300'
+                    }
+                    fillColor={isBookmarked ? 'red-300' : undefined}
+                  />
+                </button>
+              )}
             </div>
             {/* 행사 설명 */}
             <div
@@ -148,26 +152,28 @@ const EventCard = ({
                   {name}
                 </span>
 
-                <button
-                  className='cursor-pointer p-1'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleBookmark();
-                  }}
-                >
-                  <Icon
-                    name='HeartStraight'
-                    size={20}
-                    color={
-                      isBookmarked
-                        ? 'red-400'
-                        : variant === 'mint'
-                        ? 'mint-400'
-                        : 'gray-300'
-                    }
-                    fillColor={isBookmarked ? 'red-300' : undefined}
-                  />
-                </button>
+                {!hideLike && (
+                  <button
+                    className='cursor-pointer p-1'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleBookmark();
+                    }}
+                  >
+                    <Icon
+                      name='HeartStraight'
+                      size={20}
+                      color={
+                        isBookmarked
+                          ? 'red-400'
+                          : variant === 'mint'
+                          ? 'mint-400'
+                          : 'gray-300'
+                      }
+                      fillColor={isBookmarked ? 'red-300' : undefined}
+                    />
+                  </button>
+                )}
               </div>
               {/* 행사 설명 */}
               <p
