@@ -58,7 +58,7 @@ const PostCard = () => {
         )}
       >
         <FlipCard
-          frontSrc={imageUrl}
+          frontSrc={imageUrl.trim()}
           backSrc={imageProps.backSrc}
           width={imageProps.width}
           height={imageProps.height}
