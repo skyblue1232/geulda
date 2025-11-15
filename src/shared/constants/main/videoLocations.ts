@@ -12,7 +12,7 @@ export const VIDEO_LOCATIONS: VideoLocation[] = [
     description: "학생들의 창의적인 활동과 휴식을 위한 복합 문화 공간입니다.",
   },
   {
-    label: "부천자유시장",
+    label: "부천 자유시장",
     videoSrc: "https://geulda-ai-video-bucket.s3.ap-southeast-2.amazonaws.com/upload/jayuMarket.mp4",
     description: "부천의 전통과 활기가 살아있는 재래시장입니다.",
   },
@@ -42,7 +42,7 @@ export const VIDEO_LOCATIONS: VideoLocation[] = [
     description: "봄이면 진달래가 만발하는 아름다운 산책로입니다.",
   },
   {
-    label: "중도",
+    label: "중앙도서관",
     videoSrc: "https://geulda-ai-video-bucket.s3.ap-southeast-2.amazonaws.com/upload/centralLibrary.mp4",
     description: "가톨릭대학교의 중앙도서관으로, 지식의 보물창고입니다.",
   },
