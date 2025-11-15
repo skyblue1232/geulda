@@ -12,6 +12,7 @@ import {
 } from '@/shared/components';
 import { useEvents } from '@/shared/hooks/events/useEvents';
 import type { EventData } from '@/shared/types/eventtypes';
+import { formatDateToISO } from '@/shared/utils/date';
 
 export default function EventPage() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function EventPage() {
     }
   }, [router.isReady, dateQuery]);
 
-  const selectedDateString = date ? date.toISOString().split('T')[0] : '';
+  const selectedDateString = date ? formatDateToISO(date) : '';
 
   return (
     <div
