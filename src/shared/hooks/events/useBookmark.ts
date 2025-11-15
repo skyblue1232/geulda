@@ -22,21 +22,22 @@ export const useBookmark = (eventId: number, initialState: boolean) => {
     }
 
     try {
+      setIsBookmarked((prev) => !prev);
       if (isBookmarked) {
         await deleteBookmark(eventId);
       } else {
         await postBookmark(eventId);
       }
 
-      setIsBookmarked((prev) => !prev);
 
       queryClient.invalidateQueries({ queryKey: ['events'] });
       queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       queryClient.invalidateQueries({ queryKey: ['myPage'] });
       await queryClient.refetchQueries({ queryKey: ['myPage'] });
     } catch (err) {
-      console.error('북마크 토글 실패:', err);
-    }
+     console.error('북마크 토글 실패:', err);
+    setIsBookmarked((prev) => !prev); 
+     }
   };
 
   return {  isBookmarked,

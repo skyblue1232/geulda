@@ -14,7 +14,7 @@ const EventSavePage = () => {
   const { data: eventDetail, isLoading, isError } = useEventDetail(eventId);
 
   useEffect(() => {
-    if (!isLoading && (isError || !eventDetail)) {
+    if (!isLoading && (!isLoading|| !eventDetail)) {
       router.replace('/mypage');
     }
   }, [isLoading, isError, eventDetail, router]);
@@ -57,6 +57,7 @@ const EventSavePage = () => {
               src={imageUrl}
               alt={`${title} 이미지`}
               fill
+              sizes="(max-width: 35.4rem) 100vw, 35.4rem"  
               className='object-cover rounded-[2rem]'
             />
           ) : (

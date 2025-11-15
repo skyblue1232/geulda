@@ -54,7 +54,7 @@ const EventDetailPage = () => {
           aria-label='행사 기간'
           className={cn('flex justify-center w-[18.4rem] mt-[1.3rem]')}
         >
-          <DateTag startDate={startDate!} endDate={endDate!} />
+          <DateTag startDate={startDate} endDate={endDate} />
         </div>
 
         {/* 대표 이미지 */}
