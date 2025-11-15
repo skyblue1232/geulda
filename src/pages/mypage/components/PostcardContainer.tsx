@@ -82,28 +82,28 @@ export default function PostcardContainer({
           postcards.length <= 8 && 'justify-center gap-[1.2rem] ',
         )}
       >
-        {filledSlots.map((card, idx) => (
-          <button
-            key={card?.postcardId ?? idx}
-            onClick={() => card && onClickCard?.(card.postcardId)}
-            disabled={!card}
-            aria-disabled={!card}
-            className={cn(
-              postcardCardStyle({ interactive: !!card }),
-              !card && 'items-center justify-center bg-pink-100',
-            )}
-          >
-            {card && (
+        {filledSlots.map((card, idx) =>
+          card ? (
+            <button
+              key={card.postcardId}
+              onClick={() => onClickCard?.(card.postcardId)}
+              className={postcardCardStyle({ interactive: true })}
+            >
               <Image
-                src={card.imageUrl}
-                alt={card.placeName || `엽서 ${idx + 1}`}
+                src={card.imageUrl.trim()}
+                alt={card.placeName}
                 width={200}
                 height={200}
                 className='w-full h-full object-cover'
               />
-            )}
-          </button>
-        ))}
+            </button>
+          ) : (
+            <div
+              key={idx}
+              className='w-[70px] h-[70px] rounded-[8px] bg-pink-100'
+            />
+          ),
+        )}
       </div>
     </div>
   );
