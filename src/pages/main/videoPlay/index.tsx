@@ -48,6 +48,19 @@ export default function VideoPlayPage() {
       >
         영상 시청 이후 자동으로 넘어갑니다.
       </p>
+
+      <button
+        onClick={handleVideoEnd}
+        className="
+          mt-[0.4rem]
+          text-mint-700
+          text-body-lg
+          underline
+        "
+        aria-label="영상 스킵하고 다음으로 이동"
+      >
+        Skip
+      </button>
     </div>
   );
 }
