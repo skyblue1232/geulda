@@ -27,12 +27,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'mblogthumb-phinf.pstatic.net' },
       { protocol: 'https', hostname: 'blogfiles.pstatic.net' },
       { protocol: 'https', hostname: 'postfiles.pstatic.net' },
-    ],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'places.googleapis.com',
-      },
+      { protocol: 'https', hostname: 'places.googleapis.com' },
     ],
   },
 
