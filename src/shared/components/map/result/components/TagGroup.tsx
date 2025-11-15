@@ -1,26 +1,26 @@
 'use client';
-
 import { Tag } from '@/shared/components';
 import { cn } from '@/shared/lib';
 
 interface TagGroupProps {
   viewMode: 'list' | 'map';
+  tags: string[];
   onToggleView: () => void;
 }
 
-export default function TagGroup({ viewMode, onToggleView }: TagGroupProps) {
-  const tags = ['#데이트', '#당일치기', '#도보'];
-
+export default function TagGroup({ viewMode, tags, onToggleView }: TagGroupProps) {
   return (
     <div
       className={cn(
         'flex items-center justify-between w-full gap-[0.4rem] flex-wrap'
       )}
     >
-      <div className="flex gap-[1.4rem]">
-        {tags.map((tag) => (
-          <Tag key={tag} label={tag} variant="hash" />
-        ))}
+      <div className="flex gap-[0.4rem] flex-wrap">
+        {tags.length > 0 ? (
+          tags.map((tag) => <Tag key={tag} label={tag} variant="hash" />)
+        ) : (
+          <span className="text-gray-400 text-body-sm">태그 정보 없음</span>
+        )}
       </div>
 
       <Tag

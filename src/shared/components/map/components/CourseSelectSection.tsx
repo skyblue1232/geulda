@@ -1,5 +1,4 @@
 'use client';
-
 import CommonButton from '@/shared/components/button/CommonButton';
 
 interface CourseSelectSectionProps {
