@@ -17,18 +17,17 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-  domains: [
+    domains: [
       'maps.googleapis.com',
       'geulda-ai-video-bucket.s3.ap-southeast-2.amazonaws.com',
-      'example.com'
+      'example.com',
     ],
     remotePatterns: [
-    { protocol: 'https', hostname: 'mblogthumb-phinf.pstatic.net' },
-    { protocol: 'https', hostname: 'blogfiles.pstatic.net' },
-    { protocol: 'https', hostname: 'postfiles.pstatic.net' },
-  ],
-  
-},
+      { protocol: 'https', hostname: 'mblogthumb-phinf.pstatic.net' },
+      { protocol: 'https', hostname: 'blogfiles.pstatic.net' },
+      { protocol: 'https', hostname: 'postfiles.pstatic.net' },
+    ],
+  },
 
   webpack: (config) => {
     const svgRule = config.module.rules.find(
