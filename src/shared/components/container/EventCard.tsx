@@ -17,6 +17,7 @@ interface EventCardProps {
   size?: 'small' | 'medium' | 'large';
   imageSrc?: string;
   liked?: boolean;
+  onClick?: () => void; 
 }
 
 const EventCard = ({
@@ -27,7 +28,8 @@ const EventCard = ({
   variant = 'gray',
   size = 'medium',
   imageSrc = '',
-   liked = false,
+  liked = false,
+  onClick,
 }: EventCardProps) => {
   const { isBookmarked, toggleBookmark, requireLogin, setRequireLogin } =
     useBookmark(eventId, liked);
@@ -44,6 +46,7 @@ const EventCard = ({
         customHeight={
           size === 'large' ? '13rem' : size === 'small' ? '8rem' : undefined
         }
+        onClick={onClick}
       >
         {size === 'small' ? (
           <div className="flex w-[17rem] h-[8rem] p-[0.9rem_1rem] justify-center items-center flex-shrink-0 gap-[2rem]">

@@ -48,7 +48,7 @@ const EventSavePage = () => {
         {/* 대표 이미지 */}
         <section
           className={cn(
-            'relative w-full flex justify-center max-w-[35.4rem]',
+            'relative w-full flex justify-center max-w-[35.4rem] h-[43rem]',
             'mt-[1rem]',
           )}
         >
@@ -57,13 +57,13 @@ const EventSavePage = () => {
               src={imageUrl}
               alt={`${title} 이미지`}
               fill
-              className={cn('object-cover rounded-[2rem]')}
+              className='object-cover rounded-[2rem]'
             />
           ) : (
             <div
-              className={cn('w-full h-full bg-gray-200 rounded-[2rem]')}
+              className='w-full h-full bg-gray-200 rounded-[2rem]'
               role='img'
-              aria-label={`${name} 이미지가 제공되지 않습니다.`}
+              aria-label={`${title} 이미지가 제공되지 않습니다.`}
             />
           )}
         </section>
@@ -75,18 +75,18 @@ const EventSavePage = () => {
             'mt-[0.8rem]',
           )}
         >
-         <EventCard
+          <EventCard
             eventId={eventId}
             name={title}
             address={address ?? ''}
             description={body ?? ''}
-            variant="gray"
-            size="large"
+            variant='gray'
+            size='large'
             imageSrc={imageUrl ?? ''}
-            liked={eventDetail.isBookmarked ?? true}  
+            liked={eventDetail.isBookmarked ?? true}
           />
           {/* 주소복사 */}
-          <AddressCopy variant="gray" value={address ?? ''} />
+          <AddressCopy variant='gray' value={address ?? ''} />
         </div>
       </main>
     </div>

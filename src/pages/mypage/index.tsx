@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import type { AxiosError } from 'axios';
 import ProfilePhoto from '@/pages/mypage/components/ProfilePhoto';
 import PostcardContainer from '@/pages/mypage/components/PostcardContainer';
@@ -13,6 +14,7 @@ import { useMyPageQuery } from '@/shared/api/member';
 
 export default function MyPage() {
   const { isLoggedIn } = useUserStatus();
+  const router = useRouter(); 
   const {
     showLoginPopup,
     showLogoutPopup,
@@ -106,6 +108,7 @@ export default function MyPage() {
                   size='large'
                   imageSrc={event.imageUrl}
                   liked={true}
+                  onClick={() => router.push(`/mypage/events/${event.eventId}`)}
                 />
               ))}
             </div>
