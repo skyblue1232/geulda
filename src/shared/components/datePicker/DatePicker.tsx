@@ -23,9 +23,19 @@ export function DatePicker({
   ...calendarProps
 }: DatePickerProps) {
   const [open, setOpen] = useState(false);
-  const [innerDate, setInnerDate] = useState<Date | undefined>(defaultValue);
 
-  const [displayMonth, setDisplayMonth] = useState<Date>(
+  const today = new Date();
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+
+  const [innerDate, setInnerDate] = useState<Date | undefined>(
+  defaultValue ?? today
+);
+
+ const [displayMonth, setDisplayMonth] = useState<Date>(
     toFirstOfMonth(value ?? innerDate ?? new Date()),
   );
 
@@ -56,12 +66,6 @@ export function DatePicker({
     setOpen(false);
   };
 
-  const today = new Date();
-  const startOfToday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate(),
-  );
 
   return (
     <div className={cn('flex flex-col gap-3', className)}>

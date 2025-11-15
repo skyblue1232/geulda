@@ -20,11 +20,11 @@ export default function PopupSet({ text, onClose }: PopupSetProps) {
 
   return (
     <>
-      <Overlay />
+      <Overlay onClick={handleClose} />
       {/* 중앙 고정 */}
       <div
         className={cn(
-          'fixed inset-0 z-[100]',
+          'fixed inset-0 z-[10000]',
           'flex items-center justify-center',
         )}
       >
