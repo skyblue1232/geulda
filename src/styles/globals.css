@@ -13,6 +13,23 @@ html, body {
   font-family: var(--font-sans);
 }
 
+.app-wrapper {
+  width: 100%;
+  max-width: 402px; 
+  margin: 0 auto;          
+  position: relative;  
+  min-height: 100vh;
+  background: var(--background);
+  overflow-x: hidden;  
+  transform: translateZ(0);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .app-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+}
 
 @theme {
      /* 메인컬러(MAIN) → mint */
