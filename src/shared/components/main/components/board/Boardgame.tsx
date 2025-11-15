@@ -24,7 +24,7 @@ const Boardgame = () => {
       aria-label='보드게임 화면'
     >
       <Image
-        src='/assets/background_.svg'
+        src='/assets/background.png'
         alt=''
         width={402}
         height={755}
@@ -62,7 +62,7 @@ const Boardgame = () => {
                 {hasStamp && (
                   <Icon
                     name='Stamp'
-                    color='white'
+                    color='gray-50'
                     size={74}
                     className='opacity-20'
                   />

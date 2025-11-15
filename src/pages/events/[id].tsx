@@ -10,9 +10,6 @@ import { useEventDetail } from '@/shared/hooks/events/useEventDetail';
 import { buildNextEventList } from '@/shared/utils/buildNextEventList';
 import type { RelatedEventOrEmpty } from '@/shared/types/eventtypes';
 
-const isEmptyItem = (item: RelatedEventOrEmpty): item is { isEmpty: true } =>
-  'isEmpty' in item;
-
 const EventDetailPage = () => {
   const router = useRouter();
   const { id, date } = router.query;
@@ -98,44 +95,48 @@ const EventDetailPage = () => {
             size='large'
             imageSrc={imageUrl ?? ''}
             liked={eventDetail.isBookmarked ?? false}
+            hideLike={true}  
           />
           {/* 관련 행사 */}
-          <div
-            aria-label='관련 행사 목록'
-            className={cn(
-              'grid grid-cols-2 gap-[1.2rem] justify-items-center w-full max-w-[35.4rem]',
-            )}
-          >
-            {nextList.map((item: RelatedEventOrEmpty, idx) => (
-              <div key={idx} className={cn('w-[17rem]')}>
-                {isEmptyItem(item) ? (
+          {nextEvents && nextEvents.length > 0 && (
+            <div
+              aria-label="관련 행사 목록"
+              className={cn(
+                nextEvents.length === 1
+                  ? 'grid grid-cols-1 w-full max-w-[35.4rem]'
+                  : 'grid grid-cols-2 gap-[1.2rem] justify-items-center w-full max-w-[35.4rem] mt-[1.2rem]'
+              )}
+            >
+              {nextEvents.length === 1 ? (
+                <EventCard
+                  eventId={nextEvents[0].eventId}
+                  name={nextEvents[0].title}
+                  address=""
+                  description=""
+                  imageSrc={nextEvents[0].imageUrl}
+                  variant="gray"
+                  size="small"
+                  liked={false}
+                  onClick={() => router.push(`/events/${nextEvents[0].eventId}`)}
+                />
+              ) : (
+                nextEvents.map((item) => (
                   <EventCard
-                    eventId={0}
-                    name='행사 없음'
-                    address=''
-                    description=''
-                    imageSrc=''
-                    variant='gray'
-                    size='small'
-                    liked={false}
-                    onClick={() => null}
-                  />
-                ) : (
-                  <EventCard
+                    key={item.eventId}
                     eventId={item.eventId}
                     name={item.title}
-                    address=''
-                    description=''
+                    address=""
+                    description=""
                     imageSrc={item.imageUrl}
-                    variant='gray'
-                    size='small'
+                    variant="gray"
+                    size="small"
                     liked={false}
                     onClick={() => router.push(`/events/${item.eventId}`)}
                   />
-                )}
-              </div>
-            ))}
-          </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>

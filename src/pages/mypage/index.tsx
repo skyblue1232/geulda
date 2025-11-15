@@ -128,7 +128,7 @@ export default function MyPage() {
         {/* 저장한 엽서 */}
         <section
           aria-label='저장한 엽서'
-          className='w-full mt-[1.8rem] relative z-[100]'
+          className='w-full mt-[1.8rem] relative z-[10]'
         >
           <p className='text-label-lg mb-[0.6rem] pl-[1rem]'>저장한 엽서</p>
           <PostcardContainer
