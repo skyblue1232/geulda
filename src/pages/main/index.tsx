@@ -50,9 +50,10 @@ export default function MainPage() {
         {isLoading ? (
           <p className='text-gray-400 text-center py-4'>불러오는 중...</p>
         ) : isError ? (
-          <p className='text-red-400 text-center py-4'>
-            데이터를 불러오지 못했습니다 😢
-          </p>
+          <StampBoard
+            count={0}
+            total={10}
+          />
         ) : (
           <StampBoard
             count={data?.collectedStampCount ?? 0}
