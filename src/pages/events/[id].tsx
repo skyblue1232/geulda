@@ -98,6 +98,7 @@ const EventDetailPage = () => {
             size='large'
             imageSrc={imageUrl ?? ''}
             liked={eventDetail.isBookmarked ?? false}
+            hideLike={true}  
           />
           {/* 관련 행사 */}
           <div

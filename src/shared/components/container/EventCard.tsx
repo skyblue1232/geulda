@@ -18,6 +18,7 @@ interface EventCardProps {
   imageSrc?: string;
   liked?: boolean;
   onClick?: () => void;
+  hideLike?: boolean;
 }
 
 const EventCard = ({
@@ -30,6 +31,7 @@ const EventCard = ({
   imageSrc = '',
   liked = false,
   onClick,
+  hideLike = false,
 }: EventCardProps) => {
   const { isBookmarked, toggleBookmark, requireLogin, setRequireLogin } =
     useBookmark(eventId, liked);
@@ -102,26 +104,28 @@ const EventCard = ({
                 {name}
               </span>
 
-              <button
-                className='cursor-pointer p-1'
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleBookmark();
-                }}
-              >
-                <Icon
-                  name='HeartStraight'
-                  size={20}
-                  color={
-                    isBookmarked
-                      ? 'red-400'
-                      : variant === 'mint'
-                      ? 'mint-400'
-                      : 'gray-300'
-                  }
-                  fillColor={isBookmarked ? 'red-300' : undefined}
-                />
-              </button>
+              {!hideLike && (
+                <button
+                  className='cursor-pointer p-1'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleBookmark();
+                  }}
+                >
+                  <Icon
+                    name='HeartStraight'
+                    size={20}
+                    color={
+                      isBookmarked
+                        ? 'red-400'
+                        : variant === 'mint'
+                        ? 'mint-400'
+                        : 'gray-300'
+                    }
+                    fillColor={isBookmarked ? 'red-300' : undefined}
+                  />
+                </button>
+              )}
             </div>
             {/* 행사 설명 */}
             <div
@@ -148,26 +152,28 @@ const EventCard = ({
                   {name}
                 </span>
 
-                <button
-                  className='cursor-pointer p-1'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleBookmark();
-                  }}
-                >
-                  <Icon
-                    name='HeartStraight'
-                    size={20}
-                    color={
-                      isBookmarked
-                        ? 'red-400'
-                        : variant === 'mint'
-                        ? 'mint-400'
-                        : 'gray-300'
-                    }
-                    fillColor={isBookmarked ? 'red-300' : undefined}
-                  />
-                </button>
+                {!hideLike && (
+  <button
+    className='cursor-pointer p-1'
+    onClick={(e) => {
+      e.stopPropagation();
+      toggleBookmark();
+    }}
+  >
+    <Icon
+      name='HeartStraight'
+      size={20}
+      color={
+        isBookmarked
+          ? 'red-400'
+          : variant === 'mint'
+          ? 'mint-400'
+          : 'gray-300'
+      }
+      fillColor={isBookmarked ? 'red-300' : undefined}
+    />
+  </button>
+)}
               </div>
               {/* 행사 설명 */}
               <p
