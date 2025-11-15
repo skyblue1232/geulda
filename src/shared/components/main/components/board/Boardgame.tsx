@@ -10,7 +10,7 @@ const Boardgame = () => {
   const router = useRouter();
   const { data, isLoading, isError } = useGetHasBoardStamp();
 
-  const places = data?.result?.places ?? [];
+  const places = data?.data?.places ?? [];
   console.log('보드게임 스탬프 현황:', places);
 
   if (isLoading) return <p className='text-center mt-10'>로딩 중...</p>;
@@ -39,7 +39,7 @@ const Boardgame = () => {
             if (!cell.active)
               return <div key={key} className='aspect-square bg-transparent' />;
 
-            const matched = places.find((p) => p.placeId === cell.placeId);
+            const matched = places.find((p) => Number(p.placeId) === Number(cell.placeId));
             const name = matched?.name ?? cell.name;
             const hasStamp = matched?.hasStamp ?? false;
 
