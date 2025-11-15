@@ -1,20 +1,19 @@
 'use client';
-
 import { Icon } from '@/shared/icons';
 import { cn } from '@/shared/lib';
 
 interface CourseInputSectionProps {
-  placeholder?: string;
-  label?: string;
-  onNext?: () => void;
-  disabled?: boolean;
+  value: string;
+  onChange: (value: string) => void;
+  onNext: () => void;
+  isLoading?: boolean;
 }
 
 export default function CourseInputSection({
-  placeholder = '여기에 입력해 주세요...',
-  label = '꼭 가고 싶은 곳을 적어 주세요 (선택)',
+  value,
+  onChange,
   onNext,
-  disabled = false,
+  isLoading = false,
 }: CourseInputSectionProps) {
   const inputId = 'desired-place-input';
 
@@ -26,13 +25,15 @@ export default function CourseInputSection({
         role="group"
       >
         <p id={`${inputId}-label`} className="text-body-lg text-gray-700">
-          {label}
+          꼭 가고 싶은 곳을 적어 주세요 <span className="text-gray-400">(선택)</span>
         </p>
 
         <input
           id={inputId}
           type="text"
-          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="예: 석왕사, 카페 2개, 음식점 제외"
           aria-labelledby={`${inputId}-label`}
           aria-describedby={`${inputId}-desc`}
           className="
@@ -40,6 +41,7 @@ export default function CourseInputSection({
             text-body-md placeholder-gray-400 bg-gray-100
             border-0 outline-none
           "
+          disabled={isLoading}
         />
 
         <span id={`${inputId}-desc`} className="sr-only">
@@ -51,17 +53,17 @@ export default function CourseInputSection({
         <button
           type="button"
           onClick={onNext}
-          disabled={disabled}
+          disabled={isLoading}
           className={cn(
             'flex items-center justify-center transition-opacity duration-150',
-            disabled ? 'opacity-40 cursor-not-allowed' : 'opacity-100'
+            isLoading ? 'opacity-40 cursor-not-allowed' : 'opacity-100',
           )}
           aria-label="다음 단계로 이동"
         >
           <Icon
             name="NextButton"
             size={24}
-            color={disabled ? 'gray-100' : 'gray-400'}
+            color={isLoading ? 'gray-100' : 'gray-400'}
           />
         </button>
       </div>

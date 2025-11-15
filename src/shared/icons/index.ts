@@ -19,6 +19,7 @@ import './source/MapPin.svg';
 import './source/MapPin_.svg';
 import './source/NextButton.svg';
 import './source/PressStamp.svg';
+import './source/RedMapPin.svg';
 import './source/Save.svg';
 import './source/Stamp.svg';
 import './source/User.svg';
