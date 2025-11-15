@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import {
@@ -15,6 +15,7 @@ import { useGetPlaceDetail } from '@/shared/main/queries/useGetPlaceDetail';
 import { useUserStatus } from '@/shared/hooks/useUserStatus';
 import { useStampAcquire } from '@/shared/api/main/node/queries/useStampAcquire';
 import { savePostcard } from '@/shared/utils/storage';
+import { Skeleton } from '@/shared/components/skeleton/Skeleton';
 
 const Node = () => {
   const router = useRouter();
@@ -22,6 +23,12 @@ const Node = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
+
+  // 이미지 로딩 상태
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // 스켈레톤 표시 여부 (로딩이 1초 이상일 때만 true)
+  const [showSkeleton, setShowSkeleton] = useState(false);
 
   // 스탬프 획득 훅
   const { mutate: acquireStamp } = useStampAcquire();
@@ -31,13 +38,35 @@ const Node = () => {
     router.isReady ? Number(placeId) : undefined,
   );
 
-  if (isLoading) return <p className='text-center mt-10'>로딩 중...</p>;
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isLoading) {
+      timer = setTimeout(() => setShowSkeleton(true), 1000);
+    } else {
+      setShowSkeleton(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  if (isLoading && showSkeleton) {
+    return (
+      <div className='flex flex-col items-center justify-center px-[2.4rem] mt-10'>
+        <Header title='로딩중.. ' onClick={() => router.back()} />
+        <div className='mt-[10rem] flex flex-col gap-[1.2rem] w-full'>
+          <Skeleton className='w-full max-w-[354px] h-[300px] rounded-[16px]' />
+          <Skeleton className='w-full max-w-[354px] h-[100px] rounded-[16px]' />
+          <Skeleton className='w-full max-w-[354px] h-[50px] rounded-[16px]' />
+        </div>
+      </div>
+    );
+  }
+
   if (isError || !data)
     return <p className='text-center mt-10'>데이터를 불러오지 못했습니다 😢</p>;
 
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
-  // 스탬프 찍기 버튼 클릭 핸들러
+  // 🔹 스탬프 찍기 버튼
   const handleStampClick = () => {
     if (!isLoggedIn) {
       setShowLoginPopup(true);
@@ -46,20 +75,16 @@ const Node = () => {
 
     if (isCompleted) return;
 
-    // 위치 가져와서 API 호출
     getLocation(
       (pos) => {
         const body = {
-          // 하드 코딩
           latitude: 37.48585193654532,
           longitude: 126.80355242431538,
-          // 실제
+          // 실제 위치 사용 시:
           // latitude: pos.coords.latitude,
           // longitude: pos.coords.longitude,
         };
         const placeIdNum = Number(placeId);
-
-        console.log('📍 현재 위치:', body);
 
         acquireStamp(
           { placeId: placeIdNum, body },
@@ -95,33 +120,45 @@ const Node = () => {
         role='main'
         aria-label={`${placeName} 상세 페이지`}
       >
-        <section className='relative w-full'>
-          <Image
-            src={imageUrl || '/assets/board.svg'}
-            alt={placeName}
-            width={354}
-            height={436}
-            className={cn(
-              'w-full h-auto object-cover block rounded-[16px] transition-all duration-300',
-              !isCompleted && 'blur-xs brightness-90',
+        <section className='relative w-full h-[256px]'>
+          <div className='relative w-full h-full rounded-[16px] overflow-hidden'>
+            {!imageLoaded && (
+              <Skeleton className='absolute inset-0 w-full h-full rounded-[16px] animate-pulse bg-gradient-to-br from-gray-200 to-gray-100' />
             )}
-          />
 
-          <button
-            aria-label={isCompleted ? '스탬프 획득 완료' : '스탬프 찍기'}
-            className={cn(
-              'absolute bottom-0 right-0',
-              isCompleted && 'p-[2.5rem]',
-            )}
-            onClick={handleStampClick}
-          >
-            <Icon
-              name={isCompleted ? 'Stamp' : 'PressStamp'}
-              color={isCompleted ? 'pink-400' : 'gray-50'}
-              size={isCompleted ? 100 : 160}
-              aria-hidden='true'
+            <Image
+              src={imageUrl || '/assets/board.svg'}
+              alt={placeName}
+              fill
+              sizes='(max-width: 768px) 100vw, 354px'
+              priority={false}
+              onLoadingComplete={() => setImageLoaded(true)}
+              className={cn(
+                'object-cover rounded-[16px] transition-opacity duration-500',
+                !isCompleted && 'blur-xs brightness-90',
+                imageLoaded ? 'opacity-100' : 'opacity-0',
+              )}
             />
-          </button>
+          </div>
+
+          {imageLoaded && (
+            <button
+              aria-label={isCompleted ? '스탬프 획득 완료' : '스탬프 찍기'}
+              className={cn(
+                'absolute bottom-0 right-0',
+                isCompleted && 'p-[2.5rem]',
+                imageLoaded ? 'opacity-100' : 'opacity-0 h-0',
+              )}
+              onClick={handleStampClick}
+            >
+              <Icon
+                name={isCompleted ? 'Stamp' : 'PressStamp'}
+                color={isCompleted ? 'pink-400' : 'gray-50'}
+                size={isCompleted ? 100 : 160}
+                aria-hidden='true'
+              />
+            </button>
+          )}
         </section>
 
         <LocationCard
@@ -131,11 +168,10 @@ const Node = () => {
           variant='mint'
           size='large'
         />
-
         <AddressCopy variant='mint' value={address} />
       </main>
 
-      {/* 로그인 필요 팝업 */}
+      {/* 팝업 영역 */}
       {showLoginPopup && (
         <PopupSet
           text='로그인이 필요한 서비스입니다.'
@@ -146,7 +182,6 @@ const Node = () => {
         />
       )}
 
-      {/* 위치 에러 팝업 */}
       {showErrorPopup && (
         <PopupSet
           text='해당 위치를 다시 확인해 주세요.'
