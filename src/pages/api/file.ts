@@ -6,9 +6,13 @@ export interface FileResponse {
   arrayBuffer: number[];
 }
 
+export interface ErrorResponse {
+  error: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<FileResponse | any>,
+  res: NextApiResponse<FileResponse | ErrorResponse>,
 ) {
   try {
     const { url } = req.query;
@@ -17,7 +21,6 @@ export default async function handler(
       return res.status(400).json({ error: 'Missing url' });
     }
 
-    // S3에 서버에서 직접 요청 → CORS 없음
     const response = await fetch(url.trim());
 
     if (!response.ok) {
@@ -27,7 +30,7 @@ export default async function handler(
     const blob = await response.blob();
     const buffer = await blob.arrayBuffer();
 
-    res.status(200).send({
+    return res.status(200).json({
       type: blob.type,
       arrayBuffer: Array.from(new Uint8Array(buffer)),
     });
