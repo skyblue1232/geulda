@@ -20,3 +20,4 @@ const Overlay = ({ onClick, opacity = 30, className }: OverlayProps) => {
   );
 };
 export default Overlay;
+
