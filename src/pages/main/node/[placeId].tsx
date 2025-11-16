@@ -24,6 +24,7 @@ const Node = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
+  const queryClient = useQueryClient();
 
   // 이미지 로딩 상태
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -68,7 +69,6 @@ const Node = () => {
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
   // 🔹 스탬프 찍기 버튼
-  const queryClient = useQueryClient();
 
   const handleStampClick = () => {
     if (!isLoggedIn) {
