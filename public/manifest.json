@@ -1,0 +1,26 @@
+{
+  "name": "Geulda",
+  "short_name": "Geulda",
+  "start_url": "/main",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon1.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon3.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

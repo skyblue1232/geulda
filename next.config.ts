@@ -1,9 +1,10 @@
 import path from 'path';
 import type { NextConfig } from 'next';
+import withPWA from 'next-pwa';
 
 const ICON_DIR = path.resolve(__dirname, 'src/shared/icons/source');
 
-const nextConfig: NextConfig = {
+const baseConfig: NextConfig = {
   reactStrictMode: true,
 
   async redirects() {
@@ -36,6 +37,7 @@ const nextConfig: NextConfig = {
       // @ts-ignore
       (rule) => rule.test && rule.test.test && rule.test.test('.svg'),
     );
+
     if (svgRule) {
       // @ts-ignore
       svgRule.exclude = [...(svgRule.exclude || []), ICON_DIR];
@@ -59,4 +61,11 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withPWABundle = withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  buildExcludes: [/dynamic-css-manifest\.json$/],
+});
+
+export default withPWABundle(baseConfig);
