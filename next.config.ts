@@ -37,6 +37,7 @@ const baseConfig: NextConfig = {
       // @ts-ignore
       (rule) => rule.test && rule.test.test && rule.test.test('.svg'),
     );
+
     if (svgRule) {
       // @ts-ignore
       svgRule.exclude = [...(svgRule.exclude || []), ICON_DIR];
@@ -64,6 +65,7 @@ const withPWABundle = withPWA({
   dest: 'public',
   register: true,
   skipWaiting: true,
+  buildExcludes: [/dynamic-css-manifest\.json$/],
 });
 
 export default withPWABundle(baseConfig);
