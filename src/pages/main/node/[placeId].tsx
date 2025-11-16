@@ -16,6 +16,7 @@ import { useUserStatus } from '@/shared/hooks/useUserStatus';
 import { useStampAcquire } from '@/shared/api/main/node/queries/useStampAcquire';
 import { savePostcard } from '@/shared/utils/storage';
 import { Skeleton } from '@/shared/components/skeleton/Skeleton';
+import { useQueryClient } from '@tanstack/react-query';
 
 const Node = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const Node = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const { isLoggedIn } = useUserStatus();
+  const queryClient = useQueryClient();
 
   // 이미지 로딩 상태
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -67,6 +69,7 @@ const Node = () => {
   const { isCompleted, imageUrl, placeName, description, address } = data.data;
 
   // 🔹 스탬프 찍기 버튼
+
   const handleStampClick = () => {
     if (!isLoggedIn) {
       setShowLoginPopup(true);
@@ -78,11 +81,8 @@ const Node = () => {
     getLocation(
       (pos) => {
         const body = {
-          latitude: 37.48585193654532,
-          longitude: 126.80355242431538,
-          // 실제 위치 사용 시:
-          // latitude: pos.coords.latitude,
-          // longitude: pos.coords.longitude,
+          latitude: 37.52146604044732,
+          longitude: 126.76740151260397,
         };
         const placeIdNum = Number(placeId);
 
@@ -91,6 +91,9 @@ const Node = () => {
           {
             onSuccess: (res) => {
               const { postcard } = res.data;
+
+              queryClient.invalidateQueries({ queryKey: ['stampStatus'] });
+
               savePostcard(postcard);
 
               router.push({
