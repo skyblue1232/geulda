@@ -1,5 +1,5 @@
-## ❄️ Frontend Setup
-> **기술스택**  
+# ❄️ Frontend Setup
+> **Tech Stack**  
 <p>
   <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white" />
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
@@ -9,6 +9,13 @@
   <img src="https://img.shields.io/badge/OAuth2-EB5424?style=flat&logo=openid&logoColor=white" />
   <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=Vercel&logoColor=white" />
 </p>
+
+## 프론트 팀원
+| 파트 | ✧ FE                              | FE                                      | FE                                      |
+| ---- | -------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| 이름 | [이수민](https://github.com/KongMezu) | [김정민](https://github.com/jjangminii) | [고민균](https://github.com/skyblue1232) |
+
+---
 
 ### ⚙️ 아키텍처 및 프로젝트 구조
 - **Framework:** Next.js (Page Router) + TypeScript  
@@ -35,12 +42,6 @@
 # 글다(geulDa)
 > [글다 이용하기](https://www.geulda.kr/)
 <img width="4068" height="1697" alt="image" src="https://github.com/user-attachments/assets/e32f0223-da7a-475d-99bb-f77fe5a64405" />
-
-## 프론트 팀원
-| 파트 | ✧ FE                              | FE                                      | FE                                      |
-| ---- | -------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| 이름 | [이수민](https://github.com/KongMezu) | [김정민](https://github.com/jjangminii) | [고민균](https://github.com/skyblue1232) |
-
 
 ## 🩵 서비스 소개
 <img width="4314" height="1798" alt="image" src="https://github.com/user-attachments/assets/7f9bf6eb-ea17-4d44-8388-05d8638ee71a" />
