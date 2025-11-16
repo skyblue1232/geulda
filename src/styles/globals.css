@@ -19,7 +19,7 @@ html, body {
   margin: 0 auto;          
   position: relative;  
   min-height: 100vh;
-  background: var(--background);
+  background: #ffffff;
   overflow-x: hidden;  
   transform: translateZ(0);
 }
