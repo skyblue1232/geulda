@@ -1,9 +1,10 @@
 import path from 'path';
 import type { NextConfig } from 'next';
+import withPWA from 'next-pwa';
 
 const ICON_DIR = path.resolve(__dirname, 'src/shared/icons/source');
 
-const nextConfig: NextConfig = {
+const baseConfig: NextConfig = {
   reactStrictMode: true,
 
   async redirects() {
@@ -59,4 +60,10 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withPWABundle = withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+});
+
+export default withPWABundle(baseConfig);
