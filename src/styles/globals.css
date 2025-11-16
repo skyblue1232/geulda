@@ -15,7 +15,7 @@ html, body {
 
 .app-wrapper {
   width: 100%;
-  max-width: 390px; 
+  max-width: 100%;
   margin: 0 auto;          
   position: relative;  
   min-height: 100vh;
