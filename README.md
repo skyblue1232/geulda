@@ -1,4 +1,21 @@
-## ❄️ Frontend Setup
+# ❄️ Frontend Setup
+> **Tech Stack**  
+<p>
+  <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
+  <img src="https://img.shields.io/badge/TanStack Query-FF4154?style=flat&logo=reactquery&logoColor=white" />
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/OAuth2-EB5424?style=flat&logo=openid&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=Vercel&logoColor=white" />
+</p>
+
+## 프론트 팀원
+| 파트 | ✧ FE                              | FE                                      | FE                                      |
+| ---- | -------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| 이름 | [이수민](https://github.com/KongMezu) | [김정민](https://github.com/jjangminii) | [고민균](https://github.com/skyblue1232) |
+
+---
 
 ### ⚙️ 아키텍처 및 프로젝트 구조
 - **Framework:** Next.js (Page Router) + TypeScript  
@@ -23,16 +40,10 @@
 ---
 
 # 글다(geulDa)
-> [글다 이용하기](https://www.geulda.kr/)
+> [**글다 이용하기**](https://www.geulda.kr/)
 <img width="4068" height="1697" alt="image" src="https://github.com/user-attachments/assets/e32f0223-da7a-475d-99bb-f77fe5a64405" />
 
-## 프론트 팀원
-| 파트 | ✧ FE                              | FE                                      | FE                                      |
-| ---- | -------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| 이름 | [이수민](https://github.com/KongMezu) | [김정민](https://github.com/jjangminii) | [고민균](https://github.com/skyblue1232) |
-
-
-## 🩵 서비스 소개
+## 💫 서비스 소개
 <img width="4314" height="1798" alt="image" src="https://github.com/user-attachments/assets/7f9bf6eb-ea17-4d44-8388-05d8638ee71a" />
 <img width="4314" height="1798" alt="image" src="https://github.com/user-attachments/assets/4d7daa9f-a3f4-4b12-ba00-a7f7e4dd7a31" />
 <img width="5752" height="1798" alt="image" src="https://github.com/user-attachments/assets/6b080ad6-c549-4903-8a8d-6ede5061d30c" />
