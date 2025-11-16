@@ -15,7 +15,7 @@ html, body {
 
 .app-wrapper {
   width: 100%;
-  max-width: 402px; 
+  max-width: 390px; 
   margin: 0 auto;          
   position: relative;  
   min-height: 100vh;
@@ -28,6 +28,14 @@ html, body {
   .app-wrapper {
     width: 100%;
     max-width: none;
+    margin: 0
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .app-wrapper {
+    max-width: 390px;
+    margin: 0 auto;
   }
 }
 
