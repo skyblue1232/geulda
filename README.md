@@ -1,4 +1,14 @@
 ## ❄️ Frontend Setup
+> **기술스택**  
+<p>
+  <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
+  <img src="https://img.shields.io/badge/TanStack Query-FF4154?style=flat&logo=reactquery&logoColor=white" />
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/OAuth2-EB5424?style=flat&logo=openid&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=Vercel&logoColor=white" />
+</p>
 
 ### ⚙️ 아키텍처 및 프로젝트 구조
 - **Framework:** Next.js (Page Router) + TypeScript  
